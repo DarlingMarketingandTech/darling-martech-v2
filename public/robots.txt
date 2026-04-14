@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://darlingmartech.com
+
+# Sitemaps
+Sitemap: https://darlingmartech.com/sitemap.xml

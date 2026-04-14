@@ -1,36 +1,30 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteShell } from "@/components/layout/site-shell";
+import { tools } from "@/data/labs";
+import { routeMetadata } from "@/data/routes";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Tools | Darling MarTech",
-  description: "The tech stack and frameworks we use to build smarter marketing systems.",
-};
+export const metadata = buildMetadata(routeMetadata["/tools"]);
 
 export default function ToolsPage() {
   return (
-    <main className="min-h-screen px-6 py-20 max-w-4xl mx-auto">
-      <Link
-        href="/"
-        className="text-sm text-foreground/50 hover:text-foreground transition-colors mb-10 inline-block"
-      >
-        ← Back home
-      </Link>
-
-      <h1 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-        Tools
-      </h1>
-
-      <p className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-2xl">
-        Every recommendation we make is built on a tested, purposeful stack.
-        This hub documents the tools, frameworks, and integrations we rely on
-        to deliver scalable marketing systems.
-      </p>
-
-      <div className="rounded-xl border border-dashed border-foreground/20 p-10 text-center text-foreground/40">
-        <p className="font-[family-name:var(--font-mono)] text-sm">
-          Tool categories coming soon
-        </p>
-      </div>
-    </main>
+    <SiteShell>
+      <section>
+        <p className="text-xs uppercase tracking-[0.24em] text-[#F05A28]">Tools</p>
+        <h1 className="font-display mt-5 text-4xl font-semibold md:text-6xl">
+          Start with a diagnosis, not a sales call.
+        </h1>
+      </section>
+      <section className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {tools.map((tool) => (
+          <article key={tool.slug} className="surface-card rounded-3xl p-7">
+            <h2 className="font-display text-2xl font-semibold">{tool.title}</h2>
+            <p className="mt-3 text-base leading-7 text-[#F5F4F0]/70">{tool.description}</p>
+            <p className="mt-4 text-sm text-[#0FD9C8]">
+              {tool.estimatedTime} · {tool.isLive ? "Live" : "Planned"}
+            </p>
+          </article>
+        ))}
+      </section>
+    </SiteShell>
   );
 }

@@ -3,7 +3,10 @@ import type { PageMeta } from "@/types";
 import { siteConfig } from "@/data/site-config";
 
 export function buildMetadata(meta: PageMeta): Metadata {
-  const title = `${meta.title} | ${siteConfig.name}`;
+  const title =
+    meta.title === siteConfig.name || meta.title.endsWith(`| ${siteConfig.name}`)
+      ? meta.title
+      : `${meta.title} | ${siteConfig.name}`;
   const description = meta.description;
   const canonicalPath = meta.canonicalUrl ?? siteConfig.url;
   const image = meta.ogImage ?? siteConfig.defaultMeta.ogImage ?? "/og-default.svg";

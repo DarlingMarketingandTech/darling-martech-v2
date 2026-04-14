@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://darlingmartech.com/problems</loc><lastmod>2026-04-14T08:34:55.538Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>https://darlingmartech.com/contact</loc><lastmod>2026-04-14T08:34:55.538Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>https://darlingmartech.com/process</loc><lastmod>2026-04-14T08:34:55.538Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>https://darlingmartech.com/proof</loc><lastmod>2026-04-14T08:34:55.538Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>https://darlingmartech.com/tools</loc><lastmod>2026-04-14T08:34:55.538Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>https://darlingmartech.com/about</loc><lastmod>2026-04-14T08:34:55.538Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>https://darlingmartech.com</loc><lastmod>2026-04-14T08:34:55.538Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://darlingmartech.com/about</loc><lastmod>2026-04-14T10:53:28.522Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://darlingmartech.com/problems</loc><lastmod>2026-04-14T10:53:28.530Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://darlingmartech.com/tools</loc><lastmod>2026-04-14T10:53:28.530Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://darlingmartech.com/contact</loc><lastmod>2026-04-14T10:53:28.530Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://darlingmartech.com/proof</loc><lastmod>2026-04-14T10:53:28.530Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://darlingmartech.com/process</loc><lastmod>2026-04-14T10:53:28.530Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://darlingmartech.com</loc><lastmod>2026-04-14T10:53:28.530Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
 </urlset>

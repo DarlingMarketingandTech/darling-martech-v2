@@ -1,10 +1,26 @@
 import type { Metadata } from "next";
-import "@fontsource-variable/inter";
-import "@fontsource-variable/syne";
-import "@fontsource-variable/jetbrains-mono";
+import { Inter, JetBrains_Mono, Syne } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { buildMetadata } from "@/lib/metadata";
 import "./globals.css";
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-syne",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = buildMetadata({
   title: "Darling MarTech",
@@ -19,10 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className="h-full antialiased"
-    >
+    <html lang="en" className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#0C0C0E] text-[#F5F4F0]">
         {children}
         <Analytics />

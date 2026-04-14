@@ -12,10 +12,10 @@ export const siteConfig: SiteConfig = {
   },
   calComLink: "https://cal.com/jacob-darling/30min",
   defaultMeta: {
-    title: "Darling MarTech",
+    title: "Darling MarTech — Strategy, Systems & Execution",
     description:
-      "The only martech owner-operator company that builds, integrates, and runs the full marketing stack for growth-stage businesses.",
-    ogImage: "/og-default.svg",
+      "The only martech owner-operator company that builds, integrates, and runs the full marketing stack for growth-stage businesses. One person. Complete accountability.",
+    ogImage: "/og-default.png",
     canonicalUrl: "https://darlingmartech.com",
   },
 };

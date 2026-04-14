@@ -9,7 +9,7 @@ export function buildMetadata(meta: PageMeta): Metadata {
       : `${meta.title} | ${siteConfig.name}`;
   const description = meta.description;
   const canonicalPath = meta.canonicalUrl ?? siteConfig.url;
-  const image = meta.ogImage ?? siteConfig.defaultMeta.ogImage ?? "/og-default.svg";
+  const image = meta.ogImage ?? siteConfig.defaultMeta.ogImage ?? "/og-default.png";
 
   return {
     title,

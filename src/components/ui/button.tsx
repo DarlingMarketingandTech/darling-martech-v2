@@ -8,10 +8,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-[#F05A28] text-[#0C0C0E] hover:bg-[#ff6d40]",
+        primary:
+          "bg-[#F05A28] text-[#0C0C0E] shadow-[0_14px_34px_rgba(240,90,40,0.24)] hover:bg-[#ff6d40]",
         secondary:
-          "border border-[#F05A28] bg-transparent text-[#F05A28] hover:bg-[#F05A28]/10",
-        ghost: "bg-transparent text-[#F05A28] hover:text-[#ff6d40]",
+          "border border-[#F05A28]/40 bg-[#F05A28]/6 text-[#F05A28] hover:bg-[#F05A28]/10",
+        ghost: "bg-transparent text-[#F05A28] hover:bg-[#F05A28]/8 hover:text-[#ff6d40]",
       },
       size: {
         sm: "h-10 px-4",
@@ -41,11 +42,14 @@ export function Button({
   ...props
 }: ButtonProps) {
   if (href) {
+    const { onClick, ...linkProps } = props as React.ComponentPropsWithoutRef<"a">;
+
     return (
       <Link
         href={href}
         className={cn(buttonVariants({ variant, size, className }))}
-        {...(props as React.ComponentPropsWithoutRef<"a">)}
+        onClick={onClick}
+        {...linkProps}
       />
     );
   }

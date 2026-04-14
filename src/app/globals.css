@@ -3,6 +3,8 @@
 :root {
   --color-bg: #0c0c0e;
   --color-surface: #13131a;
+  --color-surface-strong: #18181f;
+  --color-border: #2a2a2e;
   --color-orange: #f05a28;
   --color-offwhite: #f5f4f0;
   --color-teal: #0fd9c8;
@@ -21,8 +23,14 @@
   --font-mono: var(--font-mono);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+* {
+  min-width: 0;
 }
 
 html {
@@ -31,9 +39,42 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  background:
+    radial-gradient(circle at top, rgba(15, 217, 200, 0.08), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(240, 90, 40, 0.1), transparent 22%),
+    linear-gradient(180deg, #111116 0%, #0c0c0e 28%, #0c0c0e 100%);
   color: var(--color-offwhite);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(245, 244, 240, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 244, 240, 0.015) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.07) 0.6px, transparent 0.7px);
+  background-size: 72px 72px, 72px 72px, 18px 18px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.55));
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.2) 0, transparent 24%),
+    radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.16) 0, transparent 22%);
+  mix-blend-mode: screen;
+  z-index: -1;
 }
 
 a {
@@ -44,6 +85,13 @@ a {
 ::selection {
   background: rgba(240, 90, 40, 0.24);
   color: var(--color-offwhite);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 .font-display {
@@ -58,7 +106,94 @@ a {
   font-family: var(--font-mono), "JetBrains Mono", monospace;
 }
 
+.page-atmosphere {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(245, 244, 240, 0.02) 0%, transparent 16%),
+    radial-gradient(circle at 14% 6%, rgba(240, 90, 40, 0.1), transparent 22%);
+  z-index: -1;
+}
+
 .surface-card {
   background: var(--color-surface);
   border: 1px solid rgba(245, 244, 240, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 60px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+.surface-band {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 32%),
+    var(--color-surface);
+  border: 1px solid rgba(245, 244, 240, 0.08);
+}
+
+.hairline-border {
+  border-color: var(--color-border);
+}
+
+.hero-mesh {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-mesh::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(240, 90, 40, 0.18), transparent 24%),
+    radial-gradient(circle at 78% 28%, rgba(15, 217, 200, 0.12), transparent 26%),
+    linear-gradient(135deg, rgba(245, 244, 240, 0.06), transparent 28%);
+  opacity: 0.75;
+  z-index: -1;
+}
+
+.grain-mask {
+  position: relative;
+}
+
+.grain-mask::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.11;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0.8px, transparent 0.9px),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.08) 0.6px, transparent 0.8px),
+    radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.09) 0.8px, transparent 0.95px);
+  background-size: 26px 26px, 22px 22px, 34px 34px;
+  mix-blend-mode: soft-light;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.section-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(245, 244, 240, 0.12), transparent);
+}
+
+.header-sheen {
+  background:
+    linear-gradient(90deg, rgba(245, 244, 240, 0.04), transparent 20%, transparent 80%, rgba(245, 244, 240, 0.04)),
+    rgba(12, 12, 14, 0.78);
 }

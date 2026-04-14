@@ -8,6 +8,10 @@
   --color-teal: #0fd9c8;
   --color-green: #22c55e;
   --color-muted: rgba(245, 244, 240, 0.5);
+
+  --font-inter: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-syne: "Syne Variable", Syne, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
 }
 
 @theme inline {

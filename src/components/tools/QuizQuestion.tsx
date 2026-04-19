@@ -51,7 +51,7 @@ export function QuizQuestion({ question, currentAnswer, onAnswer, onNext }: Quiz
             <span>{question.scaleLabels?.min}</span>
             <span>{question.scaleLabels?.max}</span>
           </div>
-          <div className="grid grid-cols-5 gap-3">
+          <div className="flex flex-wrap gap-3">
             {Array.from(
               { length: question.scaleMax - question.scaleMin + 1 },
               (_, index) => question.scaleMin! + index

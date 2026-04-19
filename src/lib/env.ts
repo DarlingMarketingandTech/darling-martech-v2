@@ -38,6 +38,7 @@ export const appEnv = {
   supabaseUrl: readOptionalEnv("NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_URL"),
   supabaseAnonKey: readOptionalEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "SUPABASE_ANON_KEY"),
   supabaseServiceRoleKey: readOptionalEnv("SUPABASE_SERVICE_ROLE_KEY"),
+  plausibleDomain: readOptionalEnv("NEXT_PUBLIC_PLAUSIBLE_DOMAIN"),
 } as const;
 
 export function getMissingEnvVars(envMap: Record<string, OptionalEnvValue>) {

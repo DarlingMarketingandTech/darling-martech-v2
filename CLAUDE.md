@@ -423,12 +423,12 @@ All interfaces are defined in `darlingmartech-data-model-spec.md` and live in
 ### Taxonomy Constants (src/data/taxonomy.ts)
 ```typescript
 PROBLEM_CLUSTERS = [
-  'pipeline-not-converting',
-  'attribution-is-broken',
-  'systems-disconnected',
-  'no-marketing-infrastructure',
-  'cant-scale-without-hiring',
-  'strategy-without-execution',
+  'no-strategy-owner',
+  'site-not-converting',
+  'disconnected-systems',
+  'not-visible-enough',
+  'brand-system-broken',
+  'pipeline-not-predictable',
 ]
 
 TRUST_LADDER_STAGES = ['browse', 'evaluate', 'qualify', 'commit', 'return']
@@ -673,14 +673,20 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=darlingmartech.com
 
 Build in this exact order. Do not jump phases.
 
-### Current Build State (as of April 2026)
-- ✅ Next.js 15 + TypeScript (strict) + Tailwind v4 initialized
-- ✅ `src/types/index.ts` — all interfaces defined
-- ❌ Fonts: `layout.tsx` uses Geist — **must replace with Syne/Inter/JetBrains Mono**
-- ❌ `globals.css`: has default Next.js vars — **must replace with brand color tokens**
-- ❌ Shadcn/UI, Framer Motion, Supabase, Resend, PostHog — not yet installed
-- ❌ `src/data/`, `src/components/`, `src/lib/` — not yet created
-- ❌ `src/app/page.tsx` — still default Next.js template (replace before Phase 1)
+### Current Build State (darling-martech-v2 — synced April 2026)
+- ✅ Next.js 15 + TypeScript (strict) + Tailwind v4
+- ✅ `src/types/index.ts` — interfaces defined
+- ✅ Fonts: `src/app/layout.tsx` uses **Syne / Inter / JetBrains Mono** via `next/font`
+- ✅ Brand tokens: `src/app/globals.css` (CSS variables + `@theme inline`)
+- ✅ Core deps: Framer Motion, Supabase client, Resend, `posthog-js`, Vercel Analytics
+- ✅ `src/data/`, `src/components/`, `src/lib/` — populated (site shell, problems, proof, tools, contact, APIs)
+- ✅ Homepage, problems hub + slugs, proof hub + slugs, tools hub + slugs, process, about, contact
+- ✅ `/resources` hub, `/resources/blog`, `/resources/frameworks`, `/studio` routes
+- ✅ Growth Bottleneck Quiz + MarTech Stack Grader interactive flows (`QuizEngine` + `labs.ts`)
+- ✅ Plausible script (when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` set) + PostHog client capture + `.env.example`
+- ⚠️ Shadcn: partial (button-style primitives only; no full `components.json` inventory)
+- ⚠️ Formbricks: not wired — contact posts JSON to `/api/contact`
+- ⚠️ Other tools (CMO Simulator, GEO, Attribution Snapshot, CMO Roadmap): pages live; flows still placeholders until built out
 
 ### Phase 0 — Foundation (Day 1)
 - [ ] Init new Next.js 15 repo with TypeScript + Tailwind + Shadcn/UI

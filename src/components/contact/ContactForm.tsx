@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { captureClientEvent } from "@/lib/analytics";
 
 type ContactIntent = {
   label: string;
@@ -57,6 +58,7 @@ export function ContactForm({ intents, selectedIntent }: ContactFormProps) {
 
     setStatus("success");
     setResponseMessage(payload.message ?? "Message received. Jacob will respond directly.");
+    captureClientEvent("contact_form_submitted", { intent: selected.label });
     setName("");
     setEmail("");
     setCompany("");

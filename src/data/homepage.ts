@@ -36,6 +36,11 @@ export const homepageData = {
     body: "Answer 8 questions. Get a specific diagnosis — not a generic checklist. No email required to see your results.",
     cta: { label: "Take the Growth Bottleneck Quiz →", href: "/tools/growth-bottleneck-quiz" },
   },
+  /** Compact pathway row directly under the proof ticker — full problem cards follow below. */
+  pathwayStrip: {
+    eyebrow: "Choose a pathway",
+    headline: "Four ways growth usually breaks — pick the one that sounds like you.",
+  },
   problemSection: {
     eyebrow: "Find your problem",
     headline: "Most growth problems start in one of four places.",
@@ -50,23 +55,33 @@ export const homepageData = {
       {
         number: "01",
         title: "Diagnose",
-        body: "Before anything is proposed, the problem gets named. I use a structured diagnostic process — whether that's a tool, a session, or a direct conversation — to find the actual bottleneck, not the symptom you're describing.",
+        body: "Name the real bottleneck with a structured diagnostic — tools, data, or conversation — before anything is scoped.",
       },
       {
         number: "02",
         title: "Build",
-        body: "Strategy maps to execution. CRM architecture, automation workflows, website rebuilds, content systems — I build the thing, not the deck about the thing. Every deliverable is a working system, not a recommendation.",
+        body: "Ship working systems: CRM, automation, site, and reporting — not recommendations buried in a deck.",
       },
       {
         number: "03",
         title: "Run & Measure",
-        body: "Most engagements end when the system launches. Mine don't. I stay to run it, track what's working, and adjust. You get one accountable person and one place to look for answers.",
+        body: "Stay past launch: operate the stack, read the numbers, and adjust so accountability stays in one place.",
       },
     ],
   },
+  /** Homepage featured proof block — must match a `CaseStudy.slug` in work-index. */
+  featuredCaseStudySlug: "graston-qualified-leads",
   proofStrip: {
-    eyebrow: "Selected case studies",
-    headline: "Real results. Named clients. Specific numbers.",
+    eyebrow: "Featured proof",
+    headline: "One engagement, one accountable operator, compounding pipeline.",
+  },
+  newsletterBand: {
+    eyebrow: "Insights",
+    headline: "Weekly notes from the stack — strategy, systems, and what actually moved the needle.",
+    body: "Short, practical breakdowns: what I tested, what broke, and what I would run again. No sponsor slots, no recycled listicles.",
+    /** Default social proof line; overridden in `page.tsx` when `NEXT_PUBLIC_NEWSLETTER_SUBSCRIBERS` is set. */
+    subscriberLineFallback: "Join 850+ readers on the list",
+    microcopy: "One email per week. Unsubscribe anytime.",
   },
   ownerOperator: {
     eyebrow: "OWNER-OPERATED",

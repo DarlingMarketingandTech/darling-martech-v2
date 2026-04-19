@@ -3,12 +3,15 @@ import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { HomepageHero } from "@/components/hero/HomepageHero";
 import { ProofTicker } from "@/components/home/ProofTicker";
+import { ProblemPathwayStrip } from "@/components/home/ProblemPathwayStrip";
 import { DiagnosticOrangeBand } from "@/components/home/DiagnosticOrangeBand";
+import { InsightsNewsletterBand } from "@/components/home/InsightsNewsletterBand";
 import { ProblemHubGrid } from "@/components/problems/ProblemHubGrid";
-import { ProofGrid } from "@/components/proof/ProofGrid";
+import { ProofCard } from "@/components/proof/ProofCard";
 import { ToolsPreviewBand } from "@/components/tools/ToolsPreviewBand";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { caseStudies } from "@/data/work/work-index";
 import { homepageData, homepageMeta } from "@/data/homepage";
 import { problemPages } from "@/data/problems";
@@ -20,7 +23,11 @@ export const metadata = buildMetadata(homepageMeta);
 export default function HomePage() {
   const featuredProblems = problemPages.slice(0, 4);
   const featuredTools = tools.slice(0, 4);
-  const featuredProof = caseStudies.slice(0, 4);
+  const featuredCaseStudy =
+    caseStudies.find((c) => c.slug === homepageData.featuredCaseStudySlug) ?? caseStudies[0];
+  const newsletterSubscriberLine = process.env.NEXT_PUBLIC_NEWSLETTER_SUBSCRIBERS?.trim()
+    ? `Join ${process.env.NEXT_PUBLIC_NEWSLETTER_SUBSCRIBERS.trim()} readers on the list`
+    : homepageData.newsletterBand.subscriberLineFallback;
 
   return (
     <SiteShell>
@@ -35,6 +42,12 @@ export default function HomePage() {
       <div className="mt-6">
         <ProofTicker metrics={homepageData.proofBar} />
       </div>
+
+      <ProblemPathwayStrip
+        eyebrow={homepageData.pathwayStrip.eyebrow}
+        headline={homepageData.pathwayStrip.headline}
+        problems={featuredProblems}
+      />
 
       <SectionWrapper className="mt-14">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -65,10 +78,10 @@ export default function HomePage() {
         />
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {homepageData.processSection.columns.map((column) => (
-            <article key={column.number} className="rounded-[1.75rem] border border-[#F5F4F0]/10 p-6">
+            <article key={column.number} className="rounded-4xl border border-[#F5F4F0]/10 p-6">
               <p className="font-mono text-xl text-[#F05A28]">{column.number}</p>
-              <h3 className="font-display mt-3 text-2xl font-semibold">{column.title}</h3>
-              <p className="mt-3 text-base leading-7 text-[#F5F4F0]/72">{column.body}</p>
+              <h3 className="font-display mt-3 text-xl font-semibold md:text-2xl">{column.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-[#F5F4F0]/72 md:text-base">{column.body}</p>
             </article>
           ))}
         </div>
@@ -76,8 +89,10 @@ export default function HomePage() {
 
       <SectionWrapper className="mt-14">
         <SectionHeader eyebrow={homepageData.proofStrip.eyebrow} title={homepageData.proofStrip.headline} />
-        <div className="mt-10">
-          <ProofGrid caseStudies={featuredProof} />
+        <div className="mx-auto mt-10 max-w-2xl">
+          <AnimateOnScroll>
+            <ProofCard caseStudy={featuredCaseStudy} />
+          </AnimateOnScroll>
         </div>
         <div className="mt-8 flex justify-center">
           <Button href="/proof" variant="ghost">
@@ -85,6 +100,14 @@ export default function HomePage() {
           </Button>
         </div>
       </SectionWrapper>
+
+      <InsightsNewsletterBand
+        eyebrow={homepageData.newsletterBand.eyebrow}
+        headline={homepageData.newsletterBand.headline}
+        body={homepageData.newsletterBand.body}
+        subscriberLine={newsletterSubscriberLine}
+        microcopy={homepageData.newsletterBand.microcopy}
+      />
 
       <BandSection className="mt-14 text-center">
         <SectionHeader

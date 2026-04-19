@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm lint:*)",
+      "Bash(node --require ./debug-hook.js node_modules/next/dist/bin/next build)",
+      "Bash(node -e ':*)"
+    ]
+  }
+}

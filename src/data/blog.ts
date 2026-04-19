@@ -1,3 +1,8 @@
+/**
+ * Blog posts for `/resources` and `/resources/blog/[slug]`.
+ * Replace starter rows from the editorial calendar; keep `slug` URL-safe and metadata accurate.
+ * Loops newsletter broadcasts are configured in Loops (not here) — see docs/implementation-workflow.md.
+ */
 import type { BlogPost, ProblemCluster, TrustLadderStage } from "@/types";
 
 export type BlogArticle = BlogPost & {

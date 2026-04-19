@@ -1,6 +1,48 @@
 import Papa from "papaparse";
 import type { ConversionRow } from "./attributionLogic";
 
+/** Normalize common Google / Meta export header variants to canonical keys. */
+function rowToConversionRow(row: Record<string, string>): ConversionRow {
+  const dateRaw =
+    row["Date"]?.trim() ||
+    row["Reporting starts"]?.trim() ||
+    row["Day"]?.trim() ||
+    row["Time"]?.trim() ||
+    "";
+
+  const valueRaw =
+    row["Conversion value"]?.trim() ||
+    row["Purchase conversion value"]?.trim() ||
+    row["Conversion value (USD)"]?.trim() ||
+    row["Conv. value"]?.trim() ||
+    "0";
+
+  const convRaw = row["Conversions"]?.trim() || row["Purchases"]?.trim() || row["All conv."]?.trim() || "1";
+
+  const clickId =
+    row["Click ID"]?.trim() ||
+    row["GCLID"]?.trim() ||
+    row["gclid"]?.trim() ||
+    row["FBCLID"]?.trim() ||
+    row["fbclid"]?.trim() ||
+    "";
+
+  const campaign =
+    row["Campaign"]?.trim() ||
+    row["Campaign name"]?.trim() ||
+    row["Ad set name"]?.trim() ||
+    row["Ad name"]?.trim() ||
+    "Uploaded Export";
+
+  return {
+    date: new Date(dateRaw),
+    campaign,
+    value: parseFloat(valueRaw.replace(/[^0-9.-]+/g, "") || "0"),
+    clickId,
+    conversions: parseInt(convRaw || "1", 10),
+  };
+}
+
 export const processAttributionCsv = (file: File): Promise<ConversionRow[]> => {
   return new Promise((resolve, reject) => {
     Papa.parse(file, {
@@ -9,18 +51,18 @@ export const processAttributionCsv = (file: File): Promise<ConversionRow[]> => {
       complete: (results) => {
         try {
           const rows = results.data as Record<string, string>[];
-          const formattedData: ConversionRow[] = rows.map((row) => ({
-            date: new Date(row["Date"]),
-            campaign: row["Campaign"] || "Uploaded Export",
-            value: parseFloat(row["Conversion value"]?.replace(/[^0-9.-]+/g, "") || "0"),
-            clickId: row["Click ID"] || row["GCLID"] || row["FBCLID"],
-            conversions: parseInt(row["Conversions"] || "1", 10),
-          }));
+          const formattedData: ConversionRow[] = rows.map((row) => rowToConversionRow(row));
 
-          const validData = formattedData.filter((d) => !isNaN(d.value) && d.clickId);
+          const validData = formattedData.filter(
+            (d) => !isNaN(d.value) && Boolean(d.clickId) && !Number.isNaN(d.date.getTime())
+          );
 
           if (validData.length === 0) {
-            reject(new Error("No valid rows found. Ensure Date, Conversion value, and Click ID exist."));
+            reject(
+              new Error(
+                "No valid rows found. Use Date (or Reporting starts), Conversions (or Purchases), Conversion value (or Purchase conversion value), and Click ID (or GCLID / FBCLID)."
+              )
+            );
           } else {
             resolve(validData);
           }

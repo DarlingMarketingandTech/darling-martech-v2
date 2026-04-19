@@ -11,8 +11,10 @@ type ToolSlugPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+const EXCLUDED_TOOL_SLUGS = new Set(["attribution-snapshot", "geo-readiness-auditor", "growth-bottleneck-quiz"]);
+
 export async function generateStaticParams() {
-  return tools.filter((tool) => tool.slug !== "attribution-snapshot").map((tool) => ({ slug: tool.slug }));
+  return tools.filter((tool) => !EXCLUDED_TOOL_SLUGS.has(tool.slug)).map((tool) => ({ slug: tool.slug }));
 }
 
 export async function generateMetadata({ params }: ToolSlugPageProps): Promise<Metadata> {

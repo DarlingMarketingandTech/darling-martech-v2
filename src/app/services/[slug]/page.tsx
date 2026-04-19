@@ -10,6 +10,7 @@ import { services } from "@/data/services";
 import { problemPages } from "@/data/problems";
 import { caseStudies } from "@/data/work/work-index";
 import { buildMetadata } from "@/lib/metadata";
+import { siteConfig } from "@/data/site-config";
 
 type ServiceSlugPageProps = {
   params: Promise<{ slug: string }>;
@@ -81,7 +82,7 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
       ) : null}
 
       <div className="mt-14 flex flex-col gap-4 sm:flex-row">
-        <Button href="/contact" size="lg">
+        <Button href={siteConfig.calComLink} size="lg">
           Start a conversation →
         </Button>
         <Button href="/tools/growth-bottleneck-quiz" variant="secondary" size="lg">

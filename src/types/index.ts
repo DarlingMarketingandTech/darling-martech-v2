@@ -141,6 +141,59 @@ export interface Tool {
   cloudinaryThumbnail?: string;
 }
 
+export type GeoAuditCheckKey =
+  | "crawler"
+  | "schema"
+  | "metadata"
+  | "structure"
+  | "faq"
+  | "authority";
+
+export interface GeoAuditCheck {
+  passed: boolean;
+  score: number;
+  max: number;
+}
+
+export interface GeoAuditExtractedData {
+  title: string;
+  metaDescription: string;
+  h1: string;
+  entities: string[];
+}
+
+export interface GeoAuditHeadingItem {
+  level: 1 | 2 | 3;
+  text: string;
+}
+
+export interface GeoAuditRawXray {
+  canonical: string | null;
+  metaRobots: string | null;
+  ogTitle: string | null;
+  ogDescription: string | null;
+  twitterCard: string | null;
+  jsonLdBlockCount: number;
+  jsonLdTypes: string[];
+  jsonLdSnippet: string | null;
+  headingOutline: GeoAuditHeadingItem[];
+  stats: {
+    h1Count: number;
+    h2Count: number;
+    h3Count: number;
+    internalLinkCount: number;
+    externalLinkCount: number;
+    visibleTextChars: number;
+  };
+}
+
+export interface GeoAuditResponse {
+  score: number;
+  extractedData: GeoAuditExtractedData;
+  checks: Record<GeoAuditCheckKey, GeoAuditCheck>;
+  rawXray: GeoAuditRawXray;
+}
+
 export interface ProcessStep {
   number: string;
   title: string;

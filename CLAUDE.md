@@ -1,11 +1,17 @@
 # CLAUDE.md
 # Darling MarTech — AI Agent Context File
-# Version: 1.1 | Last updated: April 2026
+# Version: 1.2 | Last updated: April 2026
+# v1.2: GEO Readiness Auditor — URL scrape audit (`/api/tools/geo-audit`), full-report email
+#       (`/api/tools/geo-audit/report`), dedicated `/tools/geo-readiness-auditor` + `GeoAuditorEngine`,
+#       copy in `geo-readiness-auditor.ts`, types `GeoAuditResponse`, cheerio (server-only).
 # v1.1: Copy + Blueprint rebuild pass — homepage structure, problems/proof/services depth,
 #       outcome filters, quiz (8Q), newsletter API, redirects, expanded about/process/contact.
 # This file is the single source of truth for all AI agents working on this codebase.
 # Read this entire file before writing any code, creating any files, or making any decisions.
 # Do not deviate from the conventions defined here without explicit instruction from Jacob Darling.
+#
+# Cursor: `.cursorrules` at repo root is a **byte-for-byte copy** of this file. After any CLAUDE.md edit,
+# sync with: `Copy-Item CLAUDE.md .cursorrules -Force` (PowerShell) or `cp CLAUDE.md .cursorrules`.
 
 ---
 
@@ -124,9 +130,11 @@ navigation logic, page structure, and conversion philosophy.
   "framer-motion": "^11.0.0",
   "@supabase/supabase-js": "^2.0.0",
   "resend": "^3.0.0",
-  "posthog-js": "^1.0.0"
+  "posthog-js": "^1.0.0",
+  "cheerio": "^1.0.0"
 }
 ```
+**`cheerio`:** server-side HTML parsing for the GEO Readiness Auditor API only (`src/app/api/tools/geo-audit`). Do not add alternative HTML parsers without explicit approval.
 
 ---
 
@@ -145,13 +153,15 @@ High-level layout — verify with `src/` when adding files.
 │   │   ├── problems/                  ← hub + [slug] (6 problem clusters)
 │   │   ├── proof/                     ← hub (?outcome=) + [slug] case studies
 │   │   ├── services/                  ← capabilities index + [slug] (from data/services.ts)
-│   │   ├── tools/                     ← hub, [slug] (QuizEngine), growth-bottleneck-quiz/page.tsx
+│   │   ├── tools/                     ← hub, [slug] (QuizEngine); dedicated: growth-bottleneck-quiz,
+│   │   │                              geo-readiness-auditor (URL audit + email gate)
 │   │   ├── process/, about/, contact/, studio/, privacy-policy/
 │   │   ├── resources/                 ← hub, blog/[slug], frameworks
 │   │   └── api/
 │   │       ├── contact/               ← Resend + n8n when live integrations on
 │   │       ├── newsletter/            ← Resend audience (optional; see env)
 │   │       ├── subscribe/, tool-complete/
+│   │       └── tools/geo-audit/       ← POST scan URL; report/ POST email full audit (Resend + Loops)
 │   │
 │   ├── components/
 │   │   ├── home/                      ← ProofTicker, DiagnosticOrangeBand (homepage bands)
@@ -159,7 +169,8 @@ High-level layout — verify with `src/` when adding files.
 │   │   ├── hero/                      ← HomepageHero (structured headline + accent), PageHero
 │   │   ├── proof/                     ← ProofCard, ProofGrid, ProofOutcomeFilters, AntiClaimRow
 │   │   ├── problems/                  ← ProblemCard, ProblemHubGrid, ProblemNav, ProblemClosingSection
-│   │   ├── tools/                     ← QuizEngine, GrowthBottleneckQuizClient, ToolsPreviewBand, …
+│   │   ├── tools/                     ← QuizEngine, GrowthBottleneckQuizClient, tools/geo/* (GEO auditor),
+│   │   │                              ToolsPreviewBand, …
 │   │   ├── process/                   ← ProcessTimeline, PrinciplesGrid, EngagementFormatCards
 │   │   ├── about/                     ← FounderHero, CredentialsBar
 │   │   ├── contact/                   ← ContactExperience, ContactForm, IntentSelector,
@@ -171,6 +182,7 @@ High-level layout — verify with `src/` when adding files.
 │   │   ├── taxonomy.ts              ← PROBLEM_CLUSTERS, OUTCOME_SLUG_LABELS / OUTCOME_SLUG_ORDER, …
 │   │   ├── problems.ts              ← Full ProblemPage records (long-form + hub chips)
 │   │   ├── labs.ts                  ← All interactive tools + questions + ToolResult rows
+│   │   ├── geo-readiness-auditor.ts ← GEO auditor UI copy, checklist education, overview helper
 │   │   ├── services.ts, process.ts, navigation.ts, routes.ts, contact.ts, about.ts, proof.ts
 │   │   └── work/
 │   │       ├── work-index.ts
@@ -179,8 +191,11 @@ High-level layout — verify with `src/` when adding files.
 │   │       ├── pike-medical.ts, russell-painting.ts
 │   │
 │   ├── lib/
-│   │   ├── tool-result-resolvers.ts ← Weighted Growth Bottleneck Quiz scoring → problem cluster
-│   │   ├── resend.ts, posthog.ts, analytics.ts, metadata.ts, …
+│   │   ├── tool-result-resolvers.ts ← Weighted quiz scoring → problem cluster (no GEO branch; GEO is API-driven)
+│   │   ├── geo-audit-url.ts         ← SSRF-safe public URL validation for GEO audit fetch
+│   │   ├── geo-audit-parse.ts       ← Validates `GeoAuditResponse` JSON for `/api/tools/geo-audit/report`
+│   │   ├── resend.ts                ← Includes `sendGeoAuditReportEmail` (full audit payload)
+│   │   ├── posthog.ts, analytics.ts, metadata.ts, …
 │   │
 │   ├── types/index.ts               ← CaseStudy (+ primaryOutcomeSlug, outcomeHeadline), ProblemPage, …
 │   └── app/globals.css
@@ -301,10 +316,10 @@ Logo (left)    |    Problems · Proof · Tools · Process · About    |    Let's
 /services (capabilities menu)
   /services/[slug]  ← fractional-cmo, martech-stack-build, crm-architecture, …
 /tools (hub)
-  /tools/growth-bottleneck-quiz   ← also dedicated route under tools/ (custom client UI)
+  /tools/growth-bottleneck-quiz   ← dedicated route (custom client UI; excluded from `[slug]` SSG)
+  /tools/geo-readiness-auditor    ← dedicated route (`GeoAuditorEngine`: URL audit + email full report)
   /tools/cmo-simulator
   /tools/martech-stack-grader
-  /tools/geo-readiness-auditor
   /tools/attribution-snapshot
   /tools/cmo-roadmap-generator
 /process
@@ -320,6 +335,9 @@ Logo (left)    |    Problems · Proof · Tools · Process · About    |    Let's
 ### Legacy redirects (`next.config.ts`)
 - `/work` → `/proof`, `/work/:slug` → `/proof/:slug`
 - `/lab` → `/tools`, `/lab/:slug` → `/tools/:slug`
+
+### Tools routing note
+`src/app/tools/[slug]/page.tsx` **generateStaticParams** omits slugs that have their own `page.tsx` under `tools/<slug>/` (currently **`growth-bottleneck-quiz`**, **`geo-readiness-auditor`**, **`attribution-snapshot`**) so Next does not double-generate those paths.
 
 ### Footer Navigation (see `src/data/navigation.ts`)
 Tagline + newsletter signup in `SiteFooter` (client `NewsletterSignup` → `POST /api/newsletter`).
@@ -398,11 +416,13 @@ hub fields (`hubCategory`, `proofChip`, `hubCtaLabel`).
 growth-bottleneck-quiz    ← 8 questions; weighted resolver → six problem clusters
 cmo-simulator
 martech-stack-grader
-geo-readiness-auditor
+geo-readiness-auditor     ← URL audit only: `questions: []`; live UI on `/tools/geo-readiness-auditor`
 attribution-snapshot
 cmo-roadmap-generator
 ```
-Resolver logic: `src/lib/tool-result-resolvers.ts` (per-tool switch on `tool.slug`).
+Resolver logic: `src/lib/tool-result-resolvers.ts` (per-tool switch on `tool.slug` for **quiz** tools). GEO is **not** resolved here — scoring and copy come from `POST /api/tools/geo-audit` and `src/data/geo-readiness-auditor.ts`.
+
+**GEO audit types:** `GeoAuditResponse` and related interfaces in `src/types/index.ts` (shared by API routes and client).
 
 ---
 
@@ -433,7 +453,7 @@ Approved narrative lives in **`docs/`** (Markdown exports of the site copy + blu
 
 Google Doc IDs in older briefs still apply for **reference** when cross-checking Drive.
 
-**Copy implementation rule:** Prefer **`src/data/*.ts`** (`homepage.ts`, `problems.ts`, `contact.ts`, `about.ts`, `process.ts`, `proof.ts`, `labs.ts`, etc.) so copy updates are data edits. Section titles and layout-specific strings may live next to their components when it keeps the page readable—still avoid marketing copy sprawl in JSX.
+**Copy implementation rule:** Prefer **`src/data/*.ts`** (`homepage.ts`, `problems.ts`, `contact.ts`, `about.ts`, `process.ts`, `proof.ts`, `labs.ts`, `geo-readiness-auditor.ts`, etc.) so copy updates are data edits. Section titles and layout-specific strings may live next to their components when it keeps the page readable—still avoid marketing copy sprawl in JSX.
 
 ---
 
@@ -502,6 +522,16 @@ Required env vars:
 LOOPS_API_KEY
 RESEND_API_KEY
 ```
+
+### /api/tools/geo-audit (POST)
+Body: `{ "url": "<https? public URL>" }`. Server fetches HTML (timeouts + SSRF checks in `src/lib/geo-audit-url.ts`), parses with **cheerio**, returns **`GeoAuditResponse`**: readiness score, per-signal checks, lightweight term-frequency “entities,” and **`rawXray`** (canonical, robots, OG/Twitter, JSON-LD summary, heading outline, link counts).
+
+### /api/tools/geo-audit/report (POST)
+Triggered by **`GeoAuditEmailForm`** after a successful audit. Body: name, email, optional company/note, `targetUrl`, full **`audit`** object (validated by `parseGeoAuditResponse`). Honeypot field **`website`** — if non-empty, returns success without side effects.
+
+Flow (when `ENABLE_LIVE_INTEGRATIONS`): Loops (`toolSlug: geo-readiness-auditor`) → Resend **`sendGeoAuditReportEmail`** (HTML + text full report). Mock mode (`202`) when live integrations off — same pattern as `/api/subscribe`.
+
+Client analytics (PostHog): `geo_audit_completed`, `geo_audit_report_requested` from `src/lib/analytics.ts`.
 
 ### /api/tool-complete (POST)
 Triggered by QuizEngine on tool completion.
@@ -597,9 +627,9 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=darlingmartech.com
 
 Build in this exact order. Do not jump phases.
 
-### Current Build State (darling-martech-v2 — synced April 2026, post copy/blueprint implementation)
+### Current Build State (darling-martech-v2 — synced April 2026, post GEO Readiness Auditor)
 - ✅ Next.js 15 + TypeScript (strict) + Tailwind v4
-- ✅ `src/types/index.ts` — includes `OutcomeSlug`, extended `CaseStudy`, long-form `ProblemPage`
+- ✅ `src/types/index.ts` — includes `OutcomeSlug`, extended `CaseStudy`, long-form `ProblemPage`, **`GeoAuditResponse`**
 - ✅ Fonts: `src/app/layout.tsx` uses **Syne / Inter / JetBrains Mono** via `next/font`
 - ✅ Brand tokens: `src/app/globals.css` (CSS variables + `@theme inline`)
 - ✅ Core deps: Framer Motion, Supabase client, Resend, `posthog-js`, Vercel Analytics
@@ -608,6 +638,7 @@ Build in this exact order. Do not jump phases.
 - ✅ Proof: **4** case files; `/proof?outcome=` filters; metric-first `ProofCard` + `ProofOutcomeFilters`
 - ✅ Services: `/services`, `/services/[slug]` from `data/services.ts`
 - ✅ Tools: all slugs in `labs.ts`; Growth Bottleneck Quiz **8 questions** + weighted resolver; dedicated `/tools/growth-bottleneck-quiz` page
+- ✅ **GEO Readiness Auditor:** dedicated `/tools/geo-readiness-auditor` (`GeoAuditorEngine` + `GeoAuditEmailForm`), `POST /api/tools/geo-audit`, `POST /api/tools/geo-audit/report`, **`cheerio`** dependency; hub entry uses URL-scan description and empty `questions`/`results`
 - ✅ Process: engagement format cards, “honest about fit,” scenario grid, tools reminder + closing (see `process.ts`)
 - ✅ About: timeline, differentiators, industries, closing CTAs (`about.ts` + `about/page.tsx`)
 - ✅ Contact: intent cards, conditional budget field, alternatives strip, reassurance line; email **`jacob@darlingmt.com`** in `site-config`
@@ -642,6 +673,7 @@ Build in this exact order. Do not jump phases.
 ### Phase 2 — Conversion Engine (Week 2-3)
 - [x] Build `QuizEngine` + sub-components (`QuizQuestion`, `QuizProgress`, `ResultCard`, `EmailGate`)
 - [x] Build Growth Bottleneck Quiz (`/tools/growth-bottleneck-quiz`)
+- [x] GEO Readiness Auditor — URL audit + email report (dedicated tool route + APIs; not `QuizEngine`)
 - [x] Build `EmailGate` → connect to Loops API route (`/api/subscribe`)
 - [x] Add MarTech Stack Grader (`/tools/martech-stack-grader`)
 - [ ] Wire Formbricks to contact form
@@ -653,7 +685,7 @@ Build in this exact order. Do not jump phases.
 - [x] About page (/about) — with Cloudinary portrait
 - [x] Contact page (/contact)
 - [x] Tools hub page (/tools)
-- [x] Deploy all tools to new slug structure (interactive flows for all six slugs in `labs.ts`)
+- [x] Deploy all tools to new slug structure (quiz/CSV tools + **GEO URL audit**; dedicated pages where needed)
 
 ### Phase 4 — Automation Backend (Week 4-5)
 - [ ] Stand up n8n on Railway (or chosen host)
@@ -716,7 +748,7 @@ These rules apply to all AI agents (Claude Code, Cursor, Codex, Gemini).
 ### Never do these things:
 - ❌ Write new copy — all copy is pre-written in the copy docs
 - ❌ Change brand colors or fonts
-- ❌ Add new dependencies without noting them for Jacob's approval
+- ❌ Add new dependencies without noting them for Jacob's approval (approved stack additions to date include **`cheerio`** for GEO audit only)
 - ❌ Use `any` TypeScript type
 - ❌ Use inline styles (`style={{ }}`)
 - ❌ Hardcode content strings in JSX — use data files
@@ -731,7 +763,7 @@ These rules apply to all AI agents (Claude Code, Cursor, Codex, Gemini).
 - Run `npm run dev` (or `pnpm dev`) and `npm run typecheck` before declaring a task complete
 
 ### Cursor specific:
-- `.cursorrules` at repo root mirrors this file in Cursor's instruction format
+- `.cursorrules` at repo root is a **full copy** of this file (see header comment — re-copy after `CLAUDE.md` edits)
 - Use `@codebase` context for questions about your own repo
 - Use `@docs` for pulling in Shadcn, Next.js, Tailwind, and n8n documentation
 
@@ -854,6 +886,6 @@ This site is a **precision diagnostic** for the right clients — not a generic 
 
 ---
 
-*CLAUDE.md — Darling MarTech v1.1 · Repository root: `/CLAUDE.md`*
+*CLAUDE.md — Darling MarTech v1.2 · Repository root: `/CLAUDE.md`*
 
 **Do not edit this file without Jacob Darling’s explicit approval.**

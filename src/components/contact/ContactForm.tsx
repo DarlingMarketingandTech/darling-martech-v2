@@ -85,7 +85,7 @@ export function ContactForm({
   }
 
   return (
-    <form className="surface-card rounded-4xl p-7 md:p-8" onSubmit={handleSubmit}>
+    <form id="contact-form" className="surface-card rounded-4xl p-7 md:p-8" onSubmit={handleSubmit}>
       <p className="text-sm text-[#F5F4F0]/55">{formSectionLabel}</p>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">

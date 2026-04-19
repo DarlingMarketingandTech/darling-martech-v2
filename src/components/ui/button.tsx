@@ -43,12 +43,15 @@ export function Button({
 }: ButtonProps) {
   if (href) {
     const { onClick, ...linkProps } = props as React.ComponentPropsWithoutRef<"a">;
+    const isExternal = href.startsWith("http://") || href.startsWith("https://");
 
     return (
       <Link
         href={href}
         className={cn(buttonVariants({ variant, size, className }))}
         onClick={onClick}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
         {...linkProps}
       />
     );

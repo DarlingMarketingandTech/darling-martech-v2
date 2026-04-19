@@ -48,6 +48,6 @@ export const siteNavigation: SiteNavigation = {
   },
   cta: {
     label: "Let's talk",
-    href: "/contact",
+    href: siteConfig.calComLink,
   },
 };

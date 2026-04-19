@@ -13,6 +13,7 @@ export default function ContactPage() {
         eyebrow={contactPageData.hero.eyebrow}
         headline={contactPageData.hero.headline}
         body={contactPageData.hero.body}
+        ctas={contactPageData.hero.ctas}
       />
       <ContactExperience />
       <p className="mx-auto mt-16 max-w-xl text-center text-sm text-[#F5F4F0]/48">

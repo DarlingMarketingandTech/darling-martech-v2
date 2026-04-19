@@ -6,6 +6,7 @@ import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { Button } from "@/components/ui/button";
 import { blogArticles, getBlogArticleBySlug } from "@/data/blog";
 import { buildMetadata } from "@/lib/metadata";
+import { siteConfig } from "@/data/site-config";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -76,8 +77,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <Button href="/tools/growth-bottleneck-quiz" size="lg">
             Run the quiz
           </Button>
-          <Button href="/contact" variant="ghost" size="lg">
-            Contact
+          <Button href={siteConfig.calComLink} variant="ghost" size="lg">
+            Book a diagnostic call
           </Button>
         </div>
       </BandSection>

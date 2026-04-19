@@ -1,4 +1,5 @@
 import type { PageMeta } from "@/types";
+import { siteConfig } from "@/data/site-config";
 
 export const contactMeta: PageMeta = {
   title: "Contact",
@@ -14,6 +15,10 @@ export const contactPageData = {
     body: [
       "No intake form with 14 required fields. No automated calendar bot. You send a message, I read it, and I write back.",
       "If you're not sure how to start, pick the option below that's closest to where you are.",
+    ],
+    ctas: [
+      { label: "Book a 30-min diagnostic call →", href: siteConfig.calComLink, variant: "primary" as const },
+      { label: "Send a message below →", href: "#contact-form", variant: "ghost" as const },
     ],
   },
   intents: [

@@ -69,7 +69,7 @@ export default function ResourcesPage() {
                 {item.emailGated ? "Email-gated delivery — request via contact with the framework name." : "Available on request."}
               </p>
               <div className="mt-6">
-                <Button href="/contact" size="lg">
+                <Button href="/contact#contact-form" size="lg">
                   Request this framework
                 </Button>
               </div>

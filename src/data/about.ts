@@ -1,4 +1,5 @@
 import type { PageMeta } from "@/types";
+import { siteConfig } from "@/data/site-config";
 
 export const aboutMeta: PageMeta = {
   title: "About Jacob Darling",
@@ -121,7 +122,7 @@ export const aboutPageData = {
       "I take on a limited number of active engagements at any one time. That's what makes the work good — every client gets the full version, not the scaled-down version.",
       "If what you've read here matches the problem you're trying to solve, the next step is a direct conversation.",
     ],
-    primaryCta: { label: "Start a conversation →", href: "/contact" },
+    primaryCta: { label: "Start a conversation →", href: siteConfig.calComLink },
     secondaryCta: { label: "See the work first →", href: "/proof" },
   },
 };

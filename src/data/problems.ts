@@ -1,4 +1,5 @@
 import type { ProblemPage } from "@/types";
+import { siteConfig } from "@/data/site-config";
 
 export const problemPages: ProblemPage[] = [
   {
@@ -29,7 +30,7 @@ export const problemPages: ProblemPage[] = [
     relatedService: "fractional-cmo",
     closingBlock: {
       headline: "If this is what you're dealing with, the next step is a direct conversation.",
-      primary: { label: "Let's talk →", href: "/contact" },
+      primary: { label: "Let's talk →", href: siteConfig.calComLink },
       secondary: { label: "Or try the CMO Simulator first →", href: "/tools/cmo-simulator" },
     },
   },
@@ -61,7 +62,7 @@ export const problemPages: ProblemPage[] = [
     relatedService: "content-seo-systems",
     closingBlock: {
       headline: "The right website strategy pays for itself in the first quarter.",
-      primary: { label: "Let's look at yours →", href: "/contact" },
+      primary: { label: "Let's look at yours →", href: siteConfig.calComLink },
       secondary: { label: "Generate a roadmap first →", href: "/tools/cmo-roadmap-generator" },
     },
   },
@@ -93,7 +94,7 @@ export const problemPages: ProblemPage[] = [
     relatedService: "martech-stack-build",
     closingBlock: {
       headline: "If your system is held together with manual effort and hope, that's fixable.",
-      primary: { label: "Let's map it →", href: "/contact" },
+      primary: { label: "Let's map it →", href: siteConfig.calComLink },
       secondary: { label: "Run Attribution Snapshot →", href: "/tools/attribution-snapshot" },
     },
   },
@@ -125,7 +126,7 @@ export const problemPages: ProblemPage[] = [
     relatedService: "content-seo-systems",
     closingBlock: {
       headline: "Visibility isn't luck. It's a system that can be built.",
-      primary: { label: "Let's see where you stand →", href: "/contact" },
+      primary: { label: "Let's see where you stand →", href: siteConfig.calComLink },
       secondary: { label: "Run the GEO audit →", href: "/tools/geo-readiness-auditor" },
     },
   },
@@ -157,7 +158,7 @@ export const problemPages: ProblemPage[] = [
     relatedService: "fractional-cmo",
     closingBlock: {
       headline: "The brand should work as hard as the business does.",
-      primary: { label: "Let's rebuild it →", href: "/contact" },
+      primary: { label: "Let's rebuild it →", href: siteConfig.calComLink },
       secondary: { label: "Stress-test positioning first →", href: "/tools/cmo-simulator" },
     },
   },
@@ -189,7 +190,7 @@ export const problemPages: ProblemPage[] = [
     relatedService: "attribution-analytics",
     closingBlock: {
       headline: "You can't optimize what you can't measure. This one is fixable.",
-      primary: { label: "Let's build the attribution layer →", href: "/contact" },
+      primary: { label: "Let's build the attribution layer →", href: siteConfig.calComLink },
       secondary: { label: "Upload your data first →", href: "/tools/attribution-snapshot" },
     },
   },

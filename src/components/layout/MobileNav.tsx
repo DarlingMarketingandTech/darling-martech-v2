@@ -58,7 +58,7 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
                     <Link
                       href={item.href}
                       onClick={onClose}
-                      className="surface-card font-display flex items-center justify-between rounded-[1.5rem] px-5 py-4 text-xl font-semibold"
+                      className="surface-card font-display flex items-center justify-between rounded-3xl px-5 py-4 text-xl font-semibold"
                     >
                       <span>{item.label}</span>
                       <span className="text-[#F05A28]">/</span>

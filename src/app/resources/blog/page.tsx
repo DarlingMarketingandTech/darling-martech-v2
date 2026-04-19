@@ -25,7 +25,7 @@ export default function BlogIndexPage() {
             <li key={article.slug}>
               <Link
                 href={`/resources/blog/${article.slug}`}
-                className="block rounded-[1.5rem] border border-[#F5F4F0]/10 bg-[#13131A]/40 px-6 py-5 transition-colors hover:border-[#F05A28]/35"
+                className="block rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]/40 px-6 py-5 transition-colors hover:border-[#F05A28]/35"
               >
                 <p className="text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">
                   {article.publishedAt} · {article.readingTime} min

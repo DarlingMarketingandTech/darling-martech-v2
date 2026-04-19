@@ -65,7 +65,7 @@ export function ContactForm({ intents, selectedIntent }: ContactFormProps) {
   }
 
   return (
-    <form className="surface-card rounded-[2rem] p-7 md:p-8" onSubmit={handleSubmit}>
+    <form className="surface-card rounded-4xl p-7 md:p-8" onSubmit={handleSubmit}>
       <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-2">
           <span className="text-sm text-[#F5F4F0]/62">Name</span>

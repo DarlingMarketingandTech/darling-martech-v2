@@ -26,7 +26,7 @@ export function IntentSelector({ intents, selectedIntent, onSelect }: IntentSele
             type="button"
             onClick={() => onSelect(intent)}
             className={cn(
-              "rounded-[1.5rem] border p-5 text-left transition-colors",
+              "rounded-3xl border p-5 text-left transition-colors",
               isSelected
                 ? "border-[#F05A28] bg-[#F05A28]/10"
                 : "border-[#F5F4F0]/10 bg-[#101014] hover:border-[#F05A28]/40"

@@ -15,14 +15,14 @@ export function FounderHero({ eyebrow, headline, body, imageId }: FounderHeroPro
       headline={headline}
       body={body}
       splitAside={
-        <div className="surface-card hero-mesh overflow-hidden rounded-[2rem] p-4">
+        <div className="surface-card hero-mesh overflow-hidden rounded-4xl p-4">
           <CloudinaryImage
             publicId={imageId}
             alt="Jacob Darling, founder of Darling MarTech"
             width={900}
             height={1200}
             priority
-            className="h-full min-h-[420px] w-full rounded-[1.5rem] object-cover"
+            className="h-full min-h-[420px] w-full rounded-3xl object-cover"
           />
         </div>
       }

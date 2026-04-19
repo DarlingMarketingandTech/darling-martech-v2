@@ -23,7 +23,7 @@ export default function FrameworksPage() {
           {downloadableFrameworks.map((item) => (
             <article
               key={item.slug}
-              className="rounded-[2rem] border border-[#F5F4F0]/10 bg-[#13131A]/50 p-8 md:p-10"
+              className="rounded-4xl border border-[#F5F4F0]/10 bg-[#13131A]/50 p-8 md:p-10"
             >
               <p className="text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">
                 {item.fileType} · Email-gated

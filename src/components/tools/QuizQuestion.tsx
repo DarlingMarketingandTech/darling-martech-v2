@@ -15,7 +15,7 @@ export function QuizQuestion({ question, currentAnswer, onAnswer, onNext }: Quiz
   const isAnswered = currentAnswer !== undefined && currentAnswer !== null && currentAnswer !== "";
 
   return (
-    <div className="surface-card rounded-[2rem] p-7 md:p-8">
+    <div className="surface-card rounded-4xl p-7 md:p-8">
       <p className="text-sm uppercase tracking-[0.24em] text-[#0FD9C8]">Diagnostic prompt</p>
       <h2 className="font-display text-balance mt-4 text-3xl font-semibold md:text-4xl">
         {question.question}
@@ -32,7 +32,7 @@ export function QuizQuestion({ question, currentAnswer, onAnswer, onNext }: Quiz
                 type="button"
                 onClick={() => onAnswer(option.value)}
                 className={cn(
-                  "rounded-[1.5rem] border px-5 py-4 text-left transition-colors",
+                  "rounded-3xl border px-5 py-4 text-left transition-colors",
                   isSelected
                     ? "border-[#F05A28] bg-[#F05A28]/8 text-[#F5F4F0]"
                     : "border-[#F5F4F0]/10 text-[#F5F4F0]/72 hover:border-[#F05A28]/40 hover:bg-[#F5F4F0]/3"

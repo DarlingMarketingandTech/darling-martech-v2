@@ -154,7 +154,7 @@ export function GrowthBottleneckQuizClient() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-[1.5rem] border border-[#F5F4F0]/8 p-7">
+          <div className="mt-6 rounded-3xl border border-[#F5F4F0]/8 p-7">
             <p className="text-xs uppercase tracking-[0.24em] text-[#F5F4F0]/40">
               What to do with this
             </p>

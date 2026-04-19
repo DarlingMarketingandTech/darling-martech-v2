@@ -64,7 +64,7 @@ export default function ProcessPage() {
         </div>
       </BandSection>
 
-      <div className="mt-14 rounded-[2rem] border border-[#F5F4F0]/8 bg-[#101014]/30 px-6 py-10 text-center md:px-10">
+      <div className="mt-14 rounded-4xl border border-[#F5F4F0]/8 bg-[#101014]/30 px-6 py-10 text-center md:px-10">
         <p className="text-sm text-[#F5F4F0]/55">
           Not ready to talk yet? Every tool on this site was built for this moment. Run a diagnostic, get a real answer,
           and come back when the time is right.

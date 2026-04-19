@@ -106,7 +106,7 @@ export function GeoAuditorEngine() {
 
   return (
     <div className="mx-auto w-full max-w-5xl">
-      <div className="surface-card mb-10 rounded-[2rem] p-7 md:p-8">
+      <div className="surface-card mb-10 rounded-4xl p-7 md:p-8">
         <p className="text-sm uppercase tracking-[0.24em] text-[#0FD9C8]">{geoAuditUiCopy.inputEyebrow}</p>
         <form onSubmit={runAudit} className="mt-6 flex flex-col gap-4 md:flex-row">
           <div className="relative flex-1">
@@ -129,7 +129,7 @@ export function GeoAuditorEngine() {
 
       {status === "success" && results ? (
         <div className="flex flex-col gap-10">
-          <section className="surface-card rounded-[2rem] border border-[#F05A28]/25 p-7 md:p-8">
+          <section className="surface-card rounded-4xl border border-[#F05A28]/25 p-7 md:p-8">
             <p className="text-sm uppercase tracking-[0.24em] text-[#F05A28]">{geoAuditUiCopy.overviewEyebrow}</p>
             <div className="mt-4 space-y-3 text-base leading-7 text-[#F5F4F0]/80">
               {overviewLines.map((line) => (
@@ -138,7 +138,7 @@ export function GeoAuditorEngine() {
             </div>
           </section>
 
-          <section className="surface-card rounded-[2rem] border border-[#0FD9C8]/20 p-7 md:p-8">
+          <section className="surface-card rounded-4xl border border-[#0FD9C8]/20 p-7 md:p-8">
             <div className="flex items-center gap-2">
               <Cpu className="h-5 w-5 text-[#0FD9C8]" aria-hidden />
               <h2 className="font-display text-xl font-semibold text-[#F5F4F0]">{geoAuditUiCopy.intelligenceTitle}</h2>
@@ -168,7 +168,7 @@ export function GeoAuditorEngine() {
 
               <div>
                 <p className="font-mono text-xs uppercase tracking-wider text-[#F5F4F0]/50">{geoAuditUiCopy.h1Label}</p>
-                <p className="mt-3 break-words rounded-[1rem] border border-[#F5F4F0]/10 bg-[#101014] px-4 py-3 font-mono text-sm text-[#F5F4F0]">
+                <p className="mt-3 wrap-break-word rounded-2xl border border-[#F5F4F0]/10 bg-[#101014] px-4 py-3 font-mono text-sm text-[#F5F4F0]">
                   &lt;h1&gt;{results.extractedData.h1}&lt;/h1&gt;
                 </p>
               </div>
@@ -176,7 +176,7 @@ export function GeoAuditorEngine() {
           </section>
 
           <div className="grid gap-8 md:grid-cols-3">
-            <section className="surface-band flex flex-col items-center justify-center rounded-[2rem] p-8 text-center md:col-span-1">
+            <section className="surface-band flex flex-col items-center justify-center rounded-4xl p-8 text-center md:col-span-1">
               <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#F5F4F0]/50">
                 {geoAuditUiCopy.scoreLabel}
               </span>
@@ -202,7 +202,7 @@ export function GeoAuditorEngine() {
               </p>
             </section>
 
-            <section className="surface-card rounded-[2rem] p-7 md:col-span-2 md:p-8">
+            <section className="surface-card rounded-4xl p-7 md:col-span-2 md:p-8">
               <h2 className="font-display text-2xl font-semibold text-[#F5F4F0]">{geoAuditUiCopy.diagnosticsTitle}</h2>
               <div className="mt-6 space-y-4">
                 {GEO_AUDIT_CHECK_KEYS.map((key: GeoAuditCheckKey) => {
@@ -238,7 +238,7 @@ export function GeoAuditorEngine() {
             </section>
           </div>
 
-          <details className="surface-card rounded-[2rem] p-7 md:p-8">
+          <details className="surface-card rounded-4xl p-7 md:p-8">
             <summary className="cursor-pointer font-display text-lg font-semibold text-[#F5F4F0]">
               {geoAuditUiCopy.rawXrayTitle}
             </summary>
@@ -246,33 +246,33 @@ export function GeoAuditorEngine() {
             <dl className="mt-6 space-y-5 font-mono text-xs leading-relaxed text-[#F5F4F0]/82">
               <div>
                 <dt className="text-[#F05A28]">Title</dt>
-                <dd className="mt-1 break-words">{results.extractedData.title}</dd>
+                <dd className="mt-1 wrap-break-word">{results.extractedData.title}</dd>
               </div>
               <div>
                 <dt className="text-[#F05A28]">Meta description</dt>
-                <dd className="mt-1 break-words">{results.extractedData.metaDescription}</dd>
+                <dd className="mt-1 wrap-break-word">{results.extractedData.metaDescription}</dd>
               </div>
               <div>
                 <dt className="text-[#F05A28]">Canonical</dt>
-                <dd className="mt-1 break-words">{results.rawXray.canonical ?? "—"}</dd>
+                <dd className="mt-1 wrap-break-word">{results.rawXray.canonical ?? "—"}</dd>
               </div>
               <div>
                 <dt className="text-[#F05A28]">Meta robots</dt>
-                <dd className="mt-1 break-words">{results.rawXray.metaRobots ?? "—"}</dd>
+                <dd className="mt-1 wrap-break-word">{results.rawXray.metaRobots ?? "—"}</dd>
               </div>
               <div>
                 <dt className="text-[#F05A28]">OG title / description</dt>
-                <dd className="mt-1 break-words">
+                <dd className="mt-1 wrap-break-word">
                   {(results.rawXray.ogTitle ?? "—") + " / " + (results.rawXray.ogDescription ?? "—")}
                 </dd>
               </div>
               <div>
                 <dt className="text-[#F05A28]">Twitter card</dt>
-                <dd className="mt-1 break-words">{results.rawXray.twitterCard ?? "—"}</dd>
+                <dd className="mt-1 wrap-break-word">{results.rawXray.twitterCard ?? "—"}</dd>
               </div>
               <div>
                 <dt className="text-[#F05A28]">JSON-LD</dt>
-                <dd className="mt-1 break-words">
+                <dd className="mt-1 wrap-break-word">
                   {results.rawXray.jsonLdBlockCount} block(s)
                   {results.rawXray.jsonLdTypes.length
                     ? ` — @type: ${results.rawXray.jsonLdTypes.join(", ")}`
@@ -281,7 +281,7 @@ export function GeoAuditorEngine() {
               </div>
               <div>
                 <dt className="text-[#F05A28]">Heading outline</dt>
-                <dd className="mt-1 break-words">
+                <dd className="mt-1 wrap-break-word">
                   {results.rawXray.headingOutline.length
                     ? results.rawXray.headingOutline.map((h) => `[H${h.level}] ${h.text}`).join(" · ")
                     : "—"}

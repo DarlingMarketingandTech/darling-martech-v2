@@ -75,23 +75,6 @@ function resolveMartechStackResult(tool: Tool, answers: ToolAnswers): ToolResult
   return tool.results.find((result) => result.id === "martech-integrated");
 }
 
-function resolveCmoSimulatorResult(tool: Tool, answers: ToolAnswers): ToolResult | undefined {
-  const execClarity = answers.execClarity;
-  const programLoad = answers.programLoad;
-  const evidenceCadence = answers.evidenceCadence;
-  const killSwitch = answers.killSwitch;
-
-  if (killSwitch === "runs_undead" || programLoad === "five_plus") {
-    return tool.results.find((result) => result.id === "cmo-portfolio-debt");
-  }
-
-  if (execClarity === "split" || evidenceCadence === "never") {
-    return tool.results.find((result) => result.id === "cmo-measurement-gap");
-  }
-
-  return tool.results.find((result) => result.id === "cmo-operating-rhythm");
-}
-
 function resolveAttributionSnapshotResult(tool: Tool, answers: ToolAnswers): ToolResult | undefined {
   if (!tool.questions.length) {
     return tool.results[0];
@@ -147,8 +130,6 @@ export function resolveToolResult(tool: Tool, answers: ToolAnswers): ToolResult 
       return resolveGrowthBottleneckResult(tool, answers);
     case "martech-stack-grader":
       return resolveMartechStackResult(tool, answers);
-    case "cmo-simulator":
-      return resolveCmoSimulatorResult(tool, answers);
     case "attribution-snapshot":
       return resolveAttributionSnapshotResult(tool, answers);
     case "cmo-roadmap-generator":

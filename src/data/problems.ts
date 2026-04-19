@@ -30,14 +30,14 @@ export const problemPages: ProblemPage[] = [
       "Fractional CMO engagement. Strategic ownership of the full marketing function — positioning, priorities, measurement, team direction, and the system that holds it all together. Not a strategy deck. A person with accountability.",
     relatedProof: ["graston-qualified-leads", "graston-technique"],
     relevantTools: [
-      { label: "CMO Simulator", href: "/tools/cmo-simulator" },
+      { label: "Build vs Buy Stack Calculator", href: "/tools/build-vs-buy-stack-calculator" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
     ],
     relatedService: "fractional-cmo",
     closingBlock: {
       headline: "If this is what you're dealing with, the next step is a direct conversation.",
       primary: { label: "Let's talk →", href: siteConfig.calComLink },
-      secondary: { label: "Or try the CMO Simulator first →", href: "/tools/cmo-simulator" },
+      secondary: { label: "Run the Build vs Buy calculator first →", href: "/tools/build-vs-buy-stack-calculator" },
     },
   },
   {
@@ -68,8 +68,8 @@ export const problemPages: ProblemPage[] = [
       "Website strategy and rebuild. Problem-first information architecture. Conversion flow design. Trust signals in the right places. Clear next steps for every intent level — from \"just browsing\" to \"ready to talk.\"",
     relatedProof: ["pike-medical", "clinical-compass"],
     relevantTools: [
+      { label: "Funnel ROI Forecaster", href: "/tools/funnel-roi-forecaster" },
       { label: "CMO Roadmap Generator", href: "/tools/cmo-roadmap-generator" },
-      { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
     ],
     relatedService: "content-seo-systems",
     closingBlock: {
@@ -87,7 +87,7 @@ export const problemPages: ProblemPage[] = [
     pageEyebrow: "CRM & AUTOMATION",
     heroHeadline: "Your leads, follow-up, and reporting don't talk to each other.",
     heroSubhead:
-      "Leads leak quietly when the system is patched together instead of designed end-to-end.",
+      "Leads leak quietly when the system is patched together instead of designed as one operating layer.",
     introParagraphs: [
       "This is the most common thing I find when I start working with a new client. Not a bad product. Not bad marketing. A broken system: leads come in from multiple sources, get logged inconsistently, followed up on manually, and reported in a way that tells you nothing about what's actually working.",
       "The cost isn't just inefficiency. It's the leads that fell through during a busy week. The deal that went cold because no one followed up on day 8. The decision to cut the email channel because no one knew it was generating 40% of the pipeline.",
@@ -99,15 +99,15 @@ export const problemPages: ProblemPage[] = [
       "Reporting in the room disagrees with reporting inside the tools.",
     ],
     whyItHappens:
-      "Systems get set up in layers. A CRM gets installed when the team is small. An email tool gets added when someone reads an article about marketing automation. A form gets connected to a spreadsheet because it was faster in the moment. Nobody designs the system end-to-end — they patch it together over time. And patched-together systems break silently.",
+      "Systems get set up in layers. A CRM gets installed when the team is small. An email tool gets added when someone reads an article about marketing automation. A form gets connected to a spreadsheet because it was faster in the moment. Nobody designs the system as one operating layer — they patch it together over time. And patched-together systems break silently.",
     stakes:
       "Disconnected systems are quiet killers. The leads exist. The follow-up system almost works. The reporting almost makes sense. Everything is almost fine — until you try to scale, and the whole thing falls apart because the foundation was never built to hold the load.",
     whatTheFixLooksLike:
       "CRM architecture and automation buildout. Map the full lead-to-close journey. Build the system that executes it automatically. Connect reporting so every decision is based on real data, not instinct.",
     relatedProof: ["graston-growth-engine", "pike-medical"],
     relevantTools: [
-      { label: "Attribution Snapshot", href: "/tools/attribution-snapshot" },
-      { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
+      { label: "MarTech Fragmentation Scorecard", href: "/tools/martech-fragmentation-scorecard" },
+      { label: "Automation Cost Savings Calculator", href: "/tools/automation-cost-savings-calculator" },
     ],
     relatedService: "martech-stack-build",
     closingBlock: {
@@ -182,14 +182,14 @@ export const problemPages: ProblemPage[] = [
       "Brand identity system: positioning, messaging, visual identity, tone of voice. Built from the actual quality of the work and the actual profile of the buyer — not from what looks nice or what a design trend suggested.",
     relatedProof: ["pike-medical", "317-bbq"],
     relevantTools: [
-      { label: "CMO Simulator", href: "/tools/cmo-simulator" },
+      { label: "Build vs Buy Stack Calculator", href: "/tools/build-vs-buy-stack-calculator" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
     ],
     relatedService: "fractional-cmo",
     closingBlock: {
       headline: "The brand should work as hard as the business does.",
       primary: { label: "Let's rebuild it →", href: siteConfig.calComLink },
-      secondary: { label: "Stress-test positioning first →", href: "/tools/cmo-simulator" },
+      secondary: { label: "Run Build vs Buy first →", href: "/tools/build-vs-buy-stack-calculator" },
     },
   },
   {
@@ -220,8 +220,8 @@ export const problemPages: ProblemPage[] = [
       "Attribution system design. CRM data hygiene. Source tracking implementation. Multi-model attribution reporting. One clear view of where revenue actually comes from — built to hold up to scrutiny.",
     relatedProof: ["graston-growth-engine", "graston-technique"],
     relevantTools: [
-      { label: "Attribution Snapshot", href: "/tools/attribution-snapshot" },
-      { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
+      { label: "Attribution Clarity Analyzer", href: "/tools/attribution-clarity-analyzer" },
+      { label: "Demand Capture & CAC Simulator", href: "/tools/demand-capture-cac-simulator" },
     ],
     relatedService: "attribution-analytics",
     closingBlock: {

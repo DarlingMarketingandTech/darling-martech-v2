@@ -6,7 +6,7 @@ import { buildMetadata } from "@/lib/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "Growth Bottleneck Quiz",
   description:
-    "Answer 8 focused questions about where your marketing is stuck. Identify the real constraint and find out exactly where to start.",
+    "Answer 5 honest questions about where your marketing is stuck. Identify the real constraint and find out exactly where to start.",
   canonicalUrl: "https://darlingmartech.com/tools/growth-bottleneck-quiz",
 });
 

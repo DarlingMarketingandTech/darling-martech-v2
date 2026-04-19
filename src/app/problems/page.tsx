@@ -1,50 +1,126 @@
+import Link from "next/link";
 import { SiteShell } from "@/components/layout/site-shell";
-import { SectionWrapper } from "@/components/layout/SectionWrapper";
-import { ProblemHubGrid } from "@/components/problems/ProblemHubGrid";
 import { PageHero } from "@/components/hero/PageHero";
 import { DiagnosticOrangeBand } from "@/components/home/DiagnosticOrangeBand";
 import { Button } from "@/components/ui/button";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { problemPages } from "@/data/problems";
+import { caseStudies } from "@/data/work/work-index";
 import { routeMetadata } from "@/data/routes";
 import { buildMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/data/site-config";
+import type { ProblemPage } from "@/types";
 
 export const metadata = buildMetadata(routeMetadata["/problems"]);
+
+const QUIZ_HREF = "/tools/growth-bottleneck-quiz";
+
+function formatSlugAsCategoryLabel(slug: string): string {
+  return slug
+    .split("-")
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join(" ");
+}
+
+function getCaseStudyForProblem(problem: ProblemPage) {
+  const firstSlug = problem.relatedProof[0];
+  if (!firstSlug) return undefined;
+  return caseStudies.find((study) => study.slug === firstSlug);
+}
+
+function getRecommendedTool(problem: ProblemPage) {
+  const pick =
+    problem.relevantTools.find((t) => !t.href.includes(QUIZ_HREF)) ?? problem.relevantTools[0];
+  return pick ?? { label: "CMO Simulator", href: "/tools/cmo-simulator" };
+}
+
+function ProblemsHubCard({ problem }: { problem: ProblemPage }) {
+  const study = getCaseStudyForProblem(problem);
+  const tool = getRecommendedTool(problem);
+
+  return (
+    <Link
+      href={`/problems/${problem.slug}`}
+      className="group flex h-full flex-col rounded-3xl border border-[#F5F4F0]/10 border-l-4 border-l-transparent bg-[#13131A] p-6 transition-colors hover:border-[rgba(240,90,40,0.4)] hover:border-l-[#F05A28] hover:bg-[#18181F]"
+    >
+      <p className="text-xs font-normal uppercase tracking-widest text-[#F05A28]">
+        {formatSlugAsCategoryLabel(problem.slug)}
+      </p>
+      <h2 className="font-display mt-4 text-balance text-xl font-semibold leading-snug text-[#F5F4F0] md:text-2xl">
+        {problem.heroHeadline}
+      </h2>
+      <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-[#F5F4F0]/64 md:text-base">
+        {problem.heroSubhead}
+      </p>
+
+      {study ? (
+        <div className="mt-5 rounded-xl border border-[#22C55E]/30 bg-[#22C55E]/10 px-4 py-3">
+          <p className="font-mono text-2xl font-bold text-[#22C55E]">{study.primaryMetric.value}</p>
+          <p className="mt-1 text-xs text-[#F5F4F0]/50">{study.primaryMetric.label}</p>
+        </div>
+      ) : (
+        <div className="mt-5 rounded-xl border border-[#22C55E]/30 bg-[#22C55E]/10 px-4 py-3">
+          <p className="text-xs text-[#F5F4F0]/50">{problem.proofChip}</p>
+        </div>
+      )}
+
+      <div className="mt-auto flex flex-col gap-3 border-t border-[#F5F4F0]/8 pt-5">
+        <div>
+          <p className="text-xs uppercase tracking-widest text-[#F5F4F0]/45">Recommended tool</p>
+          <p className="mt-1 text-sm font-medium text-[#F5F4F0]">{tool.label}</p>
+        </div>
+        <span className="text-sm font-medium text-[#F05A28]">See this problem →</span>
+      </div>
+    </Link>
+  );
+}
 
 export default function ProblemsPage() {
   return (
     <SiteShell>
       <PageHero
-        eyebrow="FIND YOUR PROBLEM FIRST"
+        eyebrow="Find your problem first"
         headline="Most growth problems are fixable. The ones that aren't named aren't."
         body="This page exists for one reason: to help you name the specific thing holding your growth back — before you decide what to do about it."
-        ctas={[{ label: "Take the Growth Bottleneck Quiz →", href: "/tools/growth-bottleneck-quiz", variant: "primary" }]}
+        ctas={[
+          {
+            label: "Not sure which one is yours? Take the 3-minute diagnostic →",
+            href: QUIZ_HREF,
+            variant: "primary",
+          },
+        ]}
       />
-      <p className="mt-10 text-center text-sm text-[#F5F4F0]/55">
-        These are the six most common patterns I find when I start working with a new client. One of them is probably yours.
+
+      <p className="mt-10 max-w-3xl text-center text-sm leading-relaxed text-[#F5F4F0]/55 md:mx-auto">
+        These are the six most common patterns I find when I start working with a new client. One of them is
+        probably yours.
       </p>
-      <div className="mt-10">
-        <ProblemHubGrid problems={problemPages} />
+
+      <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {problemPages.map((problem, index) => (
+          <AnimateOnScroll key={problem.slug} delay={index * 0.05}>
+            <ProblemsHubCard problem={problem} />
+          </AnimateOnScroll>
+        ))}
       </div>
 
       <div className="mt-14">
         <DiagnosticOrangeBand
           headline="Still not sure which one is your bottleneck?"
-          body="Eight questions. A specific answer — not a generic recommendation. No email required to see results."
-          cta={{ label: "Take the Growth Bottleneck Quiz →", href: "/tools/growth-bottleneck-quiz" }}
+          body="Five questions. About three minutes. A specific answer — not a generic recommendation. No email required to see results."
+          cta={{ label: "Take the Growth Bottleneck Quiz →", href: QUIZ_HREF }}
         />
       </div>
 
-      <SectionWrapper className="mt-14 text-center">
-        <p className="text-sm text-[#F5F4F0]/55">
+      <section className="mt-16 text-center md:mt-20">
+        <p className="mx-auto max-w-xl text-sm leading-relaxed text-[#F5F4F0]/55">
           If you already know the problem and you&apos;re ready to talk about fixing it, skip the diagnostic.
         </p>
-        <div className="mt-6">
-          <Button href={siteConfig.calComLink} variant="ghost" size="lg">
+        <div className="mt-6 flex justify-center">
+          <Button href="/contact" variant="ghost" size="lg">
             Start a conversation →
           </Button>
         </div>
-      </SectionWrapper>
+      </section>
     </SiteShell>
   );
 }

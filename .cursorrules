@@ -1,46 +1,65 @@
 # CLAUDE.md
 # Darling MarTech — AI Agent Context File
-# Version: 1.4 | Last updated: April 2026
-# v1.4: Tailwind v4 canonical utilities — prefer scale tokens over bracket radii when equivalent (`rounded-4xl` not `rounded-[2rem]`, etc.);
-#       use `wrap-break-word` instead of legacy-alias `break-words` (keeps Tailwind IntelliSense `suggestCanonicalClasses` clean).
-#       Supplementary docs: `docs/homepage-section-audit.md`, `docs/darlingmartech-proof-copy.md`, `docs/3D-ASSET-SOURCES.md`, split `darlingmartech-*-copy.md` exports.
-# v1.3: Motion / 3D stack — `gsap`, `lenis`, `@splinetool/*`, `three`, `@react-three/fiber`, `@react-three/drei`;
-#       Shadcn `components.json` + `card` / `badge` / `tabs` / `dialog`; bespoke `Button` (primary/secondary/ghost + `href`);
-#       server helpers `src/lib/unsplash.ts`, `src/lib/pexels.ts`; client hook `useSmoothScroll` in `src/lib/lenis.ts` (do not wire globally without QA).
-# v1.2: GEO Readiness Auditor — URL scrape audit (`/api/tools/geo-audit`), full-report email
-#       (`/api/tools/geo-audit/report`), dedicated `/tools/geo-readiness-auditor` + `GeoAuditorEngine`,
-#       copy in `geo-readiness-auditor.ts`, types `GeoAuditResponse`, cheerio (server-only).
-# v1.1: Copy + Blueprint rebuild pass — homepage structure, problems/proof/services depth,
-#       outcome filters, quiz (8Q), newsletter API, redirects, expanded about/process/contact.
+# Version: 1.7 | Last updated: April 2026
+#
+# v1.7: Strategic merge — repo-canonical v1.4 technical conventions preserved as source of truth.
+#       Incorporates from strategic review pass:
+#       - Explicit three-pillar service framing (AI & Automation raised to visible priority)
+#       - Expanded proof migration priority list (8 legacy clients)
+#       - Stronger tool strategy and interaction design rules
+#       - Homepage diagnostic-engine emphasis
+#       - Sprint 0 workflow and definition of done
+#       - Conflict resolution rule (repo wins over planning docs)
+#       - Expanded tool backlog candidates
+#       - Proof quality and dead-end rules
+#       - Resources / newsletter rules
+#
 # This file is the single source of truth for all AI agents working on this codebase.
 # Read this entire file before writing any code, creating any files, or making any decisions.
 # Do not deviate from the conventions defined here without explicit instruction from Jacob Darling.
 #
-# Cursor: `.cursorrules` at repo root is a **byte-for-byte copy** of this file. After any CLAUDE.md edit,
-# sync with: `Copy-Item CLAUDE.md .cursorrules -Force` (PowerShell) or `cp CLAUDE.md .cursorrules`.
+# Cursor: `.cursorrules` at repo root is a byte-for-byte copy of this file.
+# After any CLAUDE.md edit, sync with:
+#   cp CLAUDE.md .cursorrules
+#   or: Copy-Item CLAUDE.md .cursorrules -Force  (PowerShell)
 
 ---
 
 ## QUICK COMMANDS
+
 ```bash
-npm run dev       # Start dev server (localhost:3000) — primary script in package.json
-npm run build     # Production build (+ next-sitemap postbuild)
-npm run lint      # ESLint
-npm run typecheck # tsc --noEmit
-pnpm verify       # lint + typecheck + build (if using pnpm)
-pnpm dlx shadcn@latest add [component]   # Add Shadcn component (when used)
+pnpm dev          # local dev server (localhost:3000)
+pnpm build        # production build (+ next-sitemap postbuild)
+pnpm lint         # ESLint
+pnpm typecheck    # tsc --noEmit
+pnpm verify       # lint + typecheck + build
+pnpm dlx shadcn@latest add [component]
 ```
 
 ---
 
-## 0. WHO THIS IS FOR
+## 0. WHO THIS FILE IS FOR
 
 This file instructs AI coding agents — Claude Code, Cursor, Codex, Gemini — on exactly
 how to build the Darling MarTech website. Every architectural, brand, copy, and
 workflow decision has already been made. Your job is to implement those decisions
 correctly, not to invent new ones.
 
-When in doubt: ask Jacob. Do not guess.
+**Operating posture:** You are a senior frontend engineer and strategic collaborator.
+Do the work, then report what changed, what to verify, and what remains open.
+Do not narrate long preambles about what you plan to do.
+
+**When in doubt:** ask Jacob. Do not guess on taxonomy slugs, brand tokens, or data schemas.
+
+### Conflict resolution rule
+If an older planning doc, attached markdown, or alternate strategy file conflicts with:
+- current route structure
+- current taxonomy slugs
+- current fonts or color tokens
+- current data models
+- current component architecture
+
+then **the current repo conventions win** unless Jacob explicitly approves a migration.
 
 ---
 
@@ -49,26 +68,32 @@ When in doubt: ask Jacob. Do not guess.
 **Company:** Darling MarTech
 **Founder:** Jacob Darling
 **Location:** Indianapolis, IN (serves clients nationally)
-**Email (public / site-config):** jacob@darlingmt.com
+**Email:** jacob@darlingmt.com
 **Domain:** darlingmartech.com
 **GitHub Org:** DarlingMarketingandTech
+**Repo:** `darling-martech-v2`
 
-**What this is:** A full ground-up rebuild of darlingmartech.com. Not a revamp of
-the existing repo. A new repository, new data architecture, new site structure,
-new copy, new conversion philosophy.
+**What this is:** A full ground-up rebuild of darlingmartech.com. Not a revamp of the
+existing repo. New repository, new data architecture, new site structure, new copy,
+new conversion philosophy.
 
-**The core mission of this site:**
-Transform darlingmartech.com from a portfolio that proves capability into a
-diagnostic engine that identifies problems, delivers value before asking for
-commitment, and converts at every trust level.
+**Core mission:**
+Transform darlingmartech.com from a portfolio that proves capability into a diagnostic
+engine that identifies problems, delivers value before asking for commitment, and
+converts at every trust level.
 
 **One-sentence positioning (use this everywhere):**
 Darling MarTech is the only martech owner-operator company that builds, integrates,
 and runs the full marketing stack for growth-stage businesses — from strategy to
 system to execution — with a single accountable lead.
 
+**Expanded positioning frame:**
+Darling MarTech is a hybrid technical marketing partner — not a generic web shop,
+not a pure dev studio, not a commodity agency. The site should make that visible
+through both proof and tools.
+
 **This is a solo operator business. Jacob Darling is the product.**
-All copy, all positioning, all systems reflect a single expert — not a team.
+All copy, positioning, and systems reflect a single expert — not a team.
 Never write "we" when referring to service delivery. Use "I" or "Jacob."
 The solo operator framing is a feature, not a limitation.
 
@@ -78,21 +103,28 @@ The solo operator framing is a feature, not a limitation.
 
 **Decision: Full rebuild from scratch in a new repository.**
 
-The existing `darling-martech` repo (Next.js 16 App Router, TypeScript, CSS Modules,
-Framer Motion) has a solid technical foundation but the wrong data architecture,
-navigation logic, page structure, and conversion philosophy.
+The old `darling-martech` repo is reference material for:
+- proof content and legacy case studies
+- Cloudinary asset mapping
+- old tool concepts
+- supporting content patterns
+- migration source material
+
+It is **not** the architecture to reuse.
 
 **Do not:**
-- Reference, import, or copy patterns from the old `darling-martech` repo
-- Revamp or migrate files from the old repo
-- Use CSS Modules (use Tailwind instead)
+- Reference, import, or copy architecture from the old `darling-martech` repo
+- Mirror legacy page structure mechanically
+- Reintroduce CSS Modules
+- Paste old `/work` content raw into v2
+- Port old services-first framing unchanged
 
 **Do:**
-- Build clean from a fresh Next.js 15 + TypeScript + Tailwind + Shadcn/UI init
-- Wire new data models correctly from day one
+- Build clean from the v2 data architecture
+- Map legacy proof into v2 taxonomy
+- Preserve strong metrics, specificity, and named examples
+- Convert legacy `/work` thinking into `/proof` + `/problems` + `/services` depth
 - Keep the old repo live until the new one is fully staged and tested
-
-**Repo created:** `darling-martech-v2` (this repo).
 
 ---
 
@@ -102,32 +134,38 @@ navigation logic, page structure, and conversion philosophy.
 - **Framework:** Next.js 15 (App Router)
 - **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS v4 (no CSS Modules, no styled-components)
-- **Components:** Shadcn/UI (for interactive primitives: Dialog, Select, Toast, etc.)
-- **Animation:** Framer Motion (default for scroll reveals, page transitions, micro-interactions via `AnimateOnScroll`)
-- **Optional motion / 3D (only when a surface explicitly needs it):** `gsap` (+ ScrollTrigger), `lenis` (smooth scroll), `@splinetool/react-spline` + `@splinetool/runtime`, `three` + `@react-three/fiber` + `@react-three/drei` — lazy-load 3D; heavy bundles.
-- **Fonts:** Google Fonts via `next/font` — Syne (display), Inter (body), JetBrains Mono (data)
+- **Components:** Shadcn/UI (Dialog, Select, Toast, Tabs, Card, Badge, etc.)
+- **Animation:** Framer Motion (default — scroll reveals, transitions, micro-interactions via `AnimateOnScroll`)
+- **Optional heavy motion / 3D (only when a surface explicitly warrants it):**
+  `gsap` + ScrollTrigger, `lenis` (smooth scroll), `@splinetool/react-spline`,
+  `@splinetool/runtime`, `three`, `@react-three/fiber`, `@react-three/drei`
+  Lazy-load all 3D. Do not wire `useSmoothScroll` globally without QA.
+- **Fonts:** Google Fonts via `next/font` — **Syne** (display), **Inter** (body), **JetBrains Mono** (data/metrics)
+
+> **Note on alternate font names in planning docs:** Some older attached planning files reference
+> "Cabinet Grotesk" and "Instrument Serif." Those are not canonical. Syne / Inter / JetBrains Mono
+> are the live repo fonts. Do not mix alternates in without explicit approval.
 
 ### Backend / Infrastructure
-- **Hosting:** Vercel (frontend)
-- **Database:** Supabase (PostgreSQL — for form submissions, tool responses, CRM sync)
+- **Hosting:** Vercel
+- **Database:** Supabase (PostgreSQL — form submissions, tool responses, CRM sync)
 - **CRM:** Twenty CRM (self-hosted on Railway)
 - **Automation:** n8n (self-hosted on Railway)
-- **Email (transactional):** Resend + React Email
-- **Email (marketing/nurturing):** Loops.so
-- **Forms:** Formbricks (open source, self-hostable)
-- **Analytics:** Plausible Analytics + Vercel Analytics + PostHog
-- **Scheduling:** Cal.com (embed or link)
+- **Transactional email:** Resend + React Email
+- **Marketing email:** Loops.so
+- **Forms:** Formbricks (planned/partial; contact currently posts JSON to `/api/contact`)
+- **Analytics:** Plausible + Vercel Analytics + PostHog
+- **Scheduling:** Cal.com (`jacob-darling/30min`)
 - **CDN/DNS:** Cloudflare
-- **Media/Images:** Cloudinary (all images served from Cloudinary CDN)
+- **Media/Images:** Cloudinary (all production images served from Cloudinary CDN)
 - **Package manager:** pnpm (not npm, not yarn)
 
 ### AI Dev Stack
-- **Primary build agent:** Claude Code (in terminal, full repo access)
-- **Daily IDE:** Cursor (with `.cursorrules` configured)
-- **Research/architecture:** Gemini 1.5 Pro / 2.0 Flash in Google AI Studio
-- **Additional:** Codex for targeted code generation tasks
+- **Primary build agent:** Claude Code (terminal, full repo access)
+- **Daily IDE:** Cursor (`.cursorrules` configured)
+- **Research/architecture:** Gemini 1.5 Pro / 2.0 Flash
 
-### Key Package Versions (target)
+### Key Package Versions
 ```json
 {
   "next": "^15.0.0",
@@ -141,120 +179,133 @@ navigation logic, page structure, and conversion philosophy.
   "cheerio": "^1.0.0"
 }
 ```
-**`cheerio`:** server-side HTML parsing for the GEO Readiness Auditor API only (`src/app/api/tools/geo-audit`). Do not add alternative HTML parsers without explicit approval.
 
-**Stock photo discovery (server-only, optional):** Unsplash (`UNSPLASH_ACCESS_KEY`) and Pexels (`PEXELS_API_KEY`) are called from **`src/lib/unsplash.ts`** and **`src/lib/pexels.ts`** (Server Components or Route Handlers only). These keys must **never** ship to the browser. **Cloudinary + `CloudinaryImage`** remains the default for production marketing imagery; use Unsplash/Pexels only for approved experiments, backgrounds, or internal tooling — not as a wholesale replacement for the Cloudinary rule without Jacob’s sign-off.
+**`cheerio`:** server-side HTML parsing for the GEO Readiness Auditor API only
+(`src/app/api/tools/geo-audit`). Do not add alternative HTML parsers.
+
+**Stock photo discovery (server-only, optional):** Unsplash (`UNSPLASH_ACCESS_KEY`) and
+Pexels (`PEXELS_API_KEY`) via `src/lib/unsplash.ts` and `src/lib/pexels.ts`.
+Never expose these keys to the browser. Cloudinary remains default for production images.
+
+**New dependency rule:** Do not add packages casually. If a new dependency is necessary,
+justify it, confirm an existing package cannot cover the need, and flag it to Jacob.
 
 ---
 
-## 4. REPOSITORY STRUCTURE (CURRENT)
-
-High-level layout — verify with `src/` when adding files.
+## 4. REPOSITORY STRUCTURE
 
 ```
 /
 ├── CLAUDE.md, .cursorrules, AGENTS.md
-├── next.config.ts                     ← includes /work→/proof, /lab→/tools redirects
+├── next.config.ts                      ← /work→/proof, /lab→/tools redirects
 ├── package.json
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx, page.tsx       ← SiteShell; homepage follows copy-doc section order
-│   │   ├── problems/                  ← hub + [slug] (6 problem clusters)
-│   │   ├── proof/                     ← hub (?outcome=) + [slug] case studies
-│   │   ├── services/                  ← capabilities index + [slug] (from data/services.ts)
-│   │   ├── tools/                     ← hub, [slug] (QuizEngine); dedicated: growth-bottleneck-quiz,
-│   │   │                              geo-readiness-auditor (URL audit + email gate)
+│   │   ├── layout.tsx, page.tsx        ← SiteShell; homepage follows copy-doc section order
+│   │   ├── problems/                   ← hub + [slug] (6 problem clusters)
+│   │   ├── proof/                      ← hub (?outcome=) + [slug] case studies
+│   │   ├── services/                   ← capabilities index + [slug]
+│   │   ├── tools/                      ← hub, [slug] (QuizEngine); dedicated:
+│   │   │                                 growth-bottleneck-quiz, geo-readiness-auditor,
+│   │   │                                 attribution-snapshot
 │   │   ├── process/, about/, contact/, studio/, privacy-policy/
-│   │   ├── resources/                 ← hub, blog/[slug], frameworks
+│   │   ├── resources/                  ← hub, blog/[slug], frameworks
 │   │   └── api/
-│   │       ├── contact/               ← Resend + n8n when live integrations on
-│   │       ├── newsletter/            ← Resend audience (optional; see env)
+│   │       ├── contact/                ← Resend + n8n when live integrations on
+│   │       ├── newsletter/             ← Resend audience
 │   │       ├── subscribe/, tool-complete/
-│   │       └── tools/geo-audit/       ← POST scan URL; report/ POST email full audit (Resend + Loops)
+│   │       └── tools/geo-audit/        ← POST scan URL; report/ POST email full audit
 │   │
 │   ├── components/
-│   │   ├── home/                      ← ProofTicker, DiagnosticOrangeBand (homepage bands)
-│   │   ├── layout/                    ← SiteHeader, SiteFooter (+ NewsletterSignup client)
-│   │   ├── hero/                      ← HomepageHero (structured headline + accent), PageHero
-│   │   ├── proof/                     ← ProofCard, ProofGrid, ProofOutcomeFilters, AntiClaimRow
-│   │   ├── problems/                  ← ProblemCard, ProblemHubGrid, ProblemNav, ProblemClosingSection
-│   │   ├── tools/                     ← QuizEngine, GrowthBottleneckQuizClient, tools/geo/* (GEO auditor),
-│   │   │                              ToolsPreviewBand, …
-│   │   ├── process/                   ← ProcessTimeline, PrinciplesGrid, EngagementFormatCards
-│   │   ├── about/                     ← FounderHero, CredentialsBar
-│   │   ├── contact/                   ← ContactExperience, ContactForm, IntentSelector,
-│   │   │                              ContactAlternativePaths, WhatHappensNext, DirectContactBlock
-│   │   ├── 3d/                        ← R3F / Spline wrappers (lazy-loaded scenes)
-│   │   ├── animations/               ← GSAP / Lenis-specific clients when not using AnimateOnScroll
-│   │   └── ui/                        ← Button, Eyebrow, SectionHeader, AnimateOnScroll, Shadcn primitives (card, badge, tabs, dialog), …
+│   │   ├── home/                       ← ProofTicker, DiagnosticOrangeBand
+│   │   ├── layout/                     ← SiteHeader, SiteFooter + NewsletterSignup
+│   │   ├── hero/                       ← HomepageHero, PageHero
+│   │   ├── proof/                      ← ProofCard, ProofGrid, ProofOutcomeFilters, AntiClaimRow
+│   │   ├── problems/                   ← ProblemCard, ProblemHubGrid, ProblemNav, ProblemClosingSection
+│   │   ├── tools/                      ← QuizEngine, GrowthBottleneckQuizClient, GEO auditor,
+│   │   │                                 ToolsPreviewBand
+│   │   ├── process/                    ← ProcessTimeline, PrinciplesGrid, EngagementFormatCards
+│   │   ├── about/                      ← FounderHero, CredentialsBar
+│   │   ├── contact/                    ← ContactExperience, ContactForm, IntentSelector,
+│   │   │                                 ContactAlternativePaths, WhatHappensNext
+│   │   ├── 3d/                         ← R3F / Spline wrappers (lazy-loaded)
+│   │   ├── animations/                 ← GSAP / Lenis-specific clients
+│   │   └── ui/                         ← Button, Eyebrow, SectionHeader, AnimateOnScroll,
+│   │                                     Shadcn primitives (card, badge, tabs, dialog)
 │   │
 │   ├── data/
-│   │   ├── homepage.ts              ← Hero, proofBar (5 metrics), diagnosticBand, sections copy
-│   │   ├── taxonomy.ts              ← PROBLEM_CLUSTERS, OUTCOME_SLUG_LABELS / OUTCOME_SLUG_ORDER, …
-│   │   ├── problems.ts              ← Full ProblemPage records (long-form + hub chips)
-│   │   ├── labs.ts                  ← All interactive tools + questions + ToolResult rows
-│   │   ├── geo-readiness-auditor.ts ← GEO auditor UI copy, checklist education, overview helper
+│   │   ├── homepage.ts                 ← Hero, proofBar (5 metrics), diagnosticBand, sections
+│   │   ├── taxonomy.ts                 ← PROBLEM_CLUSTERS, OUTCOME_SLUG_LABELS, TRUST_LADDER_STAGES
+│   │   ├── problems.ts                 ← Full ProblemPage records (long-form + hub chips)
+│   │   ├── labs.ts                     ← All interactive tools + questions + ToolResult rows
+│   │   ├── geo-readiness-auditor.ts    ← GEO auditor UI copy and checklist
 │   │   ├── services.ts, process.ts, navigation.ts, routes.ts, contact.ts, about.ts, proof.ts
 │   │   └── work/
 │   │       ├── work-index.ts
-│   │       ├── graston-qualified-leads.ts   ← +212% lead narrative (distinct slug)
-│   │       ├── graston-growth-engine.ts     ← automation / overhead emphasis
-│   │       ├── pike-medical.ts, russell-painting.ts
+│   │       ├── graston-qualified-leads.ts
+│   │       ├── graston-growth-engine.ts
+│   │       ├── pike-medical.ts
+│   │       └── russell-painting.ts
 │   │
 │   ├── lib/
-│   │   ├── lenis.ts                 ← `useSmoothScroll` — Lenis + GSAP ScrollTrigger (client; opt-in per layout)
-│   │   ├── unsplash.ts              ← Server-only Unsplash search helper
-│   │   ├── pexels.ts                ← Server-only Pexels photo (and optional video) search helpers
-│   │   ├── tool-result-resolvers.ts ← Weighted quiz scoring → problem cluster (no GEO branch; GEO is API-driven)
-│   │   ├── geo-audit-url.ts         ← SSRF-safe public URL validation for GEO audit fetch
-│   │   ├── geo-audit-parse.ts       ← Validates `GeoAuditResponse` JSON for `/api/tools/geo-audit/report`
-│   │   ├── resend.ts                ← Includes `sendGeoAuditReportEmail` (full audit payload)
-│   │   ├── posthog.ts, analytics.ts, metadata.ts, …
+│   │   ├── lenis.ts                    ← useSmoothScroll (opt-in per layout)
+│   │   ├── unsplash.ts, pexels.ts      ← server-only stock helpers
+│   │   ├── tool-result-resolvers.ts    ← weighted quiz scoring → problem cluster
+│   │   ├── geo-audit-url.ts            ← SSRF-safe URL validation
+│   │   ├── geo-audit-parse.ts          ← validates GeoAuditResponse
+│   │   ├── resend.ts                   ← sendGeoAuditReportEmail + contact handlers
+│   │   ├── posthog.ts, analytics.ts, metadata.ts
+│   │   └── cloudinary.ts
 │   │
-│   ├── types/index.ts               ← CaseStudy (+ primaryOutcomeSlug, outcomeHeadline), ProblemPage, …
+│   ├── types/index.ts                  ← CaseStudy, ProblemPage, GeoAuditResponse, OutcomeSlug…
 │   └── app/globals.css
+└── docs/
+    ├── # DARLING MARTECH — COMPLETE SITE COPY.docx.md     ← canonical copy + section order
+    ├── DARLING MARTECH — COMPLETE SITE REBUILD BLUEPRINT.docx.md
+    ├── darlingmartech-data-model-spec.md
+    ├── homepage-section-audit.md
+    ├── 3D-ASSET-SOURCES.md
+    └── verification-runbook.md
 ```
 
-**Homepage flow (copy doc):** `HomepageHero` → `ProofTicker` → problem grid (2×2, first four clusters) →
-`DiagnosticOrangeBand` → “How this works” → proof strip → owner block → tools preview → closing CTA.
-
-**Canonical site copy / blueprint:** `docs/# DARLING MARTECH — COMPLETE SITE COPY.docx.md` and
-`docs/DARLING MARTECH — COMPLETE SITE REBUILD BLUEPRINT.docx.md` — treat Copy doc as the source for
-wording and section order where they differ.
+**Homepage section order (copy doc is authority):**
+`HomepageHero` → `ProofTicker` → problem grid (first four clusters) →
+`DiagnosticOrangeBand` → "How this works" → proof strip → owner block →
+tools preview → closing CTA.
 
 ---
 
 ## 5. BRAND SYSTEM (LOCKED — DO NOT CHANGE)
 
 ### Color Tokens
-Always use these exact hex values. Never approximate.
 ```css
-/* In globals.css as CSS custom properties */
---color-bg:        #0C0C0E;   /* Primary background — Near-Black */
---color-surface:   #13131A;   /* Card/band surface — slightly lighter than bg */
+/* globals.css as CSS custom properties */
+--color-bg:        #0C0C0E;   /* Near-black — primary background */
+--color-surface:   #13131A;   /* Card/band surface */
 --color-orange:    #F05A28;   /* Operator Orange — primary accent, CTAs, eyebrows */
---color-offwhite:  #F5F4F0;   /* Signal White — body text, off-white elements */
---color-teal:      #0FD9C8;   /* Circuit Teal — secondary accent, tool tags, data viz */
---color-green:     #22C55E;   /* Proof Green — metrics, proof numbers ONLY */
---color-muted:     rgba(245, 244, 240, 0.5); /* Muted text — labels, meta, secondary */
+--color-offwhite:  #F5F4F0;   /* Signal White — body text */
+--color-teal:      #0FD9C8;   /* Circuit Teal — tool tags, data viz, secondary accent */
+--color-green:     #22C55E;   /* Proof Green — metrics and proof numbers ONLY */
+--color-muted:     rgba(245, 244, 240, 0.5);
 ```
 
 In Tailwind classes, always use inline hex:
 ```
-bg-[#0C0C0E]   text-[#F05A28]   text-[#22C55E]   bg-[#13131A]
-text-[#F5F4F0]   text-[#0FD9C8]
+bg-[#0C0C0E]   bg-[#13131A]   text-[#F05A28]   bg-[#F05A28]
+text-[#F5F4F0]  text-[#0FD9C8]   text-[#22C55E]
 ```
 
-**Color usage rules:**
-- `#22C55E` (Proof Green) = metrics and proof numbers ONLY. Nothing decorative.
-- `#F05A28` (Orange) = CTAs, eyebrows, active states, accent borders
-- `#0FD9C8` (Teal) = tool category tags, data visualization, callout tags
-- Never use pure `#000000` black — always use `#0C0C0E`
-- Never use pure `#FFFFFF` white — always use `#F5F4F0`
+**Usage rules:**
+- `#22C55E` = proof numbers and positive metrics ONLY. Nothing decorative.
+- `#F05A28` = CTAs, eyebrows, active states, accent borders
+- `#0FD9C8` = tool tags, data viz, callout tags — secondary and sparing
+- Never use pure `#000000` — always `#0C0C0E`
+- Never use pure `#FFFFFF` — always `#F5F4F0`
+- Never use `#c8f55a` (lime) — this is a prototype artifact color, not in this system
 
 ### Typography System
-Load via `next/font/google`. All font loading in `src/app/layout.tsx`.
 ```typescript
+// src/app/layout.tsx
 import { Syne, Inter, JetBrains_Mono } from 'next/font/google'
 
 const syne = Syne({
@@ -283,8 +334,8 @@ const jetbrainsMono = JetBrains_Mono({
 | H1 | Syne | 48–56px | Bold (700) |
 | H2 | Syne | 32–40px | SemiBold (600) |
 | H3 | Inter | 24px | SemiBold (600) |
-| Body (large) | Inter | 18px | Regular (400) |
-| Body (standard) | Inter | 16px | Regular (400) |
+| Body large | Inter | 18px | Regular (400) |
+| Body standard | Inter | 16px | Regular (400) |
 | Small/Meta | Inter | 13–14px | Regular (400) |
 | Eyebrow | Inter | 12px | Regular, ALL CAPS, tracking-widest |
 | Metrics/Data | JetBrains Mono | 48–64px | Bold (700) |
@@ -294,12 +345,11 @@ const jetbrainsMono = JetBrains_Mono({
 **Tone:** Direct · Precise · Confident · Plain · Occasionally dry
 
 **Rules:**
-- Never use agency jargon: "leverage," "synergistic," "holistic," "ecosystem"
-- Never use filler words: "really," "very," "quite," "simply"
-- Never use passive voice when active is possible
+- Never use: "leverage," "synergistic," "holistic," "ecosystem," "best-in-class,"
+  "robust," "end-to-end," "full-service," "cutting-edge," "tailored solutions"
 - Short sentences. One idea per sentence when possible.
-- "I" not "we" for Jacob's voice
-- Proof over promises — every claim should have a number or a name behind it
+- "I" not "we" for Jacob's voice — solo operator
+- Proof over promises — every claim needs a number or a name
 - Dry humor is allowed. Forced humor is not.
 
 **Voice in practice:**
@@ -308,33 +358,51 @@ const jetbrainsMono = JetBrains_Mono({
 - ✅ "You work with one person. That person is me."
 - ❌ "Our team of experts delivers best-in-class solutions."
 
+### Tailwind v4 — Canonical Utilities
+Prefer canonical tokens over arbitrary equivalents:
+
+| Avoid | Prefer |
+|---|---|
+| `rounded-[2rem]` | `rounded-4xl` |
+| `rounded-[1.5rem]` | `rounded-3xl` |
+| `rounded-[1rem]` | `rounded-2xl` |
+| `break-words` | `wrap-break-word` |
+
+Use bracket syntax only when the value does not match a standard scale step.
+
 ---
 
 ## 6. SITE ARCHITECTURE & NAVIGATION
 
-### Primary Navigation (top)
+### Primary Navigation
 ```
-Logo (left)    |    Problems · Proof · Tools · Process · About    |    Let's Talk → (CTA, right)
+Logo (left)  |  Problems · Proof · Tools · Process · About  |  Let's Talk → (CTA, right)
 ```
+Do not drift back toward a services-first primary nav.
 
 ### Full URL Structure
 ```
 / (homepage)
 /problems (hub — 6 cards)
-  /problems/no-strategy-owner … /problems/pipeline-not-predictable
-/proof (hub — ?outcome=<OutcomeSlug> filters case list)
+  /problems/no-strategy-owner
+  /problems/site-not-converting
+  /problems/disconnected-systems
+  /problems/not-visible-enough
+  /problems/brand-system-broken
+  /problems/pipeline-not-predictable
+/proof (hub — ?outcome= filter)
   /proof/graston-qualified-leads
   /proof/graston-growth-engine
   /proof/pike-medical
   /proof/russell-painting
-/services (capabilities menu)
-  /services/[slug]  ← fractional-cmo, martech-stack-build, crm-architecture, …
+/services
+  /services/[slug]
 /tools (hub)
-  /tools/growth-bottleneck-quiz   ← dedicated route (custom client UI; excluded from `[slug]` SSG)
-  /tools/geo-readiness-auditor    ← dedicated route (`GeoAuditorEngine`: URL audit + email full report)
+  /tools/growth-bottleneck-quiz     ← custom page (GrowthBottleneckQuizClient)
+  /tools/geo-readiness-auditor      ← custom page (GeoAuditorEngine)
+  /tools/attribution-snapshot       ← dedicated route
   /tools/cmo-simulator
   /tools/martech-stack-grader
-  /tools/attribution-snapshot
   /tools/cmo-roadmap-generator
 /process
 /about
@@ -344,26 +412,70 @@ Logo (left)    |    Problems · Proof · Tools · Process · About    |    Let's
 /resources
   /resources/blog/[slug]
   /resources/frameworks
+  /resources/newsletter             ← add if missing
 ```
 
-### Legacy redirects (`next.config.ts`)
+### Legacy Redirects (`next.config.ts`)
 - `/work` → `/proof`, `/work/:slug` → `/proof/:slug`
 - `/lab` → `/tools`, `/lab/:slug` → `/tools/:slug`
+Do not undo these redirects.
 
-### Tools routing note
-`src/app/tools/[slug]/page.tsx` **generateStaticParams** omits slugs that have their own `page.tsx` under `tools/<slug>/` (currently **`growth-bottleneck-quiz`**, **`geo-readiness-auditor`**, **`attribution-snapshot`**) so Next does not double-generate those paths.
-
-### Footer Navigation (see `src/data/navigation.ts`)
-Tagline + newsletter signup in `SiteFooter` (client `NewsletterSignup` → `POST /api/newsletter`).
-Columns include Work, **Capabilities** (`/services`), Problems hub, Tools, Company (About, Contact, Resources), Contact (email, location, Cal.com).
-Footer also links **Privacy Policy** (`/privacy-policy`).
+### Tools Routing Note
+`src/app/tools/[slug]/page.tsx` `generateStaticParams` omits slugs that have their own
+`page.tsx` under `tools/<slug>/` to prevent double-generation.
 
 ---
 
-## 7. DATA MODELS
+## 7. STRATEGIC DIRECTION — THE THREE PILLARS
 
-All interfaces are defined in `darlingmartech-data-model-spec.md` and live in
-`src/data/` as TypeScript `.ts` files. Below are the critical conventions.
+The site is **problem-first**. The ideal conversion path:
+```
+Problem page → Diagnostic tool → Proof → Service depth / Contact
+```
+
+Every page should know its trust-ladder stage and present the appropriate CTA.
+
+### The Three Service Pillars (all must be visible on the site)
+
+**1. Marketing Strategy & Systems**
+- GTM, positioning, funnel architecture, GEO/visibility strategy
+- Measurement planning, growth roadmaps, fractional CMO
+
+**2. Technical Implementation**
+- Server-side tracking, GA4, attribution, CRO
+- API/middleware, MarTech stack architecture, CRM/lead flow systems
+
+**3. AI & Automation**
+- Agentic workflows, AI-enabled operations
+- Custom internal tools, AI deflection/routing
+- LLM-enhanced workflows, automation-backed growth systems
+
+> **Strategic note:** Pillar 3 (AI & Automation) is likely underrepresented relative
+> to its commercial importance. When improving homepage, services, tools, and proof
+> connections, raise AI & Automation visibility deliberately. This is the highest-ticket
+> work and should be front-facing — not buried in service subpages.
+
+---
+
+## 8. CONVERSION ARCHITECTURE — THE TRUST LADDER
+
+Every page serves a trust-ladder stage. No page asks for more trust than it has earned.
+
+| Stage | Visitor State | Primary Offer | CTA |
+|---|---|---|---|
+| Browse | Just landed | Free tool or resource | "Try the Stack Grader" / "Take the quiz" |
+| Evaluate | Considering | Proof, case study, process | "See how I've done this" |
+| Qualify | Ready to talk | Diagnostic call | "Book a 30-min diagnostic call" |
+| Commit | Ready to engage | Contact / scope | "Let's talk" |
+| Return | Existing client | Nurture / update | Newsletter, new proof |
+
+Tag data objects with `trustLadderStage` so the right CTAs render in context.
+
+---
+
+## 9. DATA MODELS
+
+All interfaces are defined in `src/types/index.ts` and content lives in `src/data/`.
 
 ### Taxonomy Constants (src/data/taxonomy.ts)
 ```typescript
@@ -382,13 +494,26 @@ OUTCOME_TAGS = [
   'Pipeline Growth', 'Systems Built', 'MarTech Integration',
   'Attribution & Analytics', 'Automation', 'CRM Architecture',
 ]
-
-// Proof hub filters — see OutcomeSlug in src/types/index.ts
-OUTCOME_SLUG_LABELS / OUTCOME_SLUG_ORDER   // e.g. lead-gen, conversion-lift, time-saved, …
 ```
 
-### Proof Metrics (VERIFIED — use exactly as written)
-These numbers are locked. Never alter, round, or approximate.
+### Problem Cluster Slugs — Canonical (use exactly as written)
+```
+no-strategy-owner
+site-not-converting
+disconnected-systems
+not-visible-enough
+brand-system-broken
+pipeline-not-predictable
+```
+
+> **Note on alternate slug names in planning docs:** Some attached docs proposed alternate
+> themes such as `cant-see-whats-working`, `tech-stack-chaos`, `ai-not-integrated`,
+> `no-system-for-growth`. These are useful **messaging themes and copy language**,
+> but they are not canonical route slugs. Do not introduce them as routes or data-model
+> enums without Jacob's explicit approval. You may use them as subheads, CTA phrasing,
+> tool framing, or backlog ideas.
+
+### Proof Metrics (VERIFIED — use exactly as written, never alter)
 
 | Metric | Value | Context |
 |---|---|---|
@@ -399,100 +524,178 @@ These numbers are locked. Never alter, round, or approximate.
 | Graston provider directory | 81 providers | Real-time spatial search |
 
 ### Case Study Slugs (src/data/work/)
-Four published studies (two Graston narratives: lead-gen vs automation stack):
 ```
-graston-qualified-leads      ← +212% qualified leads / strategy ownership story
-graston-growth-engine       ← 95% overhead / Growth Engine automation emphasis
+graston-qualified-leads       ← +212% qualified leads / strategy ownership story
+graston-growth-engine         ← 95% overhead / Growth Engine automation emphasis
 pike-medical
 russell-painting
 ```
 
-Each `CaseStudy` includes **`primaryOutcomeSlug`** (`OutcomeSlug`) and **`outcomeHeadline`** for metric-first
-proof cards and `/proof?outcome=` filtering.
-
-### Problem Cluster Slugs (src/data/problems.ts)
-```
-no-strategy-owner
-site-not-converting
-disconnected-systems
-not-visible-enough
-brand-system-broken
-pipeline-not-predictable
-```
-
-`ProblemPage` (see `src/types/index.ts`) includes long-form fields used on `/problems/[slug]`:
-`pageEyebrow`, `introParagraphs`, `whyItHappens`, `stakes`, `whatTheFixLooksLike`, `relevantTools`,
-`relatedProof` (case slugs), `relatedService` (links to `/services/[slug]`), `closingBlock`, plus
-hub fields (`hubCategory`, `proofChip`, `hubCtaLabel`).
+Each `CaseStudy` includes `primaryOutcomeSlug` (`OutcomeSlug`) and `outcomeHeadline`
+for metric-first proof cards and `/proof?outcome=` filtering.
 
 ### Tool Slugs (src/data/labs.ts)
 ```
-growth-bottleneck-quiz    ← 8 questions; weighted resolver → six problem clusters
+growth-bottleneck-quiz         ← 8 questions; weighted resolver → six problem clusters
 cmo-simulator
 martech-stack-grader
-geo-readiness-auditor     ← URL audit only: `questions: []`; live UI on `/tools/geo-readiness-auditor`
+geo-readiness-auditor          ← URL audit only; questions: []; live UI dedicated route
 attribution-snapshot
 cmo-roadmap-generator
 ```
-Resolver logic: `src/lib/tool-result-resolvers.ts` (per-tool switch on `tool.slug` for **quiz** tools). GEO is **not** resolved here — scoring and copy come from `POST /api/tools/geo-audit` and `src/data/geo-readiness-auditor.ts`.
 
-**GEO audit types:** `GeoAuditResponse` and related interfaces in `src/types/index.ts` (shared by API routes and client).
-
----
-
-## 8. CONVERSION ARCHITECTURE — THE TRUST LADDER
-
-Every page on the site serves one of five trust-ladder stages. Every CTA maps to a
-stage. No page asks for more trust than it has earned.
-
-| Stage | Visitor State | Primary Offer | CTA |
-|---|---|---|---|
-| 1 — Browse | Just landed | Free tool or resource | "Try the Stack Grader" / "Take the quiz" |
-| 2 — Evaluate | Considering | Proof, case study, process | "See how I've done this" |
-| 3 — Qualify | Ready to talk | Diagnostic call | "Book a 30-min diagnostic call" |
-| 4 — Commit | Ready to engage | Contact / scope | "Let's talk" |
-| 5 — Return | Existing client | Nurture / update | Newsletter, new proof |
-
-**Implementation rule:** Every page component should know its trust ladder stage.
-Tag data objects with `trustLadderStage` so the right CTAs render in the right context.
+Resolver logic: `src/lib/tool-result-resolvers.ts`. GEO is API-driven — not resolved here.
 
 ---
 
-## 9. COPY SOURCES — WHERE EACH PAGE'S COPY LIVES
+## 10. PROOF SYSTEM RULES
 
-Approved narrative lives in **`docs/`** (Markdown exports of the site copy + blueprint):
+### What `/proof` is
+An outcome-based proof engine connected to real buyer problems.
 
-- **`docs/# DARLING MARTECH — COMPLETE SITE COPY.docx.md`** — canonical section order and wording (homepage, problems, about, process, contact).
-- **`docs/DARLING MARTECH — COMPLETE SITE REBUILD BLUEPRINT.docx.md`** — IA, proof taxonomy, tools funnel, redirects, growth mechanics.
-- **Supporting material (not a substitute for the two masters above):** split exports like `docs/darlingmartech-homepage-copy.md`, `docs/darlingmartech-proof-copy.md`, `docs/darlingmartech-process-copy.md`, …; **`docs/darlingmartech-data-model-spec.md`** for schema; **`docs/homepage-section-audit.md`** for homepage section QA; **`docs/3D-ASSET-SOURCES.md`** for motion/3D asset sourcing; **`docs/verification-runbook.md`** for release checks.
+### What proof is not
+- a portfolio gallery
+- a generic "look what I made" wall
+- an industry-first filing cabinet
+- a carousel dumping ground
 
-Google Doc IDs in older briefs still apply for **reference** when cross-checking Drive.
+### Every proof entry must answer
+1. What changed?
+2. What was broken before?
+3. What did I build, fix, or restructure?
+4. What proof is measurable?
+5. What problem does this help a future buyer recognize?
+6. What should the visitor do next?
 
-**Copy implementation rule:** Prefer **`src/data/*.ts`** (`homepage.ts`, `problems.ts`, `contact.ts`, `about.ts`, `process.ts`, `proof.ts`, `labs.ts`, `geo-readiness-auditor.ts`, etc.) so copy updates are data edits. Section titles and layout-specific strings may live next to their components when it keeps the page readable—still avoid marketing copy sprawl in JSX.
+### Proof quality rule
+No vague claims. No "improved performance," "helped with marketing," "streamlined operations."
+Every proof card anchors to a specific number, operating shift, or clearly-defined structural change.
+
+### Proof CTA rule
+Proof pages must not dead-end. Route to:
+- a matching problem page
+- a relevant service depth page
+- a relevant tool
+- contact / diagnostic CTA where appropriate
+
+### Proof migration priority (from legacy repo/site)
+When migrating legacy case studies, prioritize in this order:
+1. Graston Technique
+2. Pike Medical Consultants (+ PrimaryCare Indy / UrgentCare Indy as child entries)
+3. 317 BBQ
+4. Russell Painting
+5. Behr Pet Essentials
+6. Hoosier Boy Barbershop
+
+When migrating legacy content, do not paste it raw. Rewrite it for:
+- v2 taxonomy and slug structure
+- solo-operator voice
+- outcome-first proof structure
+- trust-ladder CTA logic
 
 ---
 
-## 10. COMPONENT CONVENTIONS
+## 11. TOOL STRATEGY RULES
 
-Prefer existing components under `src/components/` before adding new ones. Legacy “component inventory”
-docs may exist in Drive; the **repo** is authoritative.
+### Tool philosophy
+Tools are commercial diagnostic utilities, not decorative quizzes.
 
-### Rules for every component:
-1. **Single responsibility.** One component = one job. No multi-responsibility blobs.
-2. **No cross-folder imports.** `/proof/` components don't import from `/tools/`.
-   All shared UI imports from `/ui/` only.
-3. **No inline styles.** All styling via Tailwind utility classes only.
-4. **No raw hex in className.** Use `bg-[#0C0C0E]` pattern — never `style={{ color: '#F05A28' }}`.
-5. **All images via `CloudinaryImage`.** No native `<img>` tags. No direct `<Image>` from next/image.
-6. **Default motion:** Framer Motion via **`AnimateOnScroll`** — avoid ad-hoc motion in page files. **GSAP / Lenis / R3F / Spline** are for intentional heavy-motion or 3D surfaces only; lazy-load 3D. Do **not** mount **`useSmoothScroll`** in root `layout.tsx` without scroll/anchor/accessibility QA.
-7. **TypeScript strict.** No `any` types. No `// @ts-ignore`. Type everything properly.
-8. **Shadcn/UI for primitives.** Dialog, Select, Toast, Popover — use Shadcn.
-   Install: `npx shadcn@latest add [component]`
-9. **Server components by default.** Only add `"use client"` when strictly necessary
-   (interactivity, hooks, browser APIs).
-10. **Props naming:** camelCase. Boolean props as `isX` or `hasX`. Event handlers as `onX`.
+They should: diagnose, simulate, score, compare, expose gaps, prove competence, create lead intent.
 
-### Key Tailwind class conventions:
+### Interaction pattern (preferred)
+1. Open interaction — free value first
+2. Useful partial result visible without gate
+3. Deeper report / saved output gated by email
+4. Next-step CTA connected to proof, service, or contact
+
+Avoid: full hard gate before any value. Avoid: vague score outputs with no action path.
+
+### Every tool result should ideally include
+- diagnosis summary or score
+- recommended next action
+- linked proof
+- linked service
+- linked problem page
+- optional gated deeper output
+
+### Currently built tools
+| Tool | Route | Status |
+|---|---|---|
+| Growth Bottleneck Quiz | `/tools/growth-bottleneck-quiz` | ✅ Built |
+| GEO Readiness Auditor | `/tools/geo-readiness-auditor` | ✅ Built |
+| Attribution Snapshot | `/tools/attribution-snapshot` | ✅ Built |
+| CMO Simulator | `/tools/cmo-simulator` | ✅ Built |
+| MarTech Stack Grader | `/tools/martech-stack-grader` | ✅ Built |
+| CMO Roadmap Generator | `/tools/cmo-roadmap-generator` | ✅ Built |
+
+### Approved backlog tool candidates
+```
+Build vs Buy Calculator
+Automation Savings Calculator
+Revenue Physics Simulator
+Tech Stack Scanner / X-Ray
+Ad Waste Detector
+AI Deflection ROI Simulator
+Compliance Risk Scanner
+Lead Scorer
+```
+
+### Priority tool build order (when prioritizing next tool)
+1. MarTech Stack Grader improvements
+2. Build vs Buy Calculator
+3. Automation Savings Calculator
+4. CMO Simulator improvements
+5. Attribution Snapshot upgrades
+6. CMO Roadmap Generator upgrade
+7. Tech Stack Scanner / AI Deflection ROI / advanced scanners
+
+---
+
+## 12. SERVICES DEPTH RULES
+
+`/services` exists but is not the primary path. It is the depth and evaluation layer.
+
+### Service pages connect back to
+- relevant problem cluster(s)
+- relevant proof
+- relevant diagnostic tool(s)
+
+### High-priority service depth pages
+```
+fractional-cmo
+website-rebuilds
+crm-architecture
+workflow-automation
+local-seo
+geo-readiness
+positioning-strategy
+marketing-audit
+agentic-marketing-systems    ← highest priority new page (AI & Automation pillar)
+ai-content-ops
+ai-deflection-automation
+```
+
+Service pages must not read like generic agency capability blurbs.
+
+---
+
+## 13. COMPONENT CONVENTIONS
+
+Prefer existing components before adding new ones. The repo is authoritative.
+
+### Rules for every component
+1. **Single responsibility.** One component = one job.
+2. **No cross-folder imports.** `/proof/` does not import from `/tools/`. All shared UI from `/ui/` only.
+3. **No inline styles.** All styling via Tailwind utility classes.
+4. **No raw hex in `style={{ }}`** — use `bg-[#0C0C0E]` pattern in className instead.
+5. **All images via `CloudinaryImage`.** No native `<img>`. No direct `<Image>` from next/image.
+6. **Default motion:** Framer Motion via `AnimateOnScroll`. GSAP/Lenis/R3F/Spline for intentional heavy-motion or 3D surfaces only. Lazy-load 3D. Do not mount `useSmoothScroll` in root layout without scroll/anchor/accessibility QA.
+7. **TypeScript strict.** No `any`. No `// @ts-ignore`. Type everything.
+8. **Shadcn/UI for primitives.** Dialog, Select, Toast, Popover, Tabs, Card, Badge — use Shadcn. Install: `pnpm dlx shadcn@latest add [component]`. Do not overwrite the bespoke Darling `Button` with the CLI template.
+9. **Server components by default.** Only add `"use client"` when strictly necessary.
+10. **Props naming:** camelCase. Booleans as `isX` / `hasX`. Handlers as `onX`.
+
+### Key Tailwind class patterns
 ```
 Page background:     bg-[#0C0C0E]
 Card/band surface:   bg-[#13131A]
@@ -507,84 +710,51 @@ Container:           max-w-7xl mx-auto px-6 md:px-12
 Eyebrow:             text-[#F05A28] text-xs font-normal uppercase tracking-widest
 ```
 
-**Tailwind v4 — prefer canonical utilities:** Tailwind CSS IntelliSense flags `suggestCanonicalClasses` when an arbitrary class matches a built-in token. Prefer the token so warnings stay clean and class names stay consistent.
+---
 
-| Avoid (arbitrary / alias) | Prefer (canonical v4) |
-|---|---|
-| `rounded-[2rem]` | `rounded-4xl` |
-| `rounded-[1.5rem]` | `rounded-3xl` |
-| `rounded-[1rem]` | `rounded-2xl` |
-| `break-words` | `wrap-break-word` |
+## 14. API ROUTES & INTEGRATIONS
 
-Use bracket syntax (e.g. `rounded-[1.25rem]`) only when the value does **not** match a standard radius scale step.
+### `/api/contact` (POST)
+ContactForm submission → Resend notification to Jacob → optional n8n → CRM.
+When `ENABLE_LIVE_INTEGRATIONS=true`: Resend + n8n + CRM paths per `.env.example`.
+
+### `/api/newsletter` (POST)
+Footer `NewsletterSignup` → Resend audience contact (`{ "email": string }`).
+Safe mock response when env not configured.
+
+### `/api/subscribe` (POST)
+EmailGate on tool pages → Loops (add subscriber + tag with tool name) → Resend (deliver result email).
+
+### `/api/tools/geo-audit` (POST)
+Body: `{ "url": "<https? public URL>" }`. Server fetches HTML (SSRF checks via
+`src/lib/geo-audit-url.ts`), parses with Cheerio, returns `GeoAuditResponse`:
+readiness score, per-signal checks, `rawXray` (canonical, robots, OG, JSON-LD, headings, links).
+
+### `/api/tools/geo-audit/report` (POST)
+Triggered by `GeoAuditEmailForm` after audit. Body: name, email, optional company,
+`targetUrl`, full `audit` object. Honeypot field `website` — non-empty returns success without side effects.
+Flow: Loops → Resend `sendGeoAuditReportEmail`.
+
+### `/api/tool-complete` (POST)
+QuizEngine on completion → PostHog (track event) → Supabase (log anonymous response).
+
+### Integration env flags
+Live integrations toggled with `ENABLE_LIVE_INTEGRATIONS=true` in `.env.example`.
+All routes degrade gracefully in local/staging when env is not set.
 
 ---
 
-## 11. API ROUTES & INTEGRATIONS
+## 15. SEO & METADATA
 
-### /api/contact (POST)
-Triggered by `ContactForm` submission (intent + message; optional budget range appended to message body when scope intent selected).
-Flow (when `ENABLE_LIVE_INTEGRATIONS` / `appEnv.enableLiveIntegrations`): Resend notification to Jacob → optional n8n → CRM paths per `.env.example`.
-Formbricks is **not** wired in front of the API — JSON posts directly to `/api/contact`.
+Every page must export metadata. Use Next.js 15 Metadata API.
 
-Required env vars:
-```
-RESEND_API_KEY
-N8N_WEBHOOK_URL_CONTACT
-LOOPS_API_KEY
-```
-
-### /api/newsletter (POST)
-Triggered by footer `NewsletterSignup` (`{ "email": string }`).
-When `RESEND_API_KEY` and `RESEND_NEWSLETTER_AUDIENCE_ID` are set, creates/updates a Resend audience contact; otherwise returns a success payload indicating configuration is pending (safe for local dev).
-
-### /api/subscribe (POST)
-Triggered by EmailGate component on tool pages.
-Flow: Email submit → `/api/subscribe` → Loops (add subscriber + tag with tool name)
-      → Resend (deliver tool result email)
-
-Required env vars:
-```
-LOOPS_API_KEY
-RESEND_API_KEY
-```
-
-### /api/tools/geo-audit (POST)
-Body: `{ "url": "<https? public URL>" }`. Server fetches HTML (timeouts + SSRF checks in `src/lib/geo-audit-url.ts`), parses with **cheerio**, returns **`GeoAuditResponse`**: readiness score, per-signal checks, lightweight term-frequency “entities,” and **`rawXray`** (canonical, robots, OG/Twitter, JSON-LD summary, heading outline, link counts).
-
-### /api/tools/geo-audit/report (POST)
-Triggered by **`GeoAuditEmailForm`** after a successful audit. Body: name, email, optional company/note, `targetUrl`, full **`audit`** object (validated by `parseGeoAuditResponse`). Honeypot field **`website`** — if non-empty, returns success without side effects.
-
-Flow (when `ENABLE_LIVE_INTEGRATIONS`): Loops (`toolSlug: geo-readiness-auditor`) → Resend **`sendGeoAuditReportEmail`** (HTML + text full report). Mock mode (`202`) when live integrations off — same pattern as `/api/subscribe`.
-
-Client analytics (PostHog): `geo_audit_completed`, `geo_audit_report_requested` from `src/lib/analytics.ts`.
-
-### /api/tool-complete (POST)
-Triggered by QuizEngine on tool completion.
-Flow: Tool completion → `/api/tool-complete` → PostHog (track event with tool name + result)
-      → Supabase (log anonymous response)
-
-Required env vars:
-```
-NEXT_PUBLIC_POSTHOG_KEY
-NEXT_PUBLIC_POSTHOG_HOST
-SUPABASE_URL
-SUPABASE_ANON_KEY
-```
-
----
-
-## 12. SEO & METADATA
-
-Every page must have a metadata export. Use Next.js 15 Metadata API.
 ```typescript
-// Pattern for every page:
 export const metadata: Metadata = {
   title: 'Page Title | Darling MarTech',
-  description: 'Page description under 160 characters.',
+  description: 'Under 160 characters.',
   openGraph: {
     title: 'Page Title | Darling MarTech',
-    description: 'Page description.',
+    description: '...',
     url: 'https://darlingmartech.com/page-path',
     siteName: 'Darling MarTech',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
@@ -594,44 +764,44 @@ export const metadata: Metadata = {
 }
 ```
 
-### Schema markup (built into layout.tsx)
-```typescript
-// Person schema for Jacob
-// LocalBusiness schema for Darling MarTech
-// FAQPage schema on /problems/[slug] pages
-// HowTo schema on /process page
-```
+### Internal linking rule
+Use internal linking intentionally:
+- problem → proof, problem → tool
+- proof → problem, proof → service
+- tool → proof, tool → service
+- resource → tool / proof / problem / newsletter
 
-### Technical SEO requirements (built from day one):
-- `next-sitemap` package for auto-generated sitemap
-- Semantic HTML heading hierarchy on every page (one H1, logical H2/H3)
-- Internal linking: `/problems/[slug]` → relevant `/tools/*`, `/services/[slug]`, and `/proof/*` as appropriate; proof detail ↔ problems where it helps the reader
+### Schema markup (in layout.tsx)
+- Person schema for Jacob
+- LocalBusiness schema for Darling MarTech
+- FAQPage schema on `/problems/[slug]` pages
+- HowTo schema on `/process` page
 
 ---
 
-## 13. ENVIRONMENT VARIABLES
+## 16. ENVIRONMENT VARIABLES
+
 ```bash
-# .env.example — commit this file, not .env.local
+# .env.example — commit this, not .env.local
 
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 
-# Resend (transactional email)
+# Resend
 RESEND_API_KEY=
 RESEND_FROM_EMAIL=jacob@darlingmt.com
-# Optional — footer newsletter → Resend Audiences API
 RESEND_NEWSLETTER_AUDIENCE_ID=
 
-# Loops (marketing email)
+# Loops
 LOOPS_API_KEY=
 
-# PostHog (product analytics)
+# PostHog
 NEXT_PUBLIC_POSTHOG_KEY=
 NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
 
-# n8n (automation)
+# n8n
 N8N_WEBHOOK_URL_CONTACT=
 N8N_WEBHOOK_URL_TOOL=
 
@@ -643,106 +813,21 @@ CLOUDINARY_API_SECRET=
 # Cal.com
 NEXT_PUBLIC_CAL_LINK=jacob-darling/30min
 
-# Plausible (privacy-first analytics)
+# Plausible
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=darlingmartech.com
 
-# Optional — stock discovery (server-only; never NEXT_PUBLIC_)
+# Stock discovery (server-only — never NEXT_PUBLIC_)
 UNSPLASH_ACCESS_KEY=
 PEXELS_API_KEY=
 ```
 
 ---
 
-## 14. PHASED BUILD SEQUENCE
-
-Build in this exact order. Do not jump phases.
-
-### Current Build State (darling-martech-v2 — synced April 2026, post GEO Readiness Auditor)
-- ✅ Next.js 15 + TypeScript (strict) + Tailwind v4
-- ✅ `src/types/index.ts` — includes `OutcomeSlug`, extended `CaseStudy`, long-form `ProblemPage`, **`GeoAuditResponse`**
-- ✅ Fonts: `src/app/layout.tsx` uses **Syne / Inter / JetBrains Mono** via `next/font`
-- ✅ Brand tokens: `src/app/globals.css` (CSS variables + `@theme inline`)
-- ✅ Core deps: Framer Motion, Supabase client, Resend, `posthog-js`, Vercel Analytics
-- ✅ Motion / 3D (optional): `gsap`, `lenis`, `@splinetool/react-spline`, `@splinetool/runtime`, `three`, `@react-three/fiber`, `@react-three/drei`
-- ✅ Homepage: copy-doc order — `ProofTicker`, `DiagnosticOrangeBand`, structured hero accent (`homepage.ts` + `HomepageHero`)
-- ✅ Problems: hub + **6** long-form `/problems/[slug]` pages; `ProblemClosingSection`; service deep-link to `/services/[slug]`
-- ✅ Proof: **4** case files; `/proof?outcome=` filters; metric-first `ProofCard` + `ProofOutcomeFilters`
-- ✅ Services: `/services`, `/services/[slug]` from `data/services.ts`
-- ✅ Tools: all slugs in `labs.ts`; Growth Bottleneck Quiz **8 questions** + weighted resolver; dedicated `/tools/growth-bottleneck-quiz` page
-- ✅ **GEO Readiness Auditor:** dedicated `/tools/geo-readiness-auditor` (`GeoAuditorEngine` + `GeoAuditEmailForm`), `POST /api/tools/geo-audit`, `POST /api/tools/geo-audit/report`, **`cheerio`** dependency; hub entry uses URL-scan description and empty `questions`/`results`
-- ✅ Process: engagement format cards, “honest about fit,” scenario grid, tools reminder + closing (see `process.ts`)
-- ✅ About: timeline, differentiators, industries, closing CTAs (`about.ts` + `about/page.tsx`)
-- ✅ Contact: intent cards, conditional budget field, alternatives strip, reassurance line; email **`jacob@darlingmt.com`** in `site-config`
-- ✅ Footer: tagline, `NewsletterSignup`, privacy link; `/privacy-policy` route
-- ✅ `next.config.ts` redirects: `/work`→`/proof`, `/lab`→`/tools`
-- ✅ `/api/newsletter` for footer signup (Resend audiences when configured)
-- ✅ `/resources` hub, blog, frameworks, `/studio`
-- ✅ Plausible (when env set) + PostHog + `.env.example` staging notes
-- **Track:** Phase 4 (n8n, Twenty, Loops) — operator-hosted; enable with `ENABLE_LIVE_INTEGRATIONS=true` per `.env.example`
-- ✅ Shadcn: `components.json` (New York, slate tokens) + `card`, `badge`, `tabs`, `dialog`; bespoke Darling **`Button`** (`primary` / `secondary` / `ghost`, `href`, Radix `Slot`) — do not overwrite with CLI `button` template
-- ⚠️ Formbricks: not wired — contact posts JSON to `/api/contact`
-
-### Phase 0 — Foundation (Day 1)
-- [x] Init new Next.js 15 repo with TypeScript + Tailwind + Shadcn/UI (`components.json` + card/badge/tabs/dialog; bespoke `Button`)
-- [ ] Configure Vercel deployment + custom domain staging URL (per environment)
-- [x] Create `CLAUDE.md` and `.cursorrules` at root
-- [x] Set up `src/data/taxonomy.ts` with all constants
-- [x] Set up `src/data/site-config.ts` with SiteConfig
-- [x] Set up global CSS custom properties + Tailwind base (`src/app/globals.css` — not `src/styles/`)
-- [x] Configure `next/font` with Syne, Inter, JetBrains Mono
-- [x] Build `SiteHeader`, `SiteFooter`, `PageWrapper`, `SectionWrapper`
-- [x] Build shared UI primitives: `Button`, `Eyebrow`, `SectionHeader`, `AnimateOnScroll`
-- [x] Set up Supabase project + connect client (code paths in `src/lib/supabase.ts`)
-- [ ] Set up Resend account + React Email templates (Resend wired in API routes; templates evolve with product)
-
-### Phase 1 — Core Pages (Week 1-2)
-- [x] Homepage (/) — core sections live; optional: full **11 sections** from copy doc
-- [x] Problems hub (/problems) — hub + all 6 slug pages
-- [x] Proof hub (/proof) — hub + all 3 case study pages
-- [ ] Wire Cal.com into **all** CTA buttons (footer + contact; audit hero/section CTAs)
-
-### Phase 2 — Conversion Engine (Week 2-3)
-- [x] Build `QuizEngine` + sub-components (`QuizQuestion`, `QuizProgress`, `ResultCard`, `EmailGate`)
-- [x] Build Growth Bottleneck Quiz (`/tools/growth-bottleneck-quiz`)
-- [x] GEO Readiness Auditor — URL audit + email report (dedicated tool route + APIs; not `QuizEngine`)
-- [x] Build `EmailGate` → connect to Loops API route (`/api/subscribe`)
-- [x] Add MarTech Stack Grader (`/tools/martech-stack-grader`)
-- [ ] Wire Formbricks to contact form
-- [x] PostHog client events on tools + contact; server capture on `/api/tool-complete`
-- [x] Plausible on all pages (script in root layout when env set)
-
-### Phase 3 — Secondary Pages (Week 3-4)
-- [x] Process page (/process)
-- [x] About page (/about) — with Cloudinary portrait
-- [x] Contact page (/contact)
-- [x] Tools hub page (/tools)
-- [x] Deploy all tools to new slug structure (quiz/CSV tools + **GEO URL audit**; dedicated pages where needed)
-
-### Phase 4 — Automation Backend (Week 4-5)
-- [ ] Stand up n8n on Railway (or chosen host)
-- [ ] Build contact form → CRM workflow (n8n receives `/api/contact` payload; Twenty inside workflow)
-- [ ] Build tool completion → email sequence workflow (n8n receives `/api/tool-complete` payload)
-- [ ] Stand up Twenty CRM on Railway
-- [ ] Import existing contacts into Twenty CRM
-- [ ] Set up Loops welcome sequence (5 emails)
-- [x] App surfaces: `/api/contact`, `/api/subscribe`, `/api/tool-complete` call Resend, Loops, n8n, PostHog, Supabase when `ENABLE_LIVE_INTEGRATIONS=true` — **staging smoke steps** in [`.env.example`](.env.example)
-
-### Phase 5 — Authority Layer (Month 2)
-- [x] Resources hub (/resources) + blog routes
-- [x] Starter blog posts (3) in `src/data/blog.ts` — replace with content calendar when ready
-- [ ] Set up Loops newsletter broadcast
-- [x] Studio page (/studio) — Cloudinary-powered gallery
-- [x] Downloadable frameworks (email-gated listings + request CTA on `/resources/frameworks`)
-
----
-
-## 15. CLOUDINARY ASSET REFERENCE
+## 17. CLOUDINARY ASSET REFERENCE
 
 **Cloud name:** `c-5c7019a74c9c24ab5eda7e213055bd`
 **Studio folder:** `ce5a6853810907f3008cae3ee146ffed31`
 
-All images are served from Cloudinary. Use the `CloudinaryImage` component which
-wraps `next/image` with the Cloudinary loader:
 ```typescript
 // src/lib/cloudinary.ts
 const cloudinaryLoader = ({ src, width, quality }: ImageLoaderProps) => {
@@ -750,87 +835,109 @@ const cloudinaryLoader = ({ src, width, quality }: ImageLoaderProps) => {
 }
 ```
 
-Usage:
-```tsx
-
-```
+All production images use `CloudinaryImage`. No native `<img>`. No direct next/image `<Image>`.
 
 ---
 
-## 16. AI AGENT WORKFLOW RULES
+## 18. CURRENT BUILD STATE (April 2026)
 
-These rules apply to all AI agents (Claude Code, Cursor, Codex, Gemini).
+### Built
+- ✅ Next.js 15 + TypeScript strict + Tailwind v4
+- ✅ Fonts: Syne / Inter / JetBrains Mono via `next/font`
+- ✅ Brand tokens: `globals.css` CSS variables + `@theme inline`
+- ✅ Core deps: Framer Motion, Supabase, Resend, PostHog, Vercel Analytics
+- ✅ Optional motion/3D: gsap, lenis, spline, three, R3F, Drei
+- ✅ Homepage: copy-doc order, ProofTicker, DiagnosticOrangeBand, HomepageHero
+- ✅ Problems: hub + 6 long-form `/problems/[slug]` pages
+- ✅ Proof: 4 case files, `/proof?outcome=` filters, metric-first ProofCard
+- ✅ Services: `/services`, `/services/[slug]`
+- ✅ Tools: all slugs in labs.ts, Growth Bottleneck Quiz (8Q), GEO Readiness Auditor
+- ✅ Process, About, Contact, Footer, Privacy Policy
+- ✅ Resources hub, blog, frameworks, studio
+- ✅ Legacy redirects `/work`→`/proof`, `/lab`→`/tools`
+- ✅ Shadcn: card, badge, tabs, dialog + bespoke Darling Button
+- ✅ PostHog + Plausible + analytics hooks
 
-### Before writing any code:
-1. Read this entire `CLAUDE.md`
-2. Identify which phase of the build you're in (Section 14)
-3. Identify which component you're building (Section 10, Component Inventory doc)
-4. Check the copy doc for the page you're building (Section 9)
-5. Confirm you have the right data model interface (Section 7, Data Model Spec doc)
+### Still-active build priorities
+1. **AI & Automation pillar visibility** — homepage section + `/services/agentic-marketing-systems`
+2. **Proof migration** — 317 BBQ, Behr, Hoosier Boy; strengthen Pike/Graston entries
+3. **MarTech Stack Grader** — fuller utility, better result design
+4. **Tool result gating** — partial-reveal + email-gate pattern on more tools
+5. **Service depth pages** — fractional-cmo, ai-deflection-automation, geo-readiness
+6. **Newsletter landing** — `/resources/newsletter`
+7. **CTA trust-ladder consistency** — audit every page's closing CTA stage mapping
+8. **n8n / Twenty CRM / Loops** — Phase 4 automation backend
+9. **Cal.com wiring** — all CTA buttons in footer + contact + hero
 
-### While writing code:
-- Follow folder structure exactly as specified in Section 4
-- Use Tailwind classes from Section 5 for all colors and typography
-- Import from `@/components/ui/` for all shared primitives
-- Import from `@/data/` for all content — never hardcode strings in JSX
-- TypeScript strict mode: type everything
-- Server components by default: only `"use client"` when required
+---
 
-### Never do these things:
-- ❌ Write new copy — all copy is pre-written in the copy docs
-- ❌ Change brand colors or fonts
-- ❌ Add new dependencies without noting them for Jacob's approval (approved stack additions to date include **`cheerio`** for GEO audit only; **`gsap`**, **`lenis`**, **`@splinetool/*`**, **`three`**, **`@react-three/fiber`**, **`@react-three/drei`**, Shadcn registry packages added in v1.3)
+## 19. SPRINT WORKFLOW
+
+### Every session starts with Sprint 0
+```bash
+pnpm typecheck
+```
+Report pre-existing type errors before touching any files.
+Do not fix errors in unrelated files without approval.
+
+### Standard sprint flow
+1. Read this file
+2. Run `pnpm typecheck` — note pre-existing errors
+3. Implement the sprint
+4. Run `pnpm typecheck && pnpm build`
+5. Fix all errors in modified files
+6. Report: what changed · what to verify · what remains open · any decisions needed
+
+### Definition of done
+- `pnpm typecheck` passes with zero new errors
+- `pnpm build` completes without error
+- No hardcoded colors, slugs, or long-form copy that should live in data files
+- All new components match the design system tokens
+- No broken internal links introduced
+
+**Never report a sprint complete if typecheck or build fails.**
+
+---
+
+## 20. ABSOLUTE DO-NOT-DO RULES
+
+- ❌ Change the core brand palette
+- ❌ Change the canonical fonts (Syne / Inter / JetBrains Mono)
+- ❌ Use "we" for service delivery — solo operator; always "I" or "Jacob"
+- ❌ Alter the verified proof metrics without Jacob's sign-off
 - ❌ Use `any` TypeScript type
-- ❌ Use inline styles (`style={{ }}`)
-- ❌ Hardcode content strings in JSX — use data files
-- ❌ Create a new component when an existing component from the inventory covers the job
-- ❌ Use CSS Modules — Tailwind only
-- ❌ Import from the old `darling-martech` repo
-
-### Claude Code specific:
-- Use slash commands for repetitive tasks: creating pages, updating data models,
-  generating Tailwind component variants, writing n8n workflow JSON
-- Always create or update the relevant data file before building the UI component
-- Run `npm run dev` (or `pnpm dev`) and `npm run typecheck` before declaring a task complete
-
-### Cursor specific:
-- `.cursorrules` at repo root is a **full copy** of this file (see header comment — re-copy after `CLAUDE.md` edits)
-- Use `@codebase` context for questions about your own repo
-- Use `@docs` for pulling in Shadcn, Next.js, Tailwind, and n8n documentation
+- ❌ Use inline styles `style={{ }}` — Tailwind only
+- ❌ Hardcode long marketing copy in JSX — use data files
+- ❌ Add new dependencies without flagging to Jacob
+- ❌ Import architecture from the old `darling-martech` repo
+- ❌ Reintroduce CSS Modules
+- ❌ Invent new canonical problem slugs without approval
+- ❌ Use `#c8f55a` lime anywhere in the codebase
+- ❌ Create a README or documentation file unless explicitly asked
+- ❌ Delete files without presenting a plan and getting confirmation
+- ❌ Run `git push --force` without explicit approval
+- ❌ Deploy to production without Jacob's explicit approval
+- ❌ Weaken the problems-first architecture
+- ❌ Reposition the site as a generic full-service agency
 
 ---
 
-## 17. FOUNDER INFO (USE IN COPY AND DATA)
-```typescript
-// src/data/site-config.ts — verify live file for Cal.com URL and metadata
-export const siteConfig: SiteConfig = {
-  name: 'Darling MarTech',
-  url: 'https://darlingmartech.com',
-  founder: {
-    name: 'Jacob Darling',
-    email: 'jacob@darlingmt.com',
-    location: 'Indianapolis, IN',
-    title: 'Founder, Darling MarTech',
-  },
-  calComLink: 'https://cal.com/jacob-darling/30min',
-  defaultMeta: {
-    title: 'Darling MarTech — MarTech Strategy, Systems & Execution',
-    description:
-      'The only martech owner-operator company that builds, integrates, and runs the full marketing stack for growth-stage businesses. One person. Complete accountability.',
-    ogImage: '/og-default.png',
-  },
-}
-```
+## 21. COPY SOURCES
 
-**Career context (for About page data):**
-- 15 years marketing experience
-- B.S. Business Management, Indiana University, 2008
-- Industries: Healthcare · Legal · Finance · SaaS · Retail · Nonprofit · Local Service
-- Founded Darling MarTech in 2026
+**Canonical sources:**
+- `docs/# DARLING MARTECH — COMPLETE SITE COPY.docx.md` — section order and wording
+- `docs/DARLING MARTECH — COMPLETE SITE REBUILD BLUEPRINT.docx.md` — IA, taxonomy, tools funnel
+
+**Implementation rule:** Prefer `src/data/*.ts` so copy updates are data edits.
+Section titles and layout-specific strings may live near their components when it keeps
+the page readable — avoid marketing copy sprawl in JSX.
+
+**When rewriting legacy content:** do not paste raw. Rewrite to fit v2 taxonomy,
+solo-operator voice, outcome-first proof structure, and trust-ladder CTA logic.
 
 ---
 
-## 18. QUICK REFERENCE — MOST USED PATTERNS
+## 22. QUICK REFERENCE — MOST USED PATTERNS
 
 ### Page shell
 ```tsx
@@ -845,13 +952,13 @@ export default function Page() {
 }
 ```
 
-### CTA (`Button` from `@/components/ui/button`)
+### CTA Button
 ```tsx
 <Button href="/contact" size="lg">Let&apos;s talk →</Button>
 <Button href="/proof" variant="ghost">See the proof</Button>
 ```
 
-### Proof metric (inline or `MonoMetric`)
+### Proof metric
 ```tsx
 <MonoMetric value="+212%" label="qualified leads — Graston Technique®" />
 ```
@@ -863,19 +970,16 @@ export default function Page() {
 </AnimateOnScroll>
 ```
 
-### Case study data (abbreviated — see `src/data/work/*.ts` for full shape)
+### Case study data shape (abbreviated)
 ```typescript
 import type { CaseStudy } from "@/types";
 
 export const exampleStudy: CaseStudy = {
   slug: "graston-qualified-leads",
-  // …title, clientName, clientContext, timeline, engagementFormat,
-  // outcomeTags, problemClusters, trustLadderStage, metrics,
   primaryMetric: { value: "+212%", label: "Qualified leads generated", isHighlighted: true },
   primaryOutcomeSlug: "lead-gen",
   outcomeHeadline: "+212% qualified leads",
-  resultSummary: "…",
-  systemsBuilt: ["…"],
+  trustLadderStage: "evaluate",
   featured: true,
   publishedAt: "2024-01-01",
 };
@@ -883,66 +987,51 @@ export const exampleStudy: CaseStudy = {
 
 ---
 
-## 19. THINGS TO NEVER DO (ABSOLUTE RULES)
+## 23. FOUNDER INFO
+```typescript
+// src/data/site-config.ts
+export const siteConfig = {
+  name: 'Darling MarTech',
+  url: 'https://darlingmartech.com',
+  founder: {
+    name: 'Jacob Darling',
+    email: 'jacob@darlingmt.com',
+    location: 'Indianapolis, IN',
+    title: 'Founder, Darling MarTech',
+  },
+  calComLink: 'https://cal.com/jacob-darling/30min',
+  defaultMeta: {
+    title: 'Darling MarTech — MarTech Strategy, Systems & Execution',
+    description: 'The only martech owner-operator company that builds, integrates, and runs the full marketing stack for growth-stage businesses. One person. Complete accountability.',
+    ogImage: '/og-default.png',
+  },
+}
+```
 
-These are non-negotiable.
-
-- Never change the brand color palette (see Section 5).
-- Never use “we” for service delivery — solo operator; use “I” / “Jacob.”
-- Never alter verified proof metrics without Jacob’s sign-off (+212%, +45%, 95%, 4.9★, etc.).
-- Prefer `src/data/` for copy; avoid long marketing strings scattered in JSX.
-- No CSS Modules — Tailwind only.
-- No `any` — use or extend types in `src/types/index.ts`.
-- Do not import from the old `darling-martech` repo.
-- Flag new dependencies to Jacob before adding.
-- Build or extend the data model before large UI work.
-- No production deploy without Jacob’s explicit approval.
-
----
-
-## 20. SUPPORT DOCS REFERENCE
-
-| Source | Purpose |
-|--------|---------|
-| **`docs/# DARLING MARTECH — COMPLETE SITE COPY.docx.md`** | Canonical page copy and section order |
-| **`docs/DARLING MARTECH — COMPLETE SITE REBUILD BLUEPRINT.docx.md`** | IA, taxonomy, proof engine, growth mechanics |
-| Google Drive / legacy `.md` briefs | Strategy, brand, component inventory — supplementary |
-| **`CLAUDE.md` (this file)** | Repo conventions for agents |
-| **`docs/3D-ASSET-SOURCES.md`** | Free GLB / community 3D sources and workflow notes |
-
----
-
-## 21. OPTIONAL — MOTION, 3D, SPLINE, STOCK APIs
-
-### Defaults (do not fight these)
-- **Brand colors and typography** stay exactly as **Section 5** (`#0C0C0E`, `#F05A28`, `#F5F4F0`, Syne / Inter / JetBrains Mono). Do not introduce alternate “template” palettes as canonical.
-- **Shipped marketing images:** **`CloudinaryImage`** + Cloudinary CDN remain the default path.
-
-### When to use what
-| Need | Tool |
-|------|------|
-| Section fades, staggered reveals, most scroll polish | **Framer Motion** via **`AnimateOnScroll`** |
-| Scroll-linked timelines, pin/scrub scenes | **GSAP** + **ScrollTrigger** (`import gsap from "gsap"`; `import { ScrollTrigger } from "gsap/ScrollTrigger"`; `gsap.registerPlugin(ScrollTrigger)`) |
-| Global smooth scroll | **`lenis`** — use **`useSmoothScroll`** from `src/lib/lenis.ts` only where intentionally enabled; integrating with ScrollTrigger is supported in that hook |
-| Hosted interactive 3D scenes | **Spline** — `@splinetool/react-spline`; public `.splinecode` URLs need no API key |
-| GLB in-scene / custom materials | **R3F** — `three`, `@react-three/fiber`, `@react-three/drei` (e.g. `useGLTF("/models/foo.glb")`); assets under **`public/models/`**, textures under **`public/textures/`** |
-
-### Server-only stock search
-- **`searchUnsplash`** (`src/lib/unsplash.ts`) — `process.env.UNSPLASH_ACCESS_KEY` as Unsplash `client_id` query param; `fetch` with `next: { revalidate: 3600 }` unless a route needs a different cache policy.
-- **`searchPexelsPhotos`** / **`searchPexelsVideos`** (`src/lib/pexels.ts`) — `Authorization: process.env.PEXELS_API_KEY` header. Respect [Pexels API guidelines](https://www.pexels.com/api/documentation/) and rate limits; do not describe the service as “unlimited.”
-
-### Public asset layout
-- **Models:** `/public/models/*.glb`
-- **Workflow summary:** see **`docs/3D-ASSET-SOURCES.md`**
+**Career context (for About page):**
+- 15 years marketing experience
+- B.S. Business Management, Indiana University, 2008
+- Industries: Healthcare · Legal · Finance · SaaS · Retail · Nonprofit · Local Service
+- Founded Darling MarTech in 2026
 
 ---
 
-## 22. FINAL NOTE TO ALL AI AGENTS
+## 24. FINAL OPERATING PRINCIPLE
 
-This site is a **precision diagnostic** for the right clients — not a generic portfolio template. Every component and CTA should support: name the bottleneck, deliver value before the ask, earn the conversation.
+This site is not a generic marketing agency website.
+
+It is a precision diagnostic engine for the right buyers.
+
+Every page, proof entry, tool, and CTA should help the visitor:
+1. identify the real bottleneck
+2. understand the consequence
+3. see proof that it can be fixed
+4. take the next right step at the right trust level
+
+If a change does not strengthen that system, question it before implementing it.
 
 ---
 
-*CLAUDE.md — Darling MarTech v1.3 · Repository root: `/CLAUDE.md`*
-
-**Do not edit this file without Jacob Darling’s explicit approval.**
+*CLAUDE.md — Darling MarTech v1.7 · Repository root: `/CLAUDE.md`*
+*Cursor: keep `.cursorrules` as a byte-for-byte copy of this file.*
+*Do not edit this file without Jacob Darling's explicit approval.*

@@ -25,7 +25,7 @@ export function ProblemPathwayStrip({ eyebrow, headline, problems }: ProblemPath
           <Link
             key={problem.slug}
             href={`/problems/${problem.slug}`}
-            className="surface-card group min-w-[min(100%,17.5rem)] shrink-0 snap-start rounded-4xl border border-[#F05A28]/20 p-5 transition-colors hover:border-[#F05A28]/45 md:min-w-0"
+            className="surface-card surface-card-interactive group min-w-[min(100%,17.5rem)] shrink-0 snap-start rounded-4xl border border-[#F05A28]/20 p-5 md:min-w-0"
           >
             <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[#F05A28]">{problem.hubCategory}</p>
             <p className="font-display mt-2 text-lg font-semibold leading-snug tracking-tight text-white">{problem.title}</p>

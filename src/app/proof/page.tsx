@@ -49,7 +49,25 @@ export default function ProofPage() {
 
       <ProofFilterClient caseStudies={caseStudies} />
 
+      {/* Technical trust band */}
       <BandSection className="mt-16 md:mt-20">
+        <p className="text-xs uppercase tracking-[0.24em] text-[#F05A28]">
+          {proofPageData.technicalTrust.eyebrow}
+        </p>
+        <h2 className="font-display mt-4 max-w-xl text-balance text-2xl font-semibold text-[#F5F4F0]">
+          {proofPageData.technicalTrust.headline}
+        </h2>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {proofPageData.technicalTrust.items.map((item) => (
+            <div key={item.title} className="rounded-2xl border border-[#F5F4F0]/8 px-5 py-5">
+              <h3 className="text-sm font-semibold text-[#F5F4F0]">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/55">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </BandSection>
+
+      <BandSection className="mt-10 md:mt-14">
         <SectionHeader
           eyebrow={proofPageData.explanation.eyebrow}
           title={proofPageData.explanation.headline}

@@ -27,7 +27,23 @@ export type ServiceCluster =
   | "crm-architecture"
   | "automation-systems"
   | "attribution-analytics"
-  | "content-seo-systems";
+  | "content-seo-systems"
+  | "ai-automation"
+  | "custom-infrastructure"
+  | "technical-roadmap"
+  | "digital-marketing-strategy"
+  | "paid-media-management"
+  | "conversion-optimization"
+  | "brand-identity"
+  | "website-design"
+  | "content-creation"
+  | "social-media-marketing";
+
+export type ServicePillar =
+  | "revenue-engineering"
+  | "intelligent-automation"
+  | "custom-infrastructure"
+  | "brand-creative";
 
 export type EngagementFormat = "fractional" | "project" | "diagnostic";
 
@@ -71,6 +87,26 @@ export interface CaseStudy {
   cloudinaryImages?: string[];
   featured: boolean;
   publishedAt: string;
+  /** One-line proof page subtitle shown beneath the headline */
+  heroSubhead?: string;
+  /** Why this engagement mattered commercially — the stakes */
+  whyThisMattered?: string;
+  /** What was broken or missing before the work started */
+  whatWasBroken?: string[];
+  /** Ordered sections describing what was built and how */
+  buildSections?: { title: string; description: string }[];
+  /** How the business operates differently after the work */
+  operatingImpact?: string;
+  /** Stack layers or systems involved in the implementation */
+  implementationLayers?: string[];
+  /** Tool slugs from /tools that are relevant to this proof */
+  relatedToolSlugs?: string[];
+  /** Service slugs from /services that this proof demonstrates */
+  relatedServiceSlugs?: string[];
+  /** Problem slugs (canonical) that this proof addresses */
+  relatedProblemSlugs?: string[];
+  /** Other proof slugs that reinforce or complement this one */
+  relatedProofSlugs?: string[];
 }
 
 export interface ServiceTier {
@@ -92,6 +128,21 @@ export interface Service {
   engagementFormats: EngagementFormat[];
   tiers?: ServiceTier[];
   isFeatured: boolean;
+  pillar: ServicePillar;
+}
+
+export interface IndustrySector {
+  slug: string;
+  name: string;
+  tagline: string;
+  description: string;
+  whyTheyBuy: string;
+  primaryOutcome: string;
+  painPoints: { title: string; body: string }[];
+  solutionAngles: string[];
+  relatedProblems: ProblemCluster[];
+  relatedServices: ServiceCluster[];
+  proofReferences: string[];
 }
 
 export interface ToolQuestionOption {

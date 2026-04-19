@@ -20,7 +20,7 @@ export const homepageData = {
       afterAccent: " Or it isn't.",
     },
     subhead:
-      "When strategy, systems, and execution live in different hands, nothing compounds. I close that gap — and I stay to run it.",
+      "Revenue attribution, AI-enabled automation, custom integrations — and the strategy to know which one to build first. One person. Direct accountability.",
     primaryCta: { label: "Find your bottleneck →", href: "/tools/growth-bottleneck-quiz" },
     secondaryCta: { label: "See the proof", href: "/proof" },
   },
@@ -35,11 +35,6 @@ export const homepageData = {
     headline: "Not sure where to start? There's an 8-question diagnostic for that.",
     body: "Answer 8 questions. Get a specific diagnosis — not a generic checklist. No email required to see your results.",
     cta: { label: "Take the Growth Bottleneck Quiz →", href: "/tools/growth-bottleneck-quiz" },
-  },
-  /** Compact pathway row directly under the proof ticker — full problem cards follow below. */
-  pathwayStrip: {
-    eyebrow: "Choose a pathway",
-    headline: "Four ways growth usually breaks — pick the one that sounds like you.",
   },
   problemSection: {
     eyebrow: "Find your problem",
@@ -69,12 +64,6 @@ export const homepageData = {
       },
     ],
   },
-  /** Homepage featured proof block — must match a `CaseStudy.slug` in work-index. */
-  featuredCaseStudySlug: "graston-qualified-leads",
-  proofStrip: {
-    eyebrow: "Featured proof",
-    headline: "One engagement, one accountable operator, compounding pipeline.",
-  },
   newsletterBand: {
     eyebrow: "Insights",
     headline: "Weekly notes from the stack — strategy, systems, and what actually moved the needle.",
@@ -83,20 +72,47 @@ export const homepageData = {
     subscriberLineFallback: "Join 850+ readers on the list",
     microcopy: "One email per week. Unsubscribe anytime.",
   },
-  ownerOperator: {
-    eyebrow: "OWNER-OPERATED",
-    headline: "You work with me. Not an account manager. Not a junior. Me.",
-    body: [
-      "I'm Jacob Darling. I've been inside marketing teams as a director and outside as a consultant for 15 years — healthcare systems, law firms, financial advisors, SaaS platforms, local service businesses. I know what good systems look like. I've built them. I maintain them.",
-      "When something breaks, I fix it. When something isn't working, I tell you directly. There's no layer between you and the person accountable for the result.",
+  evaluationTrio: {
+    eyebrow: "HOW HIGH-STAKES BUYERS EVALUATE A PARTNER",
+    headline: "Three things matter most — and they're non-negotiable.",
+    items: [
+      {
+        number: "01",
+        title: "Revenue clarity",
+        body: "Not impressions. Not click-throughs. Direct linkage between marketing activity and closed revenue — the kind that holds up in a board meeting or a budget defense.",
+      },
+      {
+        number: "02",
+        title: "Proactive partnership",
+        body: "An extension of your leadership team. I identify gaps and propose roadmaps without being asked — before the problem compounds, not after.",
+      },
+      {
+        number: "03",
+        title: "Speed without fragility",
+        body: "Fast to ship, but built to hold. Agile sprints and working systems — not multi-year transformation projects or prototypes that break the moment someone touches them.",
+      },
     ],
-    cta: { label: "More about how I work", href: "/process" },
   },
-  toolsPreview: {
-    eyebrow: "FREE DIAGNOSTIC TOOLS",
-    headline: "Start with a diagnosis, not a sales call.",
-    body: "Every tool on this site was built to answer a specific question before an engagement begins. Run one. See what it finds. No email required to start.",
-    cta: { label: "See all tools →", href: "/tools" },
+  icpSection: {
+    eyebrow: "WHO THIS IS FOR",
+    headline: "The economics need to make sense. Here's the filter.",
+    body: "The best-fit engagement has three traits — and they matter more than industry or company size.",
+    items: [
+      {
+        title: "High customer lifetime value",
+        body: "One client or patient or deal is worth enough to justify a sophisticated acquisition setup. If a single win is worth $5k–$60k+, building the right system to capture more of them pays for itself fast.",
+      },
+      {
+        title: "Complex or multi-touch sales cycle",
+        body: "The sale involves more than one stakeholder, takes more than 30 days, or requires education and nurturing before a decision. That's where custom automation and attribution systems create the most leverage.",
+      },
+      {
+        title: "A fragmented stack",
+        body: "Marketing uses HubSpot. Sales uses Salesforce. Finance uses Stripe. They don't talk. Leads fall through, attribution is guesswork, and decisions depend on whoever last exported a spreadsheet.",
+      },
+    ],
+    notAFit: "Not a fit: early-stage with one tool, pure creative-only needs, or looking for hourly commodity work.",
+    cta: { label: "See if your problem is on the list →", href: "/problems" },
   },
   closingCta: {
     headline: "If the problem is clear, the next step is a conversation.",

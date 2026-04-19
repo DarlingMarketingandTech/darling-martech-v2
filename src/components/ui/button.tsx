@@ -44,7 +44,7 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const classes = cn(buttonVariants({ variant, size, className }));
+  const classes = cn(buttonVariants({ variant, size }), className);
 
   if (href) {
     return (

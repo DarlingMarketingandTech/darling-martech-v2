@@ -8,8 +8,8 @@ type DiagnosticOrangeBandProps = {
 
 export function DiagnosticOrangeBand({ headline, body, cta }: DiagnosticOrangeBandProps) {
   return (
-    <section className="rounded-[2rem] bg-[#F05A28] px-6 py-10 md:px-10 md:py-12">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+    <section className="band-orange rounded-[2rem] px-6 py-10 md:px-10 md:py-12">
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         <div className="min-w-0 flex-1">
           <h2 className="font-display text-balance text-2xl font-semibold text-white md:text-3xl lg:text-4xl">
             {headline}

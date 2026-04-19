@@ -10,11 +10,17 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Opt-in smooth scrolling + ScrollTrigger sync.
  * Do not mount in root layout without anchor/modal/accessibility QA (see CLAUDE.md).
+ * Skips entirely when the user prefers reduced motion.
  */
 export function useSmoothScroll() {
   const tickerRef = useRef<((time: number) => void) | null>(null);
 
   useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

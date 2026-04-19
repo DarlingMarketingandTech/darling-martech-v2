@@ -23,6 +23,8 @@ export const siteNavigation: SiteNavigation = {
         heading: "Services",
         links: [
           { label: "Capabilities", href: "/services" },
+          { label: "Technical Roadmap", href: "/services/technical-roadmap" },
+          { label: "Industries", href: "/industries" },
           { label: "Problems Hub", href: "/problems" },
           { label: "How I Work", href: "/process" },
           { label: "Tools", href: "/tools" },

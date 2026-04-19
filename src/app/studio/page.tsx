@@ -2,6 +2,7 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { DiagnosticHudCard } from "@/components/animations/DiagnosticHudCard";
+import { StudioHero } from "@/components/animations/StudioHero";
 import { PageHero } from "@/components/hero/PageHero";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ export default function StudioPage() {
         eyebrow={studioPageData.hero.eyebrow}
         headline={studioPageData.hero.headline}
         body={studioPageData.hero.body}
+        splitAside={<StudioHero />}
       />
 
       <SectionWrapper>

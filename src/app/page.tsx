@@ -3,28 +3,22 @@ import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { HomepageHero } from "@/components/hero/HomepageHero";
 import { ProofTicker } from "@/components/home/ProofTicker";
-import { ProblemPathwayStrip } from "@/components/home/ProblemPathwayStrip";
 import { DiagnosticOrangeBand } from "@/components/home/DiagnosticOrangeBand";
 import { InsightsNewsletterBand } from "@/components/home/InsightsNewsletterBand";
+import { IcpBlock } from "@/components/home/IcpBlock";
+import { EvaluationTrio } from "@/components/home/EvaluationTrio";
 import { ProblemHubGrid } from "@/components/problems/ProblemHubGrid";
-import { ProofCard } from "@/components/proof/ProofCard";
-import { ToolsPreviewBand } from "@/components/tools/ToolsPreviewBand";
 import { Button } from "@/components/ui/button";
+import { ProcessTimeline } from "@/components/process/ProcessTimeline";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
-import { caseStudies } from "@/data/work/work-index";
 import { homepageData, homepageMeta } from "@/data/homepage";
 import { problemPages } from "@/data/problems";
-import { tools } from "@/data/labs";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata(homepageMeta);
 
 export default function HomePage() {
   const featuredProblems = problemPages.slice(0, 4);
-  const featuredTools = tools.slice(0, 4);
-  const featuredCaseStudy =
-    caseStudies.find((c) => c.slug === homepageData.featuredCaseStudySlug) ?? caseStudies[0];
   const newsletterSubscriberLine = process.env.NEXT_PUBLIC_NEWSLETTER_SUBSCRIBERS?.trim()
     ? `Join ${process.env.NEXT_PUBLIC_NEWSLETTER_SUBSCRIBERS.trim()} readers on the list`
     : homepageData.newsletterBand.subscriberLineFallback;
@@ -42,12 +36,6 @@ export default function HomePage() {
       <div className="mt-6">
         <ProofTicker metrics={homepageData.proofBar} />
       </div>
-
-      <ProblemPathwayStrip
-        eyebrow={homepageData.pathwayStrip.eyebrow}
-        headline={homepageData.pathwayStrip.headline}
-        problems={featuredProblems}
-      />
 
       <SectionWrapper className="mt-14">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -76,29 +64,34 @@ export default function HomePage() {
           title={homepageData.processSection.headline}
           body={homepageData.processSection.body}
         />
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {homepageData.processSection.columns.map((column) => (
-            <article key={column.number} className="rounded-4xl border border-[#F5F4F0]/10 p-6">
-              <p className="font-mono text-xl text-[#F05A28]">{column.number}</p>
-              <h3 className="font-display mt-3 text-xl font-semibold md:text-2xl">{column.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-[#F5F4F0]/72 md:text-base">{column.body}</p>
-            </article>
-          ))}
+        <div className="mt-8">
+          <ProcessTimeline
+            steps={homepageData.processSection.columns.map((column) => ({
+              number: column.number,
+              title: column.title,
+              description: column.body,
+            }))}
+          />
         </div>
       </BandSection>
 
       <SectionWrapper className="mt-14">
-        <SectionHeader eyebrow={homepageData.proofStrip.eyebrow} title={homepageData.proofStrip.headline} />
-        <div className="mx-auto mt-10 max-w-2xl">
-          <AnimateOnScroll>
-            <ProofCard caseStudy={featuredCaseStudy} />
-          </AnimateOnScroll>
-        </div>
-        <div className="mt-8 flex justify-center">
-          <Button href="/proof" variant="ghost">
-            See all proof →
-          </Button>
-        </div>
+        <EvaluationTrio
+          eyebrow={homepageData.evaluationTrio.eyebrow}
+          headline={homepageData.evaluationTrio.headline}
+          items={homepageData.evaluationTrio.items}
+        />
+      </SectionWrapper>
+
+      <SectionWrapper className="mt-14">
+        <IcpBlock
+          eyebrow={homepageData.icpSection.eyebrow}
+          headline={homepageData.icpSection.headline}
+          body={homepageData.icpSection.body}
+          items={homepageData.icpSection.items}
+          notAFit={homepageData.icpSection.notAFit}
+          cta={homepageData.icpSection.cta}
+        />
       </SectionWrapper>
 
       <InsightsNewsletterBand
@@ -108,36 +101,6 @@ export default function HomePage() {
         subscriberLine={newsletterSubscriberLine}
         microcopy={homepageData.newsletterBand.microcopy}
       />
-
-      <BandSection className="mt-14 text-center">
-        <SectionHeader
-          eyebrow={homepageData.ownerOperator.eyebrow}
-          title={homepageData.ownerOperator.headline}
-          body={
-            <div className="mx-auto max-w-xl space-y-4 text-[#F5F4F0]/74">
-              {homepageData.ownerOperator.body.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-          }
-          align="center"
-        />
-        <div className="mt-8">
-          <Button href={homepageData.ownerOperator.cta.href} variant="ghost">
-            {homepageData.ownerOperator.cta.label}
-          </Button>
-        </div>
-      </BandSection>
-
-      <SectionWrapper className="mt-14">
-        <ToolsPreviewBand
-          eyebrow={homepageData.toolsPreview.eyebrow}
-          headline={homepageData.toolsPreview.headline}
-          body={homepageData.toolsPreview.body}
-          tools={featuredTools}
-          cta={homepageData.toolsPreview.cta}
-        />
-      </SectionWrapper>
 
       <SectionWrapper className="mt-14 text-center">
         <SectionHeader title={homepageData.closingCta.headline} body={homepageData.closingCta.body} align="center" />

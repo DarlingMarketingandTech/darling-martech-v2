@@ -11,7 +11,7 @@ export const proofPageData = {
   hero: {
     eyebrow: "PROOF OF WORK",
     headline: "Results aren't claimed here. They're documented.",
-    body: "Every number on this page is tied to a specific engagement, a specific system, and a specific outcome.",
+    body: "Every number on this page is tied to a specific engagement, a specific system, and a specific outcome. Named clients, real metrics, and the architecture that produced them.",
   },
   explanation: {
     eyebrow: "How to read this",
@@ -21,6 +21,41 @@ export const proofPageData = {
       "Each metric maps to a specific engagement period, a specific operating system, and a specific starting point.",
     ],
   },
+  technicalTrust: {
+    eyebrow: "HOW THE WORK IS BUILT",
+    headline: "The technical standards behind every engagement.",
+    items: [
+      {
+        title: "Privacy-safe by default",
+        body: "Server-side tracking and compliance-aware implementation wherever PHI, GDPR, or CCPA exposure is a risk. Not an afterthought.",
+      },
+      {
+        title: "Documented and maintainable",
+        body: "Every system ships with documented logic and architecture notes. The next person — whether that's you, a new hire, or a future partner — can understand what was built and why.",
+      },
+      {
+        title: "Post-launch support included",
+        body: "Retainer engagements include ongoing system monitoring and iteration. Project engagements include a defined handoff period. Nothing ships and disappears.",
+      },
+    ],
+  },
+  proofGroupsByProblem: [
+    {
+      problemLabel: "Pipeline attribution",
+      description: "Engagements where marketing activity was connected to closed revenue for the first time.",
+      caseStudySlugs: ["graston-qualified-leads", "graston-growth-engine"],
+    },
+    {
+      problemLabel: "Systems & automation",
+      description: "Manual operations replaced with durable, connected automation systems.",
+      caseStudySlugs: ["graston-growth-engine", "pike-medical"],
+    },
+    {
+      problemLabel: "Patient & client acquisition",
+      description: "Regulated-industry growth built on compliant, measurement-first infrastructure.",
+      caseStudySlugs: ["pike-medical", "russell-painting"],
+    },
+  ],
   antiClaims: [
     {
       claim: "Average client sees 300% ROI.",

@@ -11,7 +11,7 @@ export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
   const outcomeLabel = OUTCOME_SLUG_LABELS[caseStudy.primaryOutcomeSlug];
 
   return (
-    <article className="surface-card grain-mask flex h-full flex-col rounded-[2rem] border border-[#F5F4F0]/8 p-7">
+    <article className="surface-card surface-card-interactive grain-mask group flex h-full flex-col rounded-[2rem] border border-[#F5F4F0]/8 p-7">
       <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#0FD9C8]">{outcomeLabel}</p>
 
       <p className="font-display mt-4 text-3xl font-semibold tracking-tight text-[#22C55E] md:text-4xl">
@@ -39,9 +39,10 @@ export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
 
       <Link
         href={`/proof/${caseStudy.slug}`}
-        className="mt-6 inline-flex text-sm font-medium text-[#F05A28] transition-colors hover:text-[#ff6d40]"
+        className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-[#F05A28] transition-all group-hover:text-[#ff6d40] group-hover:gap-2"
       >
-        Read full proof →
+        Read full proof
+        <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
       </Link>
     </article>
   );

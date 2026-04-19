@@ -28,7 +28,7 @@ export const problemPages: ProblemPage[] = [
       "Every quarter without a clear strategic owner is a quarter of compounding drift. Teams get busy on things that don't matter. Channels get funded that don't perform. Opportunities get missed because no one was watching for them. The cost isn't one bad campaign — it's 18 months of momentum you didn't build.",
     whatTheFixLooksLike:
       "Fractional CMO engagement. Strategic ownership of the full marketing function — positioning, priorities, measurement, team direction, and the system that holds it all together. Not a strategy deck. A person with accountability.",
-    relatedProof: ["graston-qualified-leads"],
+    relatedProof: ["graston-qualified-leads", "graston-technique"],
     relevantTools: [
       { label: "CMO Simulator", href: "/tools/cmo-simulator" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
@@ -66,7 +66,7 @@ export const problemPages: ProblemPage[] = [
       "Every visitor who leaves without converting is a lead that cost you money (in traffic, time, or ad spend) and produced nothing. More importantly: the right buyers — the ones who would actually pay for senior-level work — are the most likely to leave when the site doesn't immediately signal competence and credibility.",
     whatTheFixLooksLike:
       "Website strategy and rebuild. Problem-first information architecture. Conversion flow design. Trust signals in the right places. Clear next steps for every intent level — from \"just browsing\" to \"ready to talk.\"",
-    relatedProof: ["pike-medical"],
+    relatedProof: ["pike-medical", "clinical-compass"],
     relevantTools: [
       { label: "CMO Roadmap Generator", href: "/tools/cmo-roadmap-generator" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
@@ -142,7 +142,7 @@ export const problemPages: ProblemPage[] = [
       "Every dollar of traffic you don't capture is revenue that goes to someone else. More specifically: high-intent local buyers — the ones searching \"fractional CMO Indianapolis\" or \"best [service] near me\" — are the most profitable leads you can generate, and they're going to the business that showed up first, clearly, and credibly.",
     whatTheFixLooksLike:
       "Local SEO strategy and execution. GEO/AI search readiness. Citation cleanup. Conversion-optimized local pages. Structured data. Trust signals that Google and AI search engines reward.",
-    relatedProof: ["russell-painting"],
+    relatedProof: ["russell-painting", "317-bbq"],
     relevantTools: [
       { label: "GEO Readiness Auditor", href: "/tools/geo-readiness-auditor" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
@@ -180,7 +180,7 @@ export const problemPages: ProblemPage[] = [
       "Premium buyers make quick decisions. If the first impression doesn't match the caliber of the work, they move on before the relationship can form. A weak brand doesn't just lose clients — it attracts the wrong ones while repelling the right ones.",
     whatTheFixLooksLike:
       "Brand identity system: positioning, messaging, visual identity, tone of voice. Built from the actual quality of the work and the actual profile of the buyer — not from what looks nice or what a design trend suggested.",
-    relatedProof: ["pike-medical"],
+    relatedProof: ["pike-medical", "317-bbq"],
     relevantTools: [
       { label: "CMO Simulator", href: "/tools/cmo-simulator" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
@@ -218,7 +218,7 @@ export const problemPages: ProblemPage[] = [
       "You're almost certainly under-investing in the channel that's actually working and over-investing in the one that looks best in the dashboard. The cost is a misallocated budget, missed growth opportunities, and marketing that can't prove its own ROI — which means it's always vulnerable to being cut.",
     whatTheFixLooksLike:
       "Attribution system design. CRM data hygiene. Source tracking implementation. Multi-model attribution reporting. One clear view of where revenue actually comes from — built to hold up to scrutiny.",
-    relatedProof: ["graston-growth-engine"],
+    relatedProof: ["graston-growth-engine", "graston-technique"],
     relevantTools: [
       { label: "Attribution Snapshot", href: "/tools/attribution-snapshot" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },

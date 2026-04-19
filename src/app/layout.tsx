@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, JetBrains_Mono, Syne } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { AppProviders } from "@/components/providers/app-providers";
 import { siteConfig } from "@/data/site-config";
+import { appEnv } from "@/lib/env";
 import { buildMetadata } from "@/lib/metadata";
 import "./globals.css";
 
@@ -68,7 +71,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#0C0C0E] text-[#F5F4F0]">
-        {children}
+        <AppProviders>{children}</AppProviders>
+        {appEnv.plausibleDomain ? (
+          <Script
+            defer
+            strategy="afterInteractive"
+            data-domain={appEnv.plausibleDomain}
+            src="https://plausible.io/js/script.js"
+          />
+        ) : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

@@ -1,6 +1,7 @@
 import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
+import { DiagnosticHudCard } from "@/components/animations/DiagnosticHudCard";
 import { PageHero } from "@/components/hero/PageHero";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ export default function StudioPage() {
       />
 
       <SectionWrapper>
+        <DiagnosticHudCard className="mb-14" />
         <div className="grid gap-12 md:grid-cols-2">
           {studioPageData.gallery.map((item) => (
             <figure key={item.publicId} className="space-y-4">

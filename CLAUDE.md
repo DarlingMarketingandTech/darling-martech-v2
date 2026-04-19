@@ -1,6 +1,9 @@
 # CLAUDE.md
 # Darling MarTech — AI Agent Context File
-# Version: 1.3 | Last updated: April 2026
+# Version: 1.4 | Last updated: April 2026
+# v1.4: Tailwind v4 canonical utilities — prefer scale tokens over bracket radii when equivalent (`rounded-4xl` not `rounded-[2rem]`, etc.);
+#       use `wrap-break-word` instead of legacy-alias `break-words` (keeps Tailwind IntelliSense `suggestCanonicalClasses` clean).
+#       Supplementary docs: `docs/homepage-section-audit.md`, `docs/darlingmartech-proof-copy.md`, `docs/3D-ASSET-SOURCES.md`, split `darlingmartech-*-copy.md` exports.
 # v1.3: Motion / 3D stack — `gsap`, `lenis`, `@splinetool/*`, `three`, `@react-three/fiber`, `@react-three/drei`;
 #       Shadcn `components.json` + `card` / `badge` / `tabs` / `dialog`; bespoke `Button` (primary/secondary/ghost + `href`);
 #       server helpers `src/lib/unsplash.ts`, `src/lib/pexels.ts`; client hook `useSmoothScroll` in `src/lib/lenis.ts` (do not wire globally without QA).
@@ -461,6 +464,7 @@ Approved narrative lives in **`docs/`** (Markdown exports of the site copy + blu
 
 - **`docs/# DARLING MARTECH — COMPLETE SITE COPY.docx.md`** — canonical section order and wording (homepage, problems, about, process, contact).
 - **`docs/DARLING MARTECH — COMPLETE SITE REBUILD BLUEPRINT.docx.md`** — IA, proof taxonomy, tools funnel, redirects, growth mechanics.
+- **Supporting material (not a substitute for the two masters above):** split exports like `docs/darlingmartech-homepage-copy.md`, `docs/darlingmartech-proof-copy.md`, `docs/darlingmartech-process-copy.md`, …; **`docs/darlingmartech-data-model-spec.md`** for schema; **`docs/homepage-section-audit.md`** for homepage section QA; **`docs/3D-ASSET-SOURCES.md`** for motion/3D asset sourcing; **`docs/verification-runbook.md`** for release checks.
 
 Google Doc IDs in older briefs still apply for **reference** when cross-checking Drive.
 
@@ -502,6 +506,17 @@ Section padding:     py-20 md:py-28
 Container:           max-w-7xl mx-auto px-6 md:px-12
 Eyebrow:             text-[#F05A28] text-xs font-normal uppercase tracking-widest
 ```
+
+**Tailwind v4 — prefer canonical utilities:** Tailwind CSS IntelliSense flags `suggestCanonicalClasses` when an arbitrary class matches a built-in token. Prefer the token so warnings stay clean and class names stay consistent.
+
+| Avoid (arbitrary / alias) | Prefer (canonical v4) |
+|---|---|
+| `rounded-[2rem]` | `rounded-4xl` |
+| `rounded-[1.5rem]` | `rounded-3xl` |
+| `rounded-[1rem]` | `rounded-2xl` |
+| `break-words` | `wrap-break-word` |
+
+Use bracket syntax (e.g. `rounded-[1.25rem]`) only when the value does **not** match a standard radius scale step.
 
 ---
 

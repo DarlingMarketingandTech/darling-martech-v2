@@ -4,7 +4,9 @@
       "Bash(pnpm lint:*)",
       "Bash(node --require ./debug-hook.js node_modules/next/dist/bin/next build)",
       "Bash(node -e ':*)",
-      "Bash(pnpm typecheck:*)"
+      "Bash(pnpm typecheck:*)",
+      "Bash(dev-browser *)",
+      "Bash(python *)"
     ]
   }
 }

@@ -101,6 +101,10 @@ function resolveGeoReadinessResult(tool: Tool, answers: ToolAnswers): ToolResult
 }
 
 function resolveAttributionSnapshotResult(tool: Tool, answers: ToolAnswers): ToolResult | undefined {
+  if (!tool.questions.length) {
+    return tool.results[0];
+  }
+
   const definitionOwner = answers.definitionOwner;
   const crmCampaignField = answers.crmCampaignField;
   const channelStoryConflict = answers.channelStoryConflict;

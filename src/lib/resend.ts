@@ -7,6 +7,7 @@ type ContactNotificationInput = {
   message: string;
   company?: string;
   intent?: string;
+  problemCluster?: string;
 };
 
 type ToolResultEmailInput = {
@@ -47,6 +48,7 @@ export async function sendContactNotification(input: ContactNotificationInput) {
       `Email: ${input.email}`,
       `Company: ${input.company ?? "Not provided"}`,
       `Intent: ${input.intent ?? "Not provided"}`,
+      `Problem cluster: ${input.problemCluster ?? "Not provided"}`,
       "",
       input.message,
     ].join("\n"),
@@ -56,6 +58,7 @@ export async function sendContactNotification(input: ContactNotificationInput) {
       <p><strong>Email:</strong> ${escapeHtml(input.email)}</p>
       <p><strong>Company:</strong> ${escapeHtml(input.company ?? "Not provided")}</p>
       <p><strong>Intent:</strong> ${escapeHtml(input.intent ?? "Not provided")}</p>
+      <p><strong>Problem cluster:</strong> ${escapeHtml(input.problemCluster ?? "Not provided")}</p>
       <p><strong>Message:</strong></p>
       <p>${escapeHtml(input.message).replaceAll("\n", "<br />")}</p>
     `,

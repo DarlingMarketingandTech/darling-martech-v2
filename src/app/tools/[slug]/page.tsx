@@ -12,7 +12,7 @@ type ToolSlugPageProps = {
 };
 
 export async function generateStaticParams() {
-  return tools.map((tool) => ({ slug: tool.slug }));
+  return tools.filter((tool) => tool.slug !== "attribution-snapshot").map((tool) => ({ slug: tool.slug }));
 }
 
 export async function generateMetadata({ params }: ToolSlugPageProps): Promise<Metadata> {

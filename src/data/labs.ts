@@ -465,57 +465,11 @@ export const tools: Tool[] = [
   {
     slug: "attribution-snapshot",
     title: "Attribution Snapshot",
-    tagline: "Find out which channel is actually generating leads.",
-    description: "Compare attribution views and identify likely reporting blind spots.",
-    estimatedTime: "6 minutes",
-    questions: [
-      {
-        id: "definitionOwner",
-        question: "Who owns UTM discipline and campaign naming end to end?",
-        type: "single",
-        required: true,
-        options: [
-          { value: "nobody", label: "Nobody — it is a free-for-all" },
-          { value: "marketing_only", label: "Marketing sets it, but enforcement is weak" },
-          { value: "ops_only", label: "Ops enforces in CRM, marketing resists" },
-          { value: "joint", label: "Joint — documented and audited" },
-        ],
-      },
-      {
-        id: "crmCampaignField",
-        question: "How trustworthy is the primary campaign or source field in CRM?",
-        type: "single",
-        required: true,
-        options: [
-          { value: "clean", label: "Clean — required on create, audited monthly" },
-          { value: "messy", label: "Messy — hundreds of variants and blanks" },
-          { value: "audited", label: "Audited — rules plus quarterly cleanup" },
-        ],
-      },
-      {
-        id: "channelStoryConflict",
-        question: "When channels disagree on credit, what happens in leadership meetings?",
-        type: "single",
-        required: true,
-        options: [
-          { value: "always", label: "Same fight every month — no stable story" },
-          { value: "sometimes", label: "We argue, then pick a temporary winner" },
-          { value: "rarely", label: "Rarely — we have a working definition" },
-        ],
-      },
-      {
-        id: "budgetDecisionSource",
-        question: "What primarily drives paid media budget changes today?",
-        type: "single",
-        required: true,
-        options: [
-          { value: "intuition", label: "Intuition and politics" },
-          { value: "last_click_only", label: "Last-click dashboards" },
-          { value: "blended_model", label: "Blended model with known limitations" },
-          { value: "north_star_metric", label: "North-star metric tied to pipeline or revenue" },
-        ],
-      },
-    ],
+    tagline: "Upload a journey export and compare revenue credit across models in one pass.",
+    description:
+      "Interactive CSV tool: first-touch, last-touch, linear, and time-decay side by side, plus journey density and days-to-close signals—so you can see where reporting is too thin to trust.",
+    estimatedTime: "2 minutes",
+    questions: [],
     results: [
       {
         id: "attr-definition-chaos",
@@ -551,8 +505,7 @@ export const tools: Tool[] = [
         ctaHref: "/problems/pipeline-not-predictable",
       },
     ],
-    emailGated: true,
-    emailGatePosition: "after_results",
+    emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
     cloudinaryThumbnail: "tools/attribution-snapshot",

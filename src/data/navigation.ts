@@ -22,6 +22,7 @@ export const siteNavigation: SiteNavigation = {
       {
         heading: "Services",
         links: [
+          { label: "Capabilities", href: "/services" },
           { label: "Problems Hub", href: "/problems" },
           { label: "How I Work", href: "/process" },
           { label: "Tools", href: "/tools" },

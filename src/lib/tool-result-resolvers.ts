@@ -11,29 +11,60 @@ function scoreFromKeys(answers: ToolAnswers, keys: string[]): number {
 }
 
 function resolveGrowthBottleneckResult(tool: Tool, answers: ToolAnswers): ToolResult | undefined {
-  const leak = answers.leak;
-  const brandConsistency = answers.brandConsistency;
-
-  if (leak === "brand") {
-    return tool.results.find((result) => result.id === "brand-cohesion-gap");
+  const weights: Record<string, number> = {};
+  for (const r of tool.results) {
+    weights[r.problemCluster] = 0;
   }
 
-  if (
-    brandConsistency === "weak" &&
-    leak !== "strategy" &&
-    leak !== "attribution" &&
-    typeof leak === "string"
-  ) {
-    return tool.results.find((result) => result.id === "brand-cohesion-gap");
+  const leakMap: Record<string, string> = {
+    strategy: "no-strategy-owner",
+    website: "site-not-converting",
+    systems: "disconnected-systems",
+    visibility: "not-visible-enough",
+    attribution: "pipeline-not-predictable",
+    brand: "brand-system-broken",
+  };
+
+  const leak = answers.leak as string | undefined;
+  if (leak && leakMap[leak]) {
+    weights[leakMap[leak]] += 6;
   }
 
-  if (leak === "strategy") return tool.results.find((result) => result.id === "strategy-gap");
-  if (leak === "website") return tool.results.find((result) => result.id === "conversion-gap");
-  if (leak === "systems") return tool.results.find((result) => result.id === "systems-gap");
-  if (leak === "visibility") return tool.results.find((result) => result.id === "visibility-gap");
-  if (leak === "attribution") return tool.results.find((result) => result.id === "attribution-gap");
+  const brandConsistency = answers.brandConsistency as string | undefined;
+  if (brandConsistency === "weak") weights["brand-system-broken"] += 4;
+  else if (brandConsistency === "mixed") weights["brand-system-broken"] += 2;
 
-  return tool.results[0];
+  const leadershipOwnership = answers.leadershipOwnership as string | undefined;
+  if (leadershipOwnership === "none") weights["no-strategy-owner"] += 3;
+  else if (leadershipOwnership === "split") weights["no-strategy-owner"] += 2;
+
+  const siteTrustFirstSeconds = answers.siteTrustFirstSeconds as string | undefined;
+  if (siteTrustFirstSeconds === "low") weights["site-not-converting"] += 3;
+  else if (siteTrustFirstSeconds === "ok") weights["site-not-converting"] += 1;
+
+  const manualFollowUp = answers.manualFollowUp as string | undefined;
+  if (manualFollowUp === "mostly") weights["disconnected-systems"] += 3;
+  else if (manualFollowUp === "mixed") weights["disconnected-systems"] += 1;
+
+  const localSearchPresence = answers.localSearchPresence as string | undefined;
+  if (localSearchPresence === "weak") weights["not-visible-enough"] += 3;
+  else if (localSearchPresence === "mixed") weights["not-visible-enough"] += 1;
+
+  const channelContributionConfidence = answers.channelContributionConfidence as string | undefined;
+  if (channelContributionConfidence === "low") weights["pipeline-not-predictable"] += 3;
+  else if (channelContributionConfidence === "mixed") weights["pipeline-not-predictable"] += 1;
+
+  let winnerCluster = tool.results[0]?.problemCluster ?? "no-strategy-owner";
+  let max = -1;
+  for (const r of tool.results) {
+    const score = weights[r.problemCluster] ?? 0;
+    if (score > max) {
+      max = score;
+      winnerCluster = r.problemCluster;
+    }
+  }
+
+  return tool.results.find((result) => result.problemCluster === winnerCluster) ?? tool.results[0];
 }
 
 function resolveMartechStackResult(tool: Tool, answers: ToolAnswers): ToolResult | undefined {

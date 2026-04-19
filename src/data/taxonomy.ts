@@ -1,5 +1,6 @@
 import type {
   EngagementFormat,
+  OutcomeSlug,
   OutcomeTag,
   ProblemCluster,
   ServiceCluster,
@@ -45,4 +46,25 @@ export const ENGAGEMENT_FORMATS: EngagementFormat[] = [
   "fractional",
   "project",
   "diagnostic",
+];
+
+export const OUTCOME_SLUG_LABELS: Record<OutcomeSlug, string> = {
+  "lead-gen": "Lead generation",
+  "conversion-lift": "Conversion lift",
+  "time-saved": "Time saved / overhead",
+  "traffic-growth": "Traffic & visibility",
+  "brand-awareness": "Brand awareness",
+  "pipeline-automation": "Pipeline automation",
+  "system-consolidation": "System consolidation",
+};
+
+/** Order of filter chips on /proof */
+export const OUTCOME_SLUG_ORDER: OutcomeSlug[] = [
+  "lead-gen",
+  "conversion-lift",
+  "time-saved",
+  "traffic-growth",
+  "pipeline-automation",
+  "system-consolidation",
+  "brand-awareness",
 ];

@@ -2,29 +2,31 @@ import type { CaseStudy } from "@/types";
 
 export const grastonGrowthEngine: CaseStudy = {
   slug: "graston-growth-engine",
-  title: "Full MarTech Ecosystem Build",
+  title: "Graston Growth Engine — Automation Stack",
   clientName: "Graston Technique®",
-  clientContext: "National healthcare provider training organization",
+  clientContext: "Healthcare training · Marketing automation",
   location: "Indianapolis, IN",
   timeline: "18-month fractional engagement",
   engagementFormat: "fractional",
-  outcomeTags: ["Pipeline Growth", "MarTech Integration"],
-  problemClusters: ["no-strategy-owner", "disconnected-systems"],
+  outcomeTags: ["Automation", "Systems Built", "MarTech Integration"],
+  problemClusters: ["disconnected-systems", "no-strategy-owner"],
   trustLadderStage: "evaluate",
   metrics: [
-    { value: "+212%", label: "Qualified leads generated", isHighlighted: true },
-    { value: "95%", label: "Manual overhead reduced" },
+    { value: "95%", label: "Manual overhead reduced", isHighlighted: true },
     { value: "81", label: "Providers in live spatial directory" },
+    { value: "+212%", label: "Qualified leads generated" },
   ],
   primaryMetric: {
-    value: "+212%",
-    label: "Qualified leads generated",
+    value: "95%",
+    label: "Manual overhead reduced",
     isHighlighted: true,
   },
+  primaryOutcomeSlug: "time-saved",
+  outcomeHeadline: "95% less manual overhead",
   resultSummary:
-    "Built the full stack: CRM integration, automated lead nurturing, geospatial provider search, and attribution tracking. Replaced 95% of the manual overhead their team was carrying.",
+    "Custom marketing automation platform replaced eight separate manual workflows. Real-time spatial search, connected CRM, and pipeline visibility from none to operational.",
   fullStory:
-    "Graston had a static provider directory and no connected marketing system. The rebuild connected lead capture, nurturing, provider discovery, and attribution into one operating system that could be measured and improved.",
+    "The Growth Engine work focused on replacing brittle manual workflows with durable automation — so the team could scale outreach, events, and follow-up without adding headcount.",
   systemsBuilt: [
     "HubSpot",
     "Cloudflare Workers",

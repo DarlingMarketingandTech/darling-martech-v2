@@ -2,6 +2,7 @@ import Link from "next/link";
 import { siteNavigation } from "@/data/navigation";
 import { siteConfig } from "@/data/site-config";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 
 export function SiteFooter() {
   return (
@@ -19,6 +20,13 @@ export function SiteFooter() {
           </div>
           <p className="mt-6 max-w-md text-base leading-7 text-[#F5F4F0]/68">
             Strategy. Systems. Execution. One accountable operator.
+          </p>
+          <NewsletterSignup />
+          <p className="mt-8 text-xs text-[#F5F4F0]/40">
+            © {new Date().getFullYear()} Darling MarTech LLC ·{" "}
+            <Link href="/privacy-policy" className="hover:text-[#F05A28]">
+              Privacy Policy
+            </Link>
           </p>
         </div>
 

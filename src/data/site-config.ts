@@ -5,7 +5,7 @@ export const siteConfig: SiteConfig = {
   url: "https://darlingmartech.com",
   founder: {
     name: "Jacob Darling",
-    email: "jacob@darlingmartech.com",
+    email: "jacob@darlingmt.com",
     location: "Indianapolis, IN",
     title: "Founder, Darling MarTech",
     linkedIn: "https://www.linkedin.com/in/jacobdarling",

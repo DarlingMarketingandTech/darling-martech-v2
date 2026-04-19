@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { contactPageData } from "@/data/contact";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { ContactAlternativePaths } from "@/components/contact/ContactAlternativePaths";
 import { DirectContactBlock } from "@/components/contact/DirectContactBlock";
 import { IntentSelector } from "@/components/contact/IntentSelector";
 import { WhatHappensNext } from "@/components/contact/WhatHappensNext";
@@ -16,8 +17,10 @@ export function ContactExperience() {
         <div className="surface-band rounded-[2rem] p-7 md:p-8">
           <p className="text-sm uppercase tracking-[0.24em] text-[#F05A28]">Intent selector</p>
           <p className="mt-4 max-w-2xl text-base leading-7 text-[#F5F4F0]/72">
-            Pick the version that sounds most like your situation. It preloads the message so you do not have to start from zero.
+            Pick the option below that&apos;s closest to where you are. It pre-fills the message field with a useful
+            starting point.
           </p>
+          <p className="mt-3 text-sm text-[#F5F4F0]/50">What best describes where you are right now?</p>
           <div className="mt-6">
             <IntentSelector
               intents={contactPageData.intents}
@@ -26,7 +29,14 @@ export function ContactExperience() {
             />
           </div>
         </div>
-        <ContactForm intents={contactPageData.intents} selectedIntent={selectedIntent} />
+        <ContactForm
+          intents={contactPageData.intents}
+          selectedIntent={selectedIntent}
+          formSectionLabel={contactPageData.formSectionLabel}
+          budgetOptions={contactPageData.budgetOptions}
+          budgetIntentLabel={contactPageData.budgetIntentLabel}
+        />
+        <ContactAlternativePaths />
       </div>
       <div className="grid gap-6">
         <WhatHappensNext />

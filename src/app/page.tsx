@@ -2,6 +2,8 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { HomepageHero } from "@/components/hero/HomepageHero";
+import { ProofTicker } from "@/components/home/ProofTicker";
+import { DiagnosticOrangeBand } from "@/components/home/DiagnosticOrangeBand";
 import { ProblemHubGrid } from "@/components/problems/ProblemHubGrid";
 import { ProofGrid } from "@/components/proof/ProofGrid";
 import { ToolsPreviewBand } from "@/components/tools/ToolsPreviewBand";
@@ -18,7 +20,7 @@ export const metadata = buildMetadata(homepageMeta);
 export default function HomePage() {
   const featuredProblems = problemPages.slice(0, 4);
   const featuredTools = tools.slice(0, 4);
-  const featuredProof = caseStudies.slice(0, 3);
+  const featuredProof = caseStudies.slice(0, 4);
 
   return (
     <SiteShell>
@@ -28,22 +30,34 @@ export default function HomePage() {
         subhead={homepageData.hero.subhead}
         primaryCta={homepageData.hero.primaryCta}
         secondaryCta={homepageData.hero.secondaryCta}
-        metrics={homepageData.proofBar}
       />
 
-      <SectionWrapper>
+      <div className="mt-6">
+        <ProofTicker metrics={homepageData.proofBar} />
+      </div>
+
+      <SectionWrapper className="mt-14">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <SectionHeader eyebrow={homepageData.problemSection.eyebrow} title={homepageData.problemSection.headline} />
           <Button href={homepageData.problemSection.diagnosticCta.href} variant="ghost">
             {homepageData.problemSection.diagnosticCta.label}
           </Button>
         </div>
+        <p className="mt-4 text-sm text-[#F5F4F0]/55">{homepageData.problemSection.body}</p>
         <div className="mt-10">
-          <ProblemHubGrid problems={featuredProblems} />
+          <ProblemHubGrid problems={featuredProblems} layout="quad" />
         </div>
       </SectionWrapper>
 
-      <BandSection>
+      <div className="mt-14">
+        <DiagnosticOrangeBand
+          headline={homepageData.diagnosticBand.headline}
+          body={homepageData.diagnosticBand.body}
+          cta={homepageData.diagnosticBand.cta}
+        />
+      </div>
+
+      <BandSection className="mt-14">
         <SectionHeader
           eyebrow={homepageData.processSection.eyebrow}
           title={homepageData.processSection.headline}
@@ -60,29 +74,24 @@ export default function HomePage() {
         </div>
       </BandSection>
 
-      <SectionWrapper>
-        <ToolsPreviewBand
-          eyebrow={homepageData.toolsPreview.eyebrow}
-          headline={homepageData.toolsPreview.headline}
-          body={homepageData.toolsPreview.body}
-          tools={featuredTools}
-          cta={homepageData.toolsPreview.cta}
-        />
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <SectionHeader eyebrow="Selected proof" title="Documented outcomes tied to specific systems." />
+      <SectionWrapper className="mt-14">
+        <SectionHeader eyebrow={homepageData.proofStrip.eyebrow} title={homepageData.proofStrip.headline} />
         <div className="mt-10">
           <ProofGrid caseStudies={featuredProof} />
         </div>
+        <div className="mt-8 flex justify-center">
+          <Button href="/proof" variant="ghost">
+            See all proof →
+          </Button>
+        </div>
       </SectionWrapper>
 
-      <BandSection className="text-center">
+      <BandSection className="mt-14 text-center">
         <SectionHeader
           eyebrow={homepageData.ownerOperator.eyebrow}
           title={homepageData.ownerOperator.headline}
           body={
-            <div className="mx-auto max-w-3xl space-y-4">
+            <div className="mx-auto max-w-xl space-y-4 text-[#F5F4F0]/74">
               {homepageData.ownerOperator.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -97,7 +106,17 @@ export default function HomePage() {
         </div>
       </BandSection>
 
-      <SectionWrapper className="text-center">
+      <SectionWrapper className="mt-14">
+        <ToolsPreviewBand
+          eyebrow={homepageData.toolsPreview.eyebrow}
+          headline={homepageData.toolsPreview.headline}
+          body={homepageData.toolsPreview.body}
+          tools={featuredTools}
+          cta={homepageData.toolsPreview.cta}
+        />
+      </SectionWrapper>
+
+      <SectionWrapper className="mt-14 text-center">
         <SectionHeader title={homepageData.closingCta.headline} body={homepageData.closingCta.body} align="center" />
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href={homepageData.closingCta.primaryCta.href} size="lg">

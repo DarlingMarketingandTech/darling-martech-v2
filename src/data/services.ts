@@ -12,7 +12,7 @@ export const services: Service[] = [
       "Senior decision support",
       "One accountable operator across the stack",
     ],
-    proofReferences: ["graston-growth-engine"],
+    proofReferences: ["graston-qualified-leads", "graston-growth-engine"],
     problemClusters: ["no-strategy-owner", "brand-system-broken"],
     engagementFormats: ["fractional", "diagnostic"],
     isFeatured: true,

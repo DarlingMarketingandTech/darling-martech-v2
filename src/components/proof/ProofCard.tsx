@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { MonoMetric } from "@/components/ui/MonoMetric";
+import { OUTCOME_SLUG_LABELS } from "@/data/taxonomy";
 import type { CaseStudy } from "@/types";
 
 type ProofCardProps = {
@@ -9,20 +8,24 @@ type ProofCardProps = {
 };
 
 export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
+  const outcomeLabel = OUTCOME_SLUG_LABELS[caseStudy.primaryOutcomeSlug];
+
   return (
-    <article className="surface-card grain-mask rounded-[2rem] border-l-4 border-l-[#F05A28] p-7">
-      <p className="text-sm text-[#0FD9C8]">{caseStudy.clientName}</p>
-      <h3 className="font-display text-balance mt-3 text-2xl font-semibold">{caseStudy.title}</h3>
-      <p className="mt-2 text-sm leading-6 text-[#F5F4F0]/58">{caseStudy.clientContext}</p>
+    <article className="surface-card grain-mask flex h-full flex-col rounded-[2rem] border border-[#F5F4F0]/8 p-7">
+      <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#0FD9C8]">{outcomeLabel}</p>
 
-      <div className="mt-6">
-        <MonoMetric value={caseStudy.primaryMetric.value} label={caseStudy.primaryMetric.label} size="md" />
-      </div>
+      <p className="font-display mt-4 text-3xl font-semibold tracking-tight text-[#22C55E] md:text-4xl">
+        {caseStudy.outcomeHeadline}
+      </p>
 
-      <p className="mt-5 text-base leading-7 text-[#F5F4F0]/72">{caseStudy.resultSummary}</p>
+      <p className="mt-4 flex-1 text-base leading-7 text-[#F5F4F0]/72">{caseStudy.resultSummary}</p>
+
+      <p className="mt-5 text-sm text-[#F5F4F0]/48">
+        {caseStudy.clientName} · {caseStudy.clientContext}
+      </p>
 
       {showSystems ? (
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-2">
           {caseStudy.systemsBuilt.map((system) => (
             <span
               key={system}
@@ -34,12 +37,12 @@ export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
         </div>
       ) : null}
 
-      <div className="mt-6 flex items-center justify-between gap-4">
-        <Eyebrow accent="teal">{caseStudy.outcomeTags.join(" · ")}</Eyebrow>
-        <Link href={`/proof/${caseStudy.slug}`} className="text-sm text-[#F05A28] transition-colors hover:text-[#ff6d40]">
-          Read the full proof
-        </Link>
-      </div>
+      <Link
+        href={`/proof/${caseStudy.slug}`}
+        className="mt-6 inline-flex text-sm font-medium text-[#F05A28] transition-colors hover:text-[#ff6d40]"
+      >
+        Read full proof →
+      </Link>
     </article>
   );
 }

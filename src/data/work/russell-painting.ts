@@ -20,6 +20,8 @@ export const russellPainting: CaseStudy = {
     label: "Client satisfaction score",
     isHighlighted: true,
   },
+  primaryOutcomeSlug: "traffic-growth",
+  outcomeHeadline: "4.9★ local trust conversion",
   resultSummary:
     "Built a full attribution layer connecting ad spend, form fills, phone calls, and booked jobs into one reporting view. Visibility and trust signals improved alongside local conversion performance.",
   fullStory:

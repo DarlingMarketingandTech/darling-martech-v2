@@ -33,9 +33,19 @@ export const contactPageData = {
       prefill: "I have a specific decision or plan in progress and would like an expert opinion before moving forward.",
     },
     {
-      label: "I'm not sure yet. I just want to see if this is a fit.",
-      clarifier: "You're still early and want to understand what this kind of engagement looks like.",
+      label: "I'm not sure yet — I just want to see if this is a fit.",
+      clarifier:
+        "You're early stage. Nothing's on fire. You want to understand what this kind of engagement even looks like before deciding.",
       prefill: "I'm exploring whether this is the right fit for my situation and would like to have an initial conversation.",
     },
   ],
+  formSectionLabel: "Tell me a bit about what's going on.",
+  budgetOptions: [
+    { value: "", label: "I'm not sure yet" },
+    { value: "under-2k", label: "Under $2,000/month" },
+    { value: "2k-5k", label: "$2,000 – $5,000/month" },
+    { value: "5k-10k", label: "$5,000 – $10,000/month" },
+    { value: "10k-plus", label: "$10,000+/month" },
+  ],
+  budgetIntentLabel: "I know my problem and I'm ready to talk scope.",
 };

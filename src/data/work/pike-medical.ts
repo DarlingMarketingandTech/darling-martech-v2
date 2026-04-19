@@ -20,6 +20,8 @@ export const pikeMedical: CaseStudy = {
     label: "Patient pipeline growth",
     isHighlighted: true,
   },
+  primaryOutcomeSlug: "conversion-lift",
+  outcomeHeadline: "+45% patient growth over 3 years",
   resultSummary:
     "Built a CRM architecture from scratch, wired it to intake, and automated follow-up across patient segments. Pipeline visibility went from zero to real-time within 60 days.",
   fullStory:

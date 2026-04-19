@@ -43,6 +43,61 @@ export const tools: Tool[] = [
         ],
         required: true,
       },
+      {
+        id: "leadershipOwnership",
+        question: "Who owns marketing outcomes end-to-end (priorities, spend, and reporting) today?",
+        type: "single",
+        options: [
+          { value: "none", label: "No single owner — it shifts by initiative" },
+          { value: "split", label: "Split — leadership agrees in the room, execution diverges" },
+          { value: "owner", label: "One senior owner with authority across the stack" },
+        ],
+        required: true,
+      },
+      {
+        id: "siteTrustFirstSeconds",
+        question: "In the first moments on your site, how quickly does a cold visitor understand what you do and for whom?",
+        type: "single",
+        options: [
+          { value: "low", label: "Slow or unclear — they have to dig" },
+          { value: "ok", label: "Understandable with effort" },
+          { value: "high", label: "Fast — headline, proof, and next step are obvious" },
+        ],
+        required: true,
+      },
+      {
+        id: "manualFollowUp",
+        question: "How much does pipeline still depend on manual follow-up and tribal knowledge?",
+        type: "single",
+        options: [
+          { value: "mostly", label: "Mostly manual — reminders live in inboxes and tasks" },
+          { value: "mixed", label: "Mixed — some automation, lots of exceptions" },
+          { value: "systematized", label: "Mostly systematized — SLAs and automation carry the load" },
+        ],
+        required: true,
+      },
+      {
+        id: "localSearchPresence",
+        question: "How would you describe organic / local search visibility for your core offer right now?",
+        type: "single",
+        options: [
+          { value: "weak", label: "Weak — hard to find or inconsistent by market" },
+          { value: "mixed", label: "Mixed — pockets of strength" },
+          { value: "strong", label: "Strong — we show up credibly where it matters" },
+        ],
+        required: true,
+      },
+      {
+        id: "channelContributionConfidence",
+        question: "If leadership asked which channels drove the last ten qualified opportunities, how confident is the answer?",
+        type: "single",
+        options: [
+          { value: "low", label: "Low — mostly anecdotes or channel dashboards that disagree" },
+          { value: "mixed", label: "Directional — we have a working theory" },
+          { value: "high", label: "High — reconciled to pipeline on a cadence we trust" },
+        ],
+        required: true,
+      },
     ],
     results: [
       {

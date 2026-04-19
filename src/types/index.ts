@@ -31,6 +31,16 @@ export type ServiceCluster =
 
 export type EngagementFormat = "fractional" | "project" | "diagnostic";
 
+/** URL-safe keys for /proof?outcome= — aligned with site blueprint. */
+export type OutcomeSlug =
+  | "lead-gen"
+  | "conversion-lift"
+  | "time-saved"
+  | "traffic-growth"
+  | "brand-awareness"
+  | "pipeline-automation"
+  | "system-consolidation";
+
 export interface ProofMetric {
   value: string;
   label: string;
@@ -50,6 +60,10 @@ export interface CaseStudy {
   trustLadderStage: TrustLadderStage;
   metrics: ProofMetric[];
   primaryMetric: ProofMetric;
+  /** Filter key for proof hub */
+  primaryOutcomeSlug: OutcomeSlug;
+  /** Metric-first line on proof cards, e.g. "+212% qualified leads" */
+  outcomeHeadline: string;
   resultSummary: string;
   fullStory?: string;
   systemsBuilt: string[];
@@ -147,12 +161,22 @@ export interface ProcessPrinciple {
   description: string;
 }
 
+export interface ProcessWhatNot {
+  title: string;
+  body: string;
+}
+
+export interface ProcessScenario {
+  title: string;
+  body: string;
+}
+
 export interface ProcessData {
   principles: ProcessPrinciple[];
   steps: ProcessStep[];
   engagementFormats: EngagementFormatDetail[];
-  whatIDontDo: string[];
-  whatGoodLooksLike: string[];
+  whatIDontDo: ProcessWhatNot[];
+  whatGoodLooksLike: ProcessScenario[];
 }
 
 export interface Testimonial {
@@ -180,15 +204,28 @@ export interface ProblemPageCta {
 export interface ProblemPage {
   slug: ProblemCluster;
   title: string;
-  heroHeadline: string;
+  /** Hub / SEO short line */
   heroSubhead: string;
-  symptoms: string[];
-  cause: string;
-  solution: string;
+  /** Category label for hero and hub cards, e.g. STRATEGY & LEADERSHIP */
+  pageEyebrow: string;
+  /** Hub grid: STRATEGY, WEBSITE & CONVERSION, etc. */
+  hubCategory: string;
+  /** Proof line for hub cards, e.g. "+212% qualified leads — …" */
+  proofChip: string;
+  hubCtaLabel: string;
+  heroHeadline: string;
+  introParagraphs: string[];
+  whyItHappens: string;
+  stakes: string;
+  whatTheFixLooksLike: string;
   relatedProof: string[];
+  relevantTools: ProblemPageCtaLink[];
   relatedService: ServiceCluster;
-  relatedTool?: string;
-  cta: ProblemPageCta;
+  closingBlock: {
+    headline: string;
+    primary: ProblemPageCtaLink;
+    secondary?: ProblemPageCtaLink;
+  };
 }
 
 export interface NavItem {

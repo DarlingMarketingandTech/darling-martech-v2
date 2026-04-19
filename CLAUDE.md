@@ -1,18 +1,19 @@
 # CLAUDE.md
 # Darling MarTech — AI Agent Context File
-# Version: 1.7 | Last updated: April 2026
+# Version: 1.8 | Last updated: April 2026
+#
+# v1.8: Hybrid-agency positioning pass synced to repo state.
+#       - Service architecture: 4 pillars (Revenue Engineering, Intelligent Automation,
+#         Custom Infrastructure, Brand & Experience Systems) — 16 services total
+#       - Proof system: 10 case studies with extended data model (buildSections,
+#         operatingImpact, implementationLayers, whatWasBroken, relatedService/Tool/Problem slugs)
+#       - New routes: /industries (+ 3 sectors), /services/technical-roadmap
+#       - Homepage: EvaluationTrio + IcpBlock sections added
+#       - Research-aligned positioning: hybrid marketing + AI automation + custom build
 #
 # v1.7: Strategic merge — repo-canonical v1.4 technical conventions preserved as source of truth.
-#       Incorporates from strategic review pass:
-#       - Explicit three-pillar service framing (AI & Automation raised to visible priority)
-#       - Expanded proof migration priority list (8 legacy clients)
-#       - Stronger tool strategy and interaction design rules
-#       - Homepage diagnostic-engine emphasis
-#       - Sprint 0 workflow and definition of done
-#       - Conflict resolution rule (repo wins over planning docs)
-#       - Expanded tool backlog candidates
-#       - Proof quality and dead-end rules
-#       - Resources / newsletter rules
+#       Three-pillar service framing, proof migration priority, tool strategy rules,
+#       homepage diagnostic-engine emphasis, Sprint 0 workflow.
 #
 # This file is the single source of truth for all AI agents working on this codebase.
 # Read this entire file before writing any code, creating any files, or making any decisions.
@@ -393,10 +394,21 @@ Do not drift back toward a services-first primary nav.
 /proof (hub — ?outcome= filter)
   /proof/graston-qualified-leads
   /proof/graston-growth-engine
+  /proof/graston-technique
   /proof/pike-medical
+  /proof/clinical-compass
   /proof/russell-painting
-/services
-  /services/[slug]
+  /proof/barbershop-command-center
+  /proof/the-compass
+  /proof/license-requirements-navigator
+  /proof/317-bbq
+/services (hub — 4 pillars)
+  /services/[slug]                  ← dynamic; excludes dedicated slugs below
+  /services/technical-roadmap       ← dedicated static page (entry offer)
+/industries (hub — 3 sectors)
+  /industries/healthcare-medtech
+  /industries/b2b-saas-tech
+  /industries/legal-professional-services
 /tools (hub)
   /tools/growth-bottleneck-quiz     ← custom page (GrowthBottleneckQuizClient)
   /tools/geo-readiness-auditor      ← custom page (GeoAuditorEngine)
@@ -420,13 +432,18 @@ Do not drift back toward a services-first primary nav.
 - `/lab` → `/tools`, `/lab/:slug` → `/tools/:slug`
 Do not undo these redirects.
 
-### Tools Routing Note
-`src/app/tools/[slug]/page.tsx` `generateStaticParams` omits slugs that have their own
-`page.tsx` under `tools/<slug>/` to prevent double-generation.
+### Dynamic Route Exclusion Pattern
+Multiple dynamic routes use an exclusion list to prevent double-generation with
+dedicated static pages under the same parent folder:
+
+- `src/app/tools/[slug]/page.tsx` — omits slugs that have their own `page.tsx` under `tools/<slug>/`
+- `src/app/services/[slug]/page.tsx` — omits `technical-roadmap` (has its own `services/technical-roadmap/page.tsx`)
+
+When adding a dedicated service or tool page, add its slug to the corresponding `DEDICATED_*_PAGES` array.
 
 ---
 
-## 7. STRATEGIC DIRECTION — THE THREE PILLARS
+## 7. STRATEGIC DIRECTION — THE FOUR PILLARS
 
 The site is **problem-first**. The ideal conversion path:
 ```
@@ -435,25 +452,55 @@ Problem page → Diagnostic tool → Proof → Service depth / Contact
 
 Every page should know its trust-ladder stage and present the appropriate CTA.
 
-### The Three Service Pillars (all must be visible on the site)
+### Positioning (canonical)
 
-**1. Marketing Strategy & Systems**
-- GTM, positioning, funnel architecture, GEO/visibility strategy
-- Measurement planning, growth roadmaps, fractional CMO
+Darling MarTech is a **hybrid technical marketing partner** — bridging marketing strategy,
+AI-enabled automation, and custom technical infrastructure. The positioning explicitly
+rejects the "generic agency" framing. Services are engineered **systems that fix business
+problems**, not commodity deliverables.
 
-**2. Technical Implementation**
-- Server-side tracking, GA4, attribution, CRO
-- API/middleware, MarTech stack architecture, CRM/lead flow systems
+### The Four Service Pillars (all must be visible on the site)
 
-**3. AI & Automation**
-- Agentic workflows, AI-enabled operations
-- Custom internal tools, AI deflection/routing
-- LLM-enhanced workflows, automation-backed growth systems
+Service data: [`src/data/services.ts`](src/data/services.ts). Pillars defined in `SERVICE_PILLARS`.
 
-> **Strategic note:** Pillar 3 (AI & Automation) is likely underrepresented relative
-> to its commercial importance. When improving homepage, services, tools, and proof
-> connections, raise AI & Automation visibility deliberately. This is the highest-ticket
-> work and should be front-facing — not buried in service subpages.
+**1. Revenue Engineering**
+Design and optimize the systems that turn traffic into qualified pipeline and measurable revenue.
+- Fractional CMO, Attribution & Analytics, Content & SEO Systems
+- Marketing System Strategy, Demand Capture & Paid Media Systems, Conversion System Optimization
+- Technical Roadmap (entry offer — paid diagnostic before retainer)
+
+**2. Intelligent Automation**
+Deploy AI-enabled and rules-based workflows that remove manual work and accelerate response time.
+- AI & Workflow Automation, Rules-Based Automation Systems
+- MarTech Stack Build, CRM Architecture
+
+**3. Custom Infrastructure**
+Build the technical layer that connects channels, data, and customer experience.
+- Custom Infrastructure & Integrations (middleware, APIs, headless surfaces, secure portals)
+
+**4. Brand & Experience Systems**
+Build the brand, content, and web systems that shape perception, establish trust, and turn
+attention into qualified demand.
+- Brand Positioning & Identity System, Conversion-Focused Website Systems
+- Content Systems for Demand & Trust, Audience Distribution & Engagement Systems
+
+### System-based naming rule (non-negotiable)
+
+Services must be framed as **engineered systems**, not tasks. Every service title uses system
+language ("system," "engine," "infrastructure," "structure"). Descriptions follow the pattern:
+problem → system → outcome. Avoid generic agency phrasing ("we create," "we design," "we manage").
+Use active system language: "rebuild," "structure," "engine," "system," "infrastructure."
+
+### Entry offer: Technical Roadmap
+
+The paid Technical Roadmap ([`/services/technical-roadmap`](src/app/services/technical-roadmap/page.tsx))
+is the premium entry offer for high-stakes buyers. Three SKUs:
+1. Revenue Architecture Blueprint
+2. Infrastructure & Security Deep-Dive
+3. AI & Automation Feasibility Study
+
+Structure: diagnostic → prioritized build plan → credit-forward close (roadmap fee credits
+toward implementation if client proceeds into a retainer).
 
 ---
 
@@ -525,14 +572,93 @@ pipeline-not-predictable
 
 ### Case Study Slugs (src/data/work/)
 ```
-graston-qualified-leads       ← +212% qualified leads / strategy ownership story
-graston-growth-engine         ← 95% overhead / Growth Engine automation emphasis
-pike-medical
-russell-painting
+graston-qualified-leads           ← +212% qualified leads / strategy ownership
+graston-growth-engine             ← 95% overhead / Growth Engine automation
+graston-technique                 ← full platform rebuild (fractional, 18-month)
+pike-medical                      ← +45% patient pipeline / CRM + automation
+clinical-compass                  ← Pike Medical intake system deep-dive
+russell-painting                  ← 4.9★ / attribution + local lead system
+barbershop-command-center         ← Hoosier Boy local retention system
+the-compass                       ← internal diagnostic tool (product-led proof)
+license-requirements-navigator    ← Graston CE compliance lead tool
+317-bbq                           ← local brand + visibility rebuild
 ```
 
 Each `CaseStudy` includes `primaryOutcomeSlug` (`OutcomeSlug`) and `outcomeHeadline`
 for metric-first proof cards and `/proof?outcome=` filtering.
+
+### CaseStudy extended fields (v1.8)
+
+In addition to the original required fields, `CaseStudy` now supports 10 optional fields
+used for full-depth proof detail pages. All are optional to preserve backward compatibility
+with older proofs:
+
+```typescript
+heroSubhead?: string;                 // one-line subtitle under the hero headline
+whyThisMattered?: string;             // commercial stakes / why the engagement mattered
+whatWasBroken?: string[];             // pre-engagement state bullets
+buildSections?: {                     // ordered sections describing what was built
+  title: string;
+  description: string;
+}[];
+operatingImpact?: string;             // how the business operates differently after
+implementationLayers?: string[];      // stack layers / systems involved
+relatedToolSlugs?: string[];          // relevant /tools slugs
+relatedServiceSlugs?: string[];       // relevant /services slugs (ServiceCluster)
+relatedProblemSlugs?: string[];       // relevant /problems slugs (ProblemCluster)
+relatedProofSlugs?: string[];         // complementary case study slugs
+```
+
+All new proofs created under v1.8 populate these fields. When creating a new proof,
+minimum viable structure: `heroSubhead`, `whyThisMattered`, `whatWasBroken[]`,
+`buildSections[]` (≥3), `operatingImpact`, `implementationLayers[]`, plus at least one
+`relatedProblemSlugs` entry and one `relatedServiceSlugs` entry.
+
+### Service architecture (v1.8)
+
+`Service` interface includes a required `pillar: ServicePillar` field. Four pillars:
+
+```typescript
+ServicePillar =
+  | "revenue-engineering"
+  | "intelligent-automation"
+  | "custom-infrastructure"
+  | "brand-creative";
+```
+
+Canonical service slugs (`ServiceCluster` — 16 values):
+```
+// Revenue Engineering
+fractional-cmo, attribution-analytics, content-seo-systems,
+digital-marketing-strategy, paid-media-management, conversion-optimization,
+technical-roadmap
+
+// Intelligent Automation
+ai-automation, automation-systems, martech-stack-build, crm-architecture
+
+// Custom Infrastructure
+custom-infrastructure
+
+// Brand & Experience Systems
+brand-identity, website-design, content-creation, social-media-marketing
+```
+
+`SERVICE_CLUSTERS` in [`src/data/taxonomy.ts`](src/data/taxonomy.ts) must stay in sync
+with the `ServiceCluster` type. When adding a service, update both.
+
+### Industry sectors (v1.8)
+
+`IndustrySector[]` in [`src/data/industries.ts`](src/data/industries.ts) backs
+`/industries` and `/industries/[slug]`. Three canonical sectors:
+
+```
+healthcare-medtech
+b2b-saas-tech
+legal-professional-services
+```
+
+Each sector maps to `relatedProblems`, `relatedServices`, and `proofReferences`
+and renders pain points + solution angles tailored to that vertical.
 
 ### Tool Slugs (src/data/labs.ts)
 ```
@@ -653,29 +779,40 @@ Lead Scorer
 
 ## 12. SERVICES DEPTH RULES
 
-`/services` exists but is not the primary path. It is the depth and evaluation layer.
+`/services` is the depth and evaluation layer — not the primary conversion path. Visitors
+arrive here after a problem diagnosis or a proof read, to confirm capability before a
+conversation.
 
 ### Service pages connect back to
-- relevant problem cluster(s)
-- relevant proof
-- relevant diagnostic tool(s)
+- relevant problem cluster(s) via `problemClusters`
+- relevant proof via `proofReferences` (must have ≥2 proof references per service)
+- relevant diagnostic tool(s) linked in copy or CTA
 
-### High-priority service depth pages
-```
-fractional-cmo
-website-rebuilds
-crm-architecture
-workflow-automation
-local-seo
-geo-readiness
-positioning-strategy
-marketing-audit
-agentic-marketing-systems    ← highest priority new page (AI & Automation pillar)
-ai-content-ops
-ai-deflection-automation
-```
+### Canonical service slugs (v1.8 — 16 services)
 
-Service pages must not read like generic agency capability blurbs.
+See §9 for the full list grouped by pillar. All 16 slugs render through
+`src/app/services/[slug]/page.tsx` except `technical-roadmap`, which has a dedicated
+static page under `src/app/services/technical-roadmap/page.tsx`.
+
+### Featured services (shown first on `/services`)
+
+Five services carry `isFeatured: true` and surface at the top of their pillar sections:
+
+- `fractional-cmo` — Revenue Engineering
+- `attribution-analytics` — Revenue Engineering
+- `technical-roadmap` — Revenue Engineering (entry offer)
+- `ai-automation` — Intelligent Automation
+- `custom-infrastructure` — Custom Infrastructure
+
+### Service naming rule
+
+Every service title uses system language. Examples:
+- "Marketing System Strategy" (not "Digital Marketing Strategy")
+- "Demand Capture & Paid Media Systems" (not "Paid Media Management")
+- "Conversion-Focused Website Systems" (not "Website Design")
+
+Service pages must not read like generic agency capability blurbs. Use the pattern:
+problem → system → outcome.
 
 ---
 
@@ -839,7 +976,7 @@ All production images use `CloudinaryImage`. No native `<img>`. No direct next/i
 
 ---
 
-## 18. CURRENT BUILD STATE (April 2026)
+## 18. CURRENT BUILD STATE (April 2026 · v1.8)
 
 ### Built
 - ✅ Next.js 15 + TypeScript strict + Tailwind v4
@@ -848,26 +985,40 @@ All production images use `CloudinaryImage`. No native `<img>`. No direct next/i
 - ✅ Core deps: Framer Motion, Supabase, Resend, PostHog, Vercel Analytics
 - ✅ Optional motion/3D: gsap, lenis, spline, three, R3F, Drei
 - ✅ Homepage: copy-doc order, ProofTicker, DiagnosticOrangeBand, HomepageHero
+- ✅ Homepage: EvaluationTrio + IcpBlock (ICP qualification heuristic) sections
 - ✅ Problems: hub + 6 long-form `/problems/[slug]` pages
-- ✅ Proof: 4 case files, `/proof?outcome=` filters, metric-first ProofCard
-- ✅ Services: `/services`, `/services/[slug]`
+- ✅ Proof: 10 case files with extended data model (buildSections, operatingImpact,
+      implementationLayers, relatedServiceSlugs), `/proof?outcome=` filters,
+      metric-first ProofCard, technical trust band on hub
+- ✅ Services: `/services` with 4-pillar layout (Revenue Engineering, Intelligent
+      Automation, Custom Infrastructure, Brand & Experience Systems); 16 services
+- ✅ Services: `/services/technical-roadmap` dedicated page with 3 SKUs + credit-forward close
+- ✅ Industries: `/industries` hub + 3 sector pages (healthcare, B2B SaaS, legal)
 - ✅ Tools: all slugs in labs.ts, Growth Bottleneck Quiz (8Q), GEO Readiness Auditor
 - ✅ Process, About, Contact, Footer, Privacy Policy
 - ✅ Resources hub, blog, frameworks, studio
 - ✅ Legacy redirects `/work`→`/proof`, `/lab`→`/tools`
 - ✅ Shadcn: card, badge, tabs, dialog + bespoke Darling Button
 - ✅ PostHog + Plausible + analytics hooks
+- ✅ Extended `CaseStudy` type with 10 optional proof-depth fields
+- ✅ `ServiceCluster` / `ServicePillar` / `IndustrySector` types in sync with data
 
 ### Still-active build priorities
-1. **AI & Automation pillar visibility** — homepage section + `/services/agentic-marketing-systems`
-2. **Proof migration** — 317 BBQ, Behr, Hoosier Boy; strengthen Pike/Graston entries
-3. **MarTech Stack Grader** — fuller utility, better result design
-4. **Tool result gating** — partial-reveal + email-gate pattern on more tools
-5. **Service depth pages** — fractional-cmo, ai-deflection-automation, geo-readiness
+1. **MarTech Stack Grader** — fuller utility, better result design
+2. **Tool result gating** — partial-reveal + email-gate pattern on more tools
+3. **Service depth pages** — expand copy for new services (brand pillar, paid media,
+   conversion optimization) to match depth of fractional-cmo and attribution-analytics
+4. **Legal/professional proof** — `legal-professional-services` industry page has no
+   proof references yet; document a Riley Bennett or similar engagement
+5. **Behr Pet Essentials proof** — last item on the legacy migration list
 6. **Newsletter landing** — `/resources/newsletter`
-7. **CTA trust-ladder consistency** — audit every page's closing CTA stage mapping
-8. **n8n / Twenty CRM / Loops** — Phase 4 automation backend
-9. **Cal.com wiring** — all CTA buttons in footer + contact + hero
+7. **Proof hub: problem-grouped view** — `proofGroupsByProblem` data exists in
+   `src/data/proof.ts` but is not yet rendered on the proof hub
+8. **CTA trust-ladder consistency** — audit every page's closing CTA stage mapping
+9. **n8n / Twenty CRM / Loops** — Phase 4 automation backend
+10. **Cal.com wiring** — verify all CTA buttons across new pages
+11. **Fourth industry sector** — consider adding FinTech or Manufacturing if proof
+    becomes available (the research brief lists 6 sectors; we lead with 3)
 
 ---
 
@@ -1001,8 +1152,9 @@ export const siteConfig = {
   },
   calComLink: 'https://cal.com/jacob-darling/30min',
   defaultMeta: {
-    title: 'Darling MarTech — MarTech Strategy, Systems & Execution',
-    description: 'The only martech owner-operator company that builds, integrates, and runs the full marketing stack for growth-stage businesses. One person. Complete accountability.',
+    title: 'Darling MarTech — Revenue Systems, AI Automation & Custom Build',
+    description:
+      'Darling MarTech bridges marketing strategy, AI-enabled automation, and custom technical infrastructure for growth-stage businesses with complex stacks. One accountable operator — Jacob Darling — builds, integrates, and runs the full system.',
     ogImage: '/og-default.png',
   },
 }
@@ -1032,6 +1184,6 @@ If a change does not strengthen that system, question it before implementing it.
 
 ---
 
-*CLAUDE.md — Darling MarTech v1.7 · Repository root: `/CLAUDE.md`*
+*CLAUDE.md — Darling MarTech v1.8 · Repository root: `/CLAUDE.md`*
 *Cursor: keep `.cursorrules` as a byte-for-byte copy of this file.*
 *Do not edit this file without Jacob Darling's explicit approval.*

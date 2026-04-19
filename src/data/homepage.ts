@@ -2,9 +2,9 @@ import type { PageMeta } from "@/types";
 import { siteConfig } from "@/data/site-config";
 
 export const homepageMeta: PageMeta = {
-  title: "Strategy, Systems & Execution",
+  title: "Revenue Systems, AI Automation & Custom Build",
   description:
-    "Darling MarTech helps growth-stage businesses identify the real bottleneck, build the right systems, and run the full marketing stack with one accountable operator.",
+    "Darling MarTech bridges marketing strategy, AI-enabled automation, and custom technical infrastructure for growth-stage businesses with complex stacks. One accountable operator builds, integrates, and runs the full system.",
   canonicalUrl: "https://darlingmartech.com",
 };
 

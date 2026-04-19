@@ -33,13 +33,31 @@ export const OUTCOME_TAGS: OutcomeTag[] = [
   "CRM Architecture",
 ];
 
+/**
+ * Canonical list of all service slugs. Kept in sync with the `ServiceCluster`
+ * type in `src/types/index.ts`. Grouped by pillar for readability.
+ */
 export const SERVICE_CLUSTERS: ServiceCluster[] = [
+  // Revenue Engineering
   "fractional-cmo",
-  "martech-stack-build",
-  "crm-architecture",
-  "automation-systems",
   "attribution-analytics",
   "content-seo-systems",
+  "digital-marketing-strategy",
+  "paid-media-management",
+  "conversion-optimization",
+  "technical-roadmap",
+  // Intelligent Automation
+  "ai-automation",
+  "automation-systems",
+  "martech-stack-build",
+  "crm-architecture",
+  // Custom Infrastructure
+  "custom-infrastructure",
+  // Brand & Experience Systems
+  "brand-identity",
+  "website-design",
+  "content-creation",
+  "social-media-marketing",
 ];
 
 export const ENGAGEMENT_FORMATS: EngagementFormat[] = [

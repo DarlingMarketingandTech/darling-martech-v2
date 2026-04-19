@@ -16,8 +16,16 @@ type ServiceSlugPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+/**
+ * Exclude service slugs that have dedicated static pages under `src/app/services/<slug>/`
+ * to prevent double-generation (same pattern as `src/app/tools/[slug]/page.tsx`).
+ */
+const DEDICATED_SERVICE_PAGES: string[] = ["technical-roadmap"];
+
 export async function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
+  return services
+    .filter((s) => !DEDICATED_SERVICE_PAGES.includes(s.slug))
+    .map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: ServiceSlugPageProps): Promise<Metadata> {

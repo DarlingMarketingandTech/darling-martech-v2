@@ -43,4 +43,22 @@ export const routeMetadata: Record<string, PageMeta> = {
       "Free diagnostic tools that help visitors identify bottlenecks before an engagement begins.",
     canonicalUrl: "https://darlingmartech.com/tools",
   },
+  "/services": {
+    title: "Services",
+    description:
+      "Revenue engineering, intelligent automation, custom infrastructure, and brand & experience systems — scoped after the real bottleneck is named.",
+    canonicalUrl: "https://darlingmartech.com/services",
+  },
+  "/services/technical-roadmap": {
+    title: "Technical Roadmap",
+    description:
+      "A paid diagnostic engagement that maps your revenue system, names the real friction points, and delivers a prioritized build plan — before any ongoing commitment.",
+    canonicalUrl: "https://darlingmartech.com/services/technical-roadmap",
+  },
+  "/industries": {
+    title: "Industries",
+    description:
+      "Healthcare, B2B SaaS, and legal/professional services — sector-specific pain points, solution architecture, and proof from real engagements.",
+    canonicalUrl: "https://darlingmartech.com/industries",
+  },
 };

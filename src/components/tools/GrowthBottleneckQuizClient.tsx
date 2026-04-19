@@ -131,7 +131,7 @@ const QUESTIONS: Array<{
     question: "If you paused paid media tomorrow, what would break first?",
     options: [
       {
-        label: "Alignment — nobody could defend what to keep because outcomes are not owned end-to-end.",
+        label: "Alignment — nobody could defend what to keep because outcomes are not owned across the stack.",
         cluster: "no-strategy-owner",
       },
       {
@@ -212,7 +212,7 @@ function getPrimaryToolCta(cluster: ProblemCluster) {
   const preferred =
     page.relevantTools.find((t) => !t.href.includes(TOOL_SLUG)) ?? page.relevantTools[0];
   if (!preferred) {
-    return { label: "CMO Simulator", href: "/tools/cmo-simulator" };
+    return { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" };
   }
   return preferred;
 }

@@ -11,7 +11,18 @@ type ToolSlugPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-const EXCLUDED_TOOL_SLUGS = new Set(["attribution-snapshot", "geo-readiness-auditor", "growth-bottleneck-quiz"]);
+const EXCLUDED_TOOL_SLUGS = new Set([
+  "attribution-snapshot",
+  "geo-readiness-auditor",
+  "growth-bottleneck-quiz",
+  "cmo-simulator",
+  "funnel-roi-forecaster",
+  "demand-capture-cac-simulator",
+  "automation-cost-savings-calculator",
+  "martech-fragmentation-scorecard",
+  "attribution-clarity-analyzer",
+  "build-vs-buy-stack-calculator",
+]);
 
 export async function generateStaticParams() {
   return tools.filter((tool) => !EXCLUDED_TOOL_SLUGS.has(tool.slug)).map((tool) => ({ slug: tool.slug }));

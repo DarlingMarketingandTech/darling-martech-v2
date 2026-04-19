@@ -4,7 +4,7 @@ export const tools: Tool[] = [
   {
     slug: "growth-bottleneck-quiz",
     title: "Growth Bottleneck Quiz",
-    tagline: "Find the specific thing holding growth back.",
+    tagline: "Find the problem most likely holding growth back right now.",
     description:
       "A fast diagnostic built to identify the most likely strategic, conversion, systems, visibility, brand, or attribution bottleneck.",
     estimatedTime: "3 minutes",
@@ -45,7 +45,7 @@ export const tools: Tool[] = [
       },
       {
         id: "leadershipOwnership",
-        question: "Who owns marketing outcomes end-to-end (priorities, spend, and reporting) today?",
+        question: "Who owns marketing outcomes across the stack (priorities, spend, and reporting) today?",
         type: "single",
         options: [
           { value: "none", label: "No single owner — it shifts by initiative" },
@@ -175,96 +175,13 @@ export const tools: Tool[] = [
   {
     slug: "cmo-simulator",
     title: "CMO Simulator",
-    tagline: "Run a CMO-level decision session before you commit to scope.",
-    description: "Structured prompts for stress-testing priorities, positioning, and strategic choices.",
+    tagline: "A standalone strategy simulation — not a diagnostic tool.",
+    description:
+      "A separate simulation experience. Explore tradeoffs, priorities, and operator thinking in a more open-ended format.",
     estimatedTime: "8 minutes",
-    questions: [
-      {
-        id: "execClarity",
-        question: "How aligned is leadership on the single outcome marketing must move in the next quarter?",
-        type: "single",
-        required: true,
-        options: [
-          { value: "split", label: "Split — different leaders want different scoreboards" },
-          { value: "fuzzy", label: "Fuzzy — we agree in the room, then drift in execution" },
-          { value: "mostly", label: "Mostly aligned — one north star with occasional debate" },
-          { value: "crystal", label: "Crystal clear — written, measured, and revisited weekly" },
-        ],
-      },
-      {
-        id: "programLoad",
-        question: "How many meaningful marketing initiatives are active right now?",
-        type: "single",
-        required: true,
-        options: [
-          { value: "one_two", label: "One to two — focused bets" },
-          { value: "three_four", label: "Three to four — busy but still legible" },
-          { value: "five_plus", label: "Five or more — parallel workstreams everywhere" },
-          { value: "lost_count", label: "I honestly cannot count them" },
-        ],
-      },
-      {
-        id: "evidenceCadence",
-        question: "How often do you reconcile channel reporting to pipeline or revenue?",
-        type: "single",
-        required: true,
-        options: [
-          { value: "never", label: "Rarely or never — dashboards float untethered" },
-          { value: "monthly", label: "Monthly — enough to notice big swings" },
-          { value: "weekly", label: "Weekly — part of operating rhythm" },
-          { value: "cadence_live", label: "Near-live — tied to pipeline reviews" },
-        ],
-      },
-      {
-        id: "killSwitch",
-        question: "When a program misses targets, what usually happens?",
-        type: "single",
-        required: true,
-        options: [
-          { value: "runs_undead", label: "It keeps running — sunk cost wins" },
-          { value: "debated", label: "We debate it for a quarter" },
-          { value: "paused_fast", label: "We pause spend fast, then decide" },
-          { value: "killed_fast", label: "We kill or replace it inside 30 days" },
-        ],
-      },
-    ],
-    results: [
-      {
-        id: "cmo-portfolio-debt",
-        label: "Portfolio debt",
-        headline: "The portfolio is probably carrying too many undead programs.",
-        description:
-          "When initiatives multiply and weak programs do not sunset, execution dilutes. The next move is ruthless prioritization and a single scoreboard leadership agrees to defend.",
-        problemCluster: "no-strategy-owner",
-        recommendedService: "fractional-cmo",
-        ctaLabel: "See the strategy problem",
-        ctaHref: "/problems/no-strategy-owner",
-      },
-      {
-        id: "cmo-measurement-gap",
-        label: "Measurement gap",
-        headline: "Decisions are drifting ahead of shared evidence.",
-        description:
-          "When leadership is split or reporting never reconciles to revenue, every channel fight becomes political. Tighten definitions, ownership, and a reconciliation cadence before adding budget.",
-        problemCluster: "pipeline-not-predictable",
-        recommendedService: "attribution-analytics",
-        ctaLabel: "See the attribution problem",
-        ctaHref: "/problems/pipeline-not-predictable",
-      },
-      {
-        id: "cmo-operating-rhythm",
-        label: "Operating rhythm",
-        headline: "The system looks teachable — pressure is execution, not confusion.",
-        description:
-          "When alignment is workable and programs can be stopped, leverage comes from sequencing: instrument the few bets that matter, shorten feedback loops, and protect focus from new noise.",
-        problemCluster: "no-strategy-owner",
-        recommendedService: "fractional-cmo",
-        ctaLabel: "See how I work",
-        ctaHref: "/process",
-      },
-    ],
-    emailGated: true,
-    emailGatePosition: "before_results",
+    questions: [],
+    results: [],
+    emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
     cloudinaryThumbnail: "tools/cmo-simulator",
@@ -272,7 +189,7 @@ export const tools: Tool[] = [
   {
     slug: "martech-stack-grader",
     title: "MarTech Stack Grader",
-    tagline: "Grade the current system before rebuilding it.",
+    tagline: "See whether your stack behaves like a system or a pile of tools.",
     description: "Evaluate operational maturity across CRM, automation, attribution, and reporting.",
     estimatedTime: "5 minutes",
     questions: [
@@ -329,7 +246,7 @@ export const tools: Tool[] = [
       {
         id: "martech-fragile",
         label: "Fragile operating layer",
-        headline: "The stack is probably costing speed more than it is creating leverage.",
+        headline: "The stack is probably costing speed more than it is producing.",
         description:
           "When CRM, automation, attribution, and integrations all score low, execution defaults to heroics. The next win is stabilizing foundations before adding net-new channels.",
         problemCluster: "disconnected-systems",
@@ -353,7 +270,7 @@ export const tools: Tool[] = [
         label: "Integrated operator stack",
         headline: "Systems look coherent — the next bottleneck is probably measurement or scale.",
         description:
-          "When foundations score high, leverage shifts to attribution clarity, experimentation velocity, and how revenue teams use the data—not to buying more tools.",
+          "When foundations score high, the next gains come from attribution clarity, experimentation velocity, and how revenue teams use the data — not from buying more tools.",
         problemCluster: "pipeline-not-predictable",
         recommendedService: "attribution-analytics",
         ctaLabel: "See the attribution problem",
@@ -369,7 +286,7 @@ export const tools: Tool[] = [
   {
     slug: "geo-readiness-auditor",
     title: "GEO Readiness Auditor",
-    tagline: "See how the business shows up in AI-powered local search.",
+    tagline: "See whether search engines and AI systems can actually understand your business.",
     description:
       "Paste a public page URL. The audit scores crawl signals, schema, metadata, heading structure, conversational headings, and outbound citations — then shows raw HTML signals so you can see what models compress.",
     estimatedTime: "~1 minute",
@@ -383,7 +300,7 @@ export const tools: Tool[] = [
   {
     slug: "attribution-snapshot",
     title: "Attribution Snapshot",
-    tagline: "Upload a journey export and compare revenue credit across models in one pass.",
+    tagline: "See where your current reporting and source visibility break down.",
     description:
       "Interactive CSV tool: first-touch, last-touch, linear, and time-decay side by side, plus journey density and days-to-close signals—so you can see where reporting is too thin to trust.",
     estimatedTime: "2 minutes",
@@ -431,7 +348,7 @@ export const tools: Tool[] = [
   {
     slug: "cmo-roadmap-generator",
     title: "CMO Roadmap Generator",
-    tagline: "Turn goals and constraints into a practical 90-day draft.",
+    tagline: "Turn your current condition into a clearer next-step plan.",
     description: "A planning tool for turning diagnosis into a staged operating plan.",
     estimatedTime: "7 minutes",
     questions: [
@@ -521,5 +438,89 @@ export const tools: Tool[] = [
     trustLadderStage: "browse",
     isLive: true,
     cloudinaryThumbnail: "tools/cmo-roadmap-generator",
+  },
+  {
+    slug: "funnel-roi-forecaster",
+    title: "Funnel ROI Forecaster",
+    tagline: "See how much revenue is trapped in your funnel when one stage underperforms.",
+    description:
+      "Shows how a weak middle step can quietly cap revenue, even when traffic looks healthy.",
+    estimatedTime: "2 minutes",
+    questions: [],
+    results: [],
+    emailGated: false,
+    trustLadderStage: "browse",
+    isLive: true,
+    cloudinaryThumbnail: "tools/funnel-roi-forecaster",
+  },
+  {
+    slug: "demand-capture-cac-simulator",
+    title: "Demand Capture & CAC Simulator",
+    tagline: "Model how paid demand turns into leads, customers, CAC, and actual value.",
+    description:
+      "Shows whether your spend is producing healthy CAC and enough downstream value to justify the channel.",
+    estimatedTime: "3 minutes",
+    questions: [],
+    results: [],
+    emailGated: false,
+    trustLadderStage: "browse",
+    isLive: true,
+    cloudinaryThumbnail: "tools/demand-capture-cac-simulator",
+  },
+  {
+    slug: "automation-cost-savings-calculator",
+    title: "Automation Cost Savings Calculator",
+    tagline: "Calculate how much manual operating drag is costing each month and how quickly automation pays back.",
+    description:
+      "Turns recurring manual process time into a hard annual cost so you can see whether automation is worth doing now.",
+    estimatedTime: "2 minutes",
+    questions: [],
+    results: [],
+    emailGated: false,
+    trustLadderStage: "browse",
+    isLive: true,
+    cloudinaryThumbnail: "tools/automation-cost-savings-calculator",
+  },
+  {
+    slug: "martech-fragmentation-scorecard",
+    title: "MarTech Fragmentation Scorecard",
+    tagline: "Score how fragmented your current stack is and see which missing connections are creating problems.",
+    description:
+      "Scores disconnected systems, manual workarounds, and duplicate layers making your reporting and operations harder than they should be.",
+    estimatedTime: "4 minutes",
+    questions: [],
+    results: [],
+    emailGated: false,
+    trustLadderStage: "browse",
+    isLive: true,
+    cloudinaryThumbnail: "tools/martech-fragmentation-scorecard",
+  },
+  {
+    slug: "attribution-clarity-analyzer",
+    title: "Attribution Clarity Analyzer",
+    tagline: "See how much of your revenue is actually attributable and how much decision-making is being driven by weak tracking.",
+    description:
+      "Estimates how much pipeline and revenue is truly attributable versus hidden behind weak tracking confidence and unattributed activity.",
+    estimatedTime: "3 minutes",
+    questions: [],
+    results: [],
+    emailGated: false,
+    trustLadderStage: "browse",
+    isLive: true,
+    cloudinaryThumbnail: "tools/attribution-clarity-analyzer",
+  },
+  {
+    slug: "build-vs-buy-stack-calculator",
+    title: "Build vs Buy Stack Calculator",
+    tagline: "Compare the real annual cost of building the internal team versus working with an operator-led partner.",
+    description:
+      "Compares internal hiring cost, recruiting cost, overhead, and optional severance/equity drag against a partner model built around one accountable operator.",
+    estimatedTime: "3 minutes",
+    questions: [],
+    results: [],
+    emailGated: false,
+    trustLadderStage: "browse",
+    isLive: true,
+    cloudinaryThumbnail: "tools/build-vs-buy-stack-calculator",
   },
 ];

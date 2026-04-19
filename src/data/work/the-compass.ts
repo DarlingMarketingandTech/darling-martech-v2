@@ -65,7 +65,7 @@ export const theCompass: CaseStudy = {
     "HubSpot CRM integration",
     "Segmented email follow-up",
   ],
-  relatedToolSlugs: ["growth-bottleneck-quiz", "cmo-simulator"],
+  relatedToolSlugs: ["growth-bottleneck-quiz", "martech-fragmentation-scorecard"],
   relatedServiceSlugs: ["fractional-cmo", "digital-marketing-strategy", "attribution-analytics"],
   relatedProblemSlugs: ["no-strategy-owner", "pipeline-not-predictable"],
   relatedProofSlugs: ["graston-technique"],

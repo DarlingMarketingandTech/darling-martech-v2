@@ -30,7 +30,7 @@ function getCaseStudyForProblem(problem: ProblemPage) {
 function getRecommendedTool(problem: ProblemPage) {
   const pick =
     problem.relevantTools.find((t) => !t.href.includes(QUIZ_HREF)) ?? problem.relevantTools[0];
-  return pick ?? { label: "CMO Simulator", href: "/tools/cmo-simulator" };
+  return pick ?? { label: "Growth Bottleneck Quiz", href: QUIZ_HREF };
 }
 
 function ProblemsHubCard({ problem }: { problem: ProblemPage }) {

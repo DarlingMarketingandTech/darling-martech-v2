@@ -1,6 +1,9 @@
 # CLAUDE.md
 # Darling MarTech — AI Agent Context File
-# Version: 1.2 | Last updated: April 2026
+# Version: 1.3 | Last updated: April 2026
+# v1.3: Motion / 3D stack — `gsap`, `lenis`, `@splinetool/*`, `three`, `@react-three/fiber`, `@react-three/drei`;
+#       Shadcn `components.json` + `card` / `badge` / `tabs` / `dialog`; bespoke `Button` (primary/secondary/ghost + `href`);
+#       server helpers `src/lib/unsplash.ts`, `src/lib/pexels.ts`; client hook `useSmoothScroll` in `src/lib/lenis.ts` (do not wire globally without QA).
 # v1.2: GEO Readiness Auditor — URL scrape audit (`/api/tools/geo-audit`), full-report email
 #       (`/api/tools/geo-audit/report`), dedicated `/tools/geo-readiness-auditor` + `GeoAuditorEngine`,
 #       copy in `geo-readiness-auditor.ts`, types `GeoAuditResponse`, cheerio (server-only).
@@ -97,7 +100,8 @@ navigation logic, page structure, and conversion philosophy.
 - **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS v4 (no CSS Modules, no styled-components)
 - **Components:** Shadcn/UI (for interactive primitives: Dialog, Select, Toast, etc.)
-- **Animation:** Framer Motion (for scroll animations, page transitions, micro-interactions)
+- **Animation:** Framer Motion (default for scroll reveals, page transitions, micro-interactions via `AnimateOnScroll`)
+- **Optional motion / 3D (only when a surface explicitly needs it):** `gsap` (+ ScrollTrigger), `lenis` (smooth scroll), `@splinetool/react-spline` + `@splinetool/runtime`, `three` + `@react-three/fiber` + `@react-three/drei` — lazy-load 3D; heavy bundles.
 - **Fonts:** Google Fonts via `next/font` — Syne (display), Inter (body), JetBrains Mono (data)
 
 ### Backend / Infrastructure
@@ -135,6 +139,8 @@ navigation logic, page structure, and conversion philosophy.
 }
 ```
 **`cheerio`:** server-side HTML parsing for the GEO Readiness Auditor API only (`src/app/api/tools/geo-audit`). Do not add alternative HTML parsers without explicit approval.
+
+**Stock photo discovery (server-only, optional):** Unsplash (`UNSPLASH_ACCESS_KEY`) and Pexels (`PEXELS_API_KEY`) are called from **`src/lib/unsplash.ts`** and **`src/lib/pexels.ts`** (Server Components or Route Handlers only). These keys must **never** ship to the browser. **Cloudinary + `CloudinaryImage`** remains the default for production marketing imagery; use Unsplash/Pexels only for approved experiments, backgrounds, or internal tooling — not as a wholesale replacement for the Cloudinary rule without Jacob’s sign-off.
 
 ---
 
@@ -175,7 +181,9 @@ High-level layout — verify with `src/` when adding files.
 │   │   ├── about/                     ← FounderHero, CredentialsBar
 │   │   ├── contact/                   ← ContactExperience, ContactForm, IntentSelector,
 │   │   │                              ContactAlternativePaths, WhatHappensNext, DirectContactBlock
-│   │   └── ui/                        ← Button, Eyebrow, SectionHeader, AnimateOnScroll, …
+│   │   ├── 3d/                        ← R3F / Spline wrappers (lazy-loaded scenes)
+│   │   ├── animations/               ← GSAP / Lenis-specific clients when not using AnimateOnScroll
+│   │   └── ui/                        ← Button, Eyebrow, SectionHeader, AnimateOnScroll, Shadcn primitives (card, badge, tabs, dialog), …
 │   │
 │   ├── data/
 │   │   ├── homepage.ts              ← Hero, proofBar (5 metrics), diagnosticBand, sections copy
@@ -191,6 +199,9 @@ High-level layout — verify with `src/` when adding files.
 │   │       ├── pike-medical.ts, russell-painting.ts
 │   │
 │   ├── lib/
+│   │   ├── lenis.ts                 ← `useSmoothScroll` — Lenis + GSAP ScrollTrigger (client; opt-in per layout)
+│   │   ├── unsplash.ts              ← Server-only Unsplash search helper
+│   │   ├── pexels.ts                ← Server-only Pexels photo (and optional video) search helpers
 │   │   ├── tool-result-resolvers.ts ← Weighted quiz scoring → problem cluster (no GEO branch; GEO is API-driven)
 │   │   ├── geo-audit-url.ts         ← SSRF-safe public URL validation for GEO audit fetch
 │   │   ├── geo-audit-parse.ts       ← Validates `GeoAuditResponse` JSON for `/api/tools/geo-audit/report`
@@ -469,7 +480,7 @@ docs may exist in Drive; the **repo** is authoritative.
 3. **No inline styles.** All styling via Tailwind utility classes only.
 4. **No raw hex in className.** Use `bg-[#0C0C0E]` pattern — never `style={{ color: '#F05A28' }}`.
 5. **All images via `CloudinaryImage`.** No native `<img>` tags. No direct `<Image>` from next/image.
-6. **All animations via `AnimateOnScroll`.** Don't write ad-hoc Framer Motion in page files.
+6. **Default motion:** Framer Motion via **`AnimateOnScroll`** — avoid ad-hoc motion in page files. **GSAP / Lenis / R3F / Spline** are for intentional heavy-motion or 3D surfaces only; lazy-load 3D. Do **not** mount **`useSmoothScroll`** in root `layout.tsx` without scroll/anchor/accessibility QA.
 7. **TypeScript strict.** No `any` types. No `// @ts-ignore`. Type everything properly.
 8. **Shadcn/UI for primitives.** Dialog, Select, Toast, Popover — use Shadcn.
    Install: `npx shadcn@latest add [component]`
@@ -619,6 +630,10 @@ NEXT_PUBLIC_CAL_LINK=jacob-darling/30min
 
 # Plausible (privacy-first analytics)
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=darlingmartech.com
+
+# Optional — stock discovery (server-only; never NEXT_PUBLIC_)
+UNSPLASH_ACCESS_KEY=
+PEXELS_API_KEY=
 ```
 
 ---
@@ -633,6 +648,7 @@ Build in this exact order. Do not jump phases.
 - ✅ Fonts: `src/app/layout.tsx` uses **Syne / Inter / JetBrains Mono** via `next/font`
 - ✅ Brand tokens: `src/app/globals.css` (CSS variables + `@theme inline`)
 - ✅ Core deps: Framer Motion, Supabase client, Resend, `posthog-js`, Vercel Analytics
+- ✅ Motion / 3D (optional): `gsap`, `lenis`, `@splinetool/react-spline`, `@splinetool/runtime`, `three`, `@react-three/fiber`, `@react-three/drei`
 - ✅ Homepage: copy-doc order — `ProofTicker`, `DiagnosticOrangeBand`, structured hero accent (`homepage.ts` + `HomepageHero`)
 - ✅ Problems: hub + **6** long-form `/problems/[slug]` pages; `ProblemClosingSection`; service deep-link to `/services/[slug]`
 - ✅ Proof: **4** case files; `/proof?outcome=` filters; metric-first `ProofCard` + `ProofOutcomeFilters`
@@ -648,11 +664,11 @@ Build in this exact order. Do not jump phases.
 - ✅ `/resources` hub, blog, frameworks, `/studio`
 - ✅ Plausible (when env set) + PostHog + `.env.example` staging notes
 - **Track:** Phase 4 (n8n, Twenty, Loops) — operator-hosted; enable with `ENABLE_LIVE_INTEGRATIONS=true` per `.env.example`
-- ⚠️ Shadcn: partial (Radix slot + custom `Button`; add full Shadcn inventory only if needed)
+- ✅ Shadcn: `components.json` (New York, slate tokens) + `card`, `badge`, `tabs`, `dialog`; bespoke Darling **`Button`** (`primary` / `secondary` / `ghost`, `href`, Radix `Slot`) — do not overwrite with CLI `button` template
 - ⚠️ Formbricks: not wired — contact posts JSON to `/api/contact`
 
 ### Phase 0 — Foundation (Day 1)
-- [x] Init new Next.js 15 repo with TypeScript + Tailwind + Shadcn/UI (Shadcn partial — add primitives as needed)
+- [x] Init new Next.js 15 repo with TypeScript + Tailwind + Shadcn/UI (`components.json` + card/badge/tabs/dialog; bespoke `Button`)
 - [ ] Configure Vercel deployment + custom domain staging URL (per environment)
 - [x] Create `CLAUDE.md` and `.cursorrules` at root
 - [x] Set up `src/data/taxonomy.ts` with all constants
@@ -748,7 +764,7 @@ These rules apply to all AI agents (Claude Code, Cursor, Codex, Gemini).
 ### Never do these things:
 - ❌ Write new copy — all copy is pre-written in the copy docs
 - ❌ Change brand colors or fonts
-- ❌ Add new dependencies without noting them for Jacob's approval (approved stack additions to date include **`cheerio`** for GEO audit only)
+- ❌ Add new dependencies without noting them for Jacob's approval (approved stack additions to date include **`cheerio`** for GEO audit only; **`gsap`**, **`lenis`**, **`@splinetool/*`**, **`three`**, **`@react-three/fiber`**, **`@react-three/drei`**, Shadcn registry packages added in v1.3)
 - ❌ Use `any` TypeScript type
 - ❌ Use inline styles (`style={{ }}`)
 - ❌ Hardcode content strings in JSX — use data files
@@ -877,15 +893,41 @@ These are non-negotiable.
 | **`docs/DARLING MARTECH — COMPLETE SITE REBUILD BLUEPRINT.docx.md`** | IA, taxonomy, proof engine, growth mechanics |
 | Google Drive / legacy `.md` briefs | Strategy, brand, component inventory — supplementary |
 | **`CLAUDE.md` (this file)** | Repo conventions for agents |
+| **`docs/3D-ASSET-SOURCES.md`** | Free GLB / community 3D sources and workflow notes |
 
 ---
 
-## 21. FINAL NOTE TO ALL AI AGENTS
+## 21. OPTIONAL — MOTION, 3D, SPLINE, STOCK APIs
+
+### Defaults (do not fight these)
+- **Brand colors and typography** stay exactly as **Section 5** (`#0C0C0E`, `#F05A28`, `#F5F4F0`, Syne / Inter / JetBrains Mono). Do not introduce alternate “template” palettes as canonical.
+- **Shipped marketing images:** **`CloudinaryImage`** + Cloudinary CDN remain the default path.
+
+### When to use what
+| Need | Tool |
+|------|------|
+| Section fades, staggered reveals, most scroll polish | **Framer Motion** via **`AnimateOnScroll`** |
+| Scroll-linked timelines, pin/scrub scenes | **GSAP** + **ScrollTrigger** (`import gsap from "gsap"`; `import { ScrollTrigger } from "gsap/ScrollTrigger"`; `gsap.registerPlugin(ScrollTrigger)`) |
+| Global smooth scroll | **`lenis`** — use **`useSmoothScroll`** from `src/lib/lenis.ts` only where intentionally enabled; integrating with ScrollTrigger is supported in that hook |
+| Hosted interactive 3D scenes | **Spline** — `@splinetool/react-spline`; public `.splinecode` URLs need no API key |
+| GLB in-scene / custom materials | **R3F** — `three`, `@react-three/fiber`, `@react-three/drei` (e.g. `useGLTF("/models/foo.glb")`); assets under **`public/models/`**, textures under **`public/textures/`** |
+
+### Server-only stock search
+- **`searchUnsplash`** (`src/lib/unsplash.ts`) — `process.env.UNSPLASH_ACCESS_KEY` as Unsplash `client_id` query param; `fetch` with `next: { revalidate: 3600 }` unless a route needs a different cache policy.
+- **`searchPexelsPhotos`** / **`searchPexelsVideos`** (`src/lib/pexels.ts`) — `Authorization: process.env.PEXELS_API_KEY` header. Respect [Pexels API guidelines](https://www.pexels.com/api/documentation/) and rate limits; do not describe the service as “unlimited.”
+
+### Public asset layout
+- **Models:** `/public/models/*.glb`
+- **Workflow summary:** see **`docs/3D-ASSET-SOURCES.md`**
+
+---
+
+## 22. FINAL NOTE TO ALL AI AGENTS
 
 This site is a **precision diagnostic** for the right clients — not a generic portfolio template. Every component and CTA should support: name the bottleneck, deliver value before the ask, earn the conversation.
 
 ---
 
-*CLAUDE.md — Darling MarTech v1.2 · Repository root: `/CLAUDE.md`*
+*CLAUDE.md — Darling MarTech v1.3 · Repository root: `/CLAUDE.md`*
 
 **Do not edit this file without Jacob Darling’s explicit approval.**

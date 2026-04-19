@@ -1,11 +1,23 @@
 import type { PageMeta } from "@/types";
-import { siteConfig } from "@/data/site-config";
 
 export const aboutMeta: PageMeta = {
   title: "About Jacob Darling",
   description:
     "Fifteen years of marketing strategy, systems, and execution across healthcare, legal, finance, SaaS, and local service businesses.",
   canonicalUrl: "https://darlingmartech.com/about",
+};
+
+export type CareerTimelineEntry = {
+  years: string;
+  role: string;
+  company: string;
+  location: string;
+  body: string;
+};
+
+export type DifferentiatorItem = {
+  statement: string;
+  explanation: string;
 };
 
 export const aboutPageData = {
@@ -30,79 +42,74 @@ export const aboutPageData = {
     headline: "Every engagement builds on the last.",
     body: "The range isn't accidental. I've worked inside high-stakes environments — regulated industries, complex multi-division orgs, rapid-growth startups — because that's where you learn what a marketing system actually has to withstand.",
   },
-  timeline: [
+  careerTimeline: [
     {
-      range: "2026 – Present",
-      role: "Founder — Darling MarTech",
+      years: "2026–Present",
+      role: "Founder",
+      company: "Darling MarTech",
       location: "Indianapolis, IN",
-      description:
-        "Darling MarTech closes the gap between marketing strategy and technical reality for growth-stage companies. Owner-operated by design. Every client engagement is handled directly, personally, and accountably.",
+      body: "Built Darling MarTech to close the gap between marketing strategy and technical reality for growth-stage companies. Owner-operated by design. Every client engagement is handled directly, personally, and accountably.",
     },
     {
-      range: "2023 – 2025",
-      role: "Marketing Director — Graston Technique LLC",
+      years: "2023–2025",
+      role: "Marketing Director",
+      company: "Graston Technique LLC",
       location: "Indianapolis, IN",
-      description:
-        "Built the full MarTech ecosystem for a clinician education platform serving thousands of providers nationally. Replaced eight manual processes with automated systems. Rebuilt lead generation and training pipeline. Result: +212% qualified leads.",
+      body: "Built the full MarTech ecosystem for a clinician education platform serving thousands of providers nationally. Replaced eight manual processes with automated systems. Result: +212% qualified leads.",
     },
     {
-      range: "Mar – Jul 2023",
-      role: "Interim Director of Marketing — Ultimate Technologies Group",
+      years: "Mar–Jul 2023",
+      role: "Interim Director of Marketing",
+      company: "Ultimate Technologies Group",
       location: "Fishers, IN",
-      description:
-        "Interim marketing lead during a transitional period. Led strategy and execution across channels, maintained continuity, and stabilized the marketing function through organizational change.",
+      body: "Stepped in as interim marketing lead during a key transitional period. Maintained business continuity and stabilized the marketing function through organizational change.",
     },
     {
-      range: "2022 – 2023",
-      role: "Marketing Manager — Riley Bennett Egloff LLP",
+      years: "2022–2023",
+      role: "Marketing Manager",
+      company: "Riley Bennett Egloff LLP",
       location: "Indianapolis, IN",
-      description:
-        "Strategic marketing, digital communications, and client development for a leading Indianapolis law firm. Brand consistency across practice areas and digital presence.",
+      body: "Led strategic marketing and client development for one of Indianapolis's leading law firms. Built brand consistency across practice areas and developed the firm's digital presence.",
     },
     {
-      range: "2015 – 2022",
-      role: "Marketing Administrator — Riley Bennett Egloff LLP",
+      years: "2015–2022",
+      role: "Marketing Administrator",
+      company: "Riley Bennett Egloff LLP",
       location: "Indianapolis, IN",
-      description:
-        "Seven years building foundational infrastructure: content, web, social, design, and firm-to-client communications — systems that run without constant maintenance.",
+      body: "Seven years building foundational marketing infrastructure: content systems, web presence, social media, graphic design, and firm-to-client communications.",
     },
     {
-      range: "2013 – 2015",
-      role: "Marketing Coordinator — Deerfield Financial Advisors",
+      years: "2013–2015",
+      role: "Marketing Coordinator",
+      company: "Deerfield Financial Advisors",
       location: "Indianapolis, IN",
-      description:
-        "Marketing programs in a regulated environment where credibility, precision, and trust are non-negotiable.",
+      body: "Built and executed marketing programs for a financial advisory firm in a regulated environment where credibility, precision, and trust are non-negotiable.",
     },
     {
-      range: "2009 – 2013",
-      role: "Marketing Coordinator — Pike Medical Consultants",
+      years: "2009–2013",
+      role: "Marketing Coordinator",
+      company: "Pike Medical Consultants",
       location: "Indianapolis, IN",
-      description:
-        "First senior marketing responsibility: strategy, budgeting, advertising, branding, PR, website, and events. This engagement is still visible in the results: +45% patient growth over the period.",
+      body: "Directed all marketing: strategy, budgeting, advertising, branding, PR, website, and events. Result: +45% patient growth over the engagement period.",
     },
-    {
-      range: "2006 – 2007",
-      role: "Marketing Intern — OrthoIndy",
-      location: "Indianapolis, IN",
-      description: "Healthcare marketing foundations: content development and event coordination.",
-    },
-  ],
+  ] satisfies CareerTimelineEntry[],
   differentiators: {
     eyebrow: "WHAT MAKES THIS DIFFERENT",
+    title: "How this is different",
     items: [
       {
-        title: "I don't hand off.",
-        body: "The strategy I write is the strategy I execute. You never hear \"that's the developer's problem\" or \"the consultant will follow up on that.\" I own the outcome end-to-end.",
+        statement: "I don't hand off.",
+        explanation: "The strategy I write is the strategy I execute.",
       },
       {
-        title: "I build the system, not the deck.",
-        body: "Every engagement produces something that keeps working after the engagement closes — a CRM that runs, a site that converts, a pipeline that generates. Not a 40-page strategy PDF.",
+        statement: "I build the system, not the deck.",
+        explanation: "Every engagement produces something that keeps working.",
       },
       {
-        title: "I tell you what I actually think.",
-        body: "If what you're asking for isn't the right fix for your actual problem, I'll say so before we start. I'd rather lose an engagement than take your money for work that won't move the number.",
+        statement: "I tell you what I actually think.",
+        explanation: "If what you're asking for isn't the right fix, I'll say so.",
       },
-    ],
+    ] satisfies DifferentiatorItem[],
   },
   industries: [
     "Healthcare",
@@ -114,15 +121,14 @@ export const aboutPageData = {
     "Nonprofit",
     "B2B",
     "B2C",
-    "Media / Entertainment",
   ],
   closing: {
-    headline: "I keep my client list intentionally small. Here's how to get on it.",
+    headline: "I keep my client list intentionally small.",
     body: [
       "I take on a limited number of active engagements at any one time. That's what makes the work good — every client gets the full version, not the scaled-down version.",
       "If what you've read here matches the problem you're trying to solve, the next step is a direct conversation.",
     ],
-    primaryCta: { label: "Start a conversation →", href: siteConfig.calComLink },
-    secondaryCta: { label: "See the work first →", href: "/proof" },
+    primaryCta: { label: "Start a conversation", href: "/contact" },
+    secondaryCta: { label: "See the work first", href: "/proof" },
   },
 };

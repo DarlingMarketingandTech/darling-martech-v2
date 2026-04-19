@@ -4,9 +4,8 @@ import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { Button } from "@/components/ui/button";
-import { blogArticles, getBlogArticleBySlug } from "@/data/blog";
+import { blogArticles, formatBlogEyebrow, getBlogArticleBySlug } from "@/data/blog";
 import { buildMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/data/site-config";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -42,8 +41,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <SiteShell>
       <SectionWrapper className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.24em] text-[#F05A28]">
-          {article.publishedAt} · {article.readingTime} min read
+        <p className="text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">
+          {formatBlogEyebrow(article.publishedAt, article.readingTime)}
         </p>
         <h1 className="font-display mt-4 text-balance text-4xl font-bold md:text-5xl">{article.title}</h1>
         <p className="mt-6 text-lg leading-8 text-[#F5F4F0]/78">{article.excerpt}</p>
@@ -61,25 +60,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         ) : null}
         <div className="mt-12 max-w-none">
           {article.body.map((paragraph, index) => (
-            <p key={`${article.slug}-${index}`} className="mb-6 text-base leading-8 text-[#F5F4F0]/85">
+            <p key={`${article.slug}-${index}`} className="mb-6 text-base leading-8 text-[#F5F4F0]/85 last:mb-0">
               {paragraph}
             </p>
           ))}
         </div>
       </SectionWrapper>
 
-      <BandSection className="text-center">
-        <p className="font-display text-2xl font-semibold text-[#F5F4F0]">Want this applied to your stack?</p>
-        <p className="mx-auto mt-3 max-w-xl text-sm text-[#F5F4F0]/65">
-          Run the bottleneck quiz or book a diagnostic call. Either path starts with clarity, not a pitch deck.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Button href="/tools/growth-bottleneck-quiz" size="lg">
-            Run the quiz
-          </Button>
-          <Button href={siteConfig.calComLink} variant="ghost" size="lg">
-            Book a diagnostic call
-          </Button>
+      <BandSection className="border-t border-[#F5F4F0]/8 bg-[#13131A]/40">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="font-display text-2xl font-semibold text-[#F5F4F0]">Want this applied to your stack?</p>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-[#F5F4F0]/60">
+            Run the Growth Bottleneck Quiz for a concrete read on where things are stuck — or send a message and
+            I&apos;ll reply with something useful.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Button href="/tools/growth-bottleneck-quiz" size="lg">
+              Run the quiz
+            </Button>
+            <Button href="/contact" variant="secondary" size="lg">
+              Start a conversation
+            </Button>
+          </div>
         </div>
       </BandSection>
     </SiteShell>

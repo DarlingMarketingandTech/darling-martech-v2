@@ -11,6 +11,16 @@ export type BlogArticle = BlogPost & {
 
 const browse: TrustLadderStage = "browse";
 
+/** Formats `YYYY-MM-DD` + reading time for list cards (stable local noon). */
+export function formatBlogEyebrow(publishedAt: string, readingTime: number): string {
+  const date = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(`${publishedAt}T12:00:00`));
+  return `${date} · ${readingTime} min read`;
+}
+
 export const blogArticles: BlogArticle[] = [
   {
     slug: "one-operator-martech-accountability",
@@ -20,7 +30,7 @@ export const blogArticles: BlogArticle[] = [
     publishedAt: "2026-04-01",
     readingTime: 6,
     categories: ["Strategy", "Operations"],
-    problemClusters: ["no-strategy-owner", "systems-disconnected"] as ProblemCluster[],
+    problemClusters: ["no-strategy-owner", "disconnected-systems"] as ProblemCluster[],
     trustLadderStage: browse,
     featured: true,
     coverImage: "studio/jacob-portrait",
@@ -58,6 +68,7 @@ export const blogArticles: BlogArticle[] = [
     problemClusters: ["not-visible-enough"] as ProblemCluster[],
     trustLadderStage: browse,
     featured: false,
+    coverImage: "studio/jacob-portrait",
     body: [
       "If AI-generated summaries flatten your category into three names, differentiation has to live in proof, specificity, and consistent identity signals.",
       "That is not a single tactic. It is a system: listings, on-site schema, creative that matches the promise, and a CRM that captures how people actually found you.",

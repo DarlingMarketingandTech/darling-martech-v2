@@ -268,6 +268,8 @@ export interface ProblemPage {
   hubCtaLabel: string;
   heroHeadline: string;
   introParagraphs: string[];
+  /** Short diagnostic bullets for the symptom card. */
+  symptoms: string[];
   whyItHappens: string;
   stakes: string;
   whatTheFixLooksLike: string;

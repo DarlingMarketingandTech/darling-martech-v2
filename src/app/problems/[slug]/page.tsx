@@ -6,6 +6,7 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { ProblemClosingSection } from "@/components/problems/ProblemClosingSection";
 import { ProblemNav } from "@/components/problems/ProblemNav";
+import { SymptomList } from "@/components/problems/SymptomList";
 import { ProofGrid } from "@/components/proof/ProofGrid";
 import { PageHero } from "@/components/hero/PageHero";
 import { problemPages } from "@/data/problems";
@@ -55,6 +56,10 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
           headline={problem.heroHeadline}
           body={problem.introParagraphs}
         />
+      </div>
+
+      <div className="mt-14">
+        <SymptomList symptoms={problem.symptoms} />
       </div>
 
       <div className="mt-14 space-y-14">

@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       { source: "/work/:slug", destination: "/proof/:slug", permanent: true },
       { source: "/lab", destination: "/tools", permanent: true },
       { source: "/lab/:slug", destination: "/tools/:slug", permanent: true },
+      { source: "/services", destination: "/problems", permanent: true },
     ];
   },
 };

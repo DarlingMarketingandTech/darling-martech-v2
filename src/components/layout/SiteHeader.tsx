@@ -1,13 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { siteNavigation } from "@/data/navigation";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { cn } from "@/lib/utils";
 
+function isPrimaryNavActive(href: string, pathname: string | null): boolean {
+  if (!pathname) return false;
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function SiteHeader() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,15 +52,21 @@ export function SiteHeader() {
             </Link>
 
             <nav className="hidden items-center gap-7 md:flex">
-              {siteNavigation.primary.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm text-[#F5F4F0]/78 transition-colors hover:text-[#F05A28]"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {siteNavigation.primary.map((item) => {
+                const active = isPrimaryNavActive(item.href, pathname);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "text-sm text-[#F5F4F0]/78 transition-colors hover:text-[#F05A28]",
+                      active && "font-medium text-[#F05A28]"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="flex items-center gap-3">

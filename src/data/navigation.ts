@@ -41,13 +41,13 @@ export const siteNavigation: SiteNavigation = {
         links: [
           { label: siteConfig.founder.email, href: `mailto:${siteConfig.founder.email}` },
           { label: siteConfig.founder.location, href: "/contact" },
-          { label: "Book a diagnostic call", href: siteConfig.calComLink, isExternal: true },
+          { label: "Book a diagnostic call", href: "https://cal.com/jacob-darling/30min", isExternal: true },
         ],
       },
     ],
   },
   cta: {
     label: "Let's talk",
-    href: siteConfig.calComLink,
+    href: "https://cal.com/jacob-darling/30min",
   },
 };

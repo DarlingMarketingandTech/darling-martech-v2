@@ -53,4 +53,44 @@ export const contactPageData = {
     { value: "10k-plus", label: "$10,000+/month" },
   ],
   budgetIntentLabel: "I know my problem and I'm ready to talk scope.",
+  whatHappensNext: {
+    eyebrow: "After you send this",
+    steps: [
+      {
+        number: "01",
+        body: "I read it myself — not an assistant, not a bot, not an email routing rule. I read every message.",
+      },
+      {
+        number: "02",
+        body: "If the situation is clear, I reply with specific questions or a direct response. If I need more context, I'll ask.",
+      },
+      {
+        number: "03",
+        body: "If it sounds like a fit, I'll suggest a 30-minute diagnostic call — no prep required, no agenda to follow. Just a conversation.",
+      },
+    ],
+  },
+  alternatives: [
+    {
+      title: "Run a free diagnostic first",
+      description:
+        "Take the Growth Bottleneck Quiz. Get a specific result in a few minutes, no email required.",
+      href: "/tools/growth-bottleneck-quiz",
+      ctaLabel: "Take the quiz →",
+    },
+    {
+      title: "Read the case studies",
+      description: "See what the work looks like and what it produces before you decide.",
+      href: "/proof",
+      ctaLabel: "See the proof →",
+    },
+    {
+      title: "Read about the process",
+      description: "Understand how engagements work before you reach out.",
+      href: "/process",
+      ctaLabel: "See how I work →",
+    },
+  ],
+  reassurance:
+    "There's no commitment attached to sending a message. If it's not a fit, I'll say so — and point you toward something that might be.",
 };

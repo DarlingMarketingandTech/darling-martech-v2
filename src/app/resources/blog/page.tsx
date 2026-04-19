@@ -2,8 +2,8 @@ import Link from "next/link";
 import { SiteShell } from "@/components/layout/site-shell";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { PageHero } from "@/components/hero/PageHero";
+import { blogArticles, formatBlogEyebrow } from "@/data/blog";
 import { buildMetadata } from "@/lib/metadata";
-import { blogArticles } from "@/data/blog";
 
 export const metadata = buildMetadata({
   title: "Blog",
@@ -28,10 +28,10 @@ export default function BlogIndexPage() {
                 className="block rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]/40 px-6 py-5 transition-colors hover:border-[#F05A28]/35"
               >
                 <p className="text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">
-                  {article.publishedAt} · {article.readingTime} min
+                  {formatBlogEyebrow(article.publishedAt, article.readingTime)}
                 </p>
                 <h2 className="font-display mt-2 text-xl font-semibold text-[#F5F4F0]">{article.title}</h2>
-                <p className="mt-2 text-sm text-[#F5F4F0]/65">{article.excerpt}</p>
+                <p className="mt-2 text-sm leading-7 text-[#F5F4F0]/55">{article.excerpt}</p>
               </Link>
             </li>
           ))}

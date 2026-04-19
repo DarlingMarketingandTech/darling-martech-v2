@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import type { SiteNavigation } from "@/types";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type MobileNavProps = {
   isOpen: boolean;
@@ -12,7 +14,15 @@ type MobileNavProps = {
   cta: SiteNavigation["cta"];
 };
 
+function isPrimaryNavActive(href: string, pathname: string | null): boolean {
+  if (!pathname) return false;
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
+  const pathname = usePathname();
+
   return (
     <AnimatePresence>
       {isOpen ? (
@@ -47,24 +57,30 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
                 </button>
               </div>
               <nav className="mt-10 grid gap-3">
-                {nav.map((item, index) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: 24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 24 }}
-                    transition={{ delay: 0.04 * index, duration: 0.3 }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={onClose}
-                      className="surface-card font-display flex items-center justify-between rounded-3xl px-5 py-4 text-xl font-semibold"
+                {nav.map((item, index) => {
+                  const active = isPrimaryNavActive(item.href, pathname);
+                  return (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, x: 24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 24 }}
+                      transition={{ delay: 0.04 * index, duration: 0.3 }}
                     >
-                      <span>{item.label}</span>
-                      <span className="text-[#F05A28]">/</span>
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={item.href}
+                        onClick={onClose}
+                        className={cn(
+                          "surface-card font-display flex items-center justify-between rounded-3xl px-5 py-4 text-xl font-semibold",
+                          active && "text-[#F05A28]"
+                        )}
+                      >
+                        <span>{item.label}</span>
+                        <span className="text-[#F05A28]">/</span>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </nav>
             </div>
             <div className="space-y-4">

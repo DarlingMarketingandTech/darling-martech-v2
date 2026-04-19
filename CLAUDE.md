@@ -682,61 +682,63 @@ Build in this exact order. Do not jump phases.
 - ✅ `src/data/`, `src/components/`, `src/lib/` — populated (site shell, problems, proof, tools, contact, APIs)
 - ✅ Homepage, problems hub + slugs, proof hub + slugs, tools hub + slugs, process, about, contact
 - ✅ `/resources` hub, `/resources/blog`, `/resources/frameworks`, `/studio` routes
-- ✅ Growth Bottleneck Quiz + MarTech Stack Grader interactive flows (`QuizEngine` + `labs.ts`)
-- ✅ Plausible script (when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` set) + PostHog client capture + `.env.example`
+- ✅ All six `/tools/[slug]` diagnostics: `QuizEngine` + [`src/data/labs.ts`](src/data/labs.ts) + [`src/lib/tool-result-resolvers.ts`](src/lib/tool-result-resolvers.ts)
+- ✅ Plausible script (when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` set) + PostHog client capture + `.env.example` (includes **Phase 4 staging smoke** comments)
+- **Track:** Tool flows shipped in-repo first; **Phase 4** (n8n, Twenty, Loops sequences) is **operator-hosted**—validate with staging checklist in `.env.example` when `ENABLE_LIVE_INTEGRATIONS=true`.
 - ⚠️ Shadcn: partial (button-style primitives only; no full `components.json` inventory)
 - ⚠️ Formbricks: not wired — contact posts JSON to `/api/contact`
-- ⚠️ Other tools (CMO Simulator, GEO, Attribution Snapshot, CMO Roadmap): pages live; flows still placeholders until built out
+- ⚠️ Homepage: fewer than copy-doc “11 sections”; expand when aligning to homepage copy doc
 
 ### Phase 0 — Foundation (Day 1)
-- [ ] Init new Next.js 15 repo with TypeScript + Tailwind + Shadcn/UI
-- [ ] Configure Vercel deployment + custom domain staging URL
-- [ ] Create `CLAUDE.md` and `.cursorrules` at root
-- [ ] Set up `src/data/taxonomy.ts` with all constants
-- [ ] Set up `src/data/site-config.ts` with SiteConfig
-- [ ] Set up `src/styles/globals.css` with CSS custom properties + Tailwind base
-- [ ] Configure `next/font` with Syne, Inter, JetBrains Mono
-- [ ] Build `SiteHeader`, `SiteFooter`, `PageWrapper`, `SectionWrapper`
-- [ ] Build shared UI primitives: `Button`, `Eyebrow`, `SectionHeader`, `AnimateOnScroll`
-- [ ] Set up Supabase project + connect client
-- [ ] Set up Resend account + React Email templates
+- [x] Init new Next.js 15 repo with TypeScript + Tailwind + Shadcn/UI (Shadcn partial — add primitives as needed)
+- [ ] Configure Vercel deployment + custom domain staging URL (per environment)
+- [x] Create `CLAUDE.md` and `.cursorrules` at root
+- [x] Set up `src/data/taxonomy.ts` with all constants
+- [x] Set up `src/data/site-config.ts` with SiteConfig
+- [x] Set up global CSS custom properties + Tailwind base (`src/app/globals.css` — not `src/styles/`)
+- [x] Configure `next/font` with Syne, Inter, JetBrains Mono
+- [x] Build `SiteHeader`, `SiteFooter`, `PageWrapper`, `SectionWrapper`
+- [x] Build shared UI primitives: `Button`, `Eyebrow`, `SectionHeader`, `AnimateOnScroll`
+- [x] Set up Supabase project + connect client (code paths in `src/lib/supabase.ts`)
+- [ ] Set up Resend account + React Email templates (Resend wired in API routes; templates evolve with product)
 
 ### Phase 1 — Core Pages (Week 1-2)
-- [ ] Homepage (/) — all 11 sections from copy doc
-- [ ] Problems hub (/problems) — hub + all 6 slug pages
-- [ ] Proof hub (/proof) — hub + all 3 case study pages
-- [ ] Wire Cal.com into all CTA buttons
+- [x] Homepage (/) — core sections live; optional: full **11 sections** from copy doc
+- [x] Problems hub (/problems) — hub + all 6 slug pages
+- [x] Proof hub (/proof) — hub + all 3 case study pages
+- [ ] Wire Cal.com into **all** CTA buttons (footer + contact; audit hero/section CTAs)
 
 ### Phase 2 — Conversion Engine (Week 2-3)
-- [ ] Build `QuizEngine` + all sub-components
-- [ ] Build Growth Bottleneck Quiz (`/tools/growth-bottleneck-quiz`) — HIGHEST PRIORITY
-- [ ] Build `EmailGate` → connect to Loops API route
-- [ ] Add MarTech Stack Grader (`/tools/martech-stack-grader`)
+- [x] Build `QuizEngine` + sub-components (`QuizQuestion`, `QuizProgress`, `ResultCard`, `EmailGate`)
+- [x] Build Growth Bottleneck Quiz (`/tools/growth-bottleneck-quiz`)
+- [x] Build `EmailGate` → connect to Loops API route (`/api/subscribe`)
+- [x] Add MarTech Stack Grader (`/tools/martech-stack-grader`)
 - [ ] Wire Formbricks to contact form
-- [ ] Set up PostHog funnel tracking on all tool pages
-- [ ] Set up Plausible on all pages
+- [x] PostHog client events on tools + contact; server capture on `/api/tool-complete`
+- [x] Plausible on all pages (script in root layout when env set)
 
 ### Phase 3 — Secondary Pages (Week 3-4)
-- [ ] Process page (/process)
-- [ ] About page (/about) — with Cloudinary portrait
-- [ ] Contact page (/contact)
-- [ ] Tools hub page (/tools)
-- [ ] Deploy remaining existing tools to new slug structure
+- [x] Process page (/process)
+- [x] About page (/about) — with Cloudinary portrait
+- [x] Contact page (/contact)
+- [x] Tools hub page (/tools)
+- [x] Deploy all tools to new slug structure (interactive flows for all six slugs in `labs.ts`)
 
 ### Phase 4 — Automation Backend (Week 4-5)
-- [ ] Stand up n8n on Railway
-- [ ] Build contact form → CRM workflow
-- [ ] Build tool completion → email sequence workflow
+- [ ] Stand up n8n on Railway (or chosen host)
+- [ ] Build contact form → CRM workflow (n8n receives `/api/contact` payload; Twenty inside workflow)
+- [ ] Build tool completion → email sequence workflow (n8n receives `/api/tool-complete` payload)
 - [ ] Stand up Twenty CRM on Railway
 - [ ] Import existing contacts into Twenty CRM
 - [ ] Set up Loops welcome sequence (5 emails)
+- [x] App surfaces: `/api/contact`, `/api/subscribe`, `/api/tool-complete` call Resend, Loops, n8n, PostHog, Supabase when `ENABLE_LIVE_INTEGRATIONS=true` — **staging smoke steps** in [`.env.example`](.env.example)
 
 ### Phase 5 — Authority Layer (Month 2)
-- [ ] Resources hub (/resources) + blog
-- [ ] Write first 3 blog posts (from content calendar)
+- [x] Resources hub (/resources) + blog routes
+- [x] Starter blog posts (3) in `src/data/blog.ts` — replace with content calendar when ready
 - [ ] Set up Loops newsletter broadcast
-- [ ] Studio page (/studio) — Cloudinary-powered visual archive
-- [ ] Downloadable frameworks (email-gated)
+- [x] Studio page (/studio) — Cloudinary-powered gallery
+- [x] Downloadable frameworks (email-gated listings + request CTA on `/resources/frameworks`)
 
 ---
 

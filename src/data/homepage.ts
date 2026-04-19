@@ -1,4 +1,5 @@
 import type { PageMeta } from "@/types";
+import { siteConfig } from "@/data/site-config";
 
 export const homepageMeta: PageMeta = {
   title: "Strategy, Systems & Execution",
@@ -31,7 +32,7 @@ export const homepageData = {
     { value: "15+", label: "years · Healthcare · Legal · Finance · SaaS · B2B" },
   ],
   diagnosticBand: {
-    headline: "Not sure where to start? There's a 3-minute diagnostic for that.",
+    headline: "Not sure where to start? There's an 8-question diagnostic for that.",
     body: "Answer 8 questions. Get a specific diagnosis — not a generic checklist. No email required to see your results.",
     cta: { label: "Take the Growth Bottleneck Quiz →", href: "/tools/growth-bottleneck-quiz" },
   },
@@ -85,7 +86,7 @@ export const homepageData = {
   closingCta: {
     headline: "If the problem is clear, the next step is a conversation.",
     body: "No pitch deck. No discovery form with 14 fields. A real conversation about what's actually getting in the way. I reply within one business day, usually same-day.",
-    primaryCta: { label: "Let's talk →", href: "/contact" },
+    primaryCta: { label: "Let's talk →", href: siteConfig.calComLink },
     secondaryCta: { label: "Or start with a free tool →", href: "/tools" },
   },
 };

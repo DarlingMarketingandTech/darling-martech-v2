@@ -6,6 +6,7 @@ import { captureClientEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { resolveToolResult, type ToolAnswers } from "@/lib/tool-result-resolvers";
 import { tools } from "@/data/labs";
+import { siteConfig } from "@/data/site-config";
 import type { ToolResult } from "@/types";
 
 const QUIZ = tools.find((t) => t.slug === "growth-bottleneck-quiz")!;
@@ -166,7 +167,9 @@ export function GrowthBottleneckQuizClient() {
             <p className="mt-3 text-base leading-7 text-[#F5F4F0]/70">
               If the result resonates,{" "}
               <a
-                href="/contact"
+                href={siteConfig.calComLink}
+                target="_blank"
+                rel="noreferrer"
                 className="text-[#F05A28] underline underline-offset-4 hover:no-underline"
               >
                 book a 30-minute diagnostic call

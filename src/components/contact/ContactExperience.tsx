@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { contactPageData } from "@/data/contact";
+import { FormbricksSurvey } from "@/components/contact/FormbricksSurvey";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactAlternativePaths } from "@/components/contact/ContactAlternativePaths";
 import { DirectContactBlock } from "@/components/contact/DirectContactBlock";
@@ -29,6 +30,7 @@ export function ContactExperience() {
             />
           </div>
         </div>
+        <FormbricksSurvey />
         <ContactForm
           intents={contactPageData.intents}
           selectedIntent={selectedIntent}

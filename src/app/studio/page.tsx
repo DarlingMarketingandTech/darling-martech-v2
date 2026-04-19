@@ -6,6 +6,7 @@ import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { Button } from "@/components/ui/button";
 import { studioMeta, studioPageData } from "@/data/studio";
 import { buildMetadata } from "@/lib/metadata";
+import { siteConfig } from "@/data/site-config";
 
 export const metadata = buildMetadata(studioMeta);
 
@@ -43,7 +44,7 @@ export default function StudioPage() {
           <Button href="/proof" size="lg">
             See proof
           </Button>
-          <Button href="/contact" variant="ghost" size="lg">
+          <Button href={siteConfig.calComLink} variant="ghost" size="lg">
             Start a conversation
           </Button>
         </div>

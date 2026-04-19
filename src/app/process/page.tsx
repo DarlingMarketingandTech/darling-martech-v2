@@ -8,6 +8,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { processData } from "@/data/process";
 import { routeMetadata } from "@/data/routes";
+import { siteConfig } from "@/data/site-config";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata(routeMetadata["/process"]);
@@ -82,7 +83,7 @@ export default function ProcessPage() {
           the same day with something useful.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button href="/contact" size="lg">
+          <Button href={siteConfig.calComLink} size="lg">
             Start a conversation →
           </Button>
           <Button href="/tools/growth-bottleneck-quiz" variant="ghost" size="lg">

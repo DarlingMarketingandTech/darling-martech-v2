@@ -36,7 +36,7 @@ export default function FrameworksPage() {
                 this framework by name.
               </p>
               <div className="mt-8">
-                <Button href="/contact" size="lg">
+                <Button href="/contact#contact-form" size="lg">
                   Request framework
                 </Button>
               </div>

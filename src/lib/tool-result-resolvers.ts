@@ -92,14 +92,6 @@ function resolveCmoSimulatorResult(tool: Tool, answers: ToolAnswers): ToolResult
   return tool.results.find((result) => result.id === "cmo-operating-rhythm");
 }
 
-function resolveGeoReadinessResult(tool: Tool, answers: ToolAnswers): ToolResult | undefined {
-  const total = scoreFromKeys(answers, ["geoNap", "geoReviews", "geoProof", "geoStructured"]);
-
-  if (total <= 4) return tool.results.find((result) => result.id === "geo-invisible");
-  if (total <= 8) return tool.results.find((result) => result.id === "geo-building");
-  return tool.results.find((result) => result.id === "geo-ready");
-}
-
 function resolveAttributionSnapshotResult(tool: Tool, answers: ToolAnswers): ToolResult | undefined {
   if (!tool.questions.length) {
     return tool.results[0];
@@ -157,8 +149,6 @@ export function resolveToolResult(tool: Tool, answers: ToolAnswers): ToolResult 
       return resolveMartechStackResult(tool, answers);
     case "cmo-simulator":
       return resolveCmoSimulatorResult(tool, answers);
-    case "geo-readiness-auditor":
-      return resolveGeoReadinessResult(tool, answers);
     case "attribution-snapshot":
       return resolveAttributionSnapshotResult(tool, answers);
     case "cmo-roadmap-generator":

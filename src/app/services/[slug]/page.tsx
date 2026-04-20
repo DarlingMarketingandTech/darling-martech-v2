@@ -6,6 +6,7 @@ import { BandSection } from "@/components/layout/BandSection";
 import { PageHero } from "@/components/hero/PageHero";
 import { ProofGrid } from "@/components/proof/ProofGrid";
 import { Button } from "@/components/ui/button";
+import { ServiceEcosystemSupportBlock } from "@/components/capabilities/CapabilityPanels";
 import { services } from "@/data/services";
 import { problemPages } from "@/data/problems";
 import { caseStudies } from "@/data/work/work-index";
@@ -64,6 +65,8 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
           ))}
         </ul>
       </BandSection>
+
+      <ServiceEcosystemSupportBlock serviceSlug={service.slug} />
 
       {relatedProblems.length ? (
         <BandSection className="mt-10">

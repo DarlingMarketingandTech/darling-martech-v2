@@ -68,6 +68,17 @@ export const clinicalCompass: CaseStudy = {
     "Referral source tracking",
     "Web intake form optimization",
   ],
+  implementationStackCategories: [
+    "revenue-crm",
+    "analytics-growth",
+    "infrastructure-platform",
+  ],
+  implementationPlatformSlugs: [
+    "salesforce",
+    "google",
+    "wordpress",
+    "mysql",
+  ],
   relatedToolSlugs: ["growth-bottleneck-quiz", "attribution-snapshot"],
   relatedServiceSlugs: ["crm-architecture", "automation-systems", "conversion-optimization"],
   relatedProblemSlugs: ["site-not-converting", "disconnected-systems"],

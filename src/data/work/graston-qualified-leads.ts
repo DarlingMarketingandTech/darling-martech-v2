@@ -32,6 +32,8 @@ export const grastonQualifiedLeads: CaseStudy = {
     "Attribution baseline",
     "CRM integration",
   ],
+  implementationStackCategories: ["revenue-crm", "analytics-growth"],
+  implementationPlatformSlugs: ["salesforce", "google", "wordpress"],
   cloudinaryImages: ["studio/graston-growth-engine"],
   featured: true,
   publishedAt: "2024-01-01",

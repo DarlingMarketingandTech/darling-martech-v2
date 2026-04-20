@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { ProcessTimeline } from "@/components/process/ProcessTimeline";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionReveal } from "@/components/ui/section-reveal";
+import { HomepageCapabilityModule } from "@/components/capabilities/CapabilityPanels";
 import { homepageData, homepageMeta } from "@/data/homepage";
 import { problemPages } from "@/data/problems";
 import { buildMetadata } from "@/lib/metadata";
@@ -79,6 +80,8 @@ export default function HomePage() {
           </div>
         </SectionReveal>
       </BandSection>
+
+      <HomepageCapabilityModule />
 
       <SectionWrapper className="mt-14">
         <EvaluationTrio

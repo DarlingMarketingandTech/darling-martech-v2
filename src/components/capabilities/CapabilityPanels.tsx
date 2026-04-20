@@ -1,0 +1,247 @@
+import type { PlatformCapabilityCategory, PlatformSlug, ServiceCluster } from "@/types";
+import {
+  HOMEPAGE_CAPABILITY_SHORTLIST,
+  PLATFORM_ASSET_MAP,
+  PLATFORM_CAPABILITY_CATEGORY_ORDER,
+  PLATFORM_CAPABILITY_CATEGORIES,
+  PLATFORM_SLUGS_BY_CATEGORY,
+  SERVICE_ECOSYSTEM_BY_SERVICE,
+} from "@/data/platform-capabilities";
+import { BandSection } from "@/components/layout/BandSection";
+import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
+
+const chipClassName =
+  "group inline-flex items-center gap-1.5 rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 text-[10px] text-[#F5F4F0]/72";
+
+const categoryPanelClassName =
+  "rounded-xl border border-[#F5F4F0]/[0.08] bg-[#0A0A0D]/42 p-3 md:p-3.5";
+
+const categoryHeaderClassName =
+  "meta-label text-[10px] tracking-[0.12em] text-[#F5F4F0]/68";
+
+function getPlatform(slug: PlatformSlug) {
+  return PLATFORM_ASSET_MAP[slug as keyof typeof PLATFORM_ASSET_MAP];
+}
+
+function getCuratedPlatforms(slugs: PlatformSlug[]) {
+  const seen = new Set<PlatformSlug>();
+  const curated = [];
+
+  for (const slug of slugs) {
+    if (seen.has(slug)) {
+      continue;
+    }
+    seen.add(slug);
+    const platform = getPlatform(slug);
+    if (platform) {
+      curated.push(platform);
+    }
+  }
+
+  return curated;
+}
+
+function PlatformChip({ slug }: { slug: PlatformSlug }) {
+  const platform = getPlatform(slug);
+  if (!platform) {
+    return null;
+  }
+
+  return (
+    <li aria-label={platform.label}>
+      <span className={chipClassName}>
+        <span className="relative h-3.5 w-3.5 shrink-0 overflow-hidden rounded-[2px] bg-transparent">
+          <CloudinaryImage
+            publicId={platform.cloudinaryPublicId}
+            alt={`${platform.label} logo`}
+            width={20}
+            height={20}
+            className="h-full w-full object-contain grayscale opacity-70 transition duration-200 group-hover:grayscale-0 group-hover:opacity-100"
+          />
+        </span>
+        <span className="leading-none">{platform.label}</span>
+      </span>
+    </li>
+  );
+}
+
+export function HomepageCapabilityModule() {
+  return (
+    <BandSection className="mt-14">
+      <p className="meta-label text-[#F05A28]/88">Systems I Build Across</p>
+      <h2 className="font-display mt-3 text-2xl font-semibold tracking-[-0.01em] text-[#F5F4F0] md:text-[2rem]">
+        Platforms, infrastructure, and tools I work in.
+      </h2>
+      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#F5F4F0]/62 md:text-[15px]">
+        Production shortlist grouped by capability function. This is an implementation reference, not a
+        sponsorship or endorsement list.
+      </p>
+
+      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+        {PLATFORM_CAPABILITY_CATEGORY_ORDER.map((category) => {
+          const shortlisted = PLATFORM_SLUGS_BY_CATEGORY[category].filter((slug) =>
+            HOMEPAGE_CAPABILITY_SHORTLIST.includes(slug)
+          );
+          if (!shortlisted.length) {
+            return null;
+          }
+
+          return (
+            <section key={category} className={categoryPanelClassName}>
+              <p className={categoryHeaderClassName}>{PLATFORM_CAPABILITY_CATEGORIES[category].label}</p>
+              <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+              <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                {shortlisted.map((slug) => (
+                  <PlatformChip key={slug} slug={slug} />
+                ))}
+              </ul>
+            </section>
+          );
+        })}
+      </div>
+    </BandSection>
+  );
+}
+
+type ProofStackBlockProps = {
+  implementationStackCategories?: PlatformCapabilityCategory[];
+  implementationPlatformSlugs?: PlatformSlug[];
+  implementationLayers?: string[];
+  grouped?: boolean;
+};
+
+export function ProofImplementationStackBlock({
+  implementationStackCategories,
+  implementationPlatformSlugs,
+  implementationLayers,
+  grouped = true,
+}: ProofStackBlockProps) {
+  const slugs = implementationPlatformSlugs ?? [];
+  const curatedPlatforms = getCuratedPlatforms(slugs);
+  const inferredCategories = new Set(curatedPlatforms.map((platform) => platform.category));
+  const availableCategories = PLATFORM_CAPABILITY_CATEGORY_ORDER.filter((category) =>
+    implementationStackCategories?.includes(category) || inferredCategories.has(category)
+  );
+  const hasCategoryOnlyData = availableCategories.length > 0 && curatedPlatforms.length === 0;
+
+  if (!availableCategories.length && !curatedPlatforms.length && !implementationLayers?.length) {
+    return null;
+  }
+
+  return (
+    <BandSection className="mt-10">
+      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#F5F4F0]/42">IMPLEMENTATION STACK</p>
+      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#F5F4F0]/62">
+        Grouped systems involved in this proof. Scope varies by engagement.
+      </p>
+
+      {availableCategories.length && grouped ? (
+        <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {availableCategories.map((category) => {
+            const scopedSlugs = curatedPlatforms
+              .filter((platform) => platform.category === category)
+              .map((platform) => platform.slug);
+
+            return (
+            <section key={category} className={categoryPanelClassName}>
+                <p className={categoryHeaderClassName}>{PLATFORM_CAPABILITY_CATEGORIES[category].label}</p>
+                <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+                {scopedSlugs.length ? (
+                  <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                    {scopedSlugs.map((slug) => (
+                      <PlatformChip key={slug} slug={slug} />
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-3 text-xs leading-relaxed text-[#F5F4F0]/50">
+                    Systems in this category are present in the engagement implementation.
+                  </p>
+                )}
+              </section>
+            );
+          })}
+        </div>
+      ) : null}
+
+      {!grouped && curatedPlatforms.length ? (
+        <div className={categoryPanelClassName}>
+          <p className={categoryHeaderClassName}>Platform & Tooling</p>
+          <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+          <ul className="mt-2.5 flex flex-wrap gap-1.5">
+            {curatedPlatforms.map((platform) => (
+              <PlatformChip key={platform.slug} slug={platform.slug} />
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {hasCategoryOnlyData ? (
+        <div className="mt-5 rounded-xl border border-[#F5F4F0]/[0.08] bg-[#0A0A0D]/30 p-3">
+          <p className={categoryHeaderClassName}>Stack categories</p>
+          <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+          <ul className="mt-2.5 flex flex-wrap gap-1.5">
+            {availableCategories.map((category) => (
+              <li key={category}>
+                <span className="inline-flex items-center rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-[#F5F4F0]/58">
+                  {PLATFORM_CAPABILITY_CATEGORIES[category].label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {implementationLayers?.length ? (
+        <div className="mt-5 rounded-xl border border-[#F5F4F0]/[0.08] bg-[#0A0A0D]/30 p-3">
+          <p className={categoryHeaderClassName}>Build layers documented in this case</p>
+          <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+          <ul className="mt-2.5 flex flex-wrap gap-1.5">
+            {implementationLayers.map((layer) => (
+              <li key={layer}>
+                <span className="inline-flex items-center rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#F5F4F0]/58">
+                  {layer}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </BandSection>
+  );
+}
+
+export function ServiceEcosystemSupportBlock({ serviceSlug }: { serviceSlug: ServiceCluster }) {
+  const categories = SERVICE_ECOSYSTEM_BY_SERVICE[serviceSlug] ?? [];
+
+  if (!categories.length) {
+    return null;
+  }
+
+  const scopedSlugs = categories.flatMap((category) => PLATFORM_SLUGS_BY_CATEGORY[category].slice(0, 3));
+  const uniqueScopedSlugs = Array.from(new Set(scopedSlugs));
+
+  return (
+    <BandSection className="mt-10">
+      <p className="meta-label text-[#F05A28]/88">Systems Commonly Involved</p>
+      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#F5F4F0]/62">
+        Common ecosystem categories for this service. Exact implementation depends on current stack, constraints, and scope.
+      </p>
+
+      <ul className="mt-4 flex flex-wrap gap-1.5">
+        {categories.map((category) => (
+          <li key={category}>
+            <span className="inline-flex items-center rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-[#F5F4F0]/58">
+              {PLATFORM_CAPABILITY_CATEGORIES[category].label}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <ul className="mt-4 flex flex-wrap gap-1.5">
+        {uniqueScopedSlugs.map((slug) => (
+          <PlatformChip key={slug} slug={slug} />
+        ))}
+      </ul>
+    </BandSection>
+  );
+}

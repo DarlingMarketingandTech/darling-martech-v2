@@ -45,6 +45,57 @@ export type ServicePillar =
   | "custom-infrastructure"
   | "brand-creative";
 
+export type PlatformCapabilityCategory =
+  | "revenue-crm"
+  | "analytics-growth"
+  | "infrastructure-platform"
+  | "build-workflow-ai";
+
+export type PlatformSlug =
+  | "google"
+  | "googlecloud"
+  | "wordpress"
+  | "php"
+  | "hubspot"
+  | "salesforce"
+  | "fluentcrm"
+  | "woocommerce"
+  | "gravity-forms"
+  | "wp-fusion"
+  | "google-tag-manager"
+  | "google-analytics-4"
+  | "google-ads"
+  | "umami"
+  | "pixelyoursite-pro"
+  | "cloudflare"
+  | "cloudflare-workers"
+  | "litespeed"
+  | "php-fpm"
+  | "mysql"
+  | "wp-cli"
+  | "netdata"
+  | "learndash"
+  | "wordpress-multisite"
+  | "liquid-web"
+  | "apache"
+  | "vercel"
+  | "cloudinary"
+  | "nextjs"
+  | "github"
+  | "figma"
+  | "slack"
+  | "notion"
+  | "adobe-creative-cloud"
+  | "canva"
+  | "claude"
+  | "chatgpt"
+  | "gemini"
+  | "google-ai-studio"
+  | "google-stitch"
+  | "cursor"
+  | "codex"
+  | "qodo";
+
 export type EngagementFormat = "fractional" | "project" | "diagnostic";
 
 /** URL-safe keys for /proof?outcome= — aligned with site blueprint. */
@@ -99,6 +150,10 @@ export interface CaseStudy {
   operatingImpact?: string;
   /** Stack layers or systems involved in the implementation */
   implementationLayers?: string[];
+  /** Capability groups represented in the implementation stack */
+  implementationStackCategories?: PlatformCapabilityCategory[];
+  /** Canonical platform slugs represented in the stack */
+  implementationPlatformSlugs?: PlatformSlug[];
   /** Tool slugs from /tools that are relevant to this proof */
   relatedToolSlugs?: string[];
   /** Service slugs from /services that this proof demonstrates */
@@ -129,6 +184,8 @@ export interface Service {
   tiers?: ServiceTier[];
   isFeatured: boolean;
   pillar: ServicePillar;
+  /** Capability categories this service commonly orchestrates */
+  ecosystemCategories?: PlatformCapabilityCategory[];
 }
 
 export interface IndustrySector {

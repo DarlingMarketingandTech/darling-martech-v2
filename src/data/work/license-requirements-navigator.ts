@@ -66,6 +66,18 @@ export const licenseRequirementsNavigator: CaseStudy = {
     "Compliance-motivated email sequence",
     "Structured data and state SEO pages",
   ],
+  implementationStackCategories: [
+    "analytics-growth",
+    "infrastructure-platform",
+    "build-workflow-ai",
+  ],
+  implementationPlatformSlugs: [
+    "nextjs",
+    "google",
+    "googlecloud",
+    "mysql",
+    "github",
+  ],
   relatedToolSlugs: ["geo-readiness-auditor", "growth-bottleneck-quiz"],
   relatedServiceSlugs: ["content-seo-systems", "custom-infrastructure", "conversion-optimization"],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough"],

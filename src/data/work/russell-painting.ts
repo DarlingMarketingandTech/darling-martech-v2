@@ -32,6 +32,8 @@ export const russellPainting: CaseStudy = {
     "Lead source reporting",
     "Ad optimization",
   ],
+  implementationStackCategories: ["revenue-crm", "analytics-growth"],
+  implementationPlatformSlugs: ["salesforce", "google"],
   cloudinaryImages: ["studio/russell-painting"],
   featured: true,
   publishedAt: "2024-03-01",

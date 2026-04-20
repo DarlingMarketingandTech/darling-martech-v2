@@ -7,6 +7,7 @@ import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { PageHero } from "@/components/hero/PageHero";
 import { MonoMetric } from "@/components/ui/MonoMetric";
 import { Button } from "@/components/ui/button";
+import { ProofImplementationStackBlock } from "@/components/capabilities/CapabilityPanels";
 import { caseStudies } from "@/data/work/work-index";
 import { problemPages } from "@/data/problems";
 import { services } from "@/data/services";
@@ -158,6 +159,11 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
           )}
         </div>
       )}
+      <ProofImplementationStackBlock
+        implementationStackCategories={study.implementationStackCategories}
+        implementationPlatformSlugs={study.implementationPlatformSlugs}
+        implementationLayers={study.implementationLayers}
+      />
 
       {/* Fallback full story for older proofs without new fields */}
       {!study.buildSections?.length && study.fullStory && (

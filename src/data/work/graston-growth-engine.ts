@@ -33,6 +33,18 @@ export const grastonGrowthEngine: CaseStudy = {
     "Spatial search",
     "Attribution layer",
   ],
+  implementationStackCategories: [
+    "revenue-crm",
+    "analytics-growth",
+    "infrastructure-platform",
+  ],
+  implementationPlatformSlugs: [
+    "salesforce",
+    "google",
+    "googlecloud",
+    "apache",
+    "mysql",
+  ],
   liveUrl: "https://graston-growth-engine.jacob-ba2.workers.dev",
   cloudinaryImages: ["studio/graston-growth-engine"],
   featured: true,

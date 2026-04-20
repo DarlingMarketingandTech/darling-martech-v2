@@ -68,6 +68,17 @@ export const barbershopCommandCenter: CaseStudy = {
     "Client segmentation",
     "Retention and reactivation flows",
   ],
+  implementationStackCategories: [
+    "revenue-crm",
+    "analytics-growth",
+    "infrastructure-platform",
+  ],
+  implementationPlatformSlugs: [
+    "salesforce",
+    "google",
+    "wordpress",
+    "apache",
+  ],
   relatedToolSlugs: ["geo-readiness-auditor", "growth-bottleneck-quiz"],
   relatedServiceSlugs: ["crm-architecture", "automation-systems", "content-seo-systems"],
   relatedProblemSlugs: ["disconnected-systems", "not-visible-enough", "site-not-converting"],

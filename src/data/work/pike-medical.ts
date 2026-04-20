@@ -32,6 +32,8 @@ export const pikeMedical: CaseStudy = {
     "Intake workflow",
     "Segment nurturing",
   ],
+  implementationStackCategories: ["revenue-crm", "analytics-growth"],
+  implementationPlatformSlugs: ["salesforce", "google", "wordpress"],
   cloudinaryImages: ["studio/pike-medical"],
   featured: true,
   publishedAt: "2023-06-01",

@@ -68,6 +68,18 @@ export const bbq317: CaseStudy = {
     "Review velocity system",
     "Local keyword architecture",
   ],
+  implementationStackCategories: [
+    "analytics-growth",
+    "infrastructure-platform",
+    "build-workflow-ai",
+  ],
+  implementationPlatformSlugs: [
+    "google",
+    "googlecloud",
+    "apache",
+    "figma",
+    "canva",
+  ],
   relatedToolSlugs: ["geo-readiness-auditor"],
   relatedServiceSlugs: ["brand-identity", "content-seo-systems", "social-media-marketing"],
   relatedProblemSlugs: ["brand-system-broken", "not-visible-enough", "site-not-converting"],

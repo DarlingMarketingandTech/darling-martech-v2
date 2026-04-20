@@ -383,6 +383,14 @@ export interface ProblemPageCta {
   secondary: ProblemPageCtaLink;
 }
 
+/** Concrete “what it costs” copy — four operator-facing cost lenses per problem. */
+export interface ProblemCostDimensions {
+  lostRevenue: string;
+  missedLeads: string;
+  operationalDrag: string;
+  strategicConfusion: string;
+}
+
 export interface ProblemPage {
   slug: ProblemCluster;
   title: string;
@@ -405,6 +413,10 @@ export interface ProblemPage {
   symptoms: string[];
   whyItHappens: string;
   stakes: string;
+  /** Four concrete cost dimensions (revenue, leads, ops, strategy). */
+  costDimensions: ProblemCostDimensions;
+  /** One tight block: what fails at system level (not symptoms). */
+  systemFailureCore: string;
   whatTheFixLooksLike: string;
   relatedProof: string[];
   relevantTools: ProblemPageCtaLink[];

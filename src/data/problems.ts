@@ -28,6 +28,18 @@ export const problemPages: ProblemPage[] = [
       "It usually isn't a people problem. It's a structure problem. Marketing strategy requires someone who can hold the whole system — from positioning to pipeline — inside one head, and who has enough seniority to say \"we're not doing that because it won't produce what we need.\" Without that person, every initiative is equally valid and nothing compounds.",
     stakes:
       "Every quarter without a clear strategic owner is a quarter of compounding drift. Teams get busy on things that don't matter. Channels get funded that don't perform. Opportunities get missed because no one was watching for them. The cost isn't one bad campaign — it's 18 months of momentum you didn't build.",
+    costDimensions: {
+      lostRevenue:
+        "Spend accrues across ads, content, and tools while pipeline attribution stays fuzzy — budget keeps funding motion nobody can tie to closed revenue in one view.",
+      missedLeads:
+        "Inbound still arrives, but without an owner for qualification rules and follow-up priority, warm leads age in the CRM while the team chases louder, lower-intent noise.",
+      operationalDrag:
+        "RevOps and marketing meet repeatedly to realign on \"focus\" because nobody holds one accountable scoreboard — every quarter restarts the same discovery conversations.",
+      strategicConfusion:
+        "Leadership hears different answers for what marketing is optimizing for depending on the room — capital and hires land on the wrong bets because the narrative is not singular.",
+    },
+    systemFailureCore:
+      "There is no single accountable owner for the full funnel — data, channel mix, spend, and narrative — so priorities compete instead of compound.",
     whatTheFixLooksLike:
       "Fractional CMO engagement. Strategic ownership of the full marketing function — positioning, priorities, measurement, team direction, and the system that holds it all together. Not a strategy deck. A person with accountability.",
     relatedProof: ["graston-qualified-leads", "graston-technique"],
@@ -68,6 +80,18 @@ export const problemPages: ProblemPage[] = [
       "Sites get built incrementally. A page gets added here. A service gets listed there. No one rewrites the homepage when the positioning shifts. The result is a site that reflects what the business used to be or what the founder wanted to say — not what a first-time visitor needs to understand in the first 8 seconds.",
     stakes:
       "Every visitor who leaves without converting is a lead that cost you money (in traffic, time, or ad spend) and produced nothing. More importantly: the right buyers — the ones who would actually pay for senior-level work — are the most likely to leave when the site doesn't immediately signal competence and credibility.",
+    costDimensions: {
+      lostRevenue:
+        "You keep paying for traffic — organic, paid, and referral-to-site — where a meaningful share exits before the value proposition lands. That spend quietly funds bounced sessions, not pipeline.",
+      missedLeads:
+        "High-intent visitors who would convert with clearer proof, pricing paths, or booking cannot find the signal fast enough — they default to the competitor with a cleaner first screen.",
+      operationalDrag:
+        "Sales answers the same qualification questions manually because the site never resolved trust and ICP fit — every demo starts at minute zero again.",
+      strategicConfusion:
+        "Leadership sees healthy traffic in analytics and assumes pipeline should follow — when it does not, blame rotates between design, SEO, and \"messaging\" without fixing the underlying structure.",
+    },
+    systemFailureCore:
+      "The site's information architecture and trust path are misaligned with how buyers decide — traffic exists, but conversion intent never gets structured into pipeline.",
     whatTheFixLooksLike:
       "Website strategy and rebuild. Problem-first information architecture. Conversion flow design. Trust signals in the right places. Clear next steps for every intent level — from \"just browsing\" to \"ready to talk.\"",
     relatedProof: ["primarycare-indy", "urgentcare-indy"],
@@ -108,6 +132,18 @@ export const problemPages: ProblemPage[] = [
       "Systems get set up in layers. A CRM gets installed when the team is small. An email tool gets added when someone reads an article about marketing automation. A form gets connected to a spreadsheet because it was faster in the moment. Nobody designs the system as one operating layer — they patch it together over time. And patched-together systems break silently.",
     stakes:
       "Disconnected systems are quiet killers. The leads exist. The follow-up system almost works. The reporting almost makes sense. Everything is almost fine — until you try to scale, and the whole thing falls apart because the foundation was never built to hold the load.",
+    costDimensions: {
+      lostRevenue:
+        "Attribution theater sends budget to channels that look good in siloed dashboards while the workflow that actually sourced revenue stays invisible — growth spend follows politics, not truth.",
+      missedLeads:
+        "Handoffs between form, CRM, inbox, and calendar fail on busy weeks — leads land twice, not at all, or without context, so follow-up misses the window that would have closed.",
+      operationalDrag:
+        "Team members rebuild weekly spreadsheets to answer what happened last month — human middleware replaces automation the stack was supposed to handle.",
+      strategicConfusion:
+        "Marketing reports pipeline-up while sales reports pipeline-flat — leadership cannot answer which story is true in one reconciled view.",
+    },
+    systemFailureCore:
+      "Capture, routing, enrichment, and reporting were never designed as one operating layer — patches and manual rituals bridge the gaps until volume breaks them.",
     whatTheFixLooksLike:
       "CRM architecture and automation buildout. Map the full lead-to-close journey. Build the system that executes it automatically. Connect reporting so every decision is based on real data, not instinct.",
     relatedProof: ["graston-growth-engine", "barbershop-command-center"],
@@ -148,6 +184,18 @@ export const problemPages: ProblemPage[] = [
       "SEO gets treated like a project instead of a system. Someone builds citations, optimizes a few pages, maybe runs some local ads — and then the visibility work stops because it \"seems to be working.\" Meanwhile, the landscape shifts. AI search changes what \"showing up\" means. Competitors keep building.",
     stakes:
       "Every dollar of traffic you don't capture is revenue that goes to someone else. More specifically: high-intent local buyers — the ones searching \"fractional CMO Indianapolis\" or \"best [service] near me\" — are the most profitable leads you can generate, and they're going to the business that showed up first, clearly, and credibly.",
+    costDimensions: {
+      lostRevenue:
+        "High-intent local and vertical searches route to competitors with clearer entity signals — each lost primary click is contract value you never see as a form fill.",
+      missedLeads:
+        "Buyers who would choose you on quality never enter the funnel because you do not appear where they search, including AI summarization surfaces that flatten categories to a few names.",
+      operationalDrag:
+        "You fund sporadic SEO pushes and ads that cannot reinforce each other — every initiative starts from zero because discoverability was never systematized.",
+      strategicConfusion:
+        "Stakeholders equate busy marketing with demand — meanwhile search and trust signals lag the real caliber of the firm.",
+    },
+    systemFailureCore:
+      "Visibility is treated as episodic publishing and ads instead of a durable entity-and-evidence system — findability does not keep pace with how buyers look.",
     whatTheFixLooksLike:
       "Local SEO strategy and execution. GEO/AI search readiness. Citation cleanup. Conversion-optimized local pages. Structured data. Trust signals that Google and AI search engines reward.",
     relatedProof: ["urgentcare-indy", "primarycare-indy"],
@@ -188,6 +236,18 @@ export const problemPages: ProblemPage[] = [
       "Brand work gets deferred. A logo gets designed when the company is founded. A website gets built when the first client needs a link to send. Copy gets written by whoever is available. Nobody steps back and asks: \"Does this accurately represent the quality of what we're selling, to the specific buyer we're trying to reach?\"",
     stakes:
       "Premium buyers make quick decisions. If the first impression doesn't match the caliber of the work, they move on before the relationship can form. A weak brand doesn't just lose clients — it attracts the wrong ones while repelling the right ones.",
+    costDimensions: {
+      lostRevenue:
+        "Premium opportunities short-cycle because the site and collateral under-explain differentiation — you stay stuck with tire-kickers while higher ACV buyers bounce.",
+      missedLeads:
+        "Warm introductions click through positioning that undercuts actual delivery — trust never reaches the depth needed to book senior-level work.",
+      operationalDrag:
+        "Sales and marketing each maintain different decks and one-pagers — every RFP response rebuilds proof points that should live in one system.",
+      strategicConfusion:
+        "The homepage, outbound copy, and board narrative diverge — buyers and investors cannot repeat what you stand for in one sentence.",
+    },
+    systemFailureCore:
+      "Positioning, evidence, and visual identity are inconsistent artifacts — the brand layer fails as a conversion system, not as a taste problem.",
     whatTheFixLooksLike:
       "Brand identity system: positioning, messaging, visual identity, tone of voice. Built from the actual quality of the work and the actual profile of the buyer — not from what looks nice or what a design trend suggested.",
     relatedProof: ["black-letter", "317-bbq"],
@@ -228,6 +288,18 @@ export const problemPages: ProblemPage[] = [
       "Attribution doesn't get built — it gets assumed. Every tool claims credit for the lead. The CRM tracks contacts but not journeys. UTM parameters are inconsistent. The form doesn't pass source data to the CRM. Nobody audits it until a major budget decision needs justification.",
     stakes:
       "You're almost certainly under-investing in the channel that's actually working and over-investing in the one that looks best in the dashboard. The cost is a misallocated budget, missed growth opportunities, and marketing that can't prove its own ROI — which means it's always vulnerable to being cut.",
+    costDimensions: {
+      lostRevenue:
+        "Budget cuts remove the acquisition motion that actually sourced revenue because the winning path was never isolated in data — growth spending becomes political instead of evidence-led.",
+      missedLeads:
+        "Repeatable segments hide inside \"misc\" or unknown source values — you cannot double down on the motion that produced your best deals.",
+      operationalDrag:
+        "Finance waits on manual UTM forensics before approvals — every campaign launch adds a reconciliation tax.",
+      strategicConfusion:
+        "Forecast calls mix anecdotes with conflicting channel claims — nobody can articulate which lever scaled last quarter with a number leadership trusts.",
+    },
+    systemFailureCore:
+      "Source definitions and journey truth are not enforced end-to-end — tools attribute in parallel without a single reconciliation model, so confidence collapses as volume rises.",
     whatTheFixLooksLike:
       "Attribution system design. CRM data hygiene. Source tracking implementation. Multi-model attribution reporting. One clear view of where revenue actually comes from — built to hold up to scrutiny.",
     relatedProof: ["graston-growth-engine", "graston-technique"],

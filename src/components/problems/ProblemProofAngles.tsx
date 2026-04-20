@@ -5,15 +5,20 @@ type ProblemProofAnglesProps = {
   angles: ProofAngle[];
   /** Parent case study titles keyed by `CaseStudy.slug` */
   parentTitles: ReadonlyMap<string, string>;
+  /** Ties proof list to the active problem narrative (conversion framing). */
+  connectLead?: string;
 };
 
-export function ProblemProofAngles({ angles, parentTitles }: ProblemProofAnglesProps) {
+export function ProblemProofAngles({ angles, parentTitles, connectLead }: ProblemProofAnglesProps) {
   if (!angles.length) return null;
 
   return (
     <section aria-label="Proof angles for this problem">
       <p className="meta-label text-[#F05A28]/90">Where this shows up in real systems</p>
       <div className="tech-divider my-4 max-w-md" />
+      {connectLead ? (
+        <p className="mb-4 max-w-2xl text-sm leading-relaxed text-[#F5F4F0]/72">{connectLead}</p>
+      ) : null}
       <ul className="mt-4 divide-y divide-[#F5F4F0]/8 overflow-hidden rounded-2xl border border-[#F5F4F0]/10 bg-[#13131A]/35">
         {angles.map((angle) => {
           const parentTitle = parentTitles.get(angle.parentProjectSlug) ?? "Case study";

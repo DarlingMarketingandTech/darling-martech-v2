@@ -109,15 +109,17 @@ export default function HomePage() {
         />
       </div>
 
-      <BandSection className="mt-14">
+      <BandSection className="mt-16 py-12 md:mt-20 md:py-16">
         <SectionReveal delay={0.04}>
           <SectionHeader
             eyebrow={homepageData.processSection.eyebrow}
             title={homepageData.processSection.headline}
             body={homepageData.processSection.body}
+            bodyClassName="mt-5 max-w-2xl text-sm leading-snug text-[#F5F4F0]/70 md:text-[0.9375rem] md:leading-snug"
           />
-          <div className="mt-8">
+          <div className="mt-10 md:mt-12">
             <ProcessTimeline
+              layout="featured"
               steps={homepageData.processSection.columns.map((column) => ({
                 number: column.number,
                 title: column.title,

@@ -9,6 +9,7 @@ type SectionHeaderProps = {
   align?: "left" | "center";
   className?: string;
   titleClassName?: string;
+  bodyClassName?: string;
 };
 
 export function SectionHeader({
@@ -18,6 +19,7 @@ export function SectionHeader({
   align = "left",
   className,
   titleClassName,
+  bodyClassName,
 }: SectionHeaderProps) {
   return (
     <div className={cn(align === "center" ? "mx-auto text-center" : "", className)}>
@@ -31,7 +33,12 @@ export function SectionHeader({
         {title}
       </h2>
       {body ? (
-        <div className="text-pretty mt-4 max-w-3xl text-base leading-7 text-[#F5F4F0]/72 md:text-lg md:leading-8">
+        <div
+          className={cn(
+            "text-pretty mt-4 max-w-3xl text-base leading-7 text-[#F5F4F0]/72 md:text-lg md:leading-8",
+            bodyClassName
+          )}
+        >
           {body}
         </div>
       ) : null}

@@ -1,5 +1,5 @@
 import { tools } from "@/data/labs";
-import { services } from "@/data/services";
+import { services, SERVICE_DISPLAY_CLUSTERS, type ServiceDisplayClusterId } from "@/data/services";
 import { caseStudies } from "@/data/work/work-index";
 import type { ProblemCluster, ProofAngle, ServiceCluster } from "@/types";
 
@@ -773,6 +773,47 @@ export function groupProofAnglesByProblem(): ReadonlyMap<ProblemCluster, ProofAn
 export function getPrimaryProofAnglesForService(serviceSlug: ServiceCluster, limit = 3): ProofAngle[] {
   const list = byService.get(serviceSlug) ?? [];
   return list.slice(0, limit);
+}
+
+const serviceSlugInCluster = (clusterId: ServiceDisplayClusterId, slug: ServiceCluster) =>
+  SERVICE_DISPLAY_CLUSTERS[clusterId].serviceSlugs.includes(slug);
+
+/**
+ * Proof angles tied to any service in a hub display cluster — prefers spreading across parent cases
+ * before taking multiple angles from the same engagement.
+ */
+export function getProofAnglesForDisplayCluster(clusterId: ServiceDisplayClusterId, limit = 4): ProofAngle[] {
+  const matched = PROOF_ANGLES.filter(
+    (a) =>
+      serviceSlugInCluster(clusterId, a.primaryServiceSlug) ||
+      (a.secondaryServiceSlugs?.some((s) => serviceSlugInCluster(clusterId, s)) ?? false),
+  );
+
+  const byParent = new Map<string, ProofAngle[]>();
+  for (const a of matched) {
+    const list = byParent.get(a.parentProjectSlug) ?? [];
+    list.push(a);
+    byParent.set(a.parentProjectSlug, list);
+  }
+  const parents = [...byParent.keys()].sort();
+  const out: ProofAngle[] = [];
+  let round = 0;
+  while (out.length < limit && parents.length > 0) {
+    let added = false;
+    for (const p of parents) {
+      const list = byParent.get(p);
+      const a = list?.[round];
+      if (a && !out.some((o) => o.id === a.id)) {
+        out.push(a);
+        added = true;
+        if (out.length >= limit) break;
+      }
+    }
+    if (!added) break;
+    round += 1;
+    if (round > 25) break;
+  }
+  return out.slice(0, limit);
 }
 
 export function getProofAnglesForTool(toolSlug: string, limit = 4): ProofAngle[] {

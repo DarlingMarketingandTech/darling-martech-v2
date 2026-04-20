@@ -46,3 +46,4 @@ agent-system/memory/task_state.json
 agent-system/memory/session_state.json
 agent-system/memory/recent_decisions.json
 agent-system/last-run-report.json
+public/sitemap-0.xml

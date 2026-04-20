@@ -1,4 +1,4 @@
-import type { Service } from "@/types";
+import type { Service, ServiceCluster } from "@/types";
 import { SERVICE_VISUAL_BY_SLUG } from "@/data/service-visuals";
 
 const servicesUnmerged: Omit<Service, "visualPublicId" | "visualAlt">[] = [
@@ -323,57 +323,104 @@ export const SERVICE_PILLARS = [
   },
 ] as const;
 
-type ServiceDisplayClusterId = "grow" | "scale" | "build";
+export type ServiceDisplayClusterId = "foundation" | "build" | "scale" | "grow";
 
-type ServiceDisplayCluster = {
-  label: "Grow" | "Scale" | "Build";
-  descriptor: string;
-  description: string;
-  serviceSlugs: Service["slug"][];
+export type ServiceDisplayCluster = {
+  label: string;
+  /** One line under the lane title — how this lane differs from the others */
+  laneTagline: string;
+  /** What system friction this lane is built to address */
+  solvesFor: string;
+  /** Buyer / operating context */
+  whoFor: string;
+  /** Lane-level outcomes (not individual service copy) */
+  outcomes: readonly string[];
+  /** Primary “where next” for this lane */
+  nextStep: { href: string; label: string };
+  optionalStep?: { href: string; label: string };
+  serviceSlugs: ServiceCluster[];
 };
 
 export const SERVICE_DISPLAY_CLUSTER_ORDER: ServiceDisplayClusterId[] = [
-  "grow",
-  "scale",
+  "foundation",
   "build",
+  "scale",
+  "grow",
 ];
 
 export const SERVICE_DISPLAY_CLUSTERS: Record<ServiceDisplayClusterId, ServiceDisplayCluster> = {
-  grow: {
-    label: "Grow",
-    descriptor: "demand, visibility, and conversion",
-    description:
-      "For bottlenecks around acquisition quality, search presence, and conversion performance.",
-    serviceSlugs: [
-      "attribution-analytics",
-      "content-seo-systems",
-      "digital-marketing-strategy",
-      "paid-media-management",
-      "conversion-optimization",
+  foundation: {
+    label: "Foundation",
+    laneTagline: "Install the first real operating system behind capture, follow-up, and visibility.",
+    solvesFor:
+      "Lead capture, CRM, intake, and follow-up are scattered, manual, or missing — so demand never compounds.",
+    whoFor:
+      "Missing-system buyers: brochure sites, under-used CRMs, owner-dependent follow-up, and tools without operating logic.",
+    outcomes: [
+      "A first working growth system instead of a patchwork of tabs",
+      "Fewer missed leads and cleaner intake / booking / follow-up",
+      "Practical visibility into what is converting and what is leaking",
     ],
-  },
-  scale: {
-    label: "Scale",
-    descriptor: "automation, CRM, and operational leverage",
-    description:
-      "For teams that need cleaner workflows, faster response loops, and less operational drag.",
+    nextStep: { href: "/services/technical-roadmap", label: "Start with the Technical Roadmap →" },
+    optionalStep: { href: "/tools/growth-bottleneck-quiz", label: "Run the Growth Bottleneck Quiz →" },
     serviceSlugs: [
-      "ai-automation",
-      "automation-systems",
-      "martech-stack-build",
+      "technical-roadmap",
+      "website-design",
       "crm-architecture",
+      "martech-stack-build",
+      "automation-systems",
     ],
   },
   build: {
     label: "Build",
-    descriptor: "infrastructure, experience, and brand foundation",
-    description:
-      "For foundational system, experience, and architecture work that supports every downstream channel.",
+    laneTagline: "Strengthen the experience, trust, and technical layer buyers actually move through.",
+    solvesFor:
+      "The business is real — but perception, conversion surfaces, or custom product layers undersell it or break under load.",
+    whoFor:
+      "Teams where brand, site, conversion architecture, or bespoke integrations are the binding constraint.",
+    outcomes: [
+      "Positioning and surfaces that accelerate decisions",
+      "Conversion paths aligned to how buyers actually buy",
+      "Custom infrastructure that connects data and channels reliably",
+    ],
+    nextStep: { href: "/proof", label: "See proof in experience & build work →" },
+    optionalStep: { href: "/services/technical-roadmap", label: "Map the build sequence with a roadmap →" },
+    serviceSlugs: ["custom-infrastructure", "brand-identity", "conversion-optimization"],
+  },
+  scale: {
+    label: "Scale",
+    laneTagline: "Repair and harden the machine that captures, routes, measures, and follows up on demand.",
+    solvesFor:
+      "Volume and complexity expose weak CRM discipline, blind attribution, brittle automation, and AI-shaped ops gaps.",
+    whoFor:
+      "Broken-system buyers: real traffic and pipeline, but fragmented tools, leaky handoffs, and unclear reporting.",
+    outcomes: [
+      "AI-enabled and rules-based workflows that remove manual drag",
+      "Reporting leadership can defend in a budget conversation",
+      "Systems that keep running after launch — documented and governable",
+    ],
+    nextStep: { href: "/services/technical-roadmap", label: "Diagnose the stack with a roadmap →" },
+    optionalStep: { href: "/proof", label: "Review repair-style proof →" },
+    serviceSlugs: ["ai-automation", "attribution-analytics"],
+  },
+  grow: {
+    label: "Grow",
+    laneTagline: "Engineer qualified demand, visibility, and channel economics — on purpose, not by accident.",
+    solvesFor:
+      "Buyers exist but do not find you, trust is thin at the top of funnel, or paid/organic channels do not compound.",
+    whoFor:
+      "Organizations ready to invest in demand systems: SEO/content, strategy, paid capture, and distribution.",
+    outcomes: [
+      "Stronger discovery and intent-matched visibility",
+      "Content and channel systems that reinforce each other",
+      "Paid and organic spend read against pipeline, not vanity metrics",
+    ],
+    nextStep: { href: "/proof", label: "See demand and visibility proof →" },
+    optionalStep: { href: "/tools/growth-bottleneck-quiz", label: "Pressure-test channel focus with the quiz →" },
     serviceSlugs: [
-      "custom-infrastructure",
-      "technical-roadmap",
-      "brand-identity",
-      "website-design",
+      "content-seo-systems",
+      "digital-marketing-strategy",
+      "paid-media-management",
       "content-creation",
       "social-media-marketing",
     ],

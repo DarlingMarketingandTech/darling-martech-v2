@@ -46,7 +46,7 @@ export const routeMetadata: Record<string, PageMeta> = {
   "/services": {
     title: "Services",
     description:
-      "Revenue engineering, intelligent automation, custom infrastructure, and brand & experience systems — scoped after the real bottleneck is named.",
+      "Implementation lanes — foundation through grow — for building, repairing, or expanding marketing systems. Diagnose state, pick leverage, then ship with accountable execution.",
     canonicalUrl: "https://darlingmartech.com/services",
   },
   "/services/technical-roadmap": {

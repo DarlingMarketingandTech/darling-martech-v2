@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { OUTCOME_SLUG_LABELS } from "@/data/taxonomy";
 import type { CaseStudy } from "@/types";
+import { getBuyerStateLabel, getCaseStudyBuyerState } from "@/lib/buyer-state";
 
 type ProofCardProps = {
   caseStudy: CaseStudy;
@@ -9,10 +10,16 @@ type ProofCardProps = {
 
 export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
   const outcomeLabel = OUTCOME_SLUG_LABELS[caseStudy.primaryOutcomeSlug];
+  const buyerStateTag = getBuyerStateLabel(getCaseStudyBuyerState(caseStudy));
 
   return (
     <article className="panel-obsidian panel-interactive grain-mask group flex h-full flex-col rounded-4xl p-7 md:p-8">
-      <p className="meta-label-accent">{outcomeLabel}</p>
+      <div className="flex flex-wrap items-center gap-2">
+        <p className="meta-label-accent">{outcomeLabel}</p>
+        <span className="rounded-full border border-[#F5F4F0]/14 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-[#F5F4F0]/68">
+          {buyerStateTag}
+        </span>
+      </div>
       <p className="font-mono mt-3 text-[10px] font-medium uppercase tracking-[0.16em] text-[#F5F4F0]/38">
         ref · {caseStudy.slug}
       </p>

@@ -1,4 +1,7 @@
 import type { Tool } from "@/types";
+import { caseStudies } from "@/data/work/work-index";
+import { services } from "@/data/services";
+import { problemPages } from "@/data/problems";
 
 export const tools: Tool[] = [
   {
@@ -107,6 +110,7 @@ export const tools: Tool[] = [
         description:
           "The marketing system likely lacks clear ownership, prioritization, and accountability across the whole stack.",
         problemCluster: "no-strategy-owner",
+        recommendedProofSlug: "graston-qualified-leads",
         recommendedService: "fractional-cmo",
         ctaLabel: "See the strategy problem",
         ctaHref: "/problems/no-strategy-owner",
@@ -118,6 +122,7 @@ export const tools: Tool[] = [
         description:
           "The current site likely does not explain the offer clearly enough or move the right visitor to the next step quickly enough.",
         problemCluster: "site-not-converting",
+        recommendedProofSlug: "pike-medical",
         recommendedService: "content-seo-systems",
         ctaLabel: "See the website problem",
         ctaHref: "/problems/site-not-converting",
@@ -129,6 +134,7 @@ export const tools: Tool[] = [
         description:
           "Lead capture, follow-up, and reporting likely rely too heavily on manual effort and fragmented tools.",
         problemCluster: "disconnected-systems",
+        recommendedProofSlug: "graston-growth-engine",
         recommendedService: "martech-stack-build",
         ctaLabel: "See the systems problem",
         ctaHref: "/problems/disconnected-systems",
@@ -140,6 +146,7 @@ export const tools: Tool[] = [
         description:
           "Search visibility, trust signals, or local presence may be suppressing inbound demand before the sales process even starts.",
         problemCluster: "not-visible-enough",
+        recommendedProofSlug: "russell-painting",
         recommendedService: "content-seo-systems",
         ctaLabel: "See the visibility problem",
         ctaHref: "/problems/not-visible-enough",
@@ -151,6 +158,7 @@ export const tools: Tool[] = [
         description:
           "The current reporting stack probably cannot explain channel contribution with enough clarity to guide confident decisions.",
         problemCluster: "pipeline-not-predictable",
+        recommendedProofSlug: "graston-technique",
         recommendedService: "attribution-analytics",
         ctaLabel: "See the attribution problem",
         ctaHref: "/problems/pipeline-not-predictable",
@@ -162,6 +170,7 @@ export const tools: Tool[] = [
         description:
           "When positioning, creative, and proof drift across channels, conversion works harder than it should—even if individual tactics look fine.",
         problemCluster: "brand-system-broken",
+        recommendedProofSlug: "317-bbq",
         recommendedService: "content-seo-systems",
         ctaLabel: "See the brand problem",
         ctaHref: "/problems/brand-system-broken",
@@ -250,6 +259,7 @@ export const tools: Tool[] = [
         description:
           "When CRM, automation, attribution, and integrations all score low, execution defaults to heroics. The next win is stabilizing foundations before adding net-new channels.",
         problemCluster: "disconnected-systems",
+        recommendedProofSlug: "graston-growth-engine",
         recommendedService: "martech-stack-build",
         ctaLabel: "See the systems problem",
         ctaHref: "/problems/disconnected-systems",
@@ -261,6 +271,7 @@ export const tools: Tool[] = [
         description:
           "You likely have pockets of maturity with uneven handoffs. Tightening definitions, ownership, and instrumentation now prevents a costly rewrite later.",
         problemCluster: "disconnected-systems",
+        recommendedProofSlug: "clinical-compass",
         recommendedService: "martech-stack-build",
         ctaLabel: "See how I integrate stacks",
         ctaHref: "/problems/disconnected-systems",
@@ -272,6 +283,7 @@ export const tools: Tool[] = [
         description:
           "When foundations score high, the next gains come from attribution clarity, experimentation velocity, and how revenue teams use the data — not from buying more tools.",
         problemCluster: "pipeline-not-predictable",
+        recommendedProofSlug: "graston-technique",
         recommendedService: "attribution-analytics",
         ctaLabel: "See the attribution problem",
         ctaHref: "/problems/pipeline-not-predictable",
@@ -313,6 +325,7 @@ export const tools: Tool[] = [
         description:
           "When UTMs are orphan fields and every channel tells a different story, analytics becomes debate club. Fix ownership, naming, and reconciliation before buying another attribution product.",
         problemCluster: "pipeline-not-predictable",
+        recommendedProofSlug: "graston-technique",
         recommendedService: "attribution-analytics",
         ctaLabel: "See the attribution problem",
         ctaHref: "/problems/pipeline-not-predictable",
@@ -324,6 +337,7 @@ export const tools: Tool[] = [
         description:
           "Last-click and messy CRM fields bias spend toward bottom-funnel channels and away from compounding work. Tighten capture hygiene and add a second view leadership agrees to trust.",
         problemCluster: "pipeline-not-predictable",
+        recommendedProofSlug: "russell-painting",
         recommendedService: "attribution-analytics",
         ctaLabel: "See the attribution problem",
         ctaHref: "/problems/pipeline-not-predictable",
@@ -335,6 +349,7 @@ export const tools: Tool[] = [
         description:
           "When definitions have owners and conflict is rare, the next win is instrumentation depth: modeled views, incrementality tests where it matters, and tying spend decisions to pipeline cadence.",
         problemCluster: "pipeline-not-predictable",
+        recommendedProofSlug: "graston-qualified-leads",
         recommendedService: "attribution-analytics",
         ctaLabel: "See the attribution problem",
         ctaHref: "/problems/pipeline-not-predictable",
@@ -406,6 +421,7 @@ export const tools: Tool[] = [
         description:
           "When cash or focus is tight, the roadmap should shrink to a handful of measurable outcomes, freeze low-ROI experiments, and rebuild trust with leadership through predictable reporting.",
         problemCluster: "no-strategy-owner",
+        recommendedProofSlug: "graston-qualified-leads",
         recommendedService: "fractional-cmo",
         ctaLabel: "See the strategy problem",
         ctaHref: "/problems/no-strategy-owner",
@@ -417,6 +433,7 @@ export const tools: Tool[] = [
         description:
           "Before you scale spend, capture, routing, and definitions need to hold. Stage a systems wave: instrument the funnel, enforce CRM hygiene, then reopen channel experiments with honest measurement.",
         problemCluster: "disconnected-systems",
+        recommendedProofSlug: "graston-growth-engine",
         recommendedService: "martech-stack-build",
         ctaLabel: "See the systems problem",
         ctaHref: "/problems/disconnected-systems",
@@ -428,6 +445,7 @@ export const tools: Tool[] = [
         description:
           "When runway is workable and instrumentation is not blocking, the roadmap should emphasize shipping weekly improvements tied to conversion and pipeline, not another strategy deck.",
         problemCluster: "site-not-converting",
+        recommendedProofSlug: "pike-medical",
         recommendedService: "content-seo-systems",
         ctaLabel: "See the website problem",
         ctaHref: "/problems/site-not-converting",
@@ -524,3 +542,21 @@ export const tools: Tool[] = [
     cloudinaryThumbnail: "curated/tools/build-vs-buy-stack-calculator",
   },
 ];
+
+const PROBLEM_SLUGS = new Set(problemPages.map((p) => p.slug));
+const PROOF_SLUGS = new Set(caseStudies.map((study) => study.slug));
+const SERVICE_SLUGS = new Set(services.map((service) => service.slug));
+
+for (const tool of tools) {
+  for (const result of tool.results) {
+    if (!PROBLEM_SLUGS.has(result.problemCluster)) {
+      throw new Error(`Tool result ${tool.slug}/${result.id}: unknown problemCluster "${result.problemCluster}"`);
+    }
+    if (!PROOF_SLUGS.has(result.recommendedProofSlug)) {
+      throw new Error(`Tool result ${tool.slug}/${result.id}: unknown recommendedProofSlug "${result.recommendedProofSlug}"`);
+    }
+    if (!SERVICE_SLUGS.has(result.recommendedService)) {
+      throw new Error(`Tool result ${tool.slug}/${result.id}: unknown recommendedService "${result.recommendedService}"`);
+    }
+  }
+}

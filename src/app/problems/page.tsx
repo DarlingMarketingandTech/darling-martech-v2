@@ -10,27 +10,14 @@ import { services } from "@/data/services";
 import { routeMetadata } from "@/data/routes";
 import { problemHubMetaLabel } from "@/lib/problem-hub-label";
 import { buildMetadata } from "@/lib/metadata";
+import { getBuyerStateLabel, getProblemBuyerState } from "@/lib/buyer-state";
+import { FoundationPathwayMini } from "@/components/shared/FoundationPathwayMini";
 import type { ProblemPage } from "@/types";
 
 export const metadata = buildMetadata(routeMetadata["/problems"]);
 
 const QUIZ_HREF = "/tools/growth-bottleneck-quiz";
 const FOUNDATION_HREF = "/services/technical-roadmap";
-
-const PROBLEM_BUYER_FIT: Record<ProblemPage["slug"], "broken" | "missing" | "both"> = {
-  "no-strategy-owner": "broken",
-  "site-not-converting": "both",
-  "disconnected-systems": "both",
-  "not-visible-enough": "both",
-  "brand-system-broken": "both",
-  "pipeline-not-predictable": "broken",
-};
-
-const FIT_LABEL: Record<(typeof PROBLEM_BUYER_FIT)[ProblemPage["slug"]], string> = {
-  broken: "Best fit: broken systems",
-  missing: "Best fit: missing systems",
-  both: "Best fit: both states",
-};
 
 function getCaseStudyForProblem(problem: ProblemPage) {
   const firstSlug = problem.relatedProof[0];
@@ -52,14 +39,14 @@ function ProblemsHubCard({ problem }: { problem: ProblemPage }) {
   const study = getCaseStudyForProblem(problem);
   const service = getServiceForProblem(problem);
   const tool = getRecommendedTool(problem);
-  const fit = PROBLEM_BUYER_FIT[problem.slug];
+  const fit = getProblemBuyerState(problem.slug);
 
   return (
     <article className="panel-obsidian panel-interactive grain-mask group flex h-full flex-col rounded-4xl border-l-4 border-l-transparent p-6 transition-colors hover:border-l-[#F05A28] md:p-7">
       <div className="flex flex-wrap items-center gap-2">
         <p className="meta-label text-[#F05A28]/90">{problemHubMetaLabel(problem.slug)}</p>
         <span className="rounded-full border border-[#F5F4F0]/18 px-3 py-1 font-mono text-[0.64rem] uppercase tracking-[0.12em] text-[#F5F4F0]/74">
-          {FIT_LABEL[fit]}
+          {getBuyerStateLabel(fit)}
         </span>
       </div>
       <h2 className="font-display mt-5 text-balance text-xl font-semibold leading-snug tracking-[-0.02em] text-[#F5F4F0] md:text-2xl">
@@ -172,6 +159,14 @@ export default function ProblemsPage() {
           </Link>
         </article>
       </section>
+
+      <div className="mt-6">
+        <FoundationPathwayMini
+          primaryHref={FOUNDATION_HREF}
+          secondaryHref={QUIZ_HREF}
+          secondaryLabel="Secondary: run the bottleneck quiz →"
+        />
+      </div>
 
       <p className="mt-8 max-w-3xl text-center text-sm leading-relaxed text-[#F5F4F0]/55 md:mx-auto">
         These are the six patterns most often holding growth back. Pick the one that sounds closest, then follow

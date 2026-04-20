@@ -249,6 +249,7 @@ export interface ToolResult {
   headline: string;
   description: string;
   problemCluster: ProblemCluster;
+  recommendedProofSlug: string;
   recommendedService: ServiceCluster;
   ctaLabel: string;
   ctaHref: string;

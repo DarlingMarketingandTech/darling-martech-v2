@@ -1,8 +1,11 @@
 const LINKS = [
   { id: "symptoms", label: "Signals" },
-  { id: "understanding", label: "Context" },
+  { id: "cost", label: "Cost" },
+  { id: "system-breakdown", label: "System" },
+  { id: "system-fix", label: "Fix" },
   { id: "proof", label: "Proof" },
   { id: "tools", label: "Tools" },
+  { id: "next-step", label: "Next step" },
   { id: "explore", label: "More" },
 ] as const;
 

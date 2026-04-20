@@ -8,6 +8,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SERVICE_VISUAL_BY_SLUG } from "@/data/service-visuals";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
+import { FoundationPathwayMini } from "@/components/shared/FoundationPathwayMini";
 
 export const metadata = buildMetadata({
   title: "Technical Roadmap",
@@ -106,6 +107,15 @@ export default function TechnicalRoadmapPage() {
           ))}
         </div>
       </BandSection>
+
+      <SectionWrapper className="mt-12">
+        <FoundationPathwayMini
+          primaryHref={siteConfig.calComLink}
+          primaryLabel="Scope your first-system build →"
+          secondaryHref="/problems"
+          secondaryLabel="Secondary: map your problem first →"
+        />
+      </SectionWrapper>
 
       {/* SKUs */}
       <SectionWrapper className="mt-14">

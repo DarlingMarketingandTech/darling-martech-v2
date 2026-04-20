@@ -17,7 +17,17 @@ export function SymptomList({ symptoms, id }: SymptomListProps) {
         {symptoms.map((symptom) => (
           <li key={symptom} className="flex gap-3">
             <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#F05A28]" aria-hidden />
-            <p className="text-[0.9375rem] leading-7 text-[#F5F4F0]/76">{symptom}</p>
+            <p className="text-[0.9375rem] leading-7 text-[#F5F4F0]/76">
+              {symptom.includes("—") ? (
+                <>
+                  <span className="font-semibold text-[#F5F4F0]">{symptom.split("—")[0]?.trim()}</span>
+                  {" — "}
+                  {symptom.split("—").slice(1).join("—").trim()}
+                </>
+              ) : (
+                symptom
+              )}
+            </p>
           </li>
         ))}
       </ul>

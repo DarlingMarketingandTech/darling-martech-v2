@@ -20,7 +20,7 @@ export const homepageData = {
       afterAccent: "",
     },
     subhead:
-      "I diagnose, rebuild, and run growth systems that capture leads, convert demand, automate follow-up, and make reporting trustworthy. If your stack is broken or missing, this is where we fix it.",
+      "I diagnose, rebuild, and run growth systems that capture leads, convert demand, automate follow-up, and make reporting trustworthy. If your stack is broken or missing, this is where I fix it.",
     primaryCta: { label: "Find your bottleneck →", href: "/tools/growth-bottleneck-quiz" },
     secondaryCta: { label: "Book a system diagnostic →", href: "/contact" },
   },

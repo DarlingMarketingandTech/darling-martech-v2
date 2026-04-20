@@ -21,12 +21,20 @@ function getRailCaseStudies(): CaseStudy[] {
   return out;
 }
 
-export function HomepageProofRail() {
+type HomepageProofRailProps = {
+  className?: string;
+};
+
+export function HomepageProofRail({ className }: HomepageProofRailProps) {
   const studies = getRailCaseStudies();
 
   return (
     <section
-      className="border-y border-[#F5F4F0]/10 bg-[#0e0e12] px-4 py-16 md:px-8 md:py-20"
+      className={cn(
+        "border-y border-[#F5F4F0]/10 bg-[#0e0e12] px-4 py-16 md:px-8 md:py-20",
+        "mt-6 md:mt-8",
+        className
+      )}
       aria-label="Selected client work"
     >
       <div className="mx-auto max-w-6xl">

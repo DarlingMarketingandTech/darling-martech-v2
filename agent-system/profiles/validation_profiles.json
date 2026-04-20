@@ -1,0 +1,32 @@
+{
+  "audit": {
+    "lint": false,
+    "typecheck": false,
+    "build": false,
+    "targetedChecks": ["diff-is-empty-or-readonly", "summary-matches-observations"]
+  },
+  "surgical_fix": {
+    "lint": true,
+    "typecheck": true,
+    "build": false,
+    "targetedChecks": ["route-consistency", "internal-link-integrity", "metadata-consistency"]
+  },
+  "implementation": {
+    "lint": true,
+    "typecheck": true,
+    "build": false,
+    "targetedChecks": ["changed-surface-smoke-check", "scope-vs-profile-check"]
+  },
+  "design_media": {
+    "lint": true,
+    "typecheck": true,
+    "build": false,
+    "targetedChecks": ["asset-path-integrity", "canonical-route-and-meta-consistency"]
+  },
+  "refactor": {
+    "lint": true,
+    "typecheck": true,
+    "build": true,
+    "targetedChecks": ["rollback-path-documented", "unrelated-diff-absence"]
+  }
+}

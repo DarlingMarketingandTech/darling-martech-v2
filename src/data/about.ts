@@ -29,7 +29,7 @@ export const aboutPageData = {
       "I started Darling MarTech in 2026 because small businesses deserve access to the same quality of strategic thinking and technical execution that used to require a 15-person agency team. They don't need 15 people. They need one person who can hold the whole system, make the right calls, and actually do the work.",
       "That's the company. That's the offer. You work with me, directly, on every part of the engagement.",
     ],
-    imageId: "studio/jacob-portrait",
+    imageId: "c_fill,g_auto,w_900,h_1200/e_sharpen/studio/graphic-design/bio-featured-2",
   },
   credentials: [
     { value: "15+ years", label: "Marketing strategy & technical execution" },

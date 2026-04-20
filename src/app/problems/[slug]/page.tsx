@@ -6,10 +6,12 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { ProblemClosingSection } from "@/components/problems/ProblemClosingSection";
 import { ProblemNav } from "@/components/problems/ProblemNav";
+import { ProblemProofAngles } from "@/components/problems/ProblemProofAngles";
 import { SymptomList } from "@/components/problems/SymptomList";
 import { ProofGrid } from "@/components/proof/ProofGrid";
 import { PageHero } from "@/components/hero/PageHero";
 import { problemPages } from "@/data/problems";
+import { getProofAnglesForProblem } from "@/data/proof-angles";
 import { caseStudies } from "@/data/work/work-index";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -46,6 +48,11 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
 
   const relatedProof = caseStudies.filter((study) => problem.relatedProof.includes(study.slug));
   const primaryService = services.find((s) => s.slug === problem.relatedService);
+  const proofAnglesForProblem = getProofAnglesForProblem(problem.slug, {
+    limit: 4,
+    preferredParentSlugs: problem.relatedProof,
+  });
+  const parentProofTitles = new Map(caseStudies.map((study) => [study.slug, study.title]));
 
   return (
     <SiteShell>
@@ -91,13 +98,18 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
         </BandSection>
       </div>
 
-      {relatedProof.length ? (
-        <div className="mt-14">
-          <p className="meta-label text-[#F05A28]/90">Relevant proof</p>
-          <div className="tech-divider my-4 max-w-md" />
-          <div className="mt-4">
-            <ProofGrid caseStudies={relatedProof} />
-          </div>
+      {proofAnglesForProblem.length || relatedProof.length ? (
+        <div className="mt-14 space-y-10">
+          <ProblemProofAngles angles={proofAnglesForProblem} parentTitles={parentProofTitles} />
+          {relatedProof.length ? (
+            <div>
+              <p className="meta-label text-[#F05A28]/90">Relevant proof</p>
+              <div className="tech-divider my-4 max-w-md" />
+              <div className="mt-4">
+                <ProofGrid caseStudies={relatedProof} />
+              </div>
+            </div>
+          ) : null}
         </div>
       ) : null}
 

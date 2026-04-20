@@ -1,0 +1,72 @@
+{
+  "audit": {
+    "purpose": "Inspection-only repository assessment with ranked issues and safest next move.",
+    "riskLevel": "low",
+    "allowedFileGlobs": [],
+    "expectedFileBehavior": "No edits, no branch operations.",
+    "validationRequirements": ["diff-scope-check", "output-integrity-check"],
+    "stopConditions": ["any-file-edit", "branch-creation-attempt"],
+    "prEligibility": "not_eligible",
+    "maxFiles": 0,
+    "intentionallyNotChanged": [
+      "Application code and data",
+      "Routes, components, and config not explicitly requested"
+    ]
+  },
+  "surgical_fix": {
+    "purpose": "Small, bounded correction with strict diff containment.",
+    "riskLevel": "low",
+    "allowedFileGlobs": ["src/", "next.config.ts", "agent-system/"],
+    "expectedFileBehavior": "Minimal files, no broad rewrites.",
+    "validationRequirements": ["diff-scope-check", "targeted-validation", "route-and-link-consistency"],
+    "stopConditions": ["unexpected-files", "broad-rewrite-pattern", "placeholder-detected", "comment-removal-unjustified"],
+    "prEligibility": "eligible_if_safe",
+    "maxFiles": 5,
+    "intentionallyNotChanged": [
+      "Unrelated content-heavy pages",
+      "Architecture-level runtime changes"
+    ]
+  },
+  "implementation": {
+    "purpose": "Medium-scope delivery with declared boundaries and verification checklist.",
+    "riskLevel": "medium",
+    "allowedFileGlobs": ["src/", "docs/", "agent-system/", "next.config.ts", "package.json"],
+    "expectedFileBehavior": "Bounded set of files with explicit in-scope and out-of-scope summary.",
+    "validationRequirements": ["lint", "typecheck", "targeted-build-checks", "output-integrity-check"],
+    "stopConditions": ["unexpected-files", "placeholder-detected", "required-validation-failure"],
+    "prEligibility": "eligible_if_safe",
+    "maxFiles": 20,
+    "intentionallyNotChanged": [
+      "Unrelated service/tool/proof route groups",
+      "Non-requested design-system rewrites"
+    ]
+  },
+  "design_media": {
+    "purpose": "Design-system and media-safe edits with minimal runtime risk.",
+    "riskLevel": "medium",
+    "allowedFileGlobs": ["src/components/", "src/data/", "public/", "agent-system/", "src/lib/cloudinary.ts"],
+    "expectedFileBehavior": "Prefer config/content/asset wiring over architecture edits.",
+    "validationRequirements": ["lint", "typecheck", "asset-reference-check", "metadata-consistency"],
+    "stopConditions": ["unexpected-runtime-architecture-edit", "placeholder-detected", "required-validation-failure"],
+    "prEligibility": "eligible_if_safe",
+    "maxFiles": 25,
+    "intentionallyNotChanged": [
+      "Core app routing architecture unless explicitly requested",
+      "Server runtime internals unrelated to media/design scope"
+    ]
+  },
+  "refactor": {
+    "purpose": "Explicitly approved structural change with risk documentation and rollback plan.",
+    "riskLevel": "high",
+    "allowedFileGlobs": ["src/", "docs/", "agent-system/", "next.config.ts", "package.json", "tsconfig.json"],
+    "expectedFileBehavior": "Broad but intentional edits with elevated review burden.",
+    "validationRequirements": ["lint", "typecheck", "build", "diff-risk-review", "rollback-readiness"],
+    "stopConditions": ["required-validation-failure", "no-rollback-path", "unbounded-scope-expansion"],
+    "prEligibility": "eligible_with_high_scrutiny",
+    "maxFiles": 80,
+    "intentionallyNotChanged": [
+      "Non-approved migration domains",
+      "Infrastructure/deployment settings unless in approved refactor scope"
+    ]
+  }
+}

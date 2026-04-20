@@ -4,6 +4,7 @@ import { FounderHero } from "@/components/about/FounderHero";
 import { CredentialsBar } from "@/components/about/CredentialsBar";
 import { CareerTimeline } from "@/components/about/CareerTimeline";
 import { DifferentiatorGrid } from "@/components/about/DifferentiatorGrid";
+import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { aboutMeta, aboutPageData } from "@/data/about";
@@ -38,6 +39,24 @@ export default function AboutPage() {
       <BandSection className="mt-14">
         <SectionHeader eyebrow={aboutPageData.differentiators.eyebrow} title={aboutPageData.differentiators.title} />
         <DifferentiatorGrid items={aboutPageData.differentiators.items} />
+      </BandSection>
+
+      <BandSection className="mt-14">
+        <SectionHeader
+          eyebrow="Cloudinary stitch visual"
+          title="Connected media pipeline test on About."
+          body="This image is loaded from the Cloudinary `darling martech v2/stitch images` folder using the site's standard Cloudinary image loader."
+        />
+        <div className="mt-8 overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]">
+          <CloudinaryImage
+            publicId="system_pipeline_visualization_variant"
+            alt="System pipeline visualization generated from Stitch and served via Cloudinary."
+            width={1376}
+            height={768}
+            sizes="(max-width: 1024px) 100vw, 1200px"
+            className="h-auto w-full object-cover"
+          />
+        </div>
       </BandSection>
 
       <BandSection className="mt-14">

@@ -1,7 +1,7 @@
 import { tools } from "@/data/labs";
 import { services } from "@/data/services";
 import { caseStudies } from "@/data/work/work-index";
-import type { ProofAngle, ServiceCluster } from "@/types";
+import type { ProblemCluster, ProofAngle, ServiceCluster } from "@/types";
 
 const CASE_SLUGS = new Set(caseStudies.map((c) => c.slug));
 const SERVICE_SLUGS = new Set<ServiceCluster>(services.map((s) => s.slug));
@@ -562,6 +562,7 @@ assertDatasetIntegrity(PROOF_ANGLES);
 const byProject = new Map<string, ProofAngle[]>();
 const byService = new Map<ServiceCluster, ProofAngle[]>();
 const byTool = new Map<string, ProofAngle[]>();
+const byProblem = new Map<ProblemCluster, ProofAngle[]>();
 
 for (const angle of PROOF_ANGLES) {
   const projectList = byProject.get(angle.parentProjectSlug) ?? [];
@@ -572,6 +573,10 @@ for (const angle of PROOF_ANGLES) {
   primaryList.push(angle);
   byService.set(angle.primaryServiceSlug, primaryList);
 
+  const problemList = byProblem.get(angle.problemKey) ?? [];
+  problemList.push(angle);
+  byProblem.set(angle.problemKey, problemList);
+
   if (angle.toolSlug) {
     const tList = byTool.get(angle.toolSlug) ?? [];
     tList.push(angle);
@@ -581,6 +586,82 @@ for (const angle of PROOF_ANGLES) {
 
 export function getProofAnglesForProject(parentProjectSlug: string): ProofAngle[] {
   return byProject.get(parentProjectSlug) ?? [];
+}
+
+export type GetProofAnglesForProblemOptions = {
+  /** Max angles to return (default 4). */
+  limit?: number;
+  /**
+   * Case study slugs shown in the page’s main proof grid (`relatedProof`).
+   * Angles from **other** parents rank first so the block extends evidence without
+   * repeating the same headline cases; among grid parents, earlier slug ranks higher.
+   */
+  preferredParentSlugs?: readonly string[];
+};
+
+/**
+ * Proof angles whose `problemKey` matches the canonical problem slug.
+ * Surfaces angles from parents **not** in `preferredParentSlugs` first (extra specificity
+ * vs. the proof cards), then parents that appear in the grid, in listed order.
+ * Spreads across parent proofs before taking a second angle from the same case.
+ */
+export function getProofAnglesForProblem(
+  problemSlug: ProblemCluster,
+  options?: GetProofAnglesForProblemOptions,
+): ProofAngle[] {
+  const limit = options?.limit ?? 4;
+  const preferred = options?.preferredParentSlugs ?? [];
+  const preferredSet = new Set(preferred);
+  const prefIndex = (parentSlug: string) => {
+    const i = preferred.indexOf(parentSlug);
+    return i === -1 ? preferred.length + 1 : i;
+  };
+
+  const matches = byProblem.get(problemSlug) ?? [];
+  if (!matches.length) return [];
+
+  const sorted = [...matches].sort((a, b) => {
+    const aIn = preferredSet.has(a.parentProjectSlug) ? 1 : 0;
+    const bIn = preferredSet.has(b.parentProjectSlug) ? 1 : 0;
+    if (aIn !== bIn) return aIn - bIn;
+
+    if (aIn === 1) {
+      const pa = prefIndex(a.parentProjectSlug);
+      const pb = prefIndex(b.parentProjectSlug);
+      if (pa !== pb) return pa - pb;
+    } else {
+      const pc = a.parentProjectSlug.localeCompare(b.parentProjectSlug);
+      if (pc !== 0) return pc;
+    }
+
+    const ta = a.toolSlug ? 0 : 1;
+    const tb = b.toolSlug ? 0 : 1;
+    if (ta !== tb) return ta - tb;
+    return a.id.localeCompare(b.id);
+  });
+
+  const out: ProofAngle[] = [];
+  const seenParents = new Set<string>();
+
+  for (const angle of sorted) {
+    if (seenParents.has(angle.parentProjectSlug)) continue;
+    out.push(angle);
+    seenParents.add(angle.parentProjectSlug);
+    if (out.length >= limit) return out;
+  }
+
+  for (const angle of sorted) {
+    if (out.length >= limit) break;
+    if (out.some((o) => o.id === angle.id)) continue;
+    out.push(angle);
+  }
+
+  return out.slice(0, limit);
+}
+
+/** All proof angles grouped by canonical `problemKey`. */
+export function groupProofAnglesByProblem(): ReadonlyMap<ProblemCluster, ProofAngle[]> {
+  return byProblem;
 }
 
 /** Proof angles where this service is the primary capability (used on `/services` hub). */

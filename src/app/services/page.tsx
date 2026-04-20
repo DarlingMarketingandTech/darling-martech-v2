@@ -5,7 +5,12 @@ import { BandSection } from "@/components/layout/BandSection";
 import { PageHero } from "@/components/hero/PageHero";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/button";
-import { services, SERVICE_PILLARS } from "@/data/services";
+import {
+  services,
+  SERVICE_DISPLAY_CLUSTERS,
+  SERVICE_DISPLAY_CLUSTER_ORDER,
+  getServicesByCluster,
+} from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
 
@@ -17,29 +22,87 @@ export const metadata = buildMetadata({
 });
 
 export default function ServicesIndexPage() {
-  const roadmap = services.find((s) => s.slug === "technical-roadmap");
-  const pillarServices = SERVICE_PILLARS.map((pillar) => ({
-    ...pillar,
-    items: services.filter((s) => s.pillar === pillar.id && s.slug !== "technical-roadmap"),
+  const strategicLead = services.find((service) => service.slug === "fractional-cmo");
+  const clusterSections = SERVICE_DISPLAY_CLUSTER_ORDER.map((clusterId) => ({
+    id: clusterId,
+    ...SERVICE_DISPLAY_CLUSTERS[clusterId],
+    items: getServicesByCluster(clusterId),
   }));
 
   return (
     <SiteShell>
       <PageHero
         eyebrow="CAPABILITIES"
-        headline="Full-stack technical marketing — built after the real problem is named."
-        body="Revenue engineering, AI-enabled automation, and custom infrastructure. Most engagements span more than one pillar; the scope depends on what the system actually needs."
+        headline="Find the layer that is constraining growth."
+        body="Use these clusters to self-sort by outcome: grow demand, remove operational drag, or strengthen the system underneath the business."
       />
 
-      {/* Pillar sections */}
-      {pillarServices.map((pillar, pillarIndex) => (
-        <SectionWrapper key={pillar.id} className={pillarIndex === 0 ? "mt-14" : "mt-16"}>
-          <div className="mb-8 border-b border-[#F5F4F0]/8 pb-6">
-            <Eyebrow>{pillar.label}</Eyebrow>
-            <p className="mt-2 max-w-2xl text-sm text-[#F5F4F0]/55">{pillar.description}</p>
+      <SectionWrapper className="mt-14">
+        <div className="rounded-3xl border border-[#F5F4F0]/8 px-6 py-6 md:px-8">
+          <Eyebrow>How to use this page</Eyebrow>
+          <p className="mt-3 max-w-3xl text-sm text-[#F5F4F0]/70">
+            Start with the buyer problem, not the deliverable list. Choose the cluster that
+            matches your current constraint, then review the services inside that lane.
+          </p>
+          <ul className="mt-5 grid gap-3 text-sm text-[#F5F4F0]/60 md:grid-cols-3">
+            <li className="rounded-2xl border border-[#F5F4F0]/8 px-4 py-3">
+              Need more qualified demand and stronger conversion flow.
+            </li>
+            <li className="rounded-2xl border border-[#F5F4F0]/8 px-4 py-3">
+              Need less manual operations and cleaner lifecycle execution.
+            </li>
+            <li className="rounded-2xl border border-[#F5F4F0]/8 px-4 py-3">
+              Need stronger infrastructure, site systems, and brand foundation.
+            </li>
+          </ul>
+        </div>
+      </SectionWrapper>
+
+      {strategicLead && (
+        <BandSection className="mt-16">
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+            <div className="max-w-2xl">
+              <Eyebrow>Strategic leadership across the stack</Eyebrow>
+              <h2 className="font-display mt-3 text-2xl font-semibold text-[#F5F4F0] md:text-3xl">
+                {strategicLead.title}
+              </h2>
+              <p className="mt-3 text-sm text-[#F5F4F0]/70">{strategicLead.headline}</p>
+              <p className="mt-4 text-[#F5F4F0]/72">{strategicLead.description}</p>
+              <ul className="mt-6 space-y-2">
+                {strategicLead.outcomes.map((outcome) => (
+                  <li key={outcome} className="flex items-start gap-2 text-sm text-[#F5F4F0]/60">
+                    <span className="mt-0.5 text-[#0FD9C8]">→</span>
+                    <span>{outcome}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-3 md:shrink-0">
+              <Button href={`/services/${strategicLead.slug}`} size="lg">
+                Explore Fractional CMO →
+              </Button>
+              <Button href={siteConfig.calComLink} variant="ghost" size="lg">
+                Book a strategy call
+              </Button>
+            </div>
           </div>
-          <ul className="grid gap-4 md:grid-cols-2">
-            {pillar.items.map((service) => (
+        </BandSection>
+      )}
+
+      {clusterSections.map((cluster, clusterIndex) => (
+        <SectionWrapper key={cluster.id} className={clusterIndex === 0 ? "mt-16" : "mt-14"}>
+          <div className="mb-8 border-b border-[#F5F4F0]/8 pb-6">
+            <Eyebrow>Service cluster</Eyebrow>
+            <h2 className="font-display mt-3 text-2xl font-semibold text-[#F5F4F0] md:text-3xl">
+              {cluster.label}
+            </h2>
+            <p className="mt-2 text-sm text-[#F5F4F0]/60">
+              {cluster.label} — {cluster.descriptor}
+            </p>
+            <p className="mt-3 max-w-3xl text-sm text-[#F5F4F0]/55">{cluster.description}</p>
+          </div>
+          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {cluster.items.map((service) => (
               <li key={service.slug}>
                 <Link
                   href={`/services/${service.slug}`}
@@ -49,6 +112,11 @@ export default function ServicesIndexPage() {
                       : "border-[#F5F4F0]/8"
                   }`}
                 >
+                  {service.slug === "technical-roadmap" ? (
+                    <span className="mb-3 inline-block rounded-full border border-[#0FD9C8]/40 px-2.5 py-1 text-xs text-[#0FD9C8]">
+                      Paid diagnostic entry offer
+                    </span>
+                  ) : null}
                   <h2 className="font-display text-lg font-semibold text-[#F5F4F0]">
                     {service.title}
                   </h2>
@@ -60,37 +128,6 @@ export default function ServicesIndexPage() {
           </ul>
         </SectionWrapper>
       ))}
-
-      {/* Technical Roadmap entry offer */}
-      {roadmap && (
-        <BandSection className="mt-16">
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-            <div className="max-w-xl">
-              <Eyebrow>Entry offer</Eyebrow>
-              <h2 className="font-display mt-3 text-2xl font-semibold text-[#F5F4F0] md:text-3xl">
-                {roadmap.title}
-              </h2>
-              <p className="mt-4 text-[#F5F4F0]/72">{roadmap.description}</p>
-              <ul className="mt-6 space-y-2">
-                {roadmap.outcomes.map((o) => (
-                  <li key={o} className="flex items-start gap-2 text-sm text-[#F5F4F0]/60">
-                    <span className="mt-0.5 text-[#0FD9C8]">→</span>
-                    <span>{o}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex flex-col gap-3 md:shrink-0">
-              <Button href={`/services/${roadmap.slug}`} size="lg">
-                See how it works →
-              </Button>
-              <Button href={siteConfig.calComLink} variant="ghost" size="lg">
-                Book a diagnostic call
-              </Button>
-            </div>
-          </div>
-        </BandSection>
-      )}
 
       <SectionWrapper className="mt-14 text-center">
         <p className="font-display text-balance text-xl font-semibold text-[#F5F4F0] md:text-2xl">

@@ -316,3 +316,68 @@ export const SERVICE_PILLARS = [
       "Build the brand, content, and web systems that shape perception, establish trust, and turn attention into qualified demand.",
   },
 ] as const;
+
+type ServiceDisplayClusterId = "grow" | "scale" | "build";
+
+type ServiceDisplayCluster = {
+  label: "Grow" | "Scale" | "Build";
+  descriptor: string;
+  description: string;
+  serviceSlugs: Service["slug"][];
+};
+
+export const SERVICE_DISPLAY_CLUSTER_ORDER: ServiceDisplayClusterId[] = [
+  "grow",
+  "scale",
+  "build",
+];
+
+export const SERVICE_DISPLAY_CLUSTERS: Record<ServiceDisplayClusterId, ServiceDisplayCluster> = {
+  grow: {
+    label: "Grow",
+    descriptor: "demand, visibility, and conversion",
+    description:
+      "For bottlenecks around acquisition quality, search presence, and conversion performance.",
+    serviceSlugs: [
+      "attribution-analytics",
+      "content-seo-systems",
+      "digital-marketing-strategy",
+      "paid-media-management",
+      "conversion-optimization",
+    ],
+  },
+  scale: {
+    label: "Scale",
+    descriptor: "automation, CRM, and operational leverage",
+    description:
+      "For teams that need cleaner workflows, faster response loops, and less operational drag.",
+    serviceSlugs: [
+      "ai-automation",
+      "automation-systems",
+      "martech-stack-build",
+      "crm-architecture",
+    ],
+  },
+  build: {
+    label: "Build",
+    descriptor: "infrastructure, experience, and brand foundation",
+    description:
+      "For foundational system, experience, and architecture work that supports every downstream channel.",
+    serviceSlugs: [
+      "custom-infrastructure",
+      "technical-roadmap",
+      "brand-identity",
+      "website-design",
+      "content-creation",
+      "social-media-marketing",
+    ],
+  },
+};
+
+const serviceBySlug = new Map(services.map((service) => [service.slug, service]));
+
+export function getServicesByCluster(clusterId: ServiceDisplayClusterId): Service[] {
+  return SERVICE_DISPLAY_CLUSTERS[clusterId].serviceSlugs
+    .map((slug) => serviceBySlug.get(slug))
+    .filter((service): service is Service => Boolean(service));
+}

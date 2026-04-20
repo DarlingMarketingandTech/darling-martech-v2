@@ -2,7 +2,7 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { HomepageHero } from "@/components/hero/HomepageHero";
-import { ProofTicker } from "@/components/home/ProofTicker";
+import { HomepageProofRail } from "@/components/home/HomepageProofRail";
 import { DiagnosticOrangeBand } from "@/components/home/DiagnosticOrangeBand";
 import { InsightsNewsletterBand } from "@/components/home/InsightsNewsletterBand";
 import { IcpBlock } from "@/components/home/IcpBlock";
@@ -27,17 +27,9 @@ export default function HomePage() {
 
   return (
     <SiteShell>
-      <HomepageHero
-        eyebrow={homepageData.hero.eyebrow}
-        headline={homepageData.hero.headline}
-        subhead={homepageData.hero.subhead}
-        primaryCta={homepageData.hero.primaryCta}
-        secondaryCta={homepageData.hero.secondaryCta}
-      />
+      <HomepageHero />
 
-      <div className="mt-6">
-        <ProofTicker metrics={homepageData.proofBar} />
-      </div>
+      <HomepageProofRail />
 
       <SectionWrapper className="mt-14">
         <SectionReveal>

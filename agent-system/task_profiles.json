@@ -1,0 +1,115 @@
+{
+  "version": "1.0.0",
+  "profiles": {
+    "component_upgrade": {
+      "description": "Improve an existing component's layout, spacing, hierarchy, responsiveness, accessibility, motion, and CTA clarity.",
+      "implementation_constraints": {
+        "max_files_touched": 3,
+        "min_files_touched": 1,
+        "dependency_policy": "no-new-dependencies-unless-justified"
+      },
+      "inputs": [
+        "component_path",
+        "page_context",
+        "goal",
+        "constraints"
+      ],
+      "required_checks": [
+        "component_scorecard",
+        "interaction_rules",
+        "visual_hierarchy_rules",
+        "a11y_baseline"
+      ],
+      "deliverables": [
+        "diagnosis",
+        "bounded_change_plan",
+        "implementation_patch",
+        "before_after_notes"
+      ]
+    },
+    "page_experience_upgrade": {
+      "description": "Upgrade full-page structure, narrative flow, UX clarity, section sequencing, visual polish, and conversion logic.",
+      "implementation_constraints": {
+        "full_rewrites_allowed": false,
+        "must_preserve_existing_structure": true,
+        "structure_exceptions_require_explicit_approval": true
+      },
+      "inputs": [
+        "page_route",
+        "target_outcome",
+        "audience",
+        "constraints"
+      ],
+      "required_checks": [
+        "page_scorecard",
+        "page_blueprints",
+        "proof_linkage",
+        "cta_architecture"
+      ],
+      "deliverables": [
+        "page_diagnosis",
+        "prioritized_plan",
+        "section_change_spec",
+        "implementation_patch"
+      ]
+    },
+    "asset_system": {
+      "description": "Generate and integrate visual assets through a controlled design workflow.",
+      "implementation_constraints": {
+        "direct_repo_edits_allowed": false,
+        "output_scope": [
+          "asset_specs",
+          "asset_prompts",
+          "asset_candidates",
+          "naming_and_mapping_docs"
+        ]
+      },
+      "inputs": [
+        "asset_request",
+        "placement",
+        "brand_constraints",
+        "delivery_target"
+      ],
+      "required_sequence": [
+        "define_purpose",
+        "define_placement",
+        "define_size_orientation",
+        "define_style_constraints",
+        "generate_or_select",
+        "name_and_organize",
+        "integrate_safely"
+      ],
+      "required_checks": [
+        "asset_naming_rules",
+        "cloudinary_mapping_rules",
+        "visual_hierarchy_alignment"
+      ],
+      "deliverables": [
+        "asset_brief",
+        "generation_prompt",
+        "export_spec",
+        "cloudinary_mapping",
+        "integration_notes"
+      ]
+    },
+    "design_system_enforcement": {
+      "description": "Audit and enforce consistency across tokens, typography, spacing, buttons, cards, and section shells.",
+      "inputs": [
+        "target_scope",
+        "token_sources",
+        "component_set"
+      ],
+      "required_checks": [
+        "design_consistency_audit",
+        "component_scorecard",
+        "page_scorecard"
+      ],
+      "deliverables": [
+        "consistency_report",
+        "violations_by_severity",
+        "fix_plan",
+        "implementation_patch"
+      ]
+    }
+  }
+}

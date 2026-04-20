@@ -39,7 +39,7 @@
     "riskLevel": "medium",
     "allowedFileGlobs": ["src/", "docs/", "agent-system/", "next.config.ts", "package.json"],
     "expectedFileBehavior": "Bounded set of files with explicit in-scope and out-of-scope summary.",
-    "validationRequirements": ["lint", "typecheck", "targeted-build-checks", "output-integrity-check"],
+    "validationRequirements": ["lint", "typecheck", "targeted-build-checks", "output-integrity-check", "strategic-alignment-check"],
     "stopConditions": ["unexpected-files", "placeholder-detected", "required-validation-failure"],
     "prEligibility": "eligible_if_safe",
     "maxFiles": 20,
@@ -60,6 +60,62 @@
     "intentionallyNotChanged": [
       "Core app routing architecture unless explicitly requested",
       "Server runtime internals unrelated to media/design scope"
+    ]
+  },
+  "component_upgrade": {
+    "purpose": "Upgrade component-level design quality without broad page rewrites.",
+    "riskLevel": "medium",
+    "allowedFileGlobs": ["src/components/", "agent-system/", "src/data/"],
+    "expectedFileBehavior": "Focused component changes with clear hierarchy and CTA outcomes.",
+    "validationRequirements": ["lint", "typecheck", "design-threshold-gate", "strategic-alignment-check"],
+    "stopConditions": ["unexpected-files", "required-validation-failure", "design-gate-blocked"],
+    "prEligibility": "eligible_if_safe",
+    "maxFiles": 12,
+    "intentionallyNotChanged": [
+      "Unrelated page route architecture",
+      "Non-requested design-system global rewrites"
+    ]
+  },
+  "page_experience_upgrade": {
+    "purpose": "Upgrade full-page experience quality with strict narrative and CTA structure gates.",
+    "riskLevel": "medium",
+    "allowedFileGlobs": ["src/app/", "src/components/", "src/data/", "agent-system/"],
+    "expectedFileBehavior": "Section-level upgrades that preserve trusted architecture boundaries.",
+    "validationRequirements": ["lint", "typecheck", "design-threshold-gate", "strategic-alignment-check"],
+    "stopConditions": ["required-validation-failure", "design-gate-blocked", "unexpected-files"],
+    "prEligibility": "eligible_if_safe",
+    "maxFiles": 25,
+    "intentionallyNotChanged": [
+      "Non-requested backend/runtime systems",
+      "Global brand token changes"
+    ]
+  },
+  "asset_system": {
+    "purpose": "Plan and stage design/media assets with restrained consistency gate checks.",
+    "riskLevel": "low",
+    "allowedFileGlobs": ["agent-system/", "public/", "src/data/", "src/lib/cloudinary.ts"],
+    "expectedFileBehavior": "Asset briefs, mapping, and controlled integration notes.",
+    "validationRequirements": ["design-threshold-gate", "asset-reference-check", "strategic-alignment-check"],
+    "stopConditions": ["design-gate-blocked", "unexpected-runtime-architecture-edit"],
+    "prEligibility": "eligible_if_safe",
+    "maxFiles": 20,
+    "intentionallyNotChanged": [
+      "Broad page rewrites",
+      "Unrequested component architecture changes"
+    ]
+  },
+  "design_system_enforcement": {
+    "purpose": "Enforce consistent tokens, hierarchy patterns, and premium visual restraint.",
+    "riskLevel": "medium",
+    "allowedFileGlobs": ["src/", "agent-system/"],
+    "expectedFileBehavior": "Targeted consistency updates with reusable patterns.",
+    "validationRequirements": ["lint", "typecheck", "design-threshold-gate", "strategic-alignment-check"],
+    "stopConditions": ["required-validation-failure", "design-gate-blocked"],
+    "prEligibility": "eligible_if_safe",
+    "maxFiles": 30,
+    "intentionallyNotChanged": [
+      "Content-heavy rewrites not tied to consistency objectives",
+      "Infrastructure/deployment settings"
     ]
   },
   "refactor": {

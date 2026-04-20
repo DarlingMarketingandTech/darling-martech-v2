@@ -33,3 +33,5 @@
 - Constrained profiles (`audit`, `surgical_fix`) stop on unrelated diff drift.
 - Placeholder text and unjustified comment removals are blocked.
 - Validation requirements are profile-specific, not generic.
+- Design modes also run heuristic scorecards and threshold gates; see `agent-system/docs/design-validation-gates.md`.
+- Strategy/page-generation work now runs strategic context scoring and anti-drift checks; see `agent-system/docs/strategic-context-layer.md`.

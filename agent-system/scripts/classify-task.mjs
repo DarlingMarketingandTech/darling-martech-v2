@@ -8,6 +8,10 @@ const MODE_KEYWORDS = {
   surgical_fix: ["fix", "typo", "redirect", "metadata", "link", "route", "slug", "single-line", "small"],
   implementation: ["implement", "build", "add", "create", "improve", "feature", "upgrade"],
   design_media: ["design", "media", "asset", "cloudinary", "image", "visual", "canva", "stitch"],
+  component_upgrade: ["component upgrade", "component polish", "component quality", "component hierarchy"],
+  page_experience_upgrade: ["page experience", "page flow", "page hierarchy", "landing page quality"],
+  asset_system: ["asset system", "asset brief", "asset mapping", "visual specs"],
+  design_system_enforcement: ["design system", "consistency audit", "token consistency", "design enforcement"],
   refactor: ["refactor", "restructure", "rewrite", "re-architect", "cleanup", "overhaul"],
 };
 

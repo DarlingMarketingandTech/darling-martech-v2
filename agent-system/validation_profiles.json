@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "profiles": {
+    "component_upgrade": {
+      "validators": [
+        "audit-component-quality"
+      ],
+      "execution_constraints": {
+        "max_files_touched": 3,
+        "dependency_changes": "must-be-justified"
+      },
+      "pass_criteria": {
+        "min_component_score": 75,
+        "a11y_issues": "no-critical",
+        "cta_clarity": "clear-primary-action",
+        "mobile_layout": "no-content-loss"
+      }
+    },
+    "page_experience_upgrade": {
+      "validators": [
+        "audit-page-experience"
+      ],
+      "execution_constraints": {
+        "allow_full_rewrite": false,
+        "preserve_structure_by_default": true,
+        "explicit_approval_required_for_structure_change": true
+      },
+      "pass_criteria": {
+        "min_page_score": 75,
+        "narrative_flow": "clear-progression",
+        "proof_linkage": "present-and-relevant",
+        "cta_architecture": "single-primary-per-section"
+      }
+    },
+    "asset_system": {
+      "validators": [
+        "asset-sequence-check",
+        "design-consistency-check"
+      ],
+      "execution_constraints": {
+        "allow_direct_repo_edits": false,
+        "deliverables_only": [
+          "specs",
+          "assets",
+          "mapping"
+        ]
+      },
+      "pass_criteria": {
+        "sequence_complete": true,
+        "naming_compliant": true,
+        "cloudinary_mapping_complete": true,
+        "placement_defined": true
+      }
+    },
+    "design_system_enforcement": {
+      "validators": [
+        "audit-design-consistency"
+      ],
+      "pass_criteria": {
+        "token_violations": "no-critical",
+        "heading_hierarchy": "consistent",
+        "spacing_rhythm": "stable",
+        "card_system": "no-overload-pattern"
+      }
+    }
+  }
+}

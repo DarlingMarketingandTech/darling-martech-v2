@@ -15,13 +15,37 @@
     "lint": true,
     "typecheck": true,
     "build": false,
-    "targetedChecks": ["changed-surface-smoke-check", "scope-vs-profile-check"]
+    "targetedChecks": ["changed-surface-smoke-check", "scope-vs-profile-check", "strategic-alignment-check", "buyer-path-coverage-check"]
   },
   "design_media": {
     "lint": true,
     "typecheck": true,
     "build": false,
     "targetedChecks": ["asset-path-integrity", "canonical-route-and-meta-consistency"]
+  },
+  "component_upgrade": {
+    "lint": true,
+    "typecheck": true,
+    "build": false,
+    "targetedChecks": ["component-design-scorecard", "cta-clarity-threshold", "a11y-baseline", "strategic-alignment-check"]
+  },
+  "page_experience_upgrade": {
+    "lint": true,
+    "typecheck": true,
+    "build": false,
+    "targetedChecks": ["page-experience-scorecard", "narrative-flow-threshold", "proof-and-cta-integration", "strategic-alignment-check", "buyer-path-coverage-check", "anti-persona-check"]
+  },
+  "asset_system": {
+    "lint": false,
+    "typecheck": false,
+    "build": false,
+    "targetedChecks": ["asset-brief-integrity", "consistency-threshold", "mapping-completeness", "strategic-alignment-check"]
+  },
+  "design_system_enforcement": {
+    "lint": true,
+    "typecheck": true,
+    "build": false,
+    "targetedChecks": ["consistency-scorecard", "token-rhythm-threshold", "repeated-pattern-reduction", "strategic-alignment-check"]
   },
   "refactor": {
     "lint": true,

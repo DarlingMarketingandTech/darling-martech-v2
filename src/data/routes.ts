@@ -61,4 +61,10 @@ export const routeMetadata: Record<string, PageMeta> = {
       "Healthcare, B2B SaaS, and legal/professional services — sector-specific pain points, solution architecture, and proof from real engagements.",
     canonicalUrl: "https://darlingmartech.com/industries",
   },
+  "/resources/newsletter": {
+    title: "Newsletter",
+    description:
+      "Get one practical martech insight per week from Jacob, focused on strategy, systems, and execution.",
+    canonicalUrl: "https://darlingmartech.com/resources/newsletter",
+  },
 };

@@ -9,6 +9,11 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "verify": "pnpm lint && pnpm typecheck && pnpm build",
+    "design:audit": "node agent-system/scripts/design-report.mjs",
+    "design:audit:json": "node agent-system/scripts/design-report.mjs --json",
+    "design:report": "node agent-system/scripts/design-report.mjs",
+    "strategy:audit": "node agent-system/scripts/strategy-report.mjs",
+    "strategy:audit:json": "node agent-system/scripts/strategy-report.mjs --json",
     "postbuild": "next-sitemap"
   },
   "dependencies": {

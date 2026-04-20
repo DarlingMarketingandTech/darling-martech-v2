@@ -86,6 +86,7 @@ export const urgentcareIndy: CaseStudy = {
     "Urgent trust-and-clarity UX system",
     "Local visibility to booking alignment",
   ],
+  cloudinaryImages: ["urgent-care-indy_home_page_-_desktop_website_view", "urgentcare-logo-anchor"],
   featured: true,
   publishedAt: "2024-05-01",
 };

@@ -89,6 +89,7 @@ export const licenseRequirementsNavigator: CaseStudy = {
     "Structured state SEO pages",
     "CE-motivated nurture sequence",
   ],
+  cloudinaryImages: ["3-website-page-promo", "graston-logo-png"],
   featured: false,
   publishedAt: "2024-02-01",
 };

@@ -34,7 +34,7 @@ export const russellPainting: CaseStudy = {
   ],
   implementationStackCategories: ["revenue-crm", "analytics-growth"],
   implementationPlatformSlugs: ["salesforce", "google"],
-  cloudinaryImages: ["studio/russell-painting"],
+  cloudinaryImages: ["russell-painting-website", "russell-painting-logo"],
   featured: true,
   publishedAt: "2024-03-01",
 };

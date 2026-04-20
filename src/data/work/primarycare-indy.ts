@@ -87,6 +87,7 @@ export const primarycareIndy: CaseStudy = {
     "Local visibility entry paths",
     "Healthcare trust signaling layer",
   ],
+  cloudinaryImages: ["primary-care-indy-website", "primarycare-logo-anchor"],
   featured: true,
   publishedAt: "2024-04-01",
 };

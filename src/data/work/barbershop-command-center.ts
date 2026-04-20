@@ -97,6 +97,7 @@ export const barbershopCommandCenter: CaseStudy = {
     "Review velocity pipeline",
     "Retention and reactivation system",
   ],
+  cloudinaryImages: ["hoosier-boy-barbershop-website-design", "hoosierboy-logo-anchor"],
   featured: false,
   publishedAt: "2023-09-01",
 };

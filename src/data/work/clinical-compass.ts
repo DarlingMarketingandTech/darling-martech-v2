@@ -90,6 +90,7 @@ export const clinicalCompass: CaseStudy = {
     "Reactivation sequences",
     "Reporting layer",
   ],
+  cloudinaryImages: ["pike-medical_home_page_-_desktop_website_view", "pmc-webheader-med"],
   featured: false,
   publishedAt: "2023-08-01",
 };

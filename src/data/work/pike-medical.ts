@@ -34,7 +34,7 @@ export const pikeMedical: CaseStudy = {
   ],
   implementationStackCategories: ["revenue-crm", "analytics-growth"],
   implementationPlatformSlugs: ["salesforce", "google", "wordpress"],
-  cloudinaryImages: ["studio/pike-medical"],
+  cloudinaryImages: ["pike-medical_home_page_-_desktop_website_view", "pmc-webheader-med"],
   featured: true,
   publishedAt: "2023-06-01",
 };

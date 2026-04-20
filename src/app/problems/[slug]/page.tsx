@@ -49,7 +49,6 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
 
   return (
     <SiteShell>
-      <ProblemNav problems={problemPages} activeProblem={problem.slug} />
       <div className="mt-10">
         <PageHero
           eyebrow={problem.pageEyebrow}
@@ -64,18 +63,21 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
 
       <div className="mt-14 space-y-14">
         <BandSection>
-          <p className="text-sm uppercase tracking-[0.24em] text-[#0FD9C8]">Why it happens</p>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-[#F5F4F0]/72">{problem.whyItHappens}</p>
+          <p className="meta-label-accent">Why it happens</p>
+          <div className="tech-divider my-4 max-w-md" />
+          <p className="max-w-3xl text-lg leading-8 text-[#F5F4F0]/72">{problem.whyItHappens}</p>
         </BandSection>
 
         <BandSection>
-          <p className="text-sm uppercase tracking-[0.24em] text-[#F05A28]">What it costs</p>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-[#F5F4F0]/72">{problem.stakes}</p>
+          <p className="meta-label text-[#F05A28]/90">What it costs</p>
+          <div className="tech-divider my-4 max-w-md" />
+          <p className="max-w-3xl text-lg leading-8 text-[#F5F4F0]/72">{problem.stakes}</p>
         </BandSection>
 
         <BandSection>
-          <p className="text-sm uppercase tracking-[0.24em] text-[#F05A28]">What the fix looks like</p>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-[#F5F4F0]/72">{problem.whatTheFixLooksLike}</p>
+          <p className="meta-label text-[#F05A28]/90">What the fix looks like</p>
+          <div className="tech-divider my-4 max-w-md" />
+          <p className="max-w-3xl text-lg leading-8 text-[#F5F4F0]/72">{problem.whatTheFixLooksLike}</p>
           {primaryService ? (
             <p className="mt-6">
               <Link
@@ -91,16 +93,18 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
 
       {relatedProof.length ? (
         <div className="mt-14">
-          <p className="text-sm uppercase tracking-[0.24em] text-[#F05A28]">Relevant proof</p>
-          <div className="mt-8">
+          <p className="meta-label text-[#F05A28]/90">Relevant proof</p>
+          <div className="tech-divider my-4 max-w-md" />
+          <div className="mt-4">
             <ProofGrid caseStudies={relatedProof} />
           </div>
         </div>
       ) : null}
 
       <div className="mt-14">
-        <p className="text-sm uppercase tracking-[0.24em] text-[#0FD9C8]">Relevant tools</p>
-        <ul className="mt-4 flex flex-col gap-3">
+        <p className="meta-label-accent">Relevant tools</p>
+        <div className="tech-divider my-4 max-w-md" />
+        <ul className="mt-2 flex flex-col gap-3">
           {problem.relevantTools.map((tool) => (
             <li key={tool.href}>
               <Link
@@ -112,6 +116,14 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className="mt-14">
+        <p className="meta-label text-[#F05A28]/90">Problems I solve</p>
+        <div className="tech-divider my-4 max-w-md" />
+        <div className="mt-2">
+          <ProblemNav problems={problemPages} activeProblem={problem.slug} />
+        </div>
       </div>
 
       <div className="mt-14">

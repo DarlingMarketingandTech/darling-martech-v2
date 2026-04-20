@@ -8,11 +8,17 @@ type ProblemCardProps = {
 
 export function ProblemCard({ problem }: ProblemCardProps) {
   return (
-    <article className="surface-card surface-card-interactive group rounded-[2rem] p-7">
+    <article className="panel-obsidian panel-interactive grain-mask group rounded-4xl p-7 md:p-8">
       <Eyebrow>{problem.hubCategory}</Eyebrow>
-      <h3 className="font-display text-balance mt-4 text-2xl font-semibold">{problem.title}</h3>
-      <p className="mt-3 text-base leading-7 text-[#F5F4F0]/72">{problem.heroSubhead}</p>
-      <p className="mt-5 font-mono text-xs leading-relaxed text-[#22C55E]/95 md:text-sm">{problem.proofChip}</p>
+      <div className="tech-divider mt-3 max-w-xs" />
+      <h3 className="font-display mt-4 text-balance text-2xl font-semibold leading-snug tracking-[-0.02em]">
+        {problem.title}
+      </h3>
+      <p className="mt-4 text-base leading-7 text-[#F5F4F0]/72">{problem.heroSubhead}</p>
+      <div className="tech-divider mt-6" />
+      <p className="mt-4 font-mono text-xs font-medium leading-relaxed tracking-tight text-[#0FD9C8] md:text-[0.8125rem]">
+        {problem.proofChip}
+      </p>
       <Link
         href={`/problems/${problem.slug}`}
         className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-[#F05A28] transition-all group-hover:text-[#ff6d40] group-hover:gap-2"

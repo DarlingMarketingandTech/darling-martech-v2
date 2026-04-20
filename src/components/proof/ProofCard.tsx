@@ -11,16 +11,23 @@ export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
   const outcomeLabel = OUTCOME_SLUG_LABELS[caseStudy.primaryOutcomeSlug];
 
   return (
-    <article className="surface-card surface-card-interactive grain-mask group flex h-full flex-col rounded-[2rem] border border-[#F5F4F0]/8 p-7">
-      <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#0FD9C8]">{outcomeLabel}</p>
+    <article className="panel-obsidian panel-interactive grain-mask group flex h-full flex-col rounded-4xl p-7 md:p-8">
+      <p className="meta-label-accent">{outcomeLabel}</p>
+      <p className="font-mono mt-3 text-[10px] font-medium uppercase tracking-[0.16em] text-[#F5F4F0]/38">
+        ref · {caseStudy.slug}
+      </p>
 
-      <p className="font-display mt-4 text-3xl font-semibold tracking-tight text-[#22C55E] md:text-4xl">
+      <div className="tech-divider mt-5" />
+
+      <p className="font-display mt-5 text-3xl font-semibold tracking-[-0.02em] text-[#0FD9C8] md:text-[2.125rem] md:leading-tight">
         {caseStudy.outcomeHeadline}
       </p>
 
-      <p className="mt-4 flex-1 text-base leading-7 text-[#F5F4F0]/72">{caseStudy.resultSummary}</p>
+      <div className="tech-divider my-5 max-w-md" />
 
-      <p className="mt-5 text-sm text-[#F5F4F0]/48">
+      <p className="flex-1 text-base leading-7 text-[#F5F4F0]/74">{caseStudy.resultSummary}</p>
+
+      <p className="meta-label mt-8 text-[#F5F4F0]/42">
         {caseStudy.clientName} · {caseStudy.clientContext}
       </p>
 
@@ -29,7 +36,7 @@ export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
           {caseStudy.systemsBuilt.map((system) => (
             <span
               key={system}
-              className="rounded-full border border-[#F5F4F0]/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-[#F5F4F0]/56"
+              className="rounded-md border border-[#F5F4F0]/12 bg-[#0C0C0E]/35 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#F5F4F0]/58"
             >
               {system}
             </span>

@@ -90,11 +90,11 @@ export function ContactForm({
     return (
       <div
         id="contact-form"
-        className="surface-card rounded-4xl border border-[#22C55E]/25 bg-[#22C55E]/6 p-8 md:p-10"
+        className="surface-card rounded-4xl border border-[#0FD9C8]/25 bg-[#0FD9C8]/6 p-8 md:p-10"
         role="status"
         aria-live="polite"
       >
-        <p className="text-2xl text-[#22C55E]" aria-hidden>
+        <p className="text-2xl text-[#0FD9C8]" aria-hidden>
           ✓
         </p>
         <h2 className="mt-4 font-display text-2xl font-semibold text-[#F5F4F0]">Message received.</h2>

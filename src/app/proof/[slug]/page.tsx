@@ -12,6 +12,8 @@ import { problemPages } from "@/data/problems";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
+const layerChipClass =
+  "rounded-md border border-[#F5F4F0]/12 bg-[#0C0C0E]/35 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#F5F4F0]/58";
 
 type ProofSlugPageProps = {
   params: Promise<{ slug: string }>;
@@ -66,9 +68,12 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
 
       {/* Metrics strip */}
       <BandSection className="mt-10">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="tech-divider mb-6 max-w-md" />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {study.metrics.map((metric) => (
-            <MonoMetric key={metric.label} value={metric.value} label={metric.label} />
+            <div key={metric.label} className="card-elevated-dark rounded-2xl px-4 py-4 md:px-5 md:py-5">
+              <MonoMetric value={metric.value} label={metric.label} animateValue={false} />
+            </div>
           ))}
         </div>
       </BandSection>
@@ -77,17 +82,19 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
       {(study.whyThisMattered || study.whatWasBroken?.length) && (
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {study.whyThisMattered && (
-            <div className="surface-card rounded-3xl p-7">
-              <p className="text-xs uppercase tracking-[0.24em] text-[#F05A28]">Why it mattered</p>
-              <p className="mt-4 leading-7 text-[#F5F4F0]/72">{study.whyThisMattered}</p>
+            <div className="panel-obsidian grain-mask rounded-3xl p-7 md:p-8">
+              <p className="meta-label text-[#F05A28]/90">Why it mattered</p>
+              <div className="tech-divider my-4 max-w-sm" />
+              <p className="leading-7 text-[#F5F4F0]/72">{study.whyThisMattered}</p>
             </div>
           )}
           {study.whatWasBroken?.length && (
-            <div className="surface-card rounded-3xl p-7">
-              <p className="text-xs uppercase tracking-[0.24em] text-[#F05A28]">What was broken</p>
-              <ul className="mt-4 space-y-2">
+            <div className="panel-titanium grain-mask rounded-3xl p-7 md:p-8">
+              <p className="meta-label text-[#F05A28]/90">What was broken</p>
+              <div className="tech-divider my-4 max-w-sm" />
+              <ul className="space-y-2">
                 {study.whatWasBroken.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-[#F5F4F0]/60">
+                  <li key={item} className="flex items-start gap-2 text-sm text-[#F5F4F0]/65">
                     <span className="mt-0.5 text-[#F05A28]">→</span>
                     <span>{item}</span>
                   </li>
@@ -101,18 +108,24 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
       {/* Build sections */}
       {study.buildSections?.length && (
         <SectionWrapper className="mt-14">
-          <p className="text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">What was built</p>
-          <div className="mt-6 flex flex-col gap-5">
+          <p className="meta-label-accent">What was built</p>
+          <div className="tech-divider my-5 max-w-md" />
+          <div className="flex flex-col">
             {study.buildSections.map((section, i) => (
-              <div key={section.title} className="flex gap-5">
-                <span className="font-mono mt-1 text-xs text-[#0FD9C8] shrink-0">0{i + 1}</span>
-                <div>
-                  <h3 className="font-display text-base font-semibold text-[#F5F4F0]">
-                    {section.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/60">
-                    {section.description}
-                  </p>
+              <div key={section.title}>
+                {i > 0 ? <div className="tech-divider my-6 max-w-2xl" /> : null}
+                <div className="flex gap-5">
+                  <span className="font-mono mt-0.5 shrink-0 text-[11px] font-semibold tabular-nums tracking-wider text-[#0FD9C8]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-base font-semibold text-[#F5F4F0]">
+                      {section.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/62">
+                      {section.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -124,21 +137,20 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
       {(study.operatingImpact || study.implementationLayers?.length) && (
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {study.operatingImpact && (
-            <div className="surface-card rounded-3xl p-7">
-              <p className="text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">Operating impact</p>
-              <p className="mt-4 text-sm leading-relaxed text-[#F5F4F0]/72">{study.operatingImpact}</p>
+            <div className="panel-obsidian grain-mask rounded-3xl p-7 md:p-8">
+              <p className="meta-label-accent">Operating impact</p>
+              <div className="tech-divider my-4 max-w-sm" />
+              <p className="text-sm leading-relaxed text-[#F5F4F0]/72">{study.operatingImpact}</p>
             </div>
           )}
           {study.implementationLayers?.length && (
-            <div className="surface-card rounded-3xl p-7">
-              <p className="text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">Implementation layers</p>
-              <ul className="mt-4 space-y-2">
+            <div className="panel-titanium grain-mask rounded-3xl p-7 md:p-8">
+              <p className="meta-label-accent">Implementation layers</p>
+              <div className="tech-divider my-4 max-w-sm" />
+              <ul className="flex flex-wrap gap-2">
                 {study.implementationLayers.map((layer) => (
-                  <li
-                    key={layer}
-                    className="rounded-full border border-[#F5F4F0]/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-[#F5F4F0]/56 inline-block mr-2 mb-2"
-                  >
-                    {layer}
+                  <li key={layer}>
+                    <span className={layerChipClass}>{layer}</span>
                   </li>
                 ))}
               </ul>
@@ -149,15 +161,13 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
 
       {/* Fallback full story for older proofs without new fields */}
       {!study.buildSections?.length && study.fullStory && (
-        <div className="surface-card mt-14 rounded-3xl p-8">
-          <p className="text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">Full story</p>
-          <p className="mt-4 text-lg leading-8 text-[#F5F4F0]/72">{study.fullStory}</p>
+        <div className="panel-obsidian grain-mask mt-14 rounded-3xl p-8 md:p-9">
+          <p className="meta-label-accent">Full story</p>
+          <div className="tech-divider my-5 max-w-md" />
+          <p className="text-lg leading-8 text-[#F5F4F0]/72">{study.fullStory}</p>
           <div className="mt-8 flex flex-wrap gap-2">
             {study.systemsBuilt.map((system) => (
-              <span
-                key={system}
-                className="rounded-full border border-[#F5F4F0]/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-[#F5F4F0]/56"
-              >
+              <span key={system} className={layerChipClass}>
                 {system}
               </span>
             ))}
@@ -168,8 +178,9 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
       {/* Related problems */}
       {relatedProblems.length > 0 && (
         <BandSection className="mt-14">
-          <p className="text-xs uppercase tracking-[0.24em] text-[#F05A28]">This work solved</p>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <p className="meta-label text-[#F05A28]/90">This work solved</p>
+          <div className="tech-divider my-4 max-w-sm" />
+          <div className="mt-2 flex flex-wrap gap-3">
             {relatedProblems.map((problem) => (
               <Link
                 key={problem.slug}
@@ -186,8 +197,9 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
       {/* Related services */}
       {relatedServices.length > 0 && (
         <SectionWrapper className="mt-10">
-          <p className="text-xs uppercase tracking-[0.24em] text-[#F05A28]">Capabilities demonstrated</p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <p className="meta-label text-[#F05A28]/90">Capabilities demonstrated</p>
+          <div className="tech-divider my-4 max-w-sm" />
+          <div className="mt-2 flex flex-wrap gap-3">
             {relatedServices.map((s) => (
               <Link
                 key={s.slug}
@@ -204,8 +216,9 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
       {/* Related proofs */}
       {relatedProofs.length > 0 && (
         <SectionWrapper className="mt-10">
-          <p className="text-xs uppercase tracking-[0.24em] text-[#F5F4F0]/40">Related proof</p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <p className="meta-label text-[#F5F4F0]/42">Related proof</p>
+          <div className="tech-divider my-4 max-w-sm" />
+          <div className="mt-2 flex flex-wrap gap-3">
             {relatedProofs.map((c) => (
               <Link
                 key={c.slug}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +10,8 @@ type MonoMetricProps = {
   label?: string;
   size?: "sm" | "md" | "lg";
   className?: string;
+  /** When false, shows final value immediately (no count-up). Still respects `prefers-reduced-motion`. */
+  animateValue?: boolean;
 };
 
 function parseMetric(value: string) {
@@ -30,14 +32,23 @@ function parseMetric(value: string) {
   };
 }
 
-export function MonoMetric({ value, label, size = "md", className }: MonoMetricProps) {
+export function MonoMetric({
+  value,
+  label,
+  size = "md",
+  className,
+  animateValue = true,
+}: MonoMetricProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, amount: 0.6 });
+  const reduceMotion = useReducedMotion();
   const parsed = useMemo(() => parseMetric(value), [value]);
   const [displayValue, setDisplayValue] = useState(value);
 
+  const shouldAnimate = animateValue && !reduceMotion && Boolean(parsed);
+
   useEffect(() => {
-    if (!parsed || !isInView) {
+    if (!shouldAnimate || !isInView || !parsed) {
       setDisplayValue(value);
       return;
     }
@@ -60,21 +71,26 @@ export function MonoMetric({ value, label, size = "md", className }: MonoMetricP
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [isInView, parsed, value]);
+  }, [shouldAnimate, isInView, parsed, value]);
 
   const sizeClassName =
     size === "lg"
-      ? "text-4xl md:text-6xl"
+      ? "text-4xl md:text-5xl lg:text-6xl"
       : size === "sm"
-        ? "text-2xl md:text-3xl"
-        : "text-3xl md:text-5xl";
+        ? "text-[1.65rem] md:text-3xl"
+        : "text-3xl md:text-4xl lg:text-5xl";
 
   return (
     <div ref={ref} className={className}>
-      <p className={cn("font-mono font-bold tracking-[-0.04em] text-[#22C55E]", sizeClassName)}>
+      <p
+        className={cn(
+          "font-mono font-bold tabular-nums tracking-[-0.03em] text-[#0FD9C8]",
+          sizeClassName
+        )}
+      >
         {displayValue}
       </p>
-      {label ? <p className="mt-2 text-sm leading-6 text-[#F5F4F0]/62">{label}</p> : null}
+      {label ? <p className="meta-label mt-3 max-w-[20rem] leading-snug">{label}</p> : null}
     </div>
   );
 }

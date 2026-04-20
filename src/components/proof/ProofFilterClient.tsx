@@ -34,7 +34,7 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
 
   return (
     <>
-      <div className="sticky top-[64px] z-40 -mx-6 border-b border-[#F5F4F0]/8 bg-[#0C0C0E]/95 px-6 py-3 backdrop-blur-sm md:-mx-12 md:px-12">
+      <div className="sticky top-[64px] z-40 -mx-6 border-b border-[#F5F4F0]/10 bg-[#0C0C0E] px-6 py-3 shadow-[inset_0_1px_0_0_rgba(245,244,240,0.06)] md:-mx-12 md:px-12">
         <div className="flex gap-6 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <FilterPill
             label="All outcomes"
@@ -79,15 +79,15 @@ function FilterPill({
       className={cn(
         "flex shrink-0 items-center gap-2 border-b-2 pb-2 text-left text-sm transition-colors",
         isActive
-          ? "border-[#F05A28] font-bold text-[#F5F4F0]"
-          : "border-transparent font-normal text-[#F5F4F0]/50 hover:text-[#F5F4F0]/70"
+          ? "border-[#F05A28] font-semibold text-[#F5F4F0]"
+          : "border-transparent font-normal text-[#F5F4F0]/50 hover:text-[#F5F4F0]/72"
       )}
     >
       <span className="whitespace-nowrap">{label}</span>
       <span
         className={cn(
-          "rounded-full px-2 py-0.5 text-xs tabular-nums",
-          isActive ? "bg-[#F05A28]/20 text-[#F5F4F0]" : "bg-[#F5F4F0]/10 text-[#F5F4F0]/55"
+          "rounded-full px-2 py-0.5 font-mono text-[11px] font-medium tabular-nums tracking-tight",
+          isActive ? "bg-[#F05A28]/18 text-[#F5F4F0]" : "bg-[#F5F4F0]/08 text-[#F5F4F0]/52"
         )}
       >
         {count}

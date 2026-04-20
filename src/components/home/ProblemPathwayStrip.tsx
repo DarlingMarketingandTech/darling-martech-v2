@@ -29,7 +29,7 @@ export function ProblemPathwayStrip({ eyebrow, headline, problems }: ProblemPath
           >
             <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[#F05A28]">{problem.hubCategory}</p>
             <p className="font-display mt-2 text-lg font-semibold leading-snug tracking-tight text-white">{problem.title}</p>
-            <p className="mt-3 font-mono text-[0.7rem] leading-relaxed text-[#22C55E]/95 md:text-xs">{problem.proofChip}</p>
+            <p className="mt-3 font-mono text-[0.7rem] leading-relaxed text-[#0FD9C8]/95 md:text-xs">{problem.proofChip}</p>
             <span className="mt-4 inline-flex text-sm font-medium text-[#F05A28] transition-colors group-hover:text-[#ff6d40]">
               {problem.hubCtaLabel}
             </span>

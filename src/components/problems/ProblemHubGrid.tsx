@@ -15,7 +15,7 @@ export function ProblemHubGrid({ problems, layout = "default" }: ProblemHubGridP
   return (
     <div className={gridClass}>
       {problems.map((problem, index) => (
-        <AnimateOnScroll key={problem.slug} delay={index * 0.05}>
+        <AnimateOnScroll key={problem.slug} delay={index * 0.05} variant="fade">
           <ProblemCard problem={problem} />
         </AnimateOnScroll>
       ))}

@@ -8,7 +8,7 @@ type BandSectionProps = {
 
 export function BandSection({ children, className }: BandSectionProps) {
   return (
-    <section className={cn("surface-band grain-mask rounded-[2rem] px-6 py-8 md:px-10 md:py-10", className)}>
+    <section className={cn("surface-band grain-mask rounded-4xl px-6 py-8 md:px-10 md:py-10", className)}>
       {children}
     </section>
   );

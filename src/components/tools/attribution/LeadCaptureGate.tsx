@@ -34,7 +34,7 @@ export default function LeadCaptureGate({ insightSeverity }: { insightSeverity: 
 
   if (status === "success") {
     return (
-      <div className="mt-8 rounded border-l-4 border-green-500 bg-[#161618] p-6">
+      <div className="mt-8 rounded border-l-4 border-[#0FD9C8] bg-[#161618] p-6">
         <h4 className="mb-2 font-bold text-white font-display">Report Unlocked & Sent</h4>
         <p className="text-sm text-gray-400">Check your inbox shortly. Next step: let&apos;s get your actual tracking fixed.</p>
       </div>

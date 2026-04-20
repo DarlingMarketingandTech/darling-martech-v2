@@ -15,13 +15,13 @@ export function PageHero({ eyebrow, headline, body, ctas, splitAside }: PageHero
 
   return (
     <section className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end">
-      <AnimateOnScroll>
+      <AnimateOnScroll variant="fade">
         <div>
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="font-display text-balance mt-5 max-w-5xl text-4xl font-semibold leading-[1.02] tracking-[-0.04em] md:text-6xl">
+          <h1 className="font-display mt-5 max-w-5xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.035em] md:text-5xl lg:text-6xl">
             {headline}
           </h1>
-          <div className="mt-6 max-w-3xl space-y-4 text-lg leading-8 text-[#F5F4F0]/72">
+          <div className="mt-6 max-w-3xl space-y-4 text-base leading-7 text-[#F5F4F0]/72 md:text-lg md:leading-8">
             {paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -37,7 +37,11 @@ export function PageHero({ eyebrow, headline, body, ctas, splitAside }: PageHero
           ) : null}
         </div>
       </AnimateOnScroll>
-      {splitAside ? <AnimateOnScroll delay={0.08}>{splitAside}</AnimateOnScroll> : null}
+      {splitAside ? (
+        <AnimateOnScroll delay={0.08} variant="fade">
+          {splitAside}
+        </AnimateOnScroll>
+      ) : null}
     </section>
   );
 }

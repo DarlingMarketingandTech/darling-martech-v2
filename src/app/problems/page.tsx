@@ -7,19 +7,13 @@ import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { problemPages } from "@/data/problems";
 import { caseStudies } from "@/data/work/work-index";
 import { routeMetadata } from "@/data/routes";
+import { problemHubMetaLabel } from "@/lib/problem-hub-label";
 import { buildMetadata } from "@/lib/metadata";
 import type { ProblemPage } from "@/types";
 
 export const metadata = buildMetadata(routeMetadata["/problems"]);
 
 const QUIZ_HREF = "/tools/growth-bottleneck-quiz";
-
-function formatSlugAsCategoryLabel(slug: string): string {
-  return slug
-    .split("-")
-    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
-    .join(" ");
-}
 
 function getCaseStudyForProblem(problem: ProblemPage) {
   const firstSlug = problem.relatedProof[0];
@@ -40,33 +34,33 @@ function ProblemsHubCard({ problem }: { problem: ProblemPage }) {
   return (
     <Link
       href={`/problems/${problem.slug}`}
-      className="group flex h-full flex-col rounded-3xl border border-[#F5F4F0]/10 border-l-4 border-l-transparent bg-[#13131A] p-6 transition-colors hover:border-[rgba(240,90,40,0.4)] hover:border-l-[#F05A28] hover:bg-[#18181F]"
+      className="panel-obsidian panel-interactive grain-mask group flex h-full flex-col rounded-4xl border-l-4 border-l-transparent p-6 transition-colors hover:border-l-[#F05A28] md:p-7"
     >
-      <p className="text-xs font-normal uppercase tracking-widest text-[#F05A28]">
-        {formatSlugAsCategoryLabel(problem.slug)}
-      </p>
-      <h2 className="font-display mt-4 text-balance text-xl font-semibold leading-snug text-[#F5F4F0] md:text-2xl">
+      <p className="meta-label text-[#F05A28]/90">{problemHubMetaLabel(problem.slug)}</p>
+      <h2 className="font-display mt-5 text-balance text-xl font-semibold leading-snug tracking-[-0.02em] text-[#F5F4F0] md:text-2xl">
         {problem.heroHeadline}
       </h2>
-      <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-[#F5F4F0]/64 md:text-base">
+      <p className="mt-4 line-clamp-2 text-sm leading-relaxed text-[#F5F4F0]/65 md:text-base">
         {problem.heroSubhead}
       </p>
 
       {study ? (
-        <div className="mt-5 rounded-xl border border-[#22C55E]/30 bg-[#22C55E]/10 px-4 py-3">
-          <p className="font-mono text-2xl font-bold text-[#22C55E]">{study.primaryMetric.value}</p>
-          <p className="mt-1 text-xs text-[#F5F4F0]/50">{study.primaryMetric.label}</p>
+        <div className="card-elevated-dark mt-6 rounded-2xl border border-[#0FD9C8]/28 px-4 py-4">
+          <p className="font-mono text-2xl font-bold tabular-nums tracking-tight text-[#0FD9C8] md:text-[1.65rem]">
+            {study.primaryMetric.value}
+          </p>
+          <p className="meta-label mt-2 max-w-none text-[#F5F4F0]/50">{study.primaryMetric.label}</p>
         </div>
       ) : (
-        <div className="mt-5 rounded-xl border border-[#22C55E]/30 bg-[#22C55E]/10 px-4 py-3">
-          <p className="text-xs text-[#F5F4F0]/50">{problem.proofChip}</p>
+        <div className="card-elevated-dark mt-6 rounded-2xl border border-[#0FD9C8]/22 px-4 py-4">
+          <p className="text-sm leading-relaxed text-[#F5F4F0]/62">{problem.proofChip}</p>
         </div>
       )}
 
-      <div className="mt-auto flex flex-col gap-3 border-t border-[#F5F4F0]/8 pt-5">
+      <div className="mt-auto flex flex-col gap-3 border-t border-[#F5F4F0]/10 pt-6">
         <div>
-          <p className="text-xs uppercase tracking-widest text-[#F5F4F0]/45">Recommended tool</p>
-          <p className="mt-1 text-sm font-medium text-[#F5F4F0]">{tool.label}</p>
+          <p className="meta-label">Recommended tool</p>
+          <p className="mt-2 text-sm font-medium text-[#F5F4F0]">{tool.label}</p>
         </div>
         <span className="text-sm font-medium text-[#F05A28]">See this problem →</span>
       </div>
@@ -95,12 +89,14 @@ export default function ProblemsPage() {
         probably yours.
       </p>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {problemPages.map((problem, index) => (
-          <AnimateOnScroll key={problem.slug} delay={index * 0.05}>
-            <ProblemsHubCard problem={problem} />
-          </AnimateOnScroll>
-        ))}
+      <div className="mt-10 rounded-3xl border border-[#F5F4F0]/[0.07] bg-[#13131A]/30 p-4 md:p-5">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {problemPages.map((problem, index) => (
+            <AnimateOnScroll key={problem.slug} delay={index * 0.05} variant="fade">
+              <ProblemsHubCard problem={problem} />
+            </AnimateOnScroll>
+          ))}
+        </div>
       </div>
 
       <div className="mt-14">

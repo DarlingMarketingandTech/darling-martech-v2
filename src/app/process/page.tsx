@@ -27,7 +27,7 @@ export default function ProcessPage() {
       </div>
       <BandSection className="mt-14">
         <SectionHeader eyebrow="Process timeline" title="What the engagement actually looks like." />
-        <div className="mt-8">
+        <div className="tech-grid-bg mt-8 rounded-3xl p-3 md:p-4">
           <ProcessTimeline steps={processData.steps} />
         </div>
       </BandSection>
@@ -49,10 +49,16 @@ export default function ProcessPage() {
       <BandSection className="mt-14">
         <SectionHeader eyebrow="IS THIS RIGHT FOR YOU?" title="The work looks different depending on where you are." />
         <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {processData.whatGoodLooksLike.map((scenario) => (
-            <article key={scenario.title} className="rounded-4xl border border-[#F5F4F0]/10 p-6">
-              <h3 className="font-display text-lg font-semibold leading-snug">{scenario.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-[#F5F4F0]/72">{scenario.body}</p>
+          {processData.whatGoodLooksLike.map((scenario, i) => (
+            <article key={scenario.title} className="panel-obsidian grain-mask rounded-4xl p-6 md:p-7">
+              <p className="font-mono text-[10px] font-semibold tabular-nums tracking-[0.14em] text-[#F5F4F0]/36">
+                {String(i + 1).padStart(2, "0")}
+              </p>
+              <h3 className="font-display mt-3 text-lg font-semibold leading-snug tracking-[-0.02em]">
+                {scenario.title}
+              </h3>
+              <div className="tech-divider my-4" />
+              <p className="text-sm leading-7 text-[#F5F4F0]/72">{scenario.body}</p>
             </article>
           ))}
         </div>

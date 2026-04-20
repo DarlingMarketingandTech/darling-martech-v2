@@ -11,6 +11,7 @@ import { ProblemHubGrid } from "@/components/problems/ProblemHubGrid";
 import { Button } from "@/components/ui/button";
 import { ProcessTimeline } from "@/components/process/ProcessTimeline";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionReveal } from "@/components/ui/section-reveal";
 import { homepageData, homepageMeta } from "@/data/homepage";
 import { problemPages } from "@/data/problems";
 import { buildMetadata } from "@/lib/metadata";
@@ -38,16 +39,18 @@ export default function HomePage() {
       </div>
 
       <SectionWrapper className="mt-14">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <SectionHeader eyebrow={homepageData.problemSection.eyebrow} title={homepageData.problemSection.headline} />
-          <Button href={homepageData.problemSection.diagnosticCta.href} variant="ghost">
-            {homepageData.problemSection.diagnosticCta.label}
-          </Button>
-        </div>
-        <p className="mt-4 text-sm text-[#F5F4F0]/55">{homepageData.problemSection.body}</p>
-        <div className="mt-10">
-          <ProblemHubGrid problems={featuredProblems} layout="quad" />
-        </div>
+        <SectionReveal>
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeader eyebrow={homepageData.problemSection.eyebrow} title={homepageData.problemSection.headline} />
+            <Button href={homepageData.problemSection.diagnosticCta.href} variant="ghost">
+              {homepageData.problemSection.diagnosticCta.label}
+            </Button>
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-[#F5F4F0]/58">{homepageData.problemSection.body}</p>
+          <div className="mt-10">
+            <ProblemHubGrid problems={featuredProblems} layout="quad" />
+          </div>
+        </SectionReveal>
       </SectionWrapper>
 
       <div className="mt-14">
@@ -59,20 +62,22 @@ export default function HomePage() {
       </div>
 
       <BandSection className="mt-14">
-        <SectionHeader
-          eyebrow={homepageData.processSection.eyebrow}
-          title={homepageData.processSection.headline}
-          body={homepageData.processSection.body}
-        />
-        <div className="mt-8">
-          <ProcessTimeline
-            steps={homepageData.processSection.columns.map((column) => ({
-              number: column.number,
-              title: column.title,
-              description: column.body,
-            }))}
+        <SectionReveal delay={0.04}>
+          <SectionHeader
+            eyebrow={homepageData.processSection.eyebrow}
+            title={homepageData.processSection.headline}
+            body={homepageData.processSection.body}
           />
-        </div>
+          <div className="mt-8">
+            <ProcessTimeline
+              steps={homepageData.processSection.columns.map((column) => ({
+                number: column.number,
+                title: column.title,
+                description: column.body,
+              }))}
+            />
+          </div>
+        </SectionReveal>
       </BandSection>
 
       <SectionWrapper className="mt-14">
@@ -103,15 +108,17 @@ export default function HomePage() {
       />
 
       <SectionWrapper className="mt-14 text-center">
-        <SectionHeader title={homepageData.closingCta.headline} body={homepageData.closingCta.body} align="center" />
-        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button href={homepageData.closingCta.primaryCta.href} size="lg">
-            {homepageData.closingCta.primaryCta.label}
-          </Button>
-          <Button href={homepageData.closingCta.secondaryCta.href} variant="ghost" size="lg">
-            {homepageData.closingCta.secondaryCta.label}
-          </Button>
-        </div>
+        <SectionReveal delay={0.06}>
+          <SectionHeader title={homepageData.closingCta.headline} body={homepageData.closingCta.body} align="center" />
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button href={homepageData.closingCta.primaryCta.href} size="lg">
+              {homepageData.closingCta.primaryCta.label}
+            </Button>
+            <Button href={homepageData.closingCta.secondaryCta.href} variant="ghost" size="lg">
+              {homepageData.closingCta.secondaryCta.label}
+            </Button>
+          </div>
+        </SectionReveal>
       </SectionWrapper>
     </SiteShell>
   );

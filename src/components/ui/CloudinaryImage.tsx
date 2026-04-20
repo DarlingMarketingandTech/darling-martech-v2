@@ -10,6 +10,8 @@ type CloudinaryImageProps = {
   height: number;
   className?: string;
   priority?: boolean;
+  /** Responsive widths hint for `next/image` when the image spans fluid layouts. */
+  sizes?: string;
 };
 
 export function CloudinaryImage({
@@ -19,6 +21,7 @@ export function CloudinaryImage({
   height,
   className,
   priority = false,
+  sizes,
 }: CloudinaryImageProps) {
   return (
     <Image
@@ -28,6 +31,7 @@ export function CloudinaryImage({
       width={width}
       height={height}
       priority={priority}
+      sizes={sizes}
       className={className}
     />
   );

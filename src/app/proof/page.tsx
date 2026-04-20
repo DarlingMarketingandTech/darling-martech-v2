@@ -26,24 +26,25 @@ export default function ProofPage() {
         body={proofPageData.hero.body}
       />
 
-      <section
-        aria-label="Key proof metrics"
-        className="surface-band -mx-6 mt-10 px-6 py-10 md:-mx-12 md:px-12 md:py-12"
-      >
-        <div className="grid grid-cols-2 gap-y-8 md:grid-cols-4 md:gap-y-0">
-          {METRICS_STRIP.map((metric, index) => (
-            <div
-              key={metric.label}
-              className={cn(
-                "md:px-2",
-                index < 3 && "md:border-r md:border-[#F5F4F0]/8",
-                index % 2 === 0 && index < 3 && "max-md:border-r max-md:border-[#F5F4F0]/8 max-md:pr-4",
-                index % 2 === 1 && "max-md:pl-4"
-              )}
-            >
-              <MonoMetric value={metric.value} label={metric.label} size="sm" />
-            </div>
-          ))}
+      <section aria-label="Key proof metrics" className="-mx-6 mt-10 px-6 md:-mx-12 md:px-12">
+        <div className="panel-obsidian grain-mask rounded-3xl px-5 py-9 md:px-9 md:py-11">
+          <div className="tech-divider mb-8" />
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-3 md:gap-y-0">
+            {METRICS_STRIP.map((metric, index) => (
+              <div
+                key={metric.label}
+                className={cn(
+                  index < 3 && "md:border-r md:border-[#F5F4F0]/10 md:pr-3",
+                  index % 2 === 0 && index < 3 && "max-md:border-r max-md:border-[#F5F4F0]/10 max-md:pr-3",
+                  index % 2 === 1 && "max-md:pl-1"
+                )}
+              >
+                <div className="card-elevated-dark rounded-2xl px-4 py-4 md:px-4 md:py-5">
+                  <MonoMetric value={metric.value} label={metric.label} size="sm" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -51,17 +52,18 @@ export default function ProofPage() {
 
       {/* Technical trust band */}
       <BandSection className="mt-16 md:mt-20">
-        <p className="text-xs uppercase tracking-[0.24em] text-[#F05A28]">
-          {proofPageData.technicalTrust.eyebrow}
-        </p>
-        <h2 className="font-display mt-4 max-w-xl text-balance text-2xl font-semibold text-[#F5F4F0]">
+        <p className="meta-label text-[#F05A28]/90">{proofPageData.technicalTrust.eyebrow}</p>
+        <h2 className="font-display mt-5 max-w-xl text-balance text-2xl font-semibold leading-snug tracking-[-0.02em] text-[#F5F4F0] md:text-[1.75rem]">
           {proofPageData.technicalTrust.headline}
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {proofPageData.technicalTrust.items.map((item) => (
-            <div key={item.title} className="rounded-2xl border border-[#F5F4F0]/8 px-5 py-5">
-              <h3 className="text-sm font-semibold text-[#F5F4F0]">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/55">{item.body}</p>
+            <div key={item.title} className="panel-titanium rounded-2xl px-5 py-5 md:px-6 md:py-6">
+              <h3 className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#F5F4F0]/88">
+                {item.title}
+              </h3>
+              <div className="tech-divider my-4" />
+              <p className="text-sm leading-relaxed text-[#F5F4F0]/58">{item.body}</p>
             </div>
           ))}
         </div>
@@ -85,7 +87,7 @@ export default function ProofPage() {
       </BandSection>
 
       <section className="mt-16 text-center md:mt-20">
-        <h2 className="font-display mx-auto max-w-2xl text-balance text-2xl font-semibold text-[#F5F4F0] md:text-3xl">
+        <h2 className="font-display mx-auto max-w-2xl text-balance text-2xl font-semibold leading-snug tracking-[-0.02em] text-[#F5F4F0] md:text-3xl">
           If the proof is convincing, the conversation is easy.
         </h2>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">

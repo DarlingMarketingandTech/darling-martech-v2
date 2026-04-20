@@ -102,7 +102,7 @@ export function GeoAuditorEngine() {
     }
   }
 
-  const scoreAccent = results && results.score > 70 ? "#22C55E" : "#F05A28";
+  const scoreAccent = results && results.score > 70 ? "#0FD9C8" : "#F05A28";
 
   return (
     <div className="mx-auto w-full max-w-5xl">

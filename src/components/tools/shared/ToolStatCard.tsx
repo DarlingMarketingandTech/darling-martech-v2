@@ -11,7 +11,7 @@ interface ToolStatCardProps {
 
 const TONE_CLASSNAMES: Record<NonNullable<ToolStatCardProps["tone"]>, string> = {
   default: "text-[#F5F4F0]",
-  positive: "text-[#22C55E]",
+  positive: "text-[#0FD9C8]",
   warning: "text-[#F05A28]",
   teal: "text-[#0FD9C8]",
 };

@@ -1,6 +1,7 @@
 import { SiteShell } from "@/components/layout/site-shell";
 import { PageHero } from "@/components/hero/PageHero";
 import { ToolGrid } from "@/components/tools/ToolGrid";
+import { getProofAnglesForTool } from "@/data/proof-angles";
 import { tools } from "@/data/labs";
 import { routeMetadata } from "@/data/routes";
 import { buildMetadata } from "@/lib/metadata";
@@ -15,6 +16,10 @@ const SIMULATION_SLUGS = new Set(
 export default function ToolsPage() {
   const diagnosticTools = tools.filter((tool) => !SIMULATION_SLUGS.has(tool.slug));
   const simulationTools = tools.filter((tool) => SIMULATION_SLUGS.has(tool.slug));
+
+  const proofAnglesByToolSlug = Object.fromEntries(
+    tools.map((tool) => [tool.slug, getProofAnglesForTool(tool.slug, 2)])
+  );
 
   return (
     <SiteShell>
@@ -37,7 +42,7 @@ export default function ToolsPage() {
               the one that matches the decision you need to make.
             </p>
           </header>
-          <ToolGrid tools={diagnosticTools} />
+          <ToolGrid tools={diagnosticTools} proofAnglesByToolSlug={proofAnglesByToolSlug} />
         </section>
 
         {simulationTools.length ? (
@@ -54,7 +59,7 @@ export default function ToolsPage() {
                 Explore tradeoffs, priorities, and operator thinking in a more open-ended format.
               </p>
             </header>
-            <ToolGrid tools={simulationTools} />
+            <ToolGrid tools={simulationTools} proofAnglesByToolSlug={proofAnglesByToolSlug} />
           </section>
         ) : null}
       </div>

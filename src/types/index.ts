@@ -164,6 +164,21 @@ export interface CaseStudy {
   relatedProofSlugs?: string[];
 }
 
+/** Focused slice of an existing case study — entry points only; parent lives at `/proof/[slug]`. */
+export interface ProofAngle {
+  id: string;
+  parentProjectSlug: string;
+  title: string;
+  problemKey: ProblemCluster;
+  primaryServiceSlug: ServiceCluster;
+  secondaryServiceSlugs?: ServiceCluster[];
+  /** Optional link to a live diagnostic when the angle is grounded in that workflow */
+  toolSlug?: string;
+  summary: string;
+  /** Subset of the parent case study metrics only — never invent values */
+  metrics: ProofMetric[];
+}
+
 export interface ServiceTier {
   name: string;
   price?: string;

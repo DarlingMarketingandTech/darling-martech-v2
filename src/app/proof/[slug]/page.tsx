@@ -8,6 +8,8 @@ import { PageHero } from "@/components/hero/PageHero";
 import { MonoMetric } from "@/components/ui/MonoMetric";
 import { Button } from "@/components/ui/button";
 import { ProofImplementationStackBlock } from "@/components/capabilities/CapabilityPanels";
+import { ProofAnglesDemonstration } from "@/components/proof/ProofAnglesDemonstration";
+import { getProofAnglesForProject } from "@/data/proof-angles";
 import { caseStudies } from "@/data/work/work-index";
 import { problemPages } from "@/data/problems";
 import { services } from "@/data/services";
@@ -58,6 +60,8 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
   const relatedProofs = caseStudies.filter(
     (c) => study.relatedProofSlugs?.includes(c.slug)
   );
+
+  const proofAngles = getProofAnglesForProject(study.slug).slice(0, 4);
 
   return (
     <SiteShell>
@@ -164,6 +168,10 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
         implementationPlatformSlugs={study.implementationPlatformSlugs}
         implementationLayers={study.implementationLayers}
       />
+
+      <SectionWrapper>
+        <ProofAnglesDemonstration angles={proofAngles} />
+      </SectionWrapper>
 
       {/* Fallback full story for older proofs without new fields */}
       {!study.buildSections?.length && study.fullStory && (

@@ -11,6 +11,7 @@ import {
   SERVICE_DISPLAY_CLUSTER_ORDER,
   getServicesByCluster,
 } from "@/data/services";
+import { getPrimaryProofAnglesForService } from "@/data/proof-angles";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
 
@@ -102,29 +103,51 @@ export default function ServicesIndexPage() {
             <p className="mt-3 max-w-3xl text-sm text-[#F5F4F0]/55">{cluster.description}</p>
           </div>
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {cluster.items.map((service) => (
-              <li key={service.slug}>
-                <Link
-                  href={`/services/${service.slug}`}
-                  className={`block rounded-2xl border px-5 py-5 transition-colors hover:border-[#F05A28]/35 ${
-                    service.isFeatured
-                      ? "surface-card border-[#F5F4F0]/12"
-                      : "border-[#F5F4F0]/8"
-                  }`}
-                >
-                  {service.slug === "technical-roadmap" ? (
-                    <span className="mb-3 inline-block rounded-full border border-[#0FD9C8]/40 px-2.5 py-1 text-xs text-[#0FD9C8]">
-                      Paid diagnostic entry offer
-                    </span>
+            {cluster.items.map((service) => {
+              const proofAngles = getPrimaryProofAnglesForService(service.slug, 3);
+              return (
+                <li key={service.slug} className="flex flex-col gap-3">
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className={`block rounded-2xl border px-5 py-5 transition-colors hover:border-[#F05A28]/35 ${
+                      service.isFeatured
+                        ? "surface-card border-[#F5F4F0]/12"
+                        : "border-[#F5F4F0]/8"
+                    }`}
+                  >
+                    {service.slug === "technical-roadmap" ? (
+                      <span className="mb-3 inline-block rounded-full border border-[#0FD9C8]/40 px-2.5 py-1 text-xs text-[#0FD9C8]">
+                        Paid diagnostic entry offer
+                      </span>
+                    ) : null}
+                    <h2 className="font-display text-lg font-semibold text-[#F5F4F0]">
+                      {service.title}
+                    </h2>
+                    <p className="mt-2 text-sm text-[#F5F4F0]/60">{service.headline}</p>
+                    <span className="mt-4 inline-block text-sm text-[#F05A28]">View service →</span>
+                  </Link>
+                  {proofAngles.length ? (
+                    <div className="rounded-2xl border border-[#F5F4F0]/6 px-4 py-3">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#F5F4F0]/40">
+                        Related proof
+                      </p>
+                      <ul className="mt-2 space-y-2">
+                        {proofAngles.map((angle) => (
+                          <li key={angle.id}>
+                            <Link
+                              href={`/proof/${angle.parentProjectSlug}`}
+                              className="text-sm text-[#F5F4F0]/55 transition-colors hover:text-[#0FD9C8]"
+                            >
+                              <span className="text-[#F5F4F0]/35">↳</span> {angle.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ) : null}
-                  <h2 className="font-display text-lg font-semibold text-[#F5F4F0]">
-                    {service.title}
-                  </h2>
-                  <p className="mt-2 text-sm text-[#F5F4F0]/60">{service.headline}</p>
-                  <span className="mt-4 inline-block text-sm text-[#F05A28]">View service →</span>
-                </Link>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </SectionWrapper>
       ))}

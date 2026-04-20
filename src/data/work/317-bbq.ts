@@ -92,4 +92,5 @@ export const bbq317: CaseStudy = {
   ],
   featured: false,
   publishedAt: "2023-04-01",
+  cloudinaryImages: ["317_bbq_home_page_-_desktop_website_view", "317-bbq-logo-anchor"],
 };

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { ProofAngle } from "@/types";
+import { isQuantitativeProofMetric } from "@/lib/proof-metric";
+import { cn } from "@/lib/utils";
 
 type ProofAnglesDemonstrationProps = {
   angles: ProofAngle[];
@@ -57,7 +59,14 @@ export function ProofAnglesDemonstration({ angles }: ProofAnglesDemonstrationPro
                     <div key={`${angle.id}-${m.label}`} className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
                       <dt className="sr-only">{m.label}</dt>
                       <dd className="m-0 text-sm text-[#F5F4F0]/80">
-                        <span className="font-semibold tabular-nums tracking-tight text-[#F5F4F0]/90">
+                        <span
+                          className={cn(
+                            "font-semibold tracking-tight text-[#F5F4F0]/90",
+                            isQuantitativeProofMetric(m)
+                              ? "tabular-nums"
+                              : "font-display tracking-[-0.02em]"
+                          )}
+                        >
                           {m.value}
                         </span>
                         <span className="text-[#F5F4F0]/45"> — {m.label}</span>

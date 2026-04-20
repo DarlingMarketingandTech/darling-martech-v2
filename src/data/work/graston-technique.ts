@@ -49,24 +49,36 @@ export const grastonTechnique: CaseStudy = {
         "Static PDF replaced with a real-time interactive map built on Cloudflare Workers. 81 credentialed providers loaded from the CRM, searchable by specialty, location, and certification level. Directory syncs automatically as providers complete training.",
     },
     {
-      title: "Training pipeline automation",
+      title: "Training lifecycle automation",
       description:
-        "Eight manual workflows rebuilt as automated sequences: event registration confirmation, pre-event preparation sequences, post-training CE certificate delivery, recertification reminders, and lapsed-provider reactivation. All triggered by CRM status, not staff memory.",
+        "Eight manual workflows were rebuilt as lifecycle automation: event registration confirmation, pre-event preparation, post-training CE delivery, recertification reminders, and lapsed-provider reactivation, all triggered by CRM state changes.",
     },
     {
-      title: "Attribution and reporting",
+      title: "Provider directory and membership funnel",
       description:
-        "UTM architecture built and enforced across all channels. Attribution model connected paid, organic, event, and referral sources to CRM stage progression. Leadership reporting shifted from activity metrics to pipeline-stage and qualified-lead counts.",
+        "Provider discovery infrastructure was connected to member and credential states so directory accuracy, visibility, and conversion movement could operate as one system.",
+    },
+    {
+      title: "Analytics and attribution overhaul",
+      description:
+        "UTM architecture and attribution mapping connected paid, organic, event, and referral channels to CRM stage progression so leadership could evaluate qualified pipeline movement, not just campaign activity.",
+    },
+    {
+      title: "AI and smart support tooling layer",
+      description:
+        "Support-facing workflows were structured into repeatable tooling patterns so recurring provider and learner requests could be handled with more consistency and less manual escalation.",
     },
   ],
   operatingImpact:
-    "The team runs the same volume of outreach and events with significantly less manual coordination. Leads no longer fall through during busy event periods. Providers self-serve registration and CE tracking. Marketing decisions are made on pipeline data instead of estimates.",
+    "The team runs the same volume of outreach and events with substantially less manual coordination. Leads no longer fall through during high-volume periods. Providers self-serve key lifecycle steps, and leadership decisions are now driven by pipeline-stage and attribution evidence.",
   implementationLayers: [
     "HubSpot CRM",
     "Cloudflare Workers",
     "Custom spatial search",
     "UTM attribution layer",
     "Automated nurture sequences",
+    "Provider membership funnel logic",
+    "Support workflow tooling",
     "CE certificate delivery",
     "Recertification tracking",
   ],
@@ -89,9 +101,10 @@ export const grastonTechnique: CaseStudy = {
   relatedProofSlugs: ["graston-qualified-leads", "graston-growth-engine"],
   systemsBuilt: [
     "HubSpot CRM",
-    "Lead capture & attribution",
-    "Live provider directory",
-    "Training pipeline automation",
+    "Lead capture and attribution model",
+    "Live provider directory and membership funnel",
+    "Training lifecycle automation",
+    "Support workflow tooling",
     "CE tracking and delivery",
   ],
   liveUrl: "https://graston-growth-engine.jacob-ba2.workers.dev",

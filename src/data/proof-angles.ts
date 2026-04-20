@@ -60,7 +60,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "graston-technique-provider-directory",
     parentProjectSlug: "graston-technique",
-    title: "Live Provider Directory Infrastructure",
+    title: "Provider Directory and Membership Funnel",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "custom-infrastructure",
     secondaryServiceSlugs: ["martech-stack-build", "crm-architecture"],
@@ -74,7 +74,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "graston-technique-paid-channel-attribution",
     parentProjectSlug: "graston-technique",
-    title: "Paid Channel Attribution Wiring",
+    title: "Analytics and Attribution Overhaul",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "paid-media-management",
     secondaryServiceSlugs: ["attribution-analytics"],
@@ -146,7 +146,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "graston-growth-engine-workflow-platform",
     parentProjectSlug: "graston-growth-engine",
-    title: "Workflow Automation Platform",
+    title: "Training Lifecycle Automation",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "ai-automation",
     secondaryServiceSlugs: ["automation-systems", "martech-stack-build"],
@@ -160,7 +160,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "graston-growth-engine-spatial-directory",
     parentProjectSlug: "graston-growth-engine",
-    title: "Real-Time Spatial Directory",
+    title: "Provider Directory Operations Layer",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "custom-infrastructure",
     secondaryServiceSlugs: ["martech-stack-build"],
@@ -174,7 +174,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "graston-growth-engine-connected-stack",
     parentProjectSlug: "graston-growth-engine",
-    title: "Connected Growth Stack",
+    title: "AI and Smart Support Tools Layer",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "martech-stack-build",
     secondaryServiceSlugs: ["crm-architecture", "automation-systems"],
@@ -337,12 +337,12 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "barbershop-crm-booking",
     parentProjectSlug: "barbershop-command-center",
-    title: "Client Database and Booking Integration",
+    title: "Booking CRM System",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "crm-architecture",
     secondaryServiceSlugs: ["automation-systems"],
     summary:
-      "Booking history and visit patterns synced into a lightweight CRM layer so outreach could segment new versus returning clients.",
+      "Public booking flow and client lifecycle records were unified so owner/admin operations could segment new, returning, and at-risk clients from one command surface.",
     metrics: [
       { value: "4.9★", label: "Average Google rating maintained", isHighlighted: true },
       { value: "3×", label: "Increase in repeat booking rate" },
@@ -351,7 +351,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "barbershop-review-pipeline",
     parentProjectSlug: "barbershop-command-center",
-    title: "Automated Review Request Pipeline",
+    title: "Review Pipeline and Local Conversion Support",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "social-media-marketing",
     secondaryServiceSlugs: ["automation-systems", "crm-architecture"],
@@ -366,12 +366,12 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "barbershop-retention",
     parentProjectSlug: "barbershop-command-center",
-    title: "Retention and Reactivation System",
+    title: "Lifecycle Retention Automation",
     problemKey: "site-not-converting",
     primaryServiceSlug: "ai-automation",
     secondaryServiceSlugs: ["automation-systems", "crm-architecture"],
     summary:
-      "Lapsed-client prompts and repeat-visit reminders automated off visit history so rebooking tripled and no-shows dropped with reminder flows.",
+      "Lifecycle triggers for reminder, retention, and reactivation were automated from booking behavior so rebooking tripled and no-show reduction became repeatable.",
     metrics: [
       { value: "3×", label: "Increase in repeat booking rate" },
       { value: "60%", label: "Reduction in no-shows via automated reminders" },
@@ -380,17 +380,111 @@ export const PROOF_ANGLES: ProofAngle[] = [
   {
     id: "barbershop-local-seo",
     parentProjectSlug: "barbershop-command-center",
-    title: "Local Search Presence Structure",
+    title: "Owner-Admin Command Center Workflow",
     problemKey: "not-visible-enough",
-    primaryServiceSlug: "content-seo-systems",
-    secondaryServiceSlugs: ["social-media-marketing"],
+    primaryServiceSlug: "custom-infrastructure",
+    secondaryServiceSlugs: ["crm-architecture", "automation-systems"],
     toolSlug: "geo-readiness-auditor",
     summary:
-      "Google Business Profile completion, citation cleanup, and keyword alignment so review velocity and recency could compound in the local pack.",
+      "Owner/admin workflow moved to a centralized operating view for lifecycle segments, outreach queues, and booking-state visibility instead of disconnected tools and memory-driven follow-up.",
     metrics: [
-      { value: "4.9★", label: "Average Google rating maintained", isHighlighted: true },
       { value: "3×", label: "Increase in repeat booking rate" },
+      { value: "4.9★", label: "Average Google rating maintained", isHighlighted: true },
     ],
+  },
+
+  // primarycare-indy
+  {
+    id: "primarycare-indy-booking-conversion",
+    parentProjectSlug: "primarycare-indy",
+    title: "Patient Booking Conversion System",
+    problemKey: "site-not-converting",
+    primaryServiceSlug: "conversion-optimization",
+    secondaryServiceSlugs: ["website-design", "content-seo-systems"],
+    summary:
+      "Primary care booking flow was rebuilt around patient-intent pathways so online scheduling increased by removing mobile friction and decision ambiguity.",
+    metrics: [{ value: "75%", label: "Increase in online bookings", isHighlighted: true }],
+  },
+  {
+    id: "primarycare-indy-local-visibility",
+    parentProjectSlug: "primarycare-indy",
+    title: "Local Search Visibility Alignment",
+    problemKey: "not-visible-enough",
+    primaryServiceSlug: "content-seo-systems",
+    secondaryServiceSlugs: ["website-design"],
+    toolSlug: "geo-readiness-auditor",
+    summary:
+      "Local-intent entry pages and booking actions were aligned so search visibility and conversion flow reinforced each other instead of operating as separate efforts.",
+    metrics: [{ value: "75%", label: "Increase in online bookings", isHighlighted: true }],
+  },
+  {
+    id: "primarycare-indy-service-architecture",
+    parentProjectSlug: "primarycare-indy",
+    title: "Patient-Centered Service Architecture",
+    problemKey: "site-not-converting",
+    primaryServiceSlug: "website-design",
+    secondaryServiceSlugs: ["conversion-optimization", "brand-identity"],
+    summary:
+      "Service information architecture was rebuilt around patient decisions so users could identify the right care path quickly and move to scheduling with confidence.",
+    metrics: [{ value: "75%", label: "Increase in online bookings", isHighlighted: true }],
+  },
+  {
+    id: "primarycare-indy-trust-system",
+    parentProjectSlug: "primarycare-indy",
+    title: "Healthcare Trust System",
+    problemKey: "brand-system-broken",
+    primaryServiceSlug: "brand-identity",
+    secondaryServiceSlugs: ["website-design"],
+    summary:
+      "Trust-signaling layers were integrated into conversion-critical surfaces so provider confidence and booking action happened in one continuous flow.",
+    metrics: [{ value: "75%", label: "Increase in online bookings", isHighlighted: true }],
+  },
+
+  // urgentcare-indy
+  {
+    id: "urgentcare-indy-checkin-flow",
+    parentProjectSlug: "urgentcare-indy",
+    title: "Online Check-In Flow",
+    problemKey: "site-not-converting",
+    primaryServiceSlug: "website-design",
+    secondaryServiceSlugs: ["conversion-optimization"],
+    summary:
+      "Urgent-intent pathways were simplified so patients could move from need to check-in quickly with fewer decision bottlenecks.",
+    metrics: [{ value: "+35%", label: "Patient bookings from urgent-intent flow", isHighlighted: true }],
+  },
+  {
+    id: "urgentcare-indy-booking-conversion",
+    parentProjectSlug: "urgentcare-indy",
+    title: "Urgent Care Booking Conversion",
+    problemKey: "site-not-converting",
+    primaryServiceSlug: "conversion-optimization",
+    secondaryServiceSlugs: ["website-design", "content-seo-systems"],
+    summary:
+      "Urgent booking architecture was rebuilt for speed and clarity so high-intent patients completed scheduling instead of abandoning at decision points.",
+    metrics: [{ value: "+35%", label: "Patient bookings from urgent-intent flow", isHighlighted: true }],
+  },
+  {
+    id: "urgentcare-indy-local-visibility",
+    parentProjectSlug: "urgentcare-indy",
+    title: "Urgent-Intent Local Visibility",
+    problemKey: "not-visible-enough",
+    primaryServiceSlug: "content-seo-systems",
+    secondaryServiceSlugs: ["website-design"],
+    toolSlug: "geo-readiness-auditor",
+    summary:
+      "Local discovery surfaces were aligned with urgent-care conversion blocks so search intent landed on fast, trust-ready booking paths.",
+    metrics: [{ value: "+35%", label: "Patient bookings from urgent-intent flow", isHighlighted: true }],
+  },
+  {
+    id: "urgentcare-indy-trust-ux",
+    parentProjectSlug: "urgentcare-indy",
+    title: "Urgency-Meets-Trust UX System",
+    problemKey: "site-not-converting",
+    primaryServiceSlug: "website-design",
+    secondaryServiceSlugs: ["brand-identity", "conversion-optimization"],
+    summary:
+      "Urgency and trust signals were paired inside the same decision path so patients could act quickly without uncertainty about care quality or process.",
+    metrics: [{ value: "+35%", label: "Patient bookings from urgent-intent flow", isHighlighted: true }],
   },
 
   // the-compass
@@ -554,6 +648,17 @@ export const PROOF_ANGLES: ProofAngle[] = [
       { value: "4.8★", label: "Google rating — 200+ reviews" },
       { value: "Top 3", label: "Local pack ranking for 'BBQ Indianapolis'", isHighlighted: true },
     ],
+  },
+  // black-letter
+  {
+    id: "black-letter-brand-identity-system",
+    parentProjectSlug: "black-letter",
+    title: "Brand Identity System Build",
+    problemKey: "brand-system-broken",
+    primaryServiceSlug: "brand-identity",
+    summary:
+      "Black Letter brand work focused on identity architecture, visual standards, and implementation guidance so core touchpoints followed one coherent system.",
+    metrics: [{ value: "Identity system", label: "Brand architecture defined and documented", isHighlighted: true }],
   },
 ];
 

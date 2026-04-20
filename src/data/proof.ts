@@ -53,7 +53,7 @@ export const proofPageData = {
     {
       problemLabel: "Patient & client acquisition",
       description: "Regulated-industry growth built on compliant, measurement-first infrastructure.",
-      caseStudySlugs: ["pike-medical", "russell-painting"],
+      caseStudySlugs: ["primarycare-indy", "urgentcare-indy"],
     },
   ],
   antiClaims: [

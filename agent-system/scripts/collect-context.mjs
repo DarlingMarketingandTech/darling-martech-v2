@@ -31,8 +31,18 @@ export async function collectContext({ classification, input } = {}) {
       constraints: input?.constraints ?? [],
     },
     memory: {
-      sessionState,
-      taskState,
+      sessionState: {
+        sessionId: sessionState?.sessionId ?? null,
+        runCount: sessionState?.runCount ?? 0,
+        lastEvent: sessionState?.lastEvent ?? null,
+        profile: sessionState?.profile ?? null,
+      },
+      taskState: {
+        activeTask: taskState?.activeTask ?? null,
+        changedFilesCount: Array.isArray(taskState?.changedFiles) ? taskState.changedFiles.length : 0,
+        observationCount: Array.isArray(taskState?.observations) ? taskState.observations.length : 0,
+        lastRunStatus: taskState?.lastRunStatus ?? "idle",
+      },
     },
     collectedAt: new Date().toISOString(),
   };

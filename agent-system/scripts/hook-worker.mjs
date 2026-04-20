@@ -42,19 +42,28 @@ async function writeJson(fileName, data) {
 }
 
 async function readPayload() {
+  if (process.stdin.isTTY) return {};
   try {
-    const chunks = [];
-    for await (const chunk of process.stdin) chunks.push(chunk);
-    const joined = Buffer.concat(chunks).toString("utf8").trim();
+    const readAll = async () => {
+      const chunks = [];
+      for await (const chunk of process.stdin) chunks.push(Buffer.from(chunk));
+      return Buffer.concat(chunks).toString("utf8").trim();
+    };
+
+    const joined = await Promise.race([
+      readAll(),
+      new Promise((resolve) => setTimeout(() => resolve(""), 40)),
+    ]);
+
     if (!joined) return {};
-    return JSON.parse(joined);
+    return JSON.parse(String(joined));
   } catch {
     return {};
   }
 }
 
 function summarizeObservation(payload = {}) {
-  const source = payload?.toolName || payload?.command || payload?.source || "unknown";
+  const source = payload?.toolName || payload?.command || "unknown";
   const detail = payload?.summary || payload?.result || payload?.output || "";
   return { source, detail: String(detail).slice(0, 500) };
 }
@@ -62,7 +71,7 @@ function summarizeObservation(payload = {}) {
 function dedupe(observations, record) {
   const hash = crypto
     .createHash("sha1")
-    .update(`${record.source}:${record.detail}`)
+    .update(`${record.detail}`)
     .digest("hex");
   if (observations.some((entry) => entry.hash === hash)) return observations;
   return [...observations, { ...record, hash, at: new Date().toISOString() }].slice(-100);
@@ -94,6 +103,7 @@ async function handleBeforeSubmitPrompt(payload) {
     runCount: Number(sessionState.runCount ?? 0) + 1,
     lastEvent: "beforeSubmitPrompt",
     profile: classification.mode,
+    lastUpdatedAt: new Date().toISOString(),
   };
   const nextDecisions = {
     decisions: [
@@ -116,6 +126,7 @@ async function handleObservation(payload, eventName) {
   const taskState = await readJson("task_state.json", {});
   const observations = Array.isArray(taskState.observations) ? taskState.observations : [];
   const record = summarizeObservation({ ...payload, source: eventName });
+  if (!record.detail) return;
   const next = { ...taskState, observations: dedupe(observations, record) };
   await writeJson("task_state.json", next);
 }
@@ -174,4 +185,12 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch(() => process.exit(0));
+  .catch(async (error) => {
+    try {
+      const message = error?.stack || error?.message || String(error);
+      await fs.writeFile(path.join(BASE, "hook-worker-error.log"), `${message}\n`);
+    } catch {
+      // swallow
+    }
+    process.exit(0);
+  });

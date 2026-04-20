@@ -14,7 +14,12 @@ export function analyzeDiff({ mode, profile } = {}) {
   const statRaw = run("git diff --shortstat");
   const patch = run("git diff");
 
-  const hasPlaceholder = /(TODO|TBD|lorem ipsum|\.\.\.)/i.test(patch);
+  const addedLines = patch
+    .split("\n")
+    .filter((line) => line.startsWith("+") && !line.startsWith("+++"));
+  const hasPlaceholder = addedLines.some((line) =>
+    /(TODO|TBD|lorem ipsum|insert here|placeholder text)/i.test(line)
+  );
   const removedComments = /^\-\s*(\/\/|\/\*|\*)/m.test(patch);
 
   const allowedPrefixes = profile?.allowedFileGlobs ?? [];
@@ -25,12 +30,17 @@ export function analyzeDiff({ mode, profile } = {}) {
 
   const budget = Number(profile?.maxFiles ?? 999);
   const exceedsBudget = changedFiles.length > budget;
+  const blockedPrefixes = Array.isArray(profile?.blockedFilePrefixes) ? profile.blockedFilePrefixes : [];
+  const blockedFiles = blockedPrefixes.length
+    ? changedFiles.filter((file) => blockedPrefixes.some((prefix) => file.startsWith(prefix)))
+    : [];
 
   return {
     mode: mode ?? "implementation",
     changedFiles,
     stagedFiles,
     unexpectedFiles,
+    blockedFiles,
     exceedsBudget,
     diffStat: statRaw || "No diff stats available.",
     hasPlaceholder,

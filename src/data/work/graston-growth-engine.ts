@@ -26,12 +26,55 @@ export const grastonGrowthEngine: CaseStudy = {
   resultSummary:
     "Custom marketing automation platform replaced eight separate manual workflows. Real-time spatial search, connected CRM, and pipeline visibility from none to operational.",
   fullStory:
-    "The Growth Engine work focused on replacing brittle manual workflows with durable automation — so the team could scale outreach, events, and follow-up without adding headcount.",
+    "The Growth Engine work focused on replacing brittle manual workflows with durable automation so the team could scale outreach, events, and provider lifecycle operations without adding operational overhead.",
+  heroSubhead:
+    "Automation-first operating layer for a national clinician education platform where training, provider operations, and support workflows were previously manual.",
+  whyThisMattered:
+    "At national training scale, manual process drag compounds quickly. Each extra handoff increases response lag, data inconsistency, and missed follow-up windows. This engagement converted high-friction operations into a reliable system layer.",
+  whatWasBroken: [
+    "Training lifecycle steps depended on manual staff execution across multiple disconnected tools",
+    "Provider directory and membership funnel operations were fragmented from CRM state changes",
+    "Attribution and analytics signals were present but not structured as a decision-ready operating model",
+    "Support workflows lacked a scalable automation layer for recurring provider and learner requests",
+  ],
+  buildSections: [
+    {
+      title: "Training lifecycle automation",
+      description:
+        "Core training lifecycle transitions were moved to automation triggers so confirmations, sequence timing, and downstream operational updates no longer depended on manual coordination.",
+    },
+    {
+      title: "Provider directory and membership funnel system",
+      description:
+        "Provider status, listing visibility, and membership-funnel transitions were connected through one operational layer so directory integrity and conversion flow could stay synchronized.",
+    },
+    {
+      title: "Analytics and attribution operating overhaul",
+      description:
+        "Attribution and performance reporting were restructured around pipeline-stage visibility so operators could prioritize by measurable operating outcomes instead of isolated activity metrics.",
+    },
+    {
+      title: "AI and smart support workflow layer",
+      description:
+        "Recurring support and guidance flows were standardized into automation-friendly patterns so response consistency improved without increasing manual support burden.",
+    },
+  ],
+  operatingImpact:
+    "The Growth Engine now functions as an operational system, not a collection of manual tasks. Teams can execute training and provider workflows with less coordination overhead while maintaining clearer pipeline and performance visibility.",
+  implementationLayers: [
+    "Lifecycle automation orchestration",
+    "Provider directory sync logic",
+    "Membership funnel state management",
+    "Attribution and analytics reporting layer",
+    "Support automation framework",
+    "CRM-connected workflow triggers",
+  ],
   systemsBuilt: [
-    "HubSpot",
-    "Cloudflare Workers",
-    "Spatial search",
-    "Attribution layer",
+    "Training lifecycle automation",
+    "Provider directory and membership funnel",
+    "Attribution operating layer",
+    "AI-assisted support workflows",
+    "Spatial search infrastructure",
   ],
   implementationStackCategories: [
     "revenue-crm",

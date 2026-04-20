@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const barbershopCommandCenter: CaseStudy = {
   slug: "barbershop-command-center",
-  title: "Barbershop Command Center — Local Marketing & Retention System",
+  title: "Barbershop Command Center — Booking CRM & Retention Operating System",
   clientName: "Hoosier Boy Barbershop",
   clientContext: "Local service business · Indianapolis, IN",
   location: "Indianapolis, IN",
@@ -24,49 +24,50 @@ export const barbershopCommandCenter: CaseStudy = {
   primaryOutcomeSlug: "system-consolidation",
   outcomeHeadline: "4.9★ rating + 3× repeat bookings — local system built",
   resultSummary:
-    "Local barbershop rebuilt its marketing and client retention system from scratch. Appointment-to-review pipeline automated. Repeat booking rate tripled. Google presence and local search visibility structured for compounding trust.",
+    "Hoosier Boy rebuilt booking, retention, and owner operations as one connected system. Public booking flow, CRM lifecycle states, and automation sequences now run as an integrated command center that tripled repeat bookings while maintaining a 4.9-star reputation signal.",
   heroSubhead:
-    "A high-quality local barbershop with a loyal client base but no system to retain, reactivate, or grow it. Built the operating infrastructure.",
+    "A high-quality local shop with strong service delivery but disconnected booking, follow-up, and owner reporting surfaces. Rebuilt into one operating system.",
   whyThisMattered:
-    "For a local service business, the difference between 3.8 and 4.9 stars in Google determines whether a first-time searcher books or scrolls past. Client retention and online reputation are the same system — and neither was being managed deliberately.",
+    "For appointment-based service businesses, retention and utilization determine margin more than net-new traffic alone. Without a lifecycle system, even strong demand leaks through no-shows, inactive client segments, and inconsistent rebooking behavior.",
   whatWasBroken: [
-    "No CRM — client history tracked only in the booking app, disconnected from follow-up",
-    "No review request system — great experiences rarely turned into Google reviews",
-    "Rebooking was verbal or forgotten — no automated reminder or loyalty sequence",
+    "No central CRM lifecycle model — client history existed, but outreach logic was disconnected from booking behavior",
+    "No review request system — high-quality visits rarely converted into fresh trust signals",
+    "Rebooking was verbal or ad hoc — no lifecycle triggers for reminder, retention, or reactivation",
     "Local SEO was unstructured — citations inconsistent, Google Business Profile incomplete",
     "No-show rate was high — appointment reminders relied on the booking app's defaults",
   ],
   buildSections: [
     {
-      title: "Client database and booking integration",
+      title: "Public booking surface and CRM integration",
       description:
-        "Booking platform connected to a lightweight CRM layer. Each client's visit history, preferred barber, and last visit date captured and usable for segmented outreach. New and returning clients handled with different follow-up sequences.",
+        "Public booking flow was aligned to a CRM-backed client record so every appointment updated lifecycle state, visit cadence, and follow-up eligibility. New and returning clients were segmented into distinct operational tracks.",
     },
     {
-      title: "Automated review pipeline",
+      title: "Lifecycle retention and review automation",
       description:
-        "Post-visit SMS sequence built: thank-you message 2 hours after checkout, direct Google review link 24 hours later. Sequence triggers only for clients who haven't reviewed in the past 6 months. Review velocity increased from sporadic to consistent.",
+        "Post-visit flows were rebuilt into lifecycle automation: thank-you, review request, next-visit reminder, and lapsed-client reactivation. Trigger rules reduced manual outreach and made review velocity and retention more predictable.",
     },
     {
-      title: "Retention and reactivation sequences",
+      title: "Owner-admin command center workflow",
       description:
-        "Clients who haven't booked in 6 weeks receive a reactivation message with a direct booking link. Repeat-visit reminders sent at the client's average rebooking interval. No-show follow-ups include rebooking prompt and a brief check-in.",
+        "A command-center operating view centralized booking status, lifecycle segments, and outreach queues so owner/admin decisions no longer depended on memory or disconnected tools.",
     },
     {
-      title: "Local search presence",
+      title: "Local conversion and reputation support layer",
       description:
-        "Google Business Profile audited and completed: hours, services, photos, Q&A, and category alignment. Citation cleanup across directories. Local keyword structure applied to profile and website copy. Review velocity and recency improved search ranking in local pack.",
+        "Google Business Profile structure, citation hygiene, and on-site local conversion blocks were tuned to reinforce discovery and booking outcomes. Review recency and consistency supported local pack trust conversion.",
     },
   ],
   operatingImpact:
-    "The shop now runs a retention and reputation system that operates without daily management. Review requests go out automatically. Lapsed clients get reactivated without staff remembering to follow up. Local search visibility compounds as review volume and recency improve.",
+    "The shop now operates from a connected booking-to-retention system instead of fragmented tools. Owner/admin can see lifecycle state, trigger outreach by segment, and sustain retention/review operations without daily manual coordination.",
   implementationLayers: [
-    "Booking platform integration",
-    "SMS automation sequences",
+    "Public booking surface",
+    "CRM lifecycle state model",
+    "SMS and email lifecycle automation",
+    "Owner/admin command-center view",
     "Google Business Profile optimization",
     "Citation cleanup",
-    "Client segmentation",
-    "Retention and reactivation flows",
+    "Retention and reactivation orchestration",
   ],
   implementationStackCategories: [
     "revenue-crm",
@@ -80,15 +81,21 @@ export const barbershopCommandCenter: CaseStudy = {
     "apache",
   ],
   relatedToolSlugs: ["geo-readiness-auditor", "growth-bottleneck-quiz"],
-  relatedServiceSlugs: ["crm-architecture", "automation-systems", "content-seo-systems"],
+  relatedServiceSlugs: [
+    "crm-architecture",
+    "automation-systems",
+    "ai-automation",
+    "custom-infrastructure",
+    "content-seo-systems",
+  ],
   relatedProblemSlugs: ["disconnected-systems", "not-visible-enough", "site-not-converting"],
   relatedProofSlugs: ["russell-painting"],
   systemsBuilt: [
-    "CRM layer",
-    "Review pipeline",
-    "Retention sequences",
-    "Reactivation automation",
-    "Local SEO structure",
+    "Booking + CRM integration",
+    "Lifecycle automation hub",
+    "Owner-admin command center",
+    "Review velocity pipeline",
+    "Retention and reactivation system",
   ],
   featured: false,
   publishedAt: "2023-09-01",

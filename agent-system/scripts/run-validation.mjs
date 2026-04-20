@@ -43,10 +43,13 @@ export function runValidation({ validationProfile = {}, mode = "implementation",
   if (diffAnalysis.exceedsBudget) {
     failures.push("Diff exceeds configured task profile budget.");
   }
+  if (diffAnalysis.blockedFiles?.length) {
+    failures.push("Blocked file patterns were modified for current task profile.");
+  }
   if (diffAnalysis.removedComments && (mode === "surgical_fix" || mode === "implementation")) {
     failures.push("Comment removal detected in constrained task.");
   }
-  if (diffAnalysis.hasPlaceholder) {
+  if (diffAnalysis.hasPlaceholder && (mode === "audit" || mode === "surgical_fix")) {
     failures.push("Placeholder or truncation markers detected in diff.");
   }
 

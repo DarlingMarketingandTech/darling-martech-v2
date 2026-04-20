@@ -3,6 +3,7 @@
     "purpose": "Inspection-only repository assessment with ranked issues and safest next move.",
     "riskLevel": "low",
     "allowedFileGlobs": [],
+    "blockedFilePrefixes": ["src/"],
     "expectedFileBehavior": "No edits, no branch operations.",
     "validationRequirements": ["diff-scope-check", "output-integrity-check"],
     "stopConditions": ["any-file-edit", "branch-creation-attempt"],
@@ -17,6 +18,12 @@
     "purpose": "Small, bounded correction with strict diff containment.",
     "riskLevel": "low",
     "allowedFileGlobs": ["src/", "next.config.ts", "agent-system/"],
+    "blockedFilePrefixes": [
+      "src/data/work/",
+      "src/app/problems/",
+      "src/app/proof/",
+      "src/app/resources/"
+    ],
     "expectedFileBehavior": "Minimal files, no broad rewrites.",
     "validationRequirements": ["diff-scope-check", "targeted-validation", "route-and-link-consistency"],
     "stopConditions": ["unexpected-files", "broad-rewrite-pattern", "placeholder-detected", "comment-removal-unjustified"],

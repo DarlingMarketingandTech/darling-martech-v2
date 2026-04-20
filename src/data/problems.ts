@@ -66,7 +66,7 @@ export const problemPages: ProblemPage[] = [
       "Every visitor who leaves without converting is a lead that cost you money (in traffic, time, or ad spend) and produced nothing. More importantly: the right buyers — the ones who would actually pay for senior-level work — are the most likely to leave when the site doesn't immediately signal competence and credibility.",
     whatTheFixLooksLike:
       "Website strategy and rebuild. Problem-first information architecture. Conversion flow design. Trust signals in the right places. Clear next steps for every intent level — from \"just browsing\" to \"ready to talk.\"",
-    relatedProof: ["pike-medical", "clinical-compass"],
+    relatedProof: ["primarycare-indy", "urgentcare-indy"],
     relevantTools: [
       { label: "Funnel ROI Forecaster", href: "/tools/funnel-roi-forecaster" },
       { label: "CMO Roadmap Generator", href: "/tools/cmo-roadmap-generator" },
@@ -104,7 +104,7 @@ export const problemPages: ProblemPage[] = [
       "Disconnected systems are quiet killers. The leads exist. The follow-up system almost works. The reporting almost makes sense. Everything is almost fine — until you try to scale, and the whole thing falls apart because the foundation was never built to hold the load.",
     whatTheFixLooksLike:
       "CRM architecture and automation buildout. Map the full lead-to-close journey. Build the system that executes it automatically. Connect reporting so every decision is based on real data, not instinct.",
-    relatedProof: ["graston-growth-engine", "pike-medical"],
+    relatedProof: ["graston-growth-engine", "barbershop-command-center"],
     relevantTools: [
       { label: "MarTech Fragmentation Scorecard", href: "/tools/martech-fragmentation-scorecard" },
       { label: "Automation Cost Savings Calculator", href: "/tools/automation-cost-savings-calculator" },
@@ -142,7 +142,7 @@ export const problemPages: ProblemPage[] = [
       "Every dollar of traffic you don't capture is revenue that goes to someone else. More specifically: high-intent local buyers — the ones searching \"fractional CMO Indianapolis\" or \"best [service] near me\" — are the most profitable leads you can generate, and they're going to the business that showed up first, clearly, and credibly.",
     whatTheFixLooksLike:
       "Local SEO strategy and execution. GEO/AI search readiness. Citation cleanup. Conversion-optimized local pages. Structured data. Trust signals that Google and AI search engines reward.",
-    relatedProof: ["russell-painting", "317-bbq"],
+    relatedProof: ["urgentcare-indy", "primarycare-indy"],
     relevantTools: [
       { label: "GEO Readiness Auditor", href: "/tools/geo-readiness-auditor" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
@@ -180,7 +180,7 @@ export const problemPages: ProblemPage[] = [
       "Premium buyers make quick decisions. If the first impression doesn't match the caliber of the work, they move on before the relationship can form. A weak brand doesn't just lose clients — it attracts the wrong ones while repelling the right ones.",
     whatTheFixLooksLike:
       "Brand identity system: positioning, messaging, visual identity, tone of voice. Built from the actual quality of the work and the actual profile of the buyer — not from what looks nice or what a design trend suggested.",
-    relatedProof: ["pike-medical", "317-bbq"],
+    relatedProof: ["black-letter", "317-bbq"],
     relevantTools: [
       { label: "Build vs Buy Stack Calculator", href: "/tools/build-vs-buy-stack-calculator" },
       { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },

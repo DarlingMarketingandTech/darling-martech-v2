@@ -32,7 +32,7 @@ export const industrySectors: IndustrySector[] = [
     ],
     relatedProblems: ["disconnected-systems", "not-visible-enough", "pipeline-not-predictable"],
     relatedServices: ["attribution-analytics", "ai-automation", "custom-infrastructure", "martech-stack-build"],
-    proofReferences: ["pike-medical"],
+    proofReferences: ["primarycare-indy", "urgentcare-indy", "pike-medical"],
   },
   {
     slug: "b2b-saas-tech",

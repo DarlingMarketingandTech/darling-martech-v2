@@ -7,6 +7,10 @@ Use these strategic context files during review:
 - `agent-system/context/buyer_psychology.md`
 - `agent-system/context/system_foundation_path.md`
 - `agent-system/context/strategic_scorecard.md`
+- `agent-system/context/service_clusters.md`
+- `agent-system/context/problem_service_mapping.md`
+- `agent-system/context/trust_ladder_ctas.md`
+- `agent-system/context/page_generation_rules.md`
 
 Checklist:
 1. Did changes remain within profile scope?
@@ -18,6 +22,7 @@ Checklist:
 7. Does work support the correct buyer path(s)?
 8. Did anti-persona logic stay non-size-based?
 9. Are proof/CTA trust-stage paths coherent?
+10. Are service clusters and problem-service mappings coherent?
 
 Decision:
 - `safe_to_complete`

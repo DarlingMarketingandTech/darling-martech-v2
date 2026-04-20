@@ -17,6 +17,16 @@ export function preparePR({ diffAnalysis = {}, validationResult = {}, context = 
         "Changes align with scoped task profile and repo safety policies.",
       intentionallyNotChanged,
       validationPerformed: validationResult?.checksRun ?? [],
+      strategicAlignment: {
+        strategicGate: validationResult?.strategicGate ?? "not_applicable",
+        strategicScore: validationResult?.strategicScore ?? null,
+        positioningAlignment: validationResult?.positioningAlignment ?? "not_applicable",
+        buyerPathCoverage: validationResult?.buyerPathCoverage ?? "not_applicable",
+        antiPersonaCheck: validationResult?.antiPersonaCheck ?? "not_applicable",
+        trustStageAlignment: validationResult?.trustStageAlignment ?? "not_applicable",
+        clusterCoherence: validationResult?.clusterCoherence ?? "not_applicable",
+        proofPathCoherence: validationResult?.proofPathCoherence ?? "not_applicable",
+      },
       riskLevel: risk,
       rollbackPath:
         risk === "high"

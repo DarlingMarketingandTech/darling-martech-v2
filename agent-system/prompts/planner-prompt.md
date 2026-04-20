@@ -7,6 +7,7 @@ Consult these context files before proposing structure, IA, messaging, or page f
 - `agent-system/context/buyer_psychology.md`
 - `agent-system/context/system_foundation_path.md`
 - `agent-system/context/strategic_scorecard.md`
+- `agent-system/context/service_clusters.md`
 - `agent-system/context/problem_service_mapping.md`
 - `agent-system/context/trust_ladder_ctas.md`
 - `agent-system/context/page_generation_rules.md`
@@ -20,5 +21,6 @@ Required output:
 6. Strategic plan section:
    - target buyer path support (`broken-system`, `missing-system`, or both)
    - anti-persona correctness check (system/mindset based, not size based)
+   - service-cluster coherence plan
    - proof/tool/problem/service cross-link plan
    - trust-stage CTA sequencing plan

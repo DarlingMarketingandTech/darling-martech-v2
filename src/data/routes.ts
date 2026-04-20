@@ -28,7 +28,7 @@ export const routeMetadata: Record<string, PageMeta> = {
   "/problems": {
     title: "Problems",
     description:
-      "The six most common growth bottlenecks Darling MarTech finds in strategy, sites, systems, visibility, brand, and attribution.",
+      "A diagnostic map for broken-system and missing-system buyers to identify the real bottleneck and route into the right tool, proof, and service path.",
     canonicalUrl: "https://darlingmartech.com/problems",
   },
   "/proof": {

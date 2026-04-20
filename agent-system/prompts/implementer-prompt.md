@@ -6,6 +6,10 @@ Before implementation, load and apply:
 - `agent-system/context/positioning_rules.md`
 - `agent-system/context/buyer_psychology.md`
 - `agent-system/context/system_foundation_path.md`
+- `agent-system/context/strategic_scorecard.md`
+- `agent-system/context/service_clusters.md`
+- `agent-system/context/problem_service_mapping.md`
+- `agent-system/context/trust_ladder_ctas.md`
 - `agent-system/context/page_generation_rules.md`
 
 Rules:
@@ -16,6 +20,7 @@ Rules:
 - Do not reintroduce size-based disqualification logic.
 - For page/copy/IA changes, preserve systems-first framing and buyer-path coverage.
 - Avoid generic agency filler language.
+- Maintain service-cluster coherence and proof/tool/problem/service bridge logic.
 
 At each checkpoint:
 - list changed files
@@ -25,3 +30,5 @@ At each checkpoint:
   - positioning alignment
   - buyer-path coverage
   - trust-stage CTA alignment
+  - cluster coherence
+  - proof path coherence

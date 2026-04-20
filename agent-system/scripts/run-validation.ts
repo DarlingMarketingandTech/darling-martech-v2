@@ -19,6 +19,8 @@ export interface ValidationOutcome {
   buyerPathCoverage?: string;
   antiPersonaCheck?: string;
   trustStageAlignment?: string;
+  clusterCoherence?: string;
+  proofPathCoherence?: string;
   strategicGate?: "proceed" | "proceed_with_caution" | "block_and_rework" | "not_applicable";
   strategicThreshold?: { proceed: number; caution: number } | null;
   strategicRequiredImprovements?: string[];

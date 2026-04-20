@@ -3,6 +3,12 @@ export interface ContextPacket {
   profile: Record<string, unknown>;
   validation: Record<string, unknown>;
   strategicContext?: Record<string, string>;
+  strategicContextMeta?: {
+    loadedKeys: string[];
+    priorityKeys: string[];
+    profileRequiredKeys: string[];
+    contextRoutingMode: string;
+  };
   request: { prompt: string; constraints: string[] };
   memory: { sessionState: Record<string, unknown>; taskState: Record<string, unknown> };
   collectedAt: string;

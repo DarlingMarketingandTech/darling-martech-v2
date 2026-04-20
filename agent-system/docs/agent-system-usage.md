@@ -3,6 +3,7 @@
 ## What this system does
 - Classifies incoming work into explicit modes and risk levels.
 - Collects scoped context and task profile constraints before action.
+- Routes strategic context files by task mode + request intent for strategy/page tasks.
 - Tracks observations and file edits through hook events.
 - Runs stop-time safety gates and validation checks.
 - Produces PR-ready summaries from actual diff + validation outputs.
@@ -35,3 +36,16 @@
 - Validation requirements are profile-specific, not generic.
 - Design modes also run heuristic scorecards and threshold gates; see `agent-system/docs/design-validation-gates.md`.
 - Strategy/page-generation work now runs strategic context scoring and anti-drift checks; see `agent-system/docs/strategic-context-layer.md`.
+
+## Strategic runtime usage
+1. Submit a strategic task using one of the strategic modes (explicitly or by prompt classification).
+2. Inspect `agent-system/memory/task_state.json` -> `context.strategicContextMeta` to confirm routed strategic files.
+3. Run work and stop the session; inspect `agent-system/last-run-report.json`:
+   - `validationResult.strategicGate`
+   - `validationResult.positioningAlignment`
+   - `validationResult.buyerPathCoverage`
+   - `validationResult.antiPersonaCheck`
+   - `validationResult.trustStageAlignment`
+   - `validationResult.clusterCoherence`
+   - `validationResult.proofPathCoherence`
+4. Treat `block_and_rework` as mandatory rework before completion.

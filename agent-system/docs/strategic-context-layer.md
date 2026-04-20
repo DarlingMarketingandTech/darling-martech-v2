@@ -15,6 +15,12 @@ This layer is driven by source-of-truth context files in `agent-system/context`:
 - `trust_ladder_ctas.md`
 - `page_generation_rules.md`
 
+This context pack is now actively routed by mode and prompt intent via `collect-context.mjs`:
+- Mode bundles select mandatory files for strategic/page-related modes.
+- Task profile `requiredStrategicContext` keys force inclusion.
+- Prompt keyword routing adds context for page generation, service architecture, CTA planning, and positioning refinement.
+- Runtime emits `strategicContextMeta` (`loadedKeys`, `priorityKeys`, `profileRequiredKeys`) for deterministic traceability.
+
 ## Buyer states (required model)
 
 Qualification is based on system state and mindset, not company size.
@@ -34,6 +40,8 @@ Strategic audits score pages across:
 - broken-system fit
 - missing-system fit
 - trust-stage CTA alignment
+- service-cluster coherence
+- proof-path coherence (problem -> tool -> proof -> service progression)
 - operator/accountability clarity
 - commercial usefulness
 
@@ -50,6 +58,8 @@ Thresholds:
 - `buyerPathCoverage`
 - `antiPersonaCheck`
 - `trustStageAlignment`
+- `clusterCoherence`
+- `proofPathCoherence`
 - `strategicGate`
 - `strategicBlockReason`
 - `strategicRequiredImprovements`
@@ -58,6 +68,19 @@ Validation can block on:
 - size-based anti-persona drift
 - weak strategic score
 - insufficient buyer-path support (mode dependent)
+- both weak cluster coherence and weak proof-path coherence
+
+## Strategic modes
+
+Task/validation profiles now include dedicated strategic modes:
+- `strategic_audit`
+- `page_generation`
+- `service_architecture`
+- `problem_path_planning`
+- `cta_strategy`
+- `positioning_refinement`
+
+These modes enforce strategic context requirements and strategic validation dimensions before completion.
 
 ## Commands
 

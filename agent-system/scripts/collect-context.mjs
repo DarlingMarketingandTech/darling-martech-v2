@@ -2,6 +2,53 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const BASE = path.join(process.cwd(), "agent-system");
+const STRATEGIC_FILE_MAP = {
+  strategicStandards: path.join("context", "strategic_standards.md"),
+  positioningRules: path.join("context", "positioning_rules.md"),
+  buyerPsychology: path.join("context", "buyer_psychology.md"),
+  systemFoundationPath: path.join("context", "system_foundation_path.md"),
+  strategicScorecard: path.join("context", "strategic_scorecard.md"),
+  serviceClusters: path.join("context", "service_clusters.md"),
+  problemServiceMapping: path.join("context", "problem_service_mapping.md"),
+  trustLadderCtas: path.join("context", "trust_ladder_ctas.md"),
+  pageGenerationRules: path.join("context", "page_generation_rules.md"),
+};
+
+const STRATEGIC_CORE = ["strategicStandards", "positioningRules", "buyerPsychology", "systemFoundationPath"];
+const STRATEGIC_SCORING = ["strategicScorecard"];
+const STRATEGIC_PAGE_FLOW = ["pageGenerationRules", "trustLadderCtas", "problemServiceMapping"];
+const STRATEGIC_ARCH = ["serviceClusters", "problemServiceMapping", "systemFoundationPath"];
+
+const MODE_STRATEGIC_BUNDLES = {
+  strategic_audit: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, ...STRATEGIC_PAGE_FLOW, "serviceClusters"],
+  page_generation: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, ...STRATEGIC_PAGE_FLOW, "serviceClusters"],
+  service_architecture: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, ...STRATEGIC_ARCH],
+  problem_path_planning: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, "problemServiceMapping", "trustLadderCtas"],
+  cta_strategy: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, "trustLadderCtas", "pageGenerationRules"],
+  positioning_refinement: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, "serviceClusters"],
+  page_experience_upgrade: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, ...STRATEGIC_PAGE_FLOW],
+  component_upgrade: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, "pageGenerationRules"],
+  implementation: [...STRATEGIC_CORE, ...STRATEGIC_SCORING, ...STRATEGIC_PAGE_FLOW],
+};
+
+const PROMPT_KEYWORD_BUNDLES = [
+  {
+    bundle: ["pageGenerationRules", "trustLadderCtas", "problemServiceMapping"],
+    triggers: ["page", "homepage", "rewrite", "ia", "navigation", "structure"],
+  },
+  {
+    bundle: ["serviceClusters", "problemServiceMapping", "systemFoundationPath"],
+    triggers: ["service", "cluster", "offer", "architecture", "problem-service"],
+  },
+  {
+    bundle: ["trustLadderCtas", "buyerPsychology", "positioningRules"],
+    triggers: ["cta", "trust", "qualify", "buyer", "segmentation"],
+  },
+  {
+    bundle: ["positioningRules", "strategicStandards", "buyerPsychology"],
+    triggers: ["positioning", "anti-persona", "messaging", "generic agency"],
+  },
+];
 
 async function safeRead(relativePath, fallback) {
   try {
@@ -29,17 +76,35 @@ export async function collectContext({ classification, input } = {}) {
   const mode = classification?.mode ?? "implementation";
   const profile = taskProfiles?.[mode] ?? {};
   const validation = validationProfiles?.[mode] ?? {};
-  const strategicContext = {
-    strategicStandards: await safeReadText(path.join("context", "strategic_standards.md")),
-    positioningRules: await safeReadText(path.join("context", "positioning_rules.md")),
-    buyerPsychology: await safeReadText(path.join("context", "buyer_psychology.md")),
-    systemFoundationPath: await safeReadText(path.join("context", "system_foundation_path.md")),
-    strategicScorecard: await safeReadText(path.join("context", "strategic_scorecard.md")),
-    serviceClusters: await safeReadText(path.join("context", "service_clusters.md")),
-    problemServiceMapping: await safeReadText(path.join("context", "problem_service_mapping.md")),
-    trustLadderCtas: await safeReadText(path.join("context", "trust_ladder_ctas.md")),
-    pageGenerationRules: await safeReadText(path.join("context", "page_generation_rules.md")),
-  };
+  const prompt = String(input?.prompt ?? "").toLowerCase();
+  const profileRequiredStrategicContext = Array.isArray(profile?.requiredStrategicContext)
+    ? profile.requiredStrategicContext
+    : [];
+
+  const selectedStrategicKeys = new Set([
+    ...STRATEGIC_CORE,
+    ...(MODE_STRATEGIC_BUNDLES[mode] ?? []),
+    ...profileRequiredStrategicContext,
+  ]);
+
+  for (const rule of PROMPT_KEYWORD_BUNDLES) {
+    if (rule.triggers.some((trigger) => prompt.includes(trigger))) {
+      for (const key of rule.bundle) selectedStrategicKeys.add(key);
+    }
+  }
+
+  const strategicContext = {};
+  for (const key of selectedStrategicKeys) {
+    const relativePath = STRATEGIC_FILE_MAP[key];
+    if (!relativePath) continue;
+    strategicContext[key] = await safeReadText(relativePath);
+  }
+
+  const strategicContextPriority = [
+    ...STRATEGIC_CORE,
+    ...(MODE_STRATEGIC_BUNDLES[mode] ?? []),
+    ...profileRequiredStrategicContext,
+  ].filter((key, index, list) => list.indexOf(key) === index);
 
   return {
     mode,
@@ -50,6 +115,12 @@ export async function collectContext({ classification, input } = {}) {
       constraints: input?.constraints ?? [],
     },
     strategicContext,
+    strategicContextMeta: {
+      loadedKeys: Object.keys(strategicContext),
+      priorityKeys: strategicContextPriority,
+      profileRequiredKeys: profileRequiredStrategicContext,
+      contextRoutingMode: mode,
+    },
     memory: {
       sessionState: {
         sessionId: sessionState?.sessionId ?? null,

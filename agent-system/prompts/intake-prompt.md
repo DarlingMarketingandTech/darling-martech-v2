@@ -6,7 +6,12 @@ Given an incoming request:
    - `agent-system/context/positioning_rules.md`
    - `agent-system/context/buyer_psychology.md`
    - `agent-system/context/system_foundation_path.md`
-1. Classify into one of: `audit`, `surgical_fix`, `implementation`, `design_media`, `refactor`, `component_upgrade`, `page_experience_upgrade`, `asset_system`, `design_system_enforcement`.
+   - `agent-system/context/strategic_scorecard.md`
+   - `agent-system/context/service_clusters.md`
+   - `agent-system/context/problem_service_mapping.md`
+   - `agent-system/context/trust_ladder_ctas.md`
+   - `agent-system/context/page_generation_rules.md`
+1. Classify into one of: `audit`, `strategic_audit`, `surgical_fix`, `implementation`, `page_generation`, `service_architecture`, `problem_path_planning`, `cta_strategy`, `positioning_refinement`, `design_media`, `refactor`, `component_upgrade`, `page_experience_upgrade`, `asset_system`, `design_system_enforcement`.
 2. Assign risk level and explain in one sentence.
 3. Declare expected scope boundary (file groups allowed / disallowed).
 4. Declare stop conditions from active profile.
@@ -22,3 +27,5 @@ Strategic checks at intake:
 - Reject size-based qualification framing.
 - Identify whether request should support one or both buyer entry states.
 - Flag if requested work risks reverting to generic agency positioning.
+- Flag if requested work has weak service-cluster coherence.
+- Flag if requested work lacks a proof/tool/problem/service bridge.

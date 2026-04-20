@@ -6,7 +6,7 @@ import path from "node:path";
 const args = process.argv.slice(2);
 const jsonMode = args.includes("--json");
 const targetDir = args.find((arg) => !arg.startsWith("--")) || "src/app";
-const pageFiles = [];
+const candidateFiles = [];
 
 const DIMENSIONS = [
   "systemsThinking",
@@ -16,6 +16,8 @@ const DIMENSIONS = [
   "brokenSystemFit",
   "missingSystemFit",
   "trustStageAlignment",
+  "clusterCoherence",
+  "proofPathCoherence",
   "operatorAccountability",
   "commercialUsefulness",
 ];
@@ -32,13 +34,69 @@ function walk(dir) {
     if (entry.isDirectory()) {
       if (["node_modules", ".next", ".git", "api"].includes(entry.name)) continue;
       walk(full);
-    } else if (entry.name === "page.tsx") {
-      pageFiles.push(full);
+    } else if (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts") || entry.name.endsWith(".md")) {
+      candidateFiles.push(full);
     }
   }
 }
 
-function scorePage(content) {
+function safeRead(relativePath) {
+  try {
+    return fs.readFileSync(path.join(process.cwd(), "agent-system", "context", relativePath), "utf8");
+  } catch {
+    return "";
+  }
+}
+
+function parseBacktickTerms(markdown) {
+  const matches = markdown.match(/`([^`]+)`/g) || [];
+  return matches.map((value) => value.replace(/`/g, "").toLowerCase()).filter(Boolean);
+}
+
+const strategicContext = {
+  strategicStandards: safeRead("strategic_standards.md"),
+  positioningRules: safeRead("positioning_rules.md"),
+  buyerPsychology: safeRead("buyer_psychology.md"),
+  systemFoundationPath: safeRead("system_foundation_path.md"),
+  strategicScorecard: safeRead("strategic_scorecard.md"),
+  serviceClusters: safeRead("service_clusters.md"),
+  problemServiceMapping: safeRead("problem_service_mapping.md"),
+  trustLadderCtas: safeRead("trust_ladder_ctas.md"),
+  pageGenerationRules: safeRead("page_generation_rules.md"),
+};
+
+const CLUSTER_TERMS = [
+  ...parseBacktickTerms(strategicContext.serviceClusters),
+  "revenue engineering",
+  "intelligent automation",
+  "custom infrastructure",
+  "brand",
+  "experience systems",
+].filter(Boolean);
+
+const PROOF_TERMS = [
+  ...parseBacktickTerms(strategicContext.problemServiceMapping),
+  "proof",
+  "case study",
+  "metric",
+  "outcome",
+  "tool",
+  "problem",
+  "service",
+];
+
+function countSignals(text, terms) {
+  let count = 0;
+  for (const term of terms) {
+    if (!term) continue;
+    const safe = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(`\\b${safe}\\b`, "g");
+    count += (text.match(regex) || []).length;
+  }
+  return count;
+}
+
+function scoreCandidate(content) {
   const weaknesses = [];
   const strengths = [];
   const upgrades = [];
@@ -53,6 +111,8 @@ function scorePage(content) {
   const trustStageSignals = (lowered.match(/\b(quiz|diagnostic|learn|proof|roadmap|book|contact)\b/g) || []).length;
   const operatorSignals = (lowered.match(/\b(i |jacob|owner-operator|accountable)\b/g) || []).length;
   const antiPersonaSizeSignals = (lowered.match(/\b(too small|enterprise only|not for small|minimum revenue|team size)\b/g) || []).length;
+  const clusterSignals = countSignals(lowered, CLUSTER_TERMS);
+  const mappingSignals = countSignals(lowered, PROOF_TERMS);
 
   const categoryScores = {
     systemsThinking: 10,
@@ -62,6 +122,8 @@ function scorePage(content) {
     brokenSystemFit: 10,
     missingSystemFit: 10,
     trustStageAlignment: 10,
+    clusterCoherence: 10,
+    proofPathCoherence: 10,
     operatorAccountability: 10,
     commercialUsefulness: 10,
   };
@@ -114,6 +176,28 @@ function scorePage(content) {
     categoryScores.trustStageAlignment -= 3;
     weaknesses.push("CTA trust-stage progression appears thin.");
     upgrades.push("Add clearer browse/diagnose/learn/evaluate/ready CTA progression.");
+  }
+
+  if (clusterSignals < 2) {
+    categoryScores.clusterCoherence -= 4;
+    weaknesses.push("Service-cluster architecture is weakly represented.");
+    upgrades.push("Anchor recommendations to service clusters and system-foundation path.");
+  } else if (clusterSignals < 4) {
+    categoryScores.clusterCoherence -= 2;
+    upgrades.push("Strengthen cluster-level mapping clarity for implementation planning.");
+  } else {
+    strengths.push("Service-cluster architecture signals are present.");
+  }
+
+  if (mappingSignals < 3) {
+    categoryScores.proofPathCoherence -= 4;
+    weaknesses.push("Problem/tool/proof/service path is not explicit enough.");
+    upgrades.push("Add explicit bridges between problem diagnosis, proof, tools, and service next step.");
+  } else if (mappingSignals < 6) {
+    categoryScores.proofPathCoherence -= 2;
+    upgrades.push("Clarify proof and next-step path with tighter problem-service mapping.");
+  } else {
+    strengths.push("Problem/proof/tool/service path is meaningfully connected.");
   }
 
   if (operatorSignals < 1) {
@@ -173,6 +257,14 @@ function scorePage(content) {
             : "insufficient",
     antiPersonaCheck: antiPersonaSizeSignals > 0 ? "failed_size_based_disqualification_detected" : "pass",
     trustStageAlignment: categoryScores.trustStageAlignment >= 7 ? "aligned" : "weak",
+    clusterCoherence:
+      categoryScores.clusterCoherence >= 8 ? "aligned" : categoryScores.clusterCoherence >= 7 ? "partial" : "weak",
+    proofPathCoherence:
+      categoryScores.proofPathCoherence >= 8
+        ? "aligned"
+        : categoryScores.proofPathCoherence >= 7
+          ? "partial"
+          : "weak",
   };
 }
 
@@ -183,9 +275,9 @@ if (!fs.existsSync(targetDir)) {
 
 walk(targetDir);
 
-const items = pageFiles.map((file) => {
+const items = candidateFiles.map((file) => {
   const content = fs.readFileSync(file, "utf8");
-  return { file, ...scorePage(content) };
+  return { file, ...scoreCandidate(content) };
 });
 
 items.sort((a, b) => a.strategicScore - b.strategicScore);

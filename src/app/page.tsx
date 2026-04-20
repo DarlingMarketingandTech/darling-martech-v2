@@ -41,6 +41,61 @@ export default function HomePage() {
 
       <SectionWrapper className="mt-14">
         <SectionReveal>
+          <SectionHeader
+            eyebrow={homepageData.buyerPathSection.eyebrow}
+            title={homepageData.buyerPathSection.headline}
+            body={homepageData.buyerPathSection.body}
+          />
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {homepageData.buyerPathSection.paths.map((path) => (
+              <article key={path.title} className="panel-obsidian rounded-4xl p-6 md:p-8">
+                <p className="meta-label text-[#0FD9C8]">{path.stateLabel}</p>
+                <h3 className="font-display mt-4 text-2xl font-semibold tracking-[-0.02em] text-[#F5F4F0]">
+                  {path.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#F5F4F0]/70">{path.body}</p>
+                <ul className="mt-5 space-y-2">
+                  {path.signals.map((signal) => (
+                    <li key={signal} className="text-sm leading-relaxed text-[#F5F4F0]/58">
+                      - {signal}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-7 flex flex-wrap items-center gap-3">
+                  <Button href={path.primaryCta.href} size="md">
+                    {path.primaryCta.label}
+                  </Button>
+                  <Button href={path.secondaryCta.href} variant="ghost" size="md">
+                    {path.secondaryCta.label}
+                  </Button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </SectionReveal>
+      </SectionWrapper>
+
+      <BandSection className="mt-14">
+        <SectionReveal delay={0.03}>
+          <SectionHeader
+            eyebrow={homepageData.systemLogicSection.eyebrow}
+            title={homepageData.systemLogicSection.headline}
+            body={homepageData.systemLogicSection.body}
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {homepageData.systemLogicSection.steps.map((step) => (
+              <article key={step.title} className="rounded-3xl border border-[#F5F4F0]/10 bg-[#0F0F13] p-5 md:p-6">
+                <p className="meta-label text-[#F05A28]/90">{step.label}</p>
+                <h3 className="mt-3 text-lg font-semibold text-[#F5F4F0]">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/62">{step.body}</p>
+              </article>
+            ))}
+          </div>
+        </SectionReveal>
+      </BandSection>
+
+      <SectionWrapper className="mt-14">
+        <SectionReveal>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeader eyebrow={homepageData.problemSection.eyebrow} title={homepageData.problemSection.headline} />
             <Button href={homepageData.problemSection.diagnosticCta.href} variant="ghost">
@@ -92,6 +147,33 @@ export default function HomePage() {
       </SectionWrapper>
 
       <SectionWrapper className="mt-14">
+        <SectionReveal>
+          <SectionHeader
+            eyebrow={homepageData.proofBridgeSection.eyebrow}
+            title={homepageData.proofBridgeSection.headline}
+            body={homepageData.proofBridgeSection.body}
+          />
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {homepageData.proofBridgeSection.frames.map((frame) => (
+              <article key={frame.metric} className="panel-obsidian rounded-3xl p-5 md:p-6">
+                <p className="font-mono text-2xl font-semibold text-[#22C55E]">{frame.metric}</p>
+                <p className="mt-2 text-sm font-semibold text-[#F5F4F0]">{frame.context}</p>
+                <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/58">{frame.whyItMatters}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Button href={homepageData.proofBridgeSection.primaryCta.href} variant="secondary">
+              {homepageData.proofBridgeSection.primaryCta.label}
+            </Button>
+            <Button href={homepageData.proofBridgeSection.secondaryCta.href} variant="ghost">
+              {homepageData.proofBridgeSection.secondaryCta.label}
+            </Button>
+          </div>
+        </SectionReveal>
+      </SectionWrapper>
+
+      <SectionWrapper className="mt-14">
         <IcpBlock
           eyebrow={homepageData.icpSection.eyebrow}
           headline={homepageData.icpSection.headline}
@@ -119,6 +201,9 @@ export default function HomePage() {
             </Button>
             <Button href={homepageData.closingCta.secondaryCta.href} variant="ghost" size="lg">
               {homepageData.closingCta.secondaryCta.label}
+            </Button>
+            <Button href={homepageData.closingCta.tertiaryCta.href} variant="secondary" size="lg">
+              {homepageData.closingCta.tertiaryCta.label}
             </Button>
           </div>
         </SectionReveal>

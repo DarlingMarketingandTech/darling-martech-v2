@@ -16,6 +16,12 @@ const DESIGN_THRESHOLD = {
 
 const STRATEGIC_MODE_AUDITS = {
   implementation: true,
+  strategic_audit: true,
+  page_generation: true,
+  service_architecture: true,
+  problem_path_planning: true,
+  cta_strategy: true,
+  positioning_refinement: true,
   page_experience_upgrade: true,
   component_upgrade: true,
   asset_system: true,
@@ -79,6 +85,12 @@ function runStrategicAudit(mode, diffAnalysis = {}) {
   if (mode === "asset_system") {
     targetDir = "src/app";
   }
+  if (mode === "service_architecture") {
+    targetDir = "src/data";
+  }
+  if (mode === "component_upgrade" && changedFiles.some((file) => file.startsWith("src/components/"))) {
+    targetDir = "src/components";
+  }
 
   const result = spawnSync("node", ["agent-system/scripts/audit-strategic-alignment.mjs", targetDir, "--json"], {
     encoding: "utf8",
@@ -112,6 +124,18 @@ function runStrategicAudit(mode, diffAnalysis = {}) {
           : "pass",
       trustStageAlignment:
         parsed?.items?.some((row) => row.trustStageAlignment === "weak") ? "weak" : "aligned",
+      clusterCoherence:
+        parsed?.items?.some((row) => row.clusterCoherence === "weak")
+          ? "weak"
+          : parsed?.items?.some((row) => row.clusterCoherence === "partial")
+            ? "partial"
+            : "aligned",
+      proofPathCoherence:
+        parsed?.items?.some((row) => row.proofPathCoherence === "weak")
+          ? "weak"
+          : parsed?.items?.some((row) => row.proofPathCoherence === "partial")
+            ? "partial"
+            : "aligned",
       requiredImprovements: (parsed?.items || []).flatMap((row) => row.topUpgrades || []).slice(0, 5),
       topWeaknesses: (parsed?.items || []).flatMap((row) => row.topWeaknesses || []).slice(0, 6),
       raw: parsed,
@@ -221,6 +245,8 @@ function evaluateStrategicGate(mode, diffAnalysis = {}) {
       buyerPathCoverage: "unknown",
       antiPersonaCheck: "unknown",
       trustStageAlignment: "unknown",
+      clusterCoherence: "unknown",
+      proofPathCoherence: "unknown",
       requiredImprovements: [],
       blockReason: `Strategic gate could not run: ${audited.error}`,
       gate: "block_and_rework",
@@ -241,11 +267,19 @@ function evaluateStrategicGate(mode, diffAnalysis = {}) {
   if (audited.buyerPathCoverage === "insufficient" && gate === "proceed") {
     gate = "proceed_with_caution";
   }
+  if ((audited.clusterCoherence === "weak" || audited.proofPathCoherence === "weak") && gate === "proceed") {
+    gate = "proceed_with_caution";
+  }
+  if (audited.clusterCoherence === "weak" && audited.proofPathCoherence === "weak") {
+    gate = "block_and_rework";
+  }
 
   const blockReason =
     gate === "block_and_rework"
       ? audited.antiPersonaCheck !== "pass"
         ? "Blocked because size-based anti-persona logic conflicts with strategic standards."
+        : audited.clusterCoherence === "weak" && audited.proofPathCoherence === "weak"
+          ? "Blocked because service/cluster mapping and proof path coherence are both weak."
         : `Blocked because strategic score is ${audited.strategicScore} and strategic alignment is below threshold.`
       : null;
 
@@ -257,6 +291,8 @@ function evaluateStrategicGate(mode, diffAnalysis = {}) {
     buyerPathCoverage: audited.buyerPathCoverage,
     antiPersonaCheck: audited.antiPersonaCheck,
     trustStageAlignment: audited.trustStageAlignment,
+    clusterCoherence: audited.clusterCoherence,
+    proofPathCoherence: audited.proofPathCoherence,
     requiredImprovements: audited.requiredImprovements,
     blockReason,
     gate,
@@ -388,6 +424,8 @@ export function runValidation({ validationProfile = {}, mode = "implementation",
     buyerPathCoverage: strategicGateResult?.buyerPathCoverage ?? "not_applicable",
     antiPersonaCheck: strategicGateResult?.antiPersonaCheck ?? "not_applicable",
     trustStageAlignment: strategicGateResult?.trustStageAlignment ?? "not_applicable",
+    clusterCoherence: strategicGateResult?.clusterCoherence ?? "not_applicable",
+    proofPathCoherence: strategicGateResult?.proofPathCoherence ?? "not_applicable",
     strategicGate: strategicGateResult?.gate ?? "not_applicable",
     strategicThreshold: strategicGateResult?.scoreThreshold ?? null,
     strategicRequiredImprovements: strategicGateResult?.requiredImprovements ?? [],

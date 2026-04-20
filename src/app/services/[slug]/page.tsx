@@ -7,6 +7,7 @@ import { PageHero } from "@/components/hero/PageHero";
 import { ProofGrid } from "@/components/proof/ProofGrid";
 import { Button } from "@/components/ui/button";
 import { ServiceEcosystemSupportBlock } from "@/components/capabilities/CapabilityPanels";
+import { ServiceHeroVisual } from "@/components/services/ServiceHeroVisual";
 import { services } from "@/data/services";
 import { problemPages } from "@/data/problems";
 import { caseStudies } from "@/data/work/work-index";
@@ -55,7 +56,19 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
 
   return (
     <SiteShell>
-      <PageHero eyebrow="SERVICE" headline={service.title} body={service.description} />
+      <PageHero
+        eyebrow="SERVICE"
+        headline={service.title}
+        body={service.description}
+        splitAside={
+          service.visualPublicId ? (
+            <ServiceHeroVisual
+              publicId={service.visualPublicId}
+              alt={service.visualAlt ?? service.title}
+            />
+          ) : undefined
+        }
+      />
 
       <BandSection className="mt-14">
         <p className="text-sm uppercase tracking-[0.24em] text-[#0FD9C8]">Outcomes</p>

@@ -448,6 +448,27 @@ select {
   }
 }
 
+/* Service detail hero: barely perceptible motion on the split image */
+@keyframes service-hero-visual-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-0.35%, 0.28%, 0) scale(1.012);
+  }
+}
+
+.service-hero-visual-drift {
+  animation: service-hero-visual-drift 32s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-hero-visual-drift {
+    animation: none;
+  }
+}
+
 .grain-mask {
   position: relative;
 }

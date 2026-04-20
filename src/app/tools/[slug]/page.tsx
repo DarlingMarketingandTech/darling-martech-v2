@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { PageHero } from "@/components/hero/PageHero";
+import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { QuizEngine } from "@/components/tools/QuizEngine";
 import { tools } from "@/data/labs";
 import { buildMetadata } from "@/lib/metadata";
@@ -53,7 +54,24 @@ export default async function ToolSlugPage({ params }: ToolSlugPageProps) {
 
   return (
     <SiteShell>
-      <PageHero eyebrow="Diagnostic tool" headline={tool.title} body={tool.description} />
+      <PageHero
+        eyebrow="Diagnostic tool"
+        headline={tool.title}
+        body={tool.description}
+        splitAside={
+          tool.cloudinaryThumbnail ? (
+            <CloudinaryImage
+              publicId={tool.cloudinaryThumbnail}
+              alt={`${tool.title} visual`}
+              width={1024}
+              height={1024}
+              priority
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="h-full min-h-[340px] w-full rounded-3xl object-cover"
+            />
+          ) : undefined
+        }
+      />
       <BandSection className="mt-12">
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <p className="text-sm uppercase tracking-[0.24em] text-[#0FD9C8]">{tool.estimatedTime}</p>

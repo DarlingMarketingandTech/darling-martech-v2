@@ -50,7 +50,7 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
                 <p className="font-display text-xl font-semibold">D.</p>
                 <button
                   type="button"
-                  className="rounded-full border border-[#F5F4F0]/12 px-3 py-2 text-sm text-[#F5F4F0]/76"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#F5F4F0]/12 px-4 text-sm text-[#F5F4F0]/76"
                   onClick={onClose}
                 >
                   Close

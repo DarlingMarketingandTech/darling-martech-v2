@@ -112,6 +112,8 @@ export interface ProofMetric {
   value: string;
   label: string;
   isHighlighted?: boolean;
+  /** Optional blurred wash for narrative (non-numeric) outcome tiles */
+  accentImagePublicId?: string;
 }
 
 export interface CaseStudy {
@@ -199,6 +201,9 @@ export interface Service {
   tiers?: ServiceTier[];
   isFeatured: boolean;
   pillar: ServicePillar;
+  /** Curated Cloudinary hero / card visual */
+  visualPublicId?: string;
+  visualAlt?: string;
   /** Capability categories this service commonly orchestrates */
   ecosystemCategories?: PlatformCapabilityCategory[];
 }
@@ -380,6 +385,10 @@ export interface ProblemPageCta {
 export interface ProblemPage {
   slug: ProblemCluster;
   title: string;
+  /** Curated Cloudinary visual for cards and detail hero. */
+  imagePublicId?: string;
+  /** Accessible description for the curated visual. */
+  imageAlt?: string;
   /** Hub / SEO short line */
   heroSubhead: string;
   /** Category label for hero and hub cards, e.g. STRATEGY & LEADERSHIP */

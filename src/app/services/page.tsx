@@ -14,6 +14,7 @@ import {
 import { getPrimaryProofAnglesForService } from "@/data/proof-angles";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
+import { ServicesIndexAmbient } from "@/components/services/ServicesIndexAmbient";
 
 export const metadata = buildMetadata({
   title: "Services",
@@ -32,6 +33,9 @@ export default function ServicesIndexPage() {
 
   return (
     <SiteShell>
+      <div className="relative isolate">
+        <ServicesIndexAmbient />
+        <div className="relative z-10">
       <PageHero
         eyebrow="CAPABILITIES"
         headline="Find the layer that is constraining growth."
@@ -165,6 +169,8 @@ export default function ServicesIndexPage() {
           </Button>
         </div>
       </SectionWrapper>
+        </div>
+      </div>
     </SiteShell>
   );
 }

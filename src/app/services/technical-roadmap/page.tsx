@@ -2,8 +2,10 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { PageHero } from "@/components/hero/PageHero";
+import { ServiceHeroVisual } from "@/components/services/ServiceHeroVisual";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { SERVICE_VISUAL_BY_SLUG } from "@/data/service-visuals";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
 
@@ -60,12 +62,17 @@ const ROADMAP_SKUS = [
 ];
 
 export default function TechnicalRoadmapPage() {
+  const visual = SERVICE_VISUAL_BY_SLUG["technical-roadmap"];
+
   return (
     <SiteShell>
       <PageHero
         eyebrow="ENTRY OFFER · DIAGNOSIS BEFORE PRESCRIPTION"
         headline="Technical Roadmap"
         body="A paid diagnostic engagement before any retainer commitment. You get a named, prioritized plan for exactly what to build — and the fee credits toward implementation if you proceed."
+        splitAside={
+          <ServiceHeroVisual publicId={visual.visualPublicId} alt={visual.visualAlt} />
+        }
       />
 
       {/* How it works */}

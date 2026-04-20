@@ -2,9 +2,9 @@ import { HomepageHeroStitchImage } from "@/components/hero/HomepageHeroStitchIma
 
 /**
  * Cloudinary public_id for the homepage hero Stitch asset (1024×1024).
- * Verified asset: `stitch-positional-drift` — positional drift / modular plates.
+ * Verified asset: `curated/homepage/hero-positional-drift` — positional drift / modular plates.
  */
-export const HOMEPAGE_HERO_STITCH_PUBLIC_ID = "stitch-positional-drift";
+export const HOMEPAGE_HERO_STITCH_PUBLIC_ID = "curated/homepage/hero-positional-drift";
 
 /**
  * Homepage hero visual: Stitch raster base + atmospheric gradients + localized

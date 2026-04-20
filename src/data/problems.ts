@@ -5,6 +5,8 @@ export const problemPages: ProblemPage[] = [
   {
     slug: "no-strategy-owner",
     title: "No one is steering the whole system",
+    imagePublicId: "curated/problems/no-strategy-owner-unified-ownership",
+    imageAlt: "Modular systems being pulled into alignment to represent unified strategic ownership.",
     hubCategory: "STRATEGY",
     proofChip: "+212% qualified leads after strategy overhaul — Graston Technique®",
     hubCtaLabel: "See what's missing →",
@@ -43,6 +45,8 @@ export const problemPages: ProblemPage[] = [
   {
     slug: "site-not-converting",
     title: "The site gets traffic but doesn't convert it",
+    imagePublicId: "curated/problems/site-not-converting-messaging-decay",
+    imageAlt: "A decaying core module that represents trust and messaging breakdown on conversion pages.",
     hubCategory: "WEBSITE & CONVERSION",
     proofChip: "+45% patient growth after site strategy overhaul — Pike Medical Consultants",
     hubCtaLabel: "See what's blocking you →",
@@ -81,6 +85,8 @@ export const problemPages: ProblemPage[] = [
   {
     slug: "disconnected-systems",
     title: "Leads, follow-up, and reporting are disconnected",
+    imagePublicId: "curated/problems/disconnected-systems-fractured-pipeline",
+    imageAlt: "A fractured data conduit visualizing disconnected lead capture and follow-up systems.",
     hubCategory: "CRM & AUTOMATION",
     proofChip: "95% less manual overhead — Graston Growth Engine automation",
     hubCtaLabel: "See what's leaking →",
@@ -119,6 +125,8 @@ export const problemPages: ProblemPage[] = [
   {
     slug: "not-visible-enough",
     title: "Qualified buyers exist but can't find you",
+    imagePublicId: "curated/problems/not-visible-enough-unanchored-activity",
+    imageAlt: "Floating campaign modules disconnected from a core system, representing weak visibility anchoring.",
     hubCategory: "SEO & DEMAND",
     proofChip: "4.9★ local trust conversion after visibility rebuild — Russell Painting",
     hubCtaLabel: "See what's holding you back →",
@@ -157,6 +165,8 @@ export const problemPages: ProblemPage[] = [
   {
     slug: "brand-system-broken",
     title: "The brand doesn't match the quality of the business",
+    imagePublicId: "curated/problems/brand-system-broken-identity-disconnect",
+    imageAlt: "Two incompatible system clusters representing brand and business identity disconnect.",
     hubCategory: "BRAND & POSITIONING",
     proofChip: "Full brand system rebuild for legal, medical, and service clients across 15+ years",
     hubCtaLabel: "See this problem →",
@@ -195,6 +205,8 @@ export const problemPages: ProblemPage[] = [
   {
     slug: "pipeline-not-predictable",
     title: "Revenue is coming in but you can't explain why",
+    imagePublicId: "curated/problems/pipeline-not-predictable-broken-data-loop",
+    imageAlt: "A broken circular data loop representing attribution blind spots in revenue reporting.",
     hubCategory: "PIPELINE & REVENUE ATTRIBUTION",
     proofChip: "Multi-model attribution clarity delivered via Attribution Snapshot tool",
     hubCtaLabel: "See this problem →",

@@ -11,8 +11,17 @@ export const blackLetter: CaseStudy = {
   problemClusters: ["brand-system-broken"],
   trustLadderStage: "evaluate",
   metrics: [
-    { value: "Identity system", label: "Brand architecture defined and documented", isHighlighted: true },
-    { value: "Consistent assets", label: "Visual and messaging standards unified across core touchpoints" },
+    {
+      value: "Identity system",
+      label: "Brand architecture defined and documented",
+      isHighlighted: true,
+      accentImagePublicId: "Black_Letter_-_Full_Logo",
+    },
+    {
+      value: "Consistent assets",
+      label: "Visual and messaging standards unified across core touchpoints",
+      accentImagePublicId: "Gemini_Generated_Image_aadwklaadwklaadw",
+    },
   ],
   primaryMetric: {
     value: "Identity system",
@@ -68,4 +77,8 @@ export const blackLetter: CaseStudy = {
   ],
   featured: false,
   publishedAt: "2024-03-01",
+  cloudinaryImages: [
+    "Gemini_Generated_Image_aadwklaadwklaadw",
+    "Black_Letter_-_Full_Logo",
+  ],
 };

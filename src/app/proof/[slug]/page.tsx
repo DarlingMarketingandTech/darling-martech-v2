@@ -5,16 +5,20 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { PageHero } from "@/components/hero/PageHero";
-import { MonoMetric } from "@/components/ui/MonoMetric";
+import { ServiceHeroVisual } from "@/components/services/ServiceHeroVisual";
 import { Button } from "@/components/ui/button";
 import { ProofImplementationStackBlock } from "@/components/capabilities/CapabilityPanels";
 import { ProofAnglesDemonstration } from "@/components/proof/ProofAnglesDemonstration";
+import { ProofDetailAmbient } from "@/components/proof/ProofDetailAmbient";
+import { ProofMetricTile } from "@/components/proof/ProofMetricTile";
 import { getProofAnglesForProject } from "@/data/proof-angles";
 import { caseStudies } from "@/data/work/work-index";
 import { problemPages } from "@/data/problems";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
+import { getProofDetailHeroPublicId } from "@/data/proof-visuals";
 import { siteConfig } from "@/data/site-config";
+import { cn } from "@/lib/utils";
 const layerChipClass =
   "rounded-md border border-[#F5F4F0]/12 bg-[#0C0C0E]/35 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#F5F4F0]/58";
 
@@ -61,24 +65,34 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
     (c) => study.relatedProofSlugs?.includes(c.slug)
   );
 
-  const proofAngles = getProofAnglesForProject(study.slug).slice(0, 4);
+  const proofAngles = getProofAnglesForProject(study.slug).slice(0, 3);
+  const heroImagePublicId = getProofDetailHeroPublicId(study);
+  const heroImageAlt = `${study.clientName} — engagement visual`;
+  const metricGridClass =
+    study.metrics.length >= 4
+      ? "sm:grid-cols-2 lg:grid-cols-4"
+      : study.metrics.length === 3
+        ? "sm:grid-cols-2 lg:grid-cols-3"
+        : "sm:grid-cols-2";
 
   return (
     <SiteShell>
+      <div className="relative isolate">
+        <ProofDetailAmbient imagePublicId={heroImagePublicId} />
+        <div className="relative z-10">
       <PageHero
         eyebrow={study.clientName}
         headline={study.title}
         body={study.heroSubhead ?? study.resultSummary}
+        splitAside={<ServiceHeroVisual publicId={heroImagePublicId} alt={heroImageAlt} />}
       />
 
       {/* Metrics strip */}
       <BandSection className="mt-10">
         <div className="tech-divider mb-6 max-w-md" />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className={cn("grid grid-cols-1 gap-4", metricGridClass)}>
           {study.metrics.map((metric) => (
-            <div key={metric.label} className="card-elevated-dark rounded-2xl px-4 py-4 md:px-5 md:py-5">
-              <MonoMetric value={metric.value} label={metric.label} animateValue={false} />
-            </div>
+            <ProofMetricTile key={`${metric.value}-${metric.label}`} metric={metric} />
           ))}
         </div>
       </BandSection>
@@ -260,6 +274,8 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
           </Button>
         </div>
       </SectionWrapper>
+        </div>
+      </div>
     </SiteShell>
   );
 }

@@ -170,7 +170,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/growth-bottleneck-quiz",
+    cloudinaryThumbnail: "curated/tools/growth-bottleneck-quiz",
   },
   {
     slug: "cmo-simulator",
@@ -184,7 +184,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/cmo-simulator",
+    cloudinaryThumbnail: "curated/tools/cmo-simulator",
   },
   {
     slug: "martech-stack-grader",
@@ -281,7 +281,7 @@ export const tools: Tool[] = [
     emailGatePosition: "after_results",
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/martech-stack-grader",
+    cloudinaryThumbnail: "curated/tools/martech-stack-grader",
   },
   {
     slug: "geo-readiness-auditor",
@@ -295,7 +295,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/geo-readiness-auditor",
+    cloudinaryThumbnail: "curated/tools/geo-readiness-auditor",
   },
   {
     slug: "attribution-snapshot",
@@ -343,7 +343,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/attribution-snapshot",
+    cloudinaryThumbnail: "curated/tools/attribution-snapshot",
   },
   {
     slug: "cmo-roadmap-generator",
@@ -437,7 +437,7 @@ export const tools: Tool[] = [
     emailGatePosition: "after_results",
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/cmo-roadmap-generator",
+    cloudinaryThumbnail: "curated/tools/cmo-roadmap-generator",
   },
   {
     slug: "funnel-roi-forecaster",
@@ -451,7 +451,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/funnel-roi-forecaster",
+    cloudinaryThumbnail: "curated/tools/funnel-roi-forecaster",
   },
   {
     slug: "demand-capture-cac-simulator",
@@ -465,7 +465,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/demand-capture-cac-simulator",
+    cloudinaryThumbnail: "curated/tools/demand-capture-cac-simulator",
   },
   {
     slug: "automation-cost-savings-calculator",
@@ -479,7 +479,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/automation-cost-savings-calculator",
+    cloudinaryThumbnail: "curated/tools/automation-cost-savings-calculator",
   },
   {
     slug: "martech-fragmentation-scorecard",
@@ -493,7 +493,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/martech-fragmentation-scorecard",
+    cloudinaryThumbnail: "curated/tools/martech-fragmentation-scorecard",
   },
   {
     slug: "attribution-clarity-analyzer",
@@ -507,7 +507,7 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/attribution-clarity-analyzer",
+    cloudinaryThumbnail: "curated/tools/attribution-clarity-analyzer",
   },
   {
     slug: "build-vs-buy-stack-calculator",
@@ -521,6 +521,6 @@ export const tools: Tool[] = [
     emailGated: false,
     trustLadderStage: "browse",
     isLive: true,
-    cloudinaryThumbnail: "tools/build-vs-buy-stack-calculator",
+    cloudinaryThumbnail: "curated/tools/build-vs-buy-stack-calculator",
   },
 ];

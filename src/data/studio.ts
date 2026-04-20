@@ -15,14 +15,14 @@ export const studioPageData = {
   },
   gallery: [
     {
-      publicId: "tools/growth-bottleneck-quiz",
+      publicId: "curated/tools/growth-bottleneck-quiz",
       alt: "Growth Bottleneck Quiz — diagnostic interface concept",
       width: 1200,
       height: 750,
       caption: "Diagnostic tools — growth bottleneck quiz",
     },
     {
-      publicId: "tools/martech-stack-grader",
+      publicId: "curated/tools/martech-stack-grader",
       alt: "MarTech Stack Grader — stack maturity visual",
       width: 1200,
       height: 750,

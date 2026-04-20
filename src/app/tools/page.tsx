@@ -35,11 +35,12 @@ export default function ToolsPage() {
               Audits · calculators · analyzers
             </p>
             <h2 className="font-display text-2xl font-semibold md:text-3xl">
-              Proof-linked diagnostics
+              Problem-grounded diagnostics
             </h2>
             <p className="max-w-3xl text-base leading-7 text-[#F5F4F0]/64">
-              Each one maps to a real problem, a matching proof, and the service that fixes it. Use
-              the one that matches the decision you need to make.
+              Each tool answers one practical question and links outward to the buyer problems and
+              services it connects to. Proof stays on the case study pages — tools are for finding
+              your constraint, not skipping to a sales story.
             </p>
           </header>
           <ToolGrid tools={diagnosticTools} proofAnglesByToolSlug={proofAnglesByToolSlug} />

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import type { ProblemPage } from "@/types";
 
 type ProblemCardProps = {
@@ -9,6 +10,18 @@ type ProblemCardProps = {
 export function ProblemCard({ problem }: ProblemCardProps) {
   return (
     <article className="panel-obsidian panel-interactive grain-mask group rounded-4xl p-7 md:p-8">
+      {problem.imagePublicId ? (
+        <div className="mb-5 overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#101014]">
+          <CloudinaryImage
+            publicId={problem.imagePublicId}
+            alt={problem.imageAlt ?? problem.title}
+            width={1024}
+            height={1024}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+      ) : null}
       <Eyebrow>{problem.hubCategory}</Eyebrow>
       <div className="tech-divider mt-3 max-w-xs" />
       <h3 className="font-display mt-4 text-balance text-2xl font-semibold leading-snug tracking-[-0.02em]">

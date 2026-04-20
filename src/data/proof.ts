@@ -10,9 +10,31 @@ export const proofMeta: PageMeta = {
 export const proofPageData = {
   hero: {
     eyebrow: "PROOF OF WORK",
-    headline: "Results aren't claimed here. They're documented.",
-    body: "Every number on this page is tied to a specific engagement, a specific system, and a specific outcome. Named clients, real metrics, and the architecture that produced them.",
+    headline: "Documented outcomes — not pitch deck claims.",
+    body: "Each story below is one engagement: named context, sourced metrics, and what was actually built. Filter by the result you care about, then open the full write-up.",
   },
+  navigator: {
+    eyebrow: "How to use this page",
+    headline: "Three steps — no guesswork.",
+    steps: [
+      {
+        kicker: "01",
+        title: "Filter by outcome",
+        body: "Narrow the list to the kind of result you need: leads, conversion lift, time saved, systems, and more.",
+      },
+      {
+        kicker: "02",
+        title: "Open one case study",
+        body: "Every card links to a single engagement with metrics, constraints, and implementation detail.",
+      },
+      {
+        kicker: "03",
+        title: "Jump to problems or services",
+        body: "From any story, follow links to the buyer problem it solved or the capability behind the work.",
+      },
+    ],
+  },
+  metricsIntro: "Representative outcomes across recent engagements.",
   explanation: {
     eyebrow: "How to read this",
     headline: "Every number has a source.",

@@ -49,7 +49,7 @@ export default function AboutPage() {
         />
         <div className="mt-8 overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]">
           <CloudinaryImage
-            publicId="system_pipeline_visualization_variant"
+            publicId="curated/about/system-pipeline-visualization"
             alt="System pipeline visualization generated from Stitch and served via Cloudinary."
             width={1376}
             height={768}

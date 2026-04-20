@@ -1,6 +1,7 @@
 import type { Service } from "@/types";
+import { SERVICE_VISUAL_BY_SLUG } from "@/data/service-visuals";
 
-export const services: Service[] = [
+const servicesUnmerged: Omit<Service, "visualPublicId" | "visualAlt">[] = [
   // ─── Pillar 1: Revenue Engineering ───────────────────────────────────────
   {
     slug: "fractional-cmo",
@@ -289,6 +290,11 @@ export const services: Service[] = [
     pillar: "brand-creative",
   },
 ];
+
+export const services: Service[] = servicesUnmerged.map((s) => ({
+  ...s,
+  ...SERVICE_VISUAL_BY_SLUG[s.slug],
+}));
 
 export const SERVICE_PILLARS = [
   {

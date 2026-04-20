@@ -1,6 +1,14 @@
 # CLAUDE.md
 # Darling MarTech — AI Agent Context File
-# Version: 1.8 | Last updated: April 2026
+# Version: 1.9 | Last updated: April 2026
+#
+# v1.9: Repo-state sync update.
+#       - Tools: proof-linked diagnostic tool system clarified; standalone CMO Simulator explicitly separated
+#       - Services: /services presentation layer grouped into Grow / Scale / Build; fractional-cmo treated as strategic wrapper in presentation
+#       - Capability system: curated Cloudinary-backed platform/logo capability module added
+#       - Proof pages: implementation stack blocks and platform/system references now part of proof depth
+#       - Hero/visual direction: Stitch-derived system imagery and premium dark/material interface guidance clarified
+#       - Current build priorities updated to reflect proof depth as the main remaining bottleneck
 #
 # v1.8: Hybrid-agency positioning pass synced to repo state.
 #       - Service architecture: 4 pillars (Revenue Engineering, Intelligent Automation,
@@ -371,6 +379,43 @@ Prefer canonical tokens over arbitrary equivalents:
 
 Use bracket syntax only when the value does not match a standard scale step.
 
+### Visual system direction (current repo reality)
+The site’s current visual posture is:
+
+- dark
+- premium
+- technical
+- structured
+- material-driven
+- restrained
+
+Use:
+- layered surfaces
+- subtle dividers
+- system-style grouping
+- technical metadata labels
+- premium dark/material interfaces
+
+Avoid:
+- generic SaaS gradients
+- loud glassmorphism everywhere
+- random decorative 3D
+- sponsor-wall logo sections
+- gimmicky motion
+
+### Hero visual rule
+Homepage hero visual direction is now **system-image / Stitch-derived / system-atmosphere driven**, not generic placeholder 3D.
+
+3D/motion is allowed only if it:
+- materially improves the surface
+- stays subordinate to copy hierarchy
+- is performance-safe
+- is reduced-motion-safe
+- feels like system behavior, not decoration
+
+Do not assume every page needs 3D.
+Do not assume visual complexity equals quality.
+
 ---
 
 ## 6. SITE ARCHITECTURE & NAVIGATION
@@ -440,6 +485,21 @@ dedicated static pages under the same parent folder:
 - `src/app/services/[slug]/page.tsx` — omits `technical-roadmap` (has its own `services/technical-roadmap/page.tsx`)
 
 When adding a dedicated service or tool page, add its slug to the corresponding `DEDICATED_*_PAGES` array.
+
+### `/services` presentation model (current UI layer)
+The canonical service slugs and route structure remain unchanged.
+
+However, the `/services` **presentation layer** is intentionally grouped into three buyer-facing outcome clusters:
+
+- **Grow** — demand, visibility, and conversion
+- **Scale** — automation, CRM, martech, and operational leverage
+- **Build** — infrastructure, website/brand foundation, and technical experience systems
+
+This is a **presentation grouping only**.
+Do not rename service slugs or treat these clusters as new canonical taxonomy enums unless Jacob explicitly approves that migration.
+
+**Special case: `fractional-cmo`**
+`fractional-cmo` remains a canonical service slug, but in presentation it should be treated as a **strategic wrapper / leadership layer**, not just another equal-weight tactical card.
 
 ---
 
@@ -704,6 +764,23 @@ Proof pages must not dead-end. Route to:
 - a relevant tool
 - contact / diagnostic CTA where appropriate
 
+### Proof implementation stack rule
+Proof pages may include a compact **Implementation Stack** / **Systems Built** block.
+
+Purpose:
+- show the real platform and tooling layer involved in the work
+- make proof pages feel more technically grounded
+- connect the work to actual implementation surfaces
+
+Rules:
+- use only systems/platforms materially relevant to that proof
+- keep the block compact and subordinate to the proof story and metrics
+- grouped or flat rendering is acceptable if it stays readable
+- do not turn proof pages into logo walls
+- platform references must support the proof narrative, not distract from it
+
+When present, implementation stack blocks are higher-value than generic homepage logo strips.
+
 ### Proof migration priority (from legacy repo/site)
 When migrating legacy case studies, prioritize in this order:
 1. Graston Technique
@@ -726,7 +803,49 @@ When migrating legacy content, do not paste it raw. Rewrite it for:
 ### Tool philosophy
 Tools are commercial diagnostic utilities, not decorative quizzes.
 
-They should: diagnose, simulate, score, compare, expose gaps, prove competence, create lead intent.
+They should:
+- diagnose
+- simulate
+- score
+- compare
+- expose gaps
+- prove competence
+- create lead intent
+
+### Two tool classes (non-negotiable distinction)
+
+#### A. Proof-linked diagnostic tools
+These are calculators, scanners, graders, quizzes, and micro-audits that should connect into the site’s proof/problem/service system.
+
+They should usually route:
+- tool → result → proof
+- tool → result → service
+- tool → result → problem
+- optionally → gated deeper output
+
+Examples:
+- Growth Bottleneck Quiz
+- GEO Readiness Auditor
+- Attribution Snapshot
+- MarTech Stack Grader
+- CMO Roadmap Generator
+- newer proof-linked diagnostic tools and calculators
+
+#### B. Standalone simulation
+The **CMO Simulator** is not a proof-linked diagnostic tool.
+
+It is:
+- a simulation experience
+- a depth/authority signal
+- a product-like interactive layer
+
+It must remain explicitly outside:
+- proof recommendation logic
+- service recommendation logic
+- problem recommendation logic
+- relatedToolSlugs on proof pages
+
+Do not treat the CMO Simulator like an audit, grader, or diagnostic CTA.
 
 ### Interaction pattern (preferred)
 1. Open interaction — free value first
@@ -734,9 +853,11 @@ They should: diagnose, simulate, score, compare, expose gaps, prove competence, 
 3. Deeper report / saved output gated by email
 4. Next-step CTA connected to proof, service, or contact
 
-Avoid: full hard gate before any value. Avoid: vague score outputs with no action path.
+Avoid:
+- full hard gate before any value
+- vague score outputs with no action path
 
-### Every tool result should ideally include
+### Every proof-linked tool result should ideally include
 - diagnosis summary or score
 - recommended next action
 - linked proof
@@ -744,36 +865,13 @@ Avoid: full hard gate before any value. Avoid: vague score outputs with no actio
 - linked problem page
 - optional gated deeper output
 
-### Currently built tools
-| Tool | Route | Status |
-|---|---|---|
-| Growth Bottleneck Quiz | `/tools/growth-bottleneck-quiz` | ✅ Built |
-| GEO Readiness Auditor | `/tools/geo-readiness-auditor` | ✅ Built |
-| Attribution Snapshot | `/tools/attribution-snapshot` | ✅ Built |
-| CMO Simulator | `/tools/cmo-simulator` | ✅ Built |
-| MarTech Stack Grader | `/tools/martech-stack-grader` | ✅ Built |
-| CMO Roadmap Generator | `/tools/cmo-roadmap-generator` | ✅ Built |
+### Tool routing rule
+Proof-linked diagnostics should reinforce the system:
+- Problem → Tool → Proof → Service
+- Tool → Result → Proof → Service
+- Proof → Tool → Service
 
-### Approved backlog tool candidates
-```
-Build vs Buy Calculator
-Automation Savings Calculator
-Revenue Physics Simulator
-Tech Stack Scanner / X-Ray
-Ad Waste Detector
-AI Deflection ROI Simulator
-Compliance Risk Scanner
-Lead Scorer
-```
-
-### Priority tool build order (when prioritizing next tool)
-1. MarTech Stack Grader improvements
-2. Build vs Buy Calculator
-3. Automation Savings Calculator
-4. CMO Simulator improvements
-5. Attribution Snapshot upgrades
-6. CMO Roadmap Generator upgrade
-7. Tech Stack Scanner / AI Deflection ROI / advanced scanners
+The CMO Simulator is the exception and should remain outside that routing model.
 
 ---
 
@@ -831,6 +929,28 @@ Prefer existing components before adding new ones. The repo is authoritative.
 8. **Shadcn/UI for primitives.** Dialog, Select, Toast, Popover, Tabs, Card, Badge — use Shadcn. Install: `pnpm dlx shadcn@latest add [component]`. Do not overwrite the bespoke Darling `Button` with the CLI template.
 9. **Server components by default.** Only add `"use client"` when strictly necessary.
 10. **Props naming:** camelCase. Booleans as `isX` / `hasX`. Handlers as `onX`.
+
+### Capability / platform module convention
+Capability and platform/logo sections are allowed, but they must be implemented as **curated system references**.
+
+They should:
+- be grouped by category where possible
+- remain visually restrained
+- feel technical and structured
+- support credibility, not overwhelm the page
+
+They should not:
+- behave like partner-logo strips
+- become giant mixed icon walls
+- dominate the page hierarchy
+- outshine proof, problems, or CTAs
+
+Default treatment:
+- low-noise
+- grouped
+- premium dark/material styling
+- no loud motion
+- no sponsorship implication
 
 ### Key Tailwind class patterns
 ```
@@ -974,9 +1094,29 @@ const cloudinaryLoader = ({ src, width, quality }: ImageLoaderProps) => {
 
 All production images use `CloudinaryImage`. No native `<img>`. No direct next/image `<Image>`.
 
+### Cloudinary platform/logo asset rule
+Cloudinary is the canonical source for platform/logo/capability assets used on the site.
+
+Current rule set:
+- use curated, production-approved assets only
+- do not pull random platform logos at runtime from third-party icon/CDN sources
+- do not build giant generic logo walls
+- capability/logo sections must feel like **system references**, not sponsor or partner displays
+- avoid implying sponsorship, endorsement, certification, or partnership unless that is factually true
+
+Preferred uses:
+1. proof-page implementation stack blocks
+2. restrained homepage capability modules
+3. optional service ecosystem support blocks
+
+Less preferred:
+- large auto-loop carousels
+- giant mixed vendor rows
+- decorative brand/logo clutter
+
 ---
 
-## 18. CURRENT BUILD STATE (April 2026 · v1.8)
+## 18. CURRENT BUILD STATE (April 2026 · v1.9)
 
 ### Built
 - ✅ Next.js 15 + TypeScript strict + Tailwind v4
@@ -1002,23 +1142,25 @@ All production images use `CloudinaryImage`. No native `<img>`. No direct next/i
 - ✅ PostHog + Plausible + analytics hooks
 - ✅ Extended `CaseStudy` type with 10 optional proof-depth fields
 - ✅ `ServiceCluster` / `ServicePillar` / `IndustrySector` types in sync with data
+- ✅ `/services` presentation layer grouped into Grow / Scale / Build while preserving canonical service slugs
+- ✅ `fractional-cmo` elevated in presentation as a strategic wrapper / leadership layer
+- ✅ Homepage capability/platform module using curated Cloudinary-backed platform assets
+- ✅ Proof-page implementation stack blocks / platform references
+- ✅ Capability/logo sections refined to feel like system references, not logo spam
+- ✅ Homepage hero visual direction updated toward Stitch-derived system imagery / atmospheric visual integration
+- ✅ Proof-linked diagnostic tool logic strengthened; standalone CMO Simulator kept outside proof/service/problem recommendation logic
 
 ### Still-active build priorities
-1. **MarTech Stack Grader** — fuller utility, better result design
-2. **Tool result gating** — partial-reveal + email-gate pattern on more tools
-3. **Service depth pages** — expand copy for new services (brand pillar, paid media,
-   conversion optimization) to match depth of fractional-cmo and attribution-analytics
-4. **Legal/professional proof** — `legal-professional-services` industry page has no
-   proof references yet; document a Riley Bennett or similar engagement
-5. **Behr Pet Essentials proof** — last item on the legacy migration list
-6. **Newsletter landing** — `/resources/newsletter`
-7. **Proof hub: problem-grouped view** — `proofGroupsByProblem` data exists in
-   `src/data/proof.ts` but is not yet rendered on the proof hub
-8. **CTA trust-ladder consistency** — audit every page's closing CTA stage mapping
+1. **Proof depth remains the main bottleneck** — the site architecture is ahead of the proof inventory
+2. **Proof expansion** — add more proof coverage across services, problems, and tools
+3. **Proof page depth** — continue strengthening proof detail pages as full case-study system pages
+4. **MarTech Stack Grader** — fuller utility, better result design
+5. **Tool result gating** — partial-reveal + email-gate pattern on more tools
+6. **Service depth pages** — expand copy for newer services to match top-tier service pages
+7. **CTA trust-ladder consistency** — audit every page's closing CTA stage mapping
+8. **Newsletter landing** — `/resources/newsletter`
 9. **n8n / Twenty CRM / Loops** — Phase 4 automation backend
-10. **Cal.com wiring** — verify all CTA buttons across new pages
-11. **Fourth industry sector** — consider adding FinTech or Manufacturing if proof
-    becomes available (the research brief lists 6 sectors; we lead with 3)
+10. **Cal.com wiring** — verify all CTA buttons across newer pages
 
 ---
 
@@ -1184,6 +1326,6 @@ If a change does not strengthen that system, question it before implementing it.
 
 ---
 
-*CLAUDE.md — Darling MarTech v1.8 · Repository root: `/CLAUDE.md`*
+*CLAUDE.md — Darling MarTech v1.9 · Repository root: `/CLAUDE.md`*
 *Cursor: keep `.cursorrules` as a byte-for-byte copy of this file.*
 *Do not edit this file without Jacob Darling's explicit approval.*

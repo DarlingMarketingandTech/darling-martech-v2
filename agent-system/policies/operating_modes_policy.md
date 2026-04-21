@@ -74,3 +74,13 @@ Use for consistency audits and standardization across:
 ## Mode Selection Rule
 
 Choose the narrowest mode that can solve the problem while keeping scope bounded and auditable.
+
+## MCP / Tooling rule (mode-aware)
+
+Use tools because the task requires them, not because they exist.
+
+Defaults:
+- **Repo truth first** (routes, data, components, `docs/agent/*`, `agent-system/context/*`).
+- **Browser automation** only after visible UI/UX changes, for verification.
+- **Live web inspection (Firecrawl/browser)** only when explicitly needed for external reference validation.
+- **asset_system mode:** define purpose + placement + size + style + naming + mapping *before* authenticating/sourcing/generating assets; no repo edits in this mode.

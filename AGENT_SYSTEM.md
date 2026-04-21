@@ -117,10 +117,15 @@ Read the focused docs that match the task:
 
 - `docs/agent/brand-system.md`
 - `docs/agent/site-architecture.md`
-- `docs/agent/data-models.md`
 - `docs/agent/repo-workflow.md`
-- `docs/agent/current-build-state.md`
 - `docs/agent/tool-report-system.md`
+- `docs/implementation-workflow.md`
+- `docs/verification-runbook.md`
+
+Data-model reference:
+- Typed contract: `src/types/index.ts`
+- Content modules: `src/data/*`
+- Spec reference: `docs/darlingmartech-data-model-spec.md`
 
 Do not load or repeat all docs when only one area is relevant.
 

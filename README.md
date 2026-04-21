@@ -12,7 +12,7 @@ Ground-up rebuild of `darlingmartech.com` as a typed, data-driven Next.js App Ro
 
 ## Project Rules
 
-- Read `CLAUDE.md` before making architecture or implementation decisions.
+- Read `AGENT_SYSTEM.md` + `docs/agent/*` before making architecture or implementation decisions (`CLAUDE.md` is compatibility-only).
 - Treat `src/types/index.ts` and `src/data/*` as the content contract layer.
 - Do not hardcode approved site copy directly in JSX.
 - Keep server components as the default unless interactivity requires a client boundary.

@@ -13,6 +13,9 @@ This layer is driven by source-of-truth context files in `agent-system/context`:
 - `service_clusters.md`
 - `problem_service_mapping.md`
 - `trust_ladder_ctas.md`
+- `page-purpose-boundaries.md`
+- `relationship_display_limits.md`
+- `proof_storytelling_rules.md`
 - `page_generation_rules.md`
 
 This context pack is now actively routed by mode and prompt intent via `collect-context.mjs`:
@@ -20,6 +23,19 @@ This context pack is now actively routed by mode and prompt intent via `collect-
 - Task profile `requiredStrategicContext` keys force inclusion.
 - Prompt keyword routing adds context for page generation, service architecture, CTA planning, and positioning refinement.
 - Runtime emits `strategicContextMeta` (`loadedKeys`, `priorityKeys`, `profileRequiredKeys`) for deterministic traceability.
+
+## Drift hardening (page purpose + limits)
+
+The strategy layer now includes explicit controls to prevent pages from drifting into:
+- company-promotion-first proof pages
+- overlong service pages
+- “relationship map” pages that surface everything connected in the data model
+- too many competing CTAs
+
+Use these context files as hard constraints:
+- `page-purpose-boundaries.md`
+- `relationship_display_limits.md`
+- `proof_storytelling_rules.md`
 
 ## Buyer states (required model)
 

@@ -1,4 +1,6 @@
+import { cn } from "@/lib/utils";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
+import styles from "./ProcessTimeline.module.css";
 
 type ProcessTimelineStep = {
   number: string;
@@ -6,11 +8,61 @@ type ProcessTimelineStep = {
   description: string;
 };
 
+export type ProcessTimelineLayout = "connected" | "featured";
+
 type ProcessTimelineProps = {
   steps: ProcessTimelineStep[];
+  /** `featured` — premium homepage "How this works" treatment. `connected` — default rail (e.g. /process). */
+  layout?: ProcessTimelineLayout;
 };
 
-export function ProcessTimeline({ steps }: ProcessTimelineProps) {
+export function ProcessTimeline({ steps, layout = "connected" }: ProcessTimelineProps) {
+  if (layout === "featured") {
+    return (
+      <div className={cn(styles.featuredRail, "relative pl-2 md:pl-3")}>
+        <div
+          className={cn(
+            styles.featuredGrid,
+            "schematic-rail tech-grid-bg ml-3 py-3 pl-6 pr-4 md:ml-4 md:py-4 md:pl-9 md:pr-5"
+          )}
+        >
+          <div className="grid gap-6 md:gap-7">
+            {steps.map((step, index) => (
+              <AnimateOnScroll key={step.number} delay={index * 0.1} distance={20} variant="rise">
+                <article className={cn(styles.card, "relative")}>
+                  <div className={styles.cardWash} aria-hidden />
+                  <div className="absolute left-0 top-8 hidden h-px w-4 -translate-x-full bg-[#F5F4F0]/12 md:block" aria-hidden />
+                  <div className={styles.accent} aria-hidden />
+                  <div className={styles.numberRow}>
+                    <div className={styles.numberBadge}>
+                      <span className={styles.number}>{step.number}</span>
+                    </div>
+                  </div>
+                  <h3
+                    className={cn(
+                      styles.title,
+                      "font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-[#F5F4F0] md:text-2xl md:leading-snug"
+                    )}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    className={cn(
+                      styles.body,
+                      "text-[0.9375rem] leading-relaxed text-[#F5F4F0]/72 md:text-base md:leading-relaxed"
+                    )}
+                  >
+                    {step.description}
+                  </p>
+                </article>
+              </AnimateOnScroll>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative pl-2 md:pl-3">
       <div className="schematic-rail tech-grid-bg ml-3 rounded-l-2xl py-1 pl-6 md:ml-4 md:pl-8">

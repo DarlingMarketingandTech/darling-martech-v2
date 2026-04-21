@@ -46,8 +46,24 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
             className="absolute right-0 top-0 flex h-full w-[min(26rem,88vw)] flex-col justify-between border-l border-[#2A2A2E] bg-[#101014] px-6 py-6"
           >
             <div>
-              <div className="flex items-center justify-between">
-                <p className="font-display text-xl font-semibold">D.</p>
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-2.5">
+                  <span className="relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[#F05A28]/28 bg-[linear-gradient(145deg,rgba(240,90,40,0.14),rgba(12,12,14,0.9))] text-base font-bold text-[#F05A28]">
+                    <span className="font-display">D.</span>
+                    <span
+                      className="absolute right-0.5 top-0.5 h-1.5 w-1.5 rounded-full bg-[#0FD9C8]/90 ring-2 ring-[#101014]"
+                      aria-hidden
+                    />
+                  </span>
+                  <div className="min-w-0 leading-tight">
+                    <p className="font-display truncate text-lg font-semibold tracking-[-0.03em] text-[#F5F4F0]">
+                      Darling
+                    </p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#F5F4F0]/45">
+                      MarTech
+                    </p>
+                  </div>
+                </div>
                 <button
                   type="button"
                   className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#F5F4F0]/12 px-4 text-sm text-[#F5F4F0]/76"

@@ -29,29 +29,35 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 px-3 pt-3 md:px-6">
+      <header className="sticky top-0 z-30 px-3 pt-3 md:px-6 md:pt-4">
         <div
           className={cn(
-            "mx-auto max-w-7xl rounded-[1.75rem] border border-transparent transition-all duration-300",
-            isScrolled ? "header-sheen border-[#2A2A2E] shadow-[0_20px_80px_rgba(0,0,0,0.32)] backdrop-blur-xl" : ""
+            "mx-auto max-w-7xl rounded-3xl border transition-[border-color,box-shadow,background-color] duration-300 ease-out",
+            "border-[#F5F4F0]/[0.06] bg-[#0C0C0E]/55 shadow-[inset_0_1px_0_rgba(245,244,240,0.04)] backdrop-blur-md",
+            isScrolled &&
+              "header-sheen border-[#2A2A2E] shadow-[0_20px_80px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(245,244,240,0.05)] backdrop-blur-xl"
           )}
         >
-          <div className="mx-auto flex items-center justify-between gap-6 px-4 py-4 md:px-6">
-            <Link href="/" className="group flex items-center gap-3">
-              <span className="font-display inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#F05A28]/25 bg-[#F05A28]/8 text-lg font-bold text-[#F05A28] transition-colors group-hover:bg-[#F05A28]/14">
-                D.
+          <div className="mx-auto flex items-center justify-between gap-5 px-4 py-3.5 md:gap-8 md:px-6 md:py-4">
+            <Link href="/" className="group flex min-w-0 items-center gap-3 md:gap-3.5">
+              <span className="relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#F05A28]/28 bg-[linear-gradient(145deg,rgba(240,90,40,0.14),rgba(12,12,14,0.85))] text-lg font-bold text-[#F05A28] shadow-[0_0_0_1px_rgba(12,12,14,0.9)_inset] transition-[border-color,background-color,box-shadow] duration-200 group-hover:border-[#F05A28]/40 group-hover:shadow-[0_0_24px_rgba(240,90,40,0.12)]">
+                <span className="font-display">D.</span>
+                <span
+                  className="absolute right-1 top-1 h-1.5 w-1.5 rounded-full bg-[#0FD9C8]/90 ring-2 ring-[#0C0C0E]"
+                  aria-hidden
+                />
               </span>
-              <span className="leading-none">
-                <span className="font-display block text-lg font-semibold tracking-[-0.04em] text-[#F5F4F0] md:text-xl">
+              <span className="min-w-0 leading-none">
+                <span className="font-display block truncate text-lg font-semibold tracking-[-0.04em] text-[#F5F4F0] md:text-xl">
                   Darling
                 </span>
-                <span className="font-mono block text-[11px] uppercase tracking-[0.3em] text-[#F5F4F0]/52 md:text-xs">
+                <span className="font-mono block text-[10px] uppercase tracking-[0.28em] text-[#F5F4F0]/48 md:text-[11px] md:tracking-[0.32em]">
                   MarTech
                 </span>
               </span>
             </Link>
 
-            <nav className="hidden items-center gap-7 md:flex">
+            <nav className="hidden items-center gap-1 md:flex lg:gap-2">
               {siteNavigation.primary.map((item) => {
                 const active = isPrimaryNavActive(item.href, pathname);
                 return (
@@ -59,8 +65,8 @@ export function SiteHeader() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "text-sm text-[#F5F4F0]/78 transition-colors hover:text-[#F05A28]",
-                      active && "font-medium text-[#F05A28]"
+                      "rounded-full px-3 py-2 text-sm text-[#F5F4F0]/72 transition-colors duration-200 hover:bg-[#F5F4F0]/[0.04] hover:text-[#F5F4F0]",
+                      active && "bg-[#F05A28]/10 font-medium text-[#F05A28] hover:bg-[#F05A28]/12 hover:text-[#F05A28]"
                     )}
                   >
                     {item.label}
@@ -69,20 +75,20 @@ export function SiteHeader() {
               })}
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-2.5 md:gap-3">
               <Button href={siteNavigation.cta.href} size="sm" className="hidden md:inline-flex">
                 {siteNavigation.cta.label}
               </Button>
               <button
                 type="button"
                 aria-label="Open navigation"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#F5F4F0]/12 text-[#F5F4F0] md:hidden"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[#F5F4F0]/12 bg-[#13131A]/60 text-[#F5F4F0] shadow-[inset_0_1px_0_rgba(245,244,240,0.05)] transition-[border-color,background-color] duration-200 hover:border-[#F5F4F0]/18 hover:bg-[#13131A]/90 md:hidden"
                 onClick={() => setIsOpen(true)}
               >
                 <span className="flex flex-col gap-1.5">
-                  <span className="h-px w-4 bg-current" />
-                  <span className="h-px w-4 bg-current" />
-                  <span className="h-px w-4 bg-current" />
+                  <span className="h-px w-[18px] rounded-full bg-current opacity-90" />
+                  <span className="h-px w-[18px] rounded-full bg-current opacity-75" />
+                  <span className="h-px w-[18px] rounded-full bg-current opacity-55" />
                 </span>
               </button>
             </div>

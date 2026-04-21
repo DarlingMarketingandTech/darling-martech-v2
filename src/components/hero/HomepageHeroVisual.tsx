@@ -15,7 +15,7 @@ export const HOMEPAGE_HERO_STITCH_PUBLIC_ID = "curated/homepage/hero-positional-
 export function HomepageHeroVisual() {
   return (
     <div
-      className="relative h-full min-h-0 w-full overflow-hidden rounded-[1.75rem] bg-[#0C0C0E] sm:rounded-[2rem] lg:rounded-l-[2rem] lg:rounded-r-none"
+      className="relative h-full min-h-0 w-full overflow-hidden rounded-[inherit] bg-[#0C0C0E]"
       aria-hidden
     >
       <HomepageHeroStitchImage

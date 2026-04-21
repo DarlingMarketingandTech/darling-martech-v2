@@ -9,7 +9,7 @@ type ProblemCardProps = {
 
 export function ProblemCard({ problem }: ProblemCardProps) {
   return (
-    <article className="panel-obsidian panel-interactive grain-mask group rounded-4xl p-7 md:p-8">
+    <article className="panel-obsidian panel-interactive ui-card-motion grain-mask group rounded-4xl p-7 md:p-8">
       {problem.imagePublicId ? (
         <div className="mb-5 overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#101014]">
           <CloudinaryImage
@@ -34,7 +34,7 @@ export function ProblemCard({ problem }: ProblemCardProps) {
       </p>
       <Link
         href={`/problems/${problem.slug}`}
-        className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-[#F05A28] transition-all group-hover:text-[#ff6d40] group-hover:gap-2"
+        className="ui-link-motion mt-6 inline-flex items-center gap-1 text-sm font-medium text-[#F05A28] group-hover:gap-2 group-hover:text-[#ff6d40]"
       >
         {problem.hubCtaLabel}
         <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>

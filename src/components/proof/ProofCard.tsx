@@ -17,8 +17,7 @@ export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
     <Link
       href={`/proof/${caseStudy.slug}`}
       className={cn(
-        "group block h-full rounded-4xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05A28]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0c0e]",
-        "motion-safe:transition-[transform,box-shadow] motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:scale-[1.02]"
+        "ui-card-motion group block h-full rounded-4xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05A28]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0c0e]"
       )}
     >
       <article
@@ -71,7 +70,7 @@ export function ProofCard({ caseStudy, showSystems = true }: ProofCardProps) {
           </div>
         ) : null}
 
-        <span className="relative z-[2] mt-6 inline-flex items-center gap-1 text-sm font-medium text-[#F05A28] transition-[gap,color] duration-200 group-hover:gap-2 group-hover:text-[#ff6d40]">
+        <span className="ui-link-motion relative z-[2] mt-6 inline-flex items-center gap-1 text-sm font-medium text-[#F05A28] duration-200 group-hover:gap-2 group-hover:text-[#ff6d40]">
           Read full proof
           <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">
             →

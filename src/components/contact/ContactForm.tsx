@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { captureClientEvent } from "@/lib/analytics";
+import { siteConfig } from "@/data/site-config";
+import { Button } from "@/components/ui/button";
 
 type ContactIntent = {
   label: string;
@@ -38,6 +40,7 @@ export function ContactForm({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
+  const [linkedin, setLinkedin] = useState("");
   const [message, setMessage] = useState(selected.prefill);
   const [budget, setBudget] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -58,6 +61,7 @@ export function ContactForm({
       showBudget && budget
         ? `\n\nApproximate monthly budget: ${budgetOptions.find((o) => o.value === budget)?.label ?? budget}`
         : "";
+    const linkedinLine = linkedin.trim() ? `\n\nLinkedIn profile: ${linkedin.trim()}` : "";
 
     const response = await fetch("/api/contact", {
       method: "POST",
@@ -66,7 +70,7 @@ export function ContactForm({
         name,
         email,
         company: company.trim() || undefined,
-        message: `${message}${budgetLine}`,
+        message: `${message}${budgetLine}${linkedinLine}`,
         intent: selected.label,
       }),
     });
@@ -85,6 +89,7 @@ export function ContactForm({
     setName("");
     setEmail("");
     setCompany("");
+    setLinkedin("");
     setBudget("");
   }
 
@@ -110,6 +115,20 @@ export function ContactForm({
   return (
     <form id="contact-form" className="surface-card rounded-4xl p-7 md:p-8" onSubmit={handleSubmit}>
       <p className="text-sm text-[#F5F4F0]/55">{formSectionLabel}</p>
+      <div className="mt-4 rounded-2xl border border-[#0FD9C8]/22 bg-[#0FD9C8]/6 px-4 py-4">
+        <p className="meta-label text-[#0FD9C8]">Faster path</p>
+        <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/70">
+          If you prefer less typing, book directly and share context live in 30 minutes.
+        </p>
+        <div className="mt-3">
+          <Button href={siteConfig.calComLink} size="sm">
+            Book a diagnostic call →
+          </Button>
+        </div>
+        <p className="mt-3 text-xs text-[#F5F4F0]/52">
+          Social sign-in prefill (Google/LinkedIn) can be added in a secure OAuth phase.
+        </p>
+      </div>
       <div className="mt-4 rounded-2xl border border-[#F5F4F0]/12 bg-[#13131A]/45 px-4 py-4">
         <p className="meta-label text-[#0FD9C8]">Fit and response expectations</p>
         <ul className="mt-3 space-y-2">
@@ -132,6 +151,8 @@ export function ContactForm({
           <span className="text-sm text-[#F5F4F0]/62">Your name</span>
           <input
             required
+            name="name"
+            autoComplete="name"
             placeholder="What should I call you?"
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -143,6 +164,8 @@ export function ContactForm({
           <input
             required
             type="email"
+            name="email"
+            autoComplete="email"
             placeholder="Where should I reply?"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -154,9 +177,25 @@ export function ContactForm({
       <label className="mt-4 grid gap-2">
         <span className="text-sm text-[#F5F4F0]/62">Your company (optional)</span>
         <input
+          name="organization"
+          autoComplete="organization"
           placeholder="If relevant"
           value={company}
           onChange={(event) => setCompany(event.target.value)}
+          className={fieldClassName}
+        />
+      </label>
+
+      <label className="mt-4 grid gap-2">
+        <span className="text-sm text-[#F5F4F0]/62">LinkedIn profile (optional)</span>
+        <input
+          type="url"
+          name="linkedin"
+          autoComplete="url"
+          inputMode="url"
+          placeholder="https://www.linkedin.com/in/..."
+          value={linkedin}
+          onChange={(event) => setLinkedin(event.target.value)}
           className={fieldClassName}
         />
       </label>

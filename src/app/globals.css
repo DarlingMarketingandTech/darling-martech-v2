@@ -321,13 +321,35 @@ select {
     0 20px 52px rgba(0, 0, 0, 0.42);
 }
 
+.ui-card-motion {
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease;
+}
+
+.ui-card-motion:hover {
+  transform: translateY(-2px);
+}
+
+.ui-link-motion {
+  transition:
+    color 180ms ease,
+    gap 180ms ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .surface-card,
   .surface-card-interactive,
-  .panel-interactive {
+  .panel-interactive,
+  .ui-card-motion,
+  .ui-link-motion {
     transition: none;
   }
   .surface-card-interactive:hover {
+    transform: none;
+  }
+  .ui-card-motion:hover {
     transform: none;
   }
 }

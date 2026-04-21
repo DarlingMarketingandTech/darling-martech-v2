@@ -11,7 +11,7 @@ export function ToolCard({ tool, relatedProofAngles }: ToolCardProps) {
   const angles = relatedProofAngles?.slice(0, 2) ?? [];
 
   return (
-    <article className="surface-card surface-card-interactive group rounded-[2rem] border-l-4 border-l-[#F05A28] p-6">
+    <article className="surface-card surface-card-interactive ui-card-motion group rounded-[2rem] border-l-4 border-l-[#F05A28] p-6">
       {tool.cloudinaryThumbnail ? (
         <div className="mb-5 overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#101014]">
           <CloudinaryImage
@@ -60,7 +60,7 @@ export function ToolCard({ tool, relatedProofAngles }: ToolCardProps) {
       ) : null}
       <Link
         href={`/tools/${tool.slug}`}
-        className="mt-6 inline-flex items-center gap-1 text-sm text-[#F05A28] transition-all group-hover:text-[#ff6d40] group-hover:gap-2"
+        className="ui-link-motion mt-6 inline-flex items-center gap-1 text-sm text-[#F05A28] group-hover:gap-2 group-hover:text-[#ff6d40]"
       >
         Open tool
         <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>

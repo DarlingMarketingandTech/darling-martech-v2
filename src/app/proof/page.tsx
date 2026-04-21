@@ -46,7 +46,7 @@ export default function ProofPage() {
             >
               {proofPageData.navigator.headline}
             </h2>
-            <ol className="mt-8 grid gap-8 md:grid-cols-3 md:gap-7">
+            <ol className="mt-8 hidden gap-8 md:grid md:grid-cols-3 md:gap-7">
               {proofPageData.navigator.steps.map((step) => (
                 <li key={step.kicker} className="flex gap-4">
                   <span
@@ -62,6 +62,24 @@ export default function ProofPage() {
                 </li>
               ))}
             </ol>
+            <details className="mt-6 rounded-2xl border border-[#F5F4F0]/10 bg-[#13131A]/32 px-4 py-3 md:hidden">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-[#F5F4F0] [&::-webkit-details-marker]:hidden">
+                Show 3-step guide
+              </summary>
+              <ol className="mt-4 grid gap-4">
+                {proofPageData.navigator.steps.map((step) => (
+                  <li key={step.kicker} className="flex gap-3">
+                    <span className="font-mono mt-0.5 shrink-0 text-xs font-semibold tabular-nums tracking-[0.12em] text-[#0FD9C8]/85">
+                      {step.kicker}
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-[#F5F4F0]">{step.title}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-[#F5F4F0]/56">{step.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </details>
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t border-[#F5F4F0]/8 pt-6 text-sm">
               <Link
                 href="/services"

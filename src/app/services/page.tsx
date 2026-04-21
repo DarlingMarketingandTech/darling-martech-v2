@@ -79,9 +79,16 @@ export default function ServicesIndexPage() {
             ctas={[
               { label: "Start with the Technical Roadmap →", href: "/services/technical-roadmap", variant: "primary" },
               { label: "Map symptoms on /problems →", href: "/problems", variant: "secondary" },
-              { label: "Review proof →", href: "/proof", variant: "ghost" },
             ]}
           />
+          <div className="mt-4">
+            <Link
+              href="/proof"
+              className="text-sm text-[#F5F4F0]/58 underline decoration-[#F5F4F0]/20 underline-offset-4 transition-colors hover:text-[#0FD9C8] hover:decoration-[#0FD9C8]/35"
+            >
+              Prefer evidence-first? Review proof →
+            </Link>
+          </div>
 
           <SectionWrapper className="pt-0 md:pt-4">
             <ServicesBuyerPathSplit />
@@ -137,7 +144,7 @@ export default function ServicesIndexPage() {
                     </p>
                   </div>
 
-                  <div className="mt-8 grid gap-8 lg:grid-cols-2">
+                  <div className="mt-8 hidden gap-8 lg:grid lg:grid-cols-2">
                     <div>
                       <p className="meta-label text-[#F05A28]/85">What it solves</p>
                       <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/74">{cluster.solvesFor}</p>
@@ -148,7 +155,7 @@ export default function ServicesIndexPage() {
                     </div>
                   </div>
 
-                  <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  <ul className="mt-8 hidden gap-3 sm:grid-cols-2 lg:grid lg:grid-cols-4">
                     {cluster.outcomes.map((outcome) => (
                       <li
                         key={outcome}
@@ -158,6 +165,32 @@ export default function ServicesIndexPage() {
                       </li>
                     ))}
                   </ul>
+
+                  <details className="mt-6 rounded-2xl border border-[#F5F4F0]/10 bg-[#13131A]/35 px-4 py-3 lg:hidden">
+                    <summary className="cursor-pointer list-none text-sm font-semibold text-[#F5F4F0] [&::-webkit-details-marker]:hidden">
+                      View lane guidance and outcomes
+                    </summary>
+                    <div className="mt-4 space-y-4">
+                      <div>
+                        <p className="meta-label text-[#F05A28]/85">What it solves</p>
+                        <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/74">{cluster.solvesFor}</p>
+                      </div>
+                      <div>
+                        <p className="meta-label text-[#F05A28]/85">Who it is for</p>
+                        <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/74">{cluster.whoFor}</p>
+                      </div>
+                      <ul className="grid gap-2">
+                        {cluster.outcomes.map((outcome) => (
+                          <li
+                            key={outcome}
+                            className="rounded-2xl border border-[#F5F4F0]/10 bg-[#0C0C0E]/30 px-3 py-2 text-sm leading-snug text-[#F5F4F0]/75"
+                          >
+                            {outcome}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </details>
 
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                     <Button href={cluster.nextStep.href} size="lg">

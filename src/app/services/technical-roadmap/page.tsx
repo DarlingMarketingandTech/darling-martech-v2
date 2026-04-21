@@ -66,7 +66,7 @@ export default function TechnicalRoadmapPage() {
   const visual = SERVICE_VISUAL_BY_SLUG["technical-roadmap"];
 
   return (
-    <SiteShell>
+    <SiteShell hideNewsletterSignup>
       <PageHero
         eyebrow="ENTRY OFFER · DIAGNOSIS BEFORE PRESCRIPTION"
         headline="Technical Roadmap"
@@ -176,15 +176,24 @@ export default function TechnicalRoadmapPage() {
       </BandSection>
 
       {/* Free diagnostic alternative */}
-      <SectionWrapper className="mt-14 text-center">
-        <p className="text-sm text-[#F5F4F0]/50">
-          Not ready for a paid roadmap? Start with a free diagnostic.
-        </p>
-        <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button href="/tools/growth-bottleneck-quiz" variant="secondary">
-            Growth Bottleneck Quiz →
-          </Button>
-        </div>
+      <SectionWrapper className="mt-12 pb-6">
+        <section className="rounded-[2rem] border border-[#F5F4F0]/10 bg-[#0C0C0E]/35 px-6 py-10 text-center md:px-10">
+          <p className="meta-label text-[#F5F4F0]/55">Not ready for a paid roadmap?</p>
+          <h2 className="font-display mt-3 text-balance text-2xl font-semibold tracking-[-0.02em] text-[#F5F4F0] md:text-3xl">
+            Start with a free diagnostic.
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#F5F4F0]/60 md:text-base">
+            Get a problem-class diagnosis first, then decide whether you need a written implementation sequence.
+          </p>
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button href="/tools/growth-bottleneck-quiz" variant="secondary" size="lg">
+              Growth Bottleneck Quiz →
+            </Button>
+            <Button href="/problems" variant="ghost" size="lg">
+              Browse the problem map →
+            </Button>
+          </div>
+        </section>
       </SectionWrapper>
     </SiteShell>
   );

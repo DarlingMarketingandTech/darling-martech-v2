@@ -20,16 +20,18 @@
 - Problem page: `agent-system/prompts/problem-page-prompt.md`
 - Service page: `agent-system/prompts/service-page-prompt.md`
 - Tool page: `agent-system/prompts/tool-page-prompt.md`
+- Service interior improvement: `agent-system/prompts/service-interior-improvement-prompt.md`
+- Service media: `agent-system/prompts/service-media-prompt.md`
+- Report page (`/report/[id]`): `agent-system/prompts/report-page-prompt.md`
 
 ## Areas likely needing unique prompts (confirm priorities)
 1. **Homepage wayfinding prompt** (explicit broken vs missing entry UX; CTA + proof rail sequencing).
 2. **Hub-page curation prompt** (Problems/Proof/Tools/Services hubs: featured logic + relationship caps).
 3. **Industry page prompt** (industry-specific problems/proof without turning into “all services for industry”).
-4. **Resource/blog prompt** (teach something useful, route to tools/proof, avoid generic thought leadership).
-5. **“Foundation offer” prompt** (productized system foundation narrative + CTA ladder for missing-system buyers).
-6. **Migration/redirect prompt** (route safety + metadata/canonical intent when reworking routes).
-7. **MCP QA prompt** (browser + visual-regression runs after UI changes; screenshot diff gates).
-8. **MCP prompt** (blocked: term “NCP” does not appear in repo; user clarified this should be “MCP”).
+4. **“Foundation offer” prompt** (productized system foundation narrative + CTA ladder for missing-system buyers).
+5. **Migration/redirect prompt** (route safety + metadata/canonical intent when reworking routes).
+6. **Homepage media/hero prompt** (deferred until service interiors are strong).
+7. **Resource/blog prompt** (deferred for later; not phase-1 scope).
 
 ## Asset tooling guidance (when to switch modes)
 - If a page plan requires new visuals beyond simple wiring, switch to `asset_system` mode.

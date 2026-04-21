@@ -71,6 +71,10 @@ export default function TechnicalRoadmapPage() {
         eyebrow="ENTRY OFFER · DIAGNOSIS BEFORE PRESCRIPTION"
         headline="Technical Roadmap"
         body="A paid diagnostic engagement before any retainer commitment. You get a named, prioritized plan for exactly what to build — and the fee credits toward implementation if you proceed."
+        ctas={[
+          { label: "Book a roadmap scoping call →", href: siteConfig.calComLink, variant: "primary" },
+          { label: "Not ready? Run the free diagnostic →", href: "/tools/growth-bottleneck-quiz", variant: "secondary" },
+        ]}
         splitAside={
           <ServiceHeroVisual publicId={visual.visualPublicId} alt={visual.visualAlt} />
         }
@@ -110,10 +114,10 @@ export default function TechnicalRoadmapPage() {
 
       <SectionWrapper className="mt-12">
         <FoundationPathwayMini
-          primaryHref={siteConfig.calComLink}
-          primaryLabel="Scope your first-system build →"
+          primaryHref="/tools/growth-bottleneck-quiz"
+          primaryLabel="Run free diagnostic first →"
           secondaryHref="/problems"
-          secondaryLabel="Secondary: map your problem first →"
+          secondaryLabel="Then map your problem path →"
         />
       </SectionWrapper>
 
@@ -167,9 +171,6 @@ export default function TechnicalRoadmapPage() {
             <Button href={siteConfig.calComLink} size="lg">
               Book a scoping call →
             </Button>
-            <Button href="/problems" variant="ghost" size="lg">
-              Or browse the problem list first
-            </Button>
           </div>
         </div>
       </BandSection>
@@ -182,9 +183,6 @@ export default function TechnicalRoadmapPage() {
         <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button href="/tools/growth-bottleneck-quiz" variant="secondary">
             Growth Bottleneck Quiz →
-          </Button>
-          <Button href="/tools/attribution-snapshot" variant="ghost">
-            Attribution Snapshot
           </Button>
         </div>
       </SectionWrapper>

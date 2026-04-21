@@ -8,12 +8,14 @@ import { ServiceHeroVisual } from "@/components/services/ServiceHeroVisual";
 import { ServiceOutcomesGrid } from "@/components/services/ServiceOutcomesGrid";
 import { ServiceProofConnection } from "@/components/services/ServiceProofConnection";
 import { ServiceDetailCtas } from "@/components/services/ServiceDetailCtas";
+import { ServiceRelatedProblemsBlock } from "@/components/services/ServiceRelatedProblemsBlock";
 import Link from "next/link";
 import { services } from "@/data/services";
 import { problemPages } from "@/data/problems";
 import { caseStudies } from "@/data/work/work-index";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
+import { getProblemBuyerState } from "@/lib/buyer-state";
 
 type ServiceSlugPageProps = {
   params: Promise<{ slug: string }>;
@@ -53,9 +55,23 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
   }
 
   const relatedProblems = problemPages.filter((p) => service.problemClusters.includes(p.slug));
+  const curatedProblems = relatedProblems.slice(0, 2);
   const proof = caseStudies.filter((c) => service.proofReferences.includes(c.slug));
   const featuredProof = proof[0];
   const primaryProblem = relatedProblems[0];
+  const states = new Set(service.problemClusters.map((slug) => getProblemBuyerState(slug)));
+  const buyerStateLabel =
+    states.size > 1 || states.has("both")
+      ? "Works for broken and missing system states"
+      : states.has("broken")
+        ? "Best fit for broken-system buyers"
+        : "Best fit for missing-system buyers";
+  const heroCtas = [
+    { label: "Book a diagnostic call →", href: siteConfig.calComLink, variant: "primary" as const },
+    featuredProof
+      ? { label: "See related proof →", href: `/proof/${featuredProof.slug}`, variant: "secondary" as const }
+      : { label: "Browse proof →", href: "/proof", variant: "secondary" as const },
+  ];
   const processSteps = [
     "Clarify constraints, decision criteria, and what success looks like in this context.",
     "Implement the highest-leverage work first and cut low-impact complexity.",
@@ -76,14 +92,14 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
             />
           ) : undefined
         }
-        ctas={[
-          { label: "Book a 30-minute call →", href: siteConfig.calComLink, variant: "primary" },
-          { label: "Run the diagnostic →", href: "/tools/growth-bottleneck-quiz", variant: "secondary" },
-        ]}
+        ctas={heroCtas}
       />
 
       <SectionWrapper className="py-12 md:py-16">
         <section className="max-w-4xl" aria-labelledby="service-change-heading">
+          <p className="mb-3 inline-flex rounded-full border border-[#F5F4F0]/18 px-3 py-1 font-mono text-[0.64rem] uppercase tracking-[0.12em] text-[#F5F4F0]/76">
+            {buyerStateLabel}
+          </p>
           <p className="meta-label text-[#0FD9C8]/90">What this service changes</p>
           <h2
             id="service-change-heading"
@@ -116,6 +132,12 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
       {featuredProof ? (
         <SectionWrapper className="py-12 md:py-16">
           <ServiceProofConnection serviceTitle={service.title} caseStudy={featuredProof} />
+        </SectionWrapper>
+      ) : null}
+
+      {curatedProblems.length ? (
+        <SectionWrapper className="py-12 md:py-16">
+          <ServiceRelatedProblemsBlock problems={curatedProblems} />
         </SectionWrapper>
       ) : null}
 

@@ -28,10 +28,10 @@
 4. **Resource/blog prompt** (teach something useful, route to tools/proof, avoid generic thought leadership).
 5. **“Foundation offer” prompt** (productized system foundation narrative + CTA ladder for missing-system buyers).
 6. **Migration/redirect prompt** (route safety + metadata/canonical intent when reworking routes).
-7. **NCP prompt** (blocked: term “NCP” does not appear in repo; needs definition of what NCP is and how it’s used).
+7. **MCP QA prompt** (browser + visual-regression runs after UI changes; screenshot diff gates).
+8. **MCP prompt** (blocked: term “NCP” does not appear in repo; user clarified this should be “MCP”).
 
 ## Asset tooling guidance (when to switch modes)
 - If a page plan requires new visuals beyond simple wiring, switch to `asset_system` mode.
 - Use `asset-brief-prompt.md` first, then `page-visual-prompt.md` / `component-visual-prompt.md`.
 - Apply `agent-system/policies/asset_pipeline_policy.md` + `agent-system/context/cloudinary_mapping_rules.md`.
-

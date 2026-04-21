@@ -1,4 +1,5 @@
 import type { PlatformCapabilityCategory, PlatformSlug, ServiceCluster } from "@/types";
+import { Boxes } from "lucide-react";
 import {
   HOMEPAGE_CAPABILITY_SHORTLIST,
   PLATFORM_ASSET_MAP,
@@ -221,27 +222,49 @@ export function ServiceEcosystemSupportBlock({ serviceSlug }: { serviceSlug: Ser
   const uniqueScopedSlugs = Array.from(new Set(scopedSlugs));
 
   return (
-    <BandSection className="mt-10">
-      <p className="meta-label text-[#F05A28]/88">Systems Commonly Involved</p>
-      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#F5F4F0]/62">
-        Common ecosystem categories for this service. Exact implementation depends on current stack, constraints, and scope.
-      </p>
+    <BandSection className="relative mt-10 overflow-hidden">
+      <span
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#0FD9C8]/25 to-transparent"
+        aria-hidden
+      />
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <p className="meta-label text-[#F05A28]/88">Systems commonly involved</p>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#F5F4F0]/62">
+            Ecosystem categories and representative platforms for this service. Final stack is always scoped to your
+            constraints — this is the reference shape, not a fixed shopping list.
+          </p>
+        </div>
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#F5F4F0]/10 bg-[#12121a]/55 text-[#0FD9C8]/80">
+          <Boxes className="h-5 w-5" strokeWidth={1.6} aria-hidden />
+        </span>
+      </div>
 
-      <ul className="mt-4 flex flex-wrap gap-1.5">
-        {categories.map((category) => (
-          <li key={category}>
-            <span className="inline-flex items-center rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-[#F5F4F0]/58">
-              {PLATFORM_CAPABILITY_CATEGORIES[category].label}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <div className="mt-8 grid gap-4 lg:grid-cols-2">
+        <section className={categoryPanelClassName}>
+          <p className={categoryHeaderClassName}>Capability categories</p>
+          <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+          <ul className="mt-3 flex flex-wrap gap-1.5">
+            {categories.map((category) => (
+              <li key={category}>
+                <span className="inline-flex items-center rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-[#F5F4F0]/58">
+                  {PLATFORM_CAPABILITY_CATEGORIES[category].label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <ul className="mt-4 flex flex-wrap gap-1.5">
-        {uniqueScopedSlugs.map((slug) => (
-          <PlatformChip key={slug} slug={slug} />
-        ))}
-      </ul>
+        <section className={categoryPanelClassName}>
+          <p className={categoryHeaderClassName}>Representative platforms</p>
+          <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+          <ul className="mt-3 flex flex-wrap gap-1.5">
+            {uniqueScopedSlugs.map((slug) => (
+              <PlatformChip key={slug} slug={slug} />
+            ))}
+          </ul>
+        </section>
+      </div>
     </BandSection>
   );
 }

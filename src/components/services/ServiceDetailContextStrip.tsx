@@ -5,7 +5,7 @@ import {
   getDisplayClusterIdForServiceSlug,
   getServicesIndexLaneHash,
 } from "@/data/services";
-import type { EngagementFormat, Service, ServiceCluster } from "@/types";
+import type { EngagementFormat, Service } from "@/types";
 import { cn } from "@/lib/utils";
 
 const FORMAT_LABELS: Record<EngagementFormat, string> = {
@@ -23,7 +23,7 @@ type ServiceDetailContextStripProps = {
 };
 
 export function ServiceDetailContextStrip({ service }: ServiceDetailContextStripProps) {
-  const clusterId = getDisplayClusterIdForServiceSlug(service.slug as ServiceCluster);
+  const clusterId = getDisplayClusterIdForServiceSlug(service.slug);
   const cluster = clusterId ? SERVICE_DISPLAY_CLUSTERS[clusterId] : null;
   const pillar = SERVICE_PILLARS.find((p) => p.id === service.pillar);
   const laneHref = clusterId ? `/services#${getServicesIndexLaneHash(clusterId)}` : "/services";

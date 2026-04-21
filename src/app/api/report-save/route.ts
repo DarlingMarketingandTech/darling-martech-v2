@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { appEnv, getMissingEnvVars } from "@/lib/env";
 import { asOptionalString, isJsonRecord, isValidEmail, normalizeEmail } from "@/lib/request-utils";
-import { saveReportForEmail } from "@/lib/supabase";
+import { ReportNotFoundError, saveReportForEmail } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -65,9 +65,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, saveId }, { status: 200 });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-
-    if (message === "Report not found") {
+    if (error instanceof ReportNotFoundError) {
       return NextResponse.json({ ok: false, error: "This report could not be found." }, { status: 404 });
     }
 

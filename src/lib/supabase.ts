@@ -65,6 +65,13 @@ export type SaveReportForEmailInput = {
   emailNormalized: string;
 };
 
+export class ReportNotFoundError extends Error {
+  constructor() {
+    super("Report not found");
+    this.name = "ReportNotFoundError";
+  }
+}
+
 /** Persists a soft-identity save row and optionally backfills completion email when empty. */
 export async function saveReportForEmail(input: SaveReportForEmailInput): Promise<{ saveId: string }> {
   const supabase = createSupabaseServerClient();
@@ -78,7 +85,7 @@ export async function saveReportForEmail(input: SaveReportForEmailInput): Promis
     throw new Error(`Supabase read failed: ${loadError.message}`);
   }
   if (!completion) {
-    throw new Error("Report not found");
+    throw new ReportNotFoundError();
   }
 
   if (!completion.email) {

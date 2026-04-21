@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import type { SiteNavigation } from "@/types";
 import { Button } from "@/components/ui/button";
+import { CTA_LABELS, CTA_LINKS } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
 type MobileNavProps = {
@@ -98,13 +99,39 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
                   );
                 })}
               </nav>
+              <div className="mt-6 rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]/55 p-4">
+                <p className="meta-label text-[#0FD9C8]">Quick actions</p>
+                <div className="mt-3 grid gap-2">
+                  <Link
+                    href={CTA_LINKS.startHere}
+                    onClick={onClose}
+                    className="rounded-2xl border border-[#F5F4F0]/10 px-4 py-3 text-sm text-[#F5F4F0]/84 transition-colors hover:border-[#F05A28]/35 hover:text-[#F5F4F0]"
+                  >
+                    Start Here
+                  </Link>
+                  <Link
+                    href={CTA_LINKS.proof}
+                    onClick={onClose}
+                    className="rounded-2xl border border-[#F5F4F0]/10 px-4 py-3 text-sm text-[#F5F4F0]/84 transition-colors hover:border-[#F05A28]/35 hover:text-[#F5F4F0]"
+                  >
+                    Proof
+                  </Link>
+                  <Link
+                    href={CTA_LINKS.bookCall}
+                    onClick={onClose}
+                    className="rounded-2xl border border-[#F5F4F0]/10 px-4 py-3 text-sm text-[#F5F4F0]/84 transition-colors hover:border-[#F05A28]/35 hover:text-[#F5F4F0]"
+                  >
+                    Book Call
+                  </Link>
+                </div>
+              </div>
             </div>
             <div className="space-y-4">
               <p className="text-sm leading-6 text-[#F5F4F0]/62">
                 Strategy. Systems. Execution. One accountable operator.
               </p>
               <Button href={cta.href} size="lg" className="w-full" onClick={onClose}>
-                {cta.label}
+                {CTA_LABELS.bookCall}
               </Button>
             </div>
           </motion.div>

@@ -3,11 +3,12 @@ import { HomeHeroSignalStrip } from "@/components/hero/HomeHeroSignalStrip";
 import { HomepageHeroPrimaryCta } from "@/components/hero/HomepageHeroPrimaryCta";
 import { HomepageHeroVisual } from "@/components/hero/HomepageHeroVisual";
 import { homepageData } from "@/data/homepage";
+import { CTA_LABELS, CTA_LINKS } from "@/lib/cta";
 import styles from "@/components/hero/homepage-hero-v2.module.css";
 import { cn } from "@/lib/utils";
 
-const PRIMARY_HREF = "/process";
-const SECONDARY_HREF = "/proof";
+const PRIMARY_HREF = CTA_LINKS.startHere;
+const SECONDARY_HREF = CTA_LINKS.proof;
 
 const HERO_SIGNAL_METRICS = homepageData.proofBar.slice(0, 3);
 
@@ -46,6 +47,14 @@ export function HomepageHero() {
               I design and build connected growth systems — aligning brand, website, and marketing infrastructure so they
               actually drive pipeline.
             </p>
+            <ul className="mt-5 flex flex-wrap gap-2.5">
+              <li className="rounded-full border border-[#F5F4F0]/14 bg-[#13131A]/60 px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.12em] text-[#0FD9C8]">
+                +212% qualified leads
+              </li>
+              <li className="rounded-full border border-[#F5F4F0]/14 bg-[#13131A]/60 px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.12em] text-[#F5F4F0]/72">
+                3-minute diagnosis
+              </li>
+            </ul>
             <div
               className={cn(
                 styles.reveal,
@@ -53,9 +62,9 @@ export function HomepageHero() {
                 "mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
               )}
             >
-              <HomepageHeroPrimaryCta href={PRIMARY_HREF}>See how it works</HomepageHeroPrimaryCta>
+              <HomepageHeroPrimaryCta href={PRIMARY_HREF}>{CTA_LABELS.startHere}</HomepageHeroPrimaryCta>
               <Button href={SECONDARY_HREF} variant="secondary" size="lg">
-                View proof
+                {CTA_LABELS.proof}
               </Button>
             </div>
           </div>

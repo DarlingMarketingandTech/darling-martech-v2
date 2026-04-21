@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { siteNavigation } from "@/data/navigation";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { CTA_LABELS } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
 function isPrimaryNavActive(href: string, pathname: string | null): boolean {
@@ -77,7 +78,7 @@ export function SiteHeader() {
 
             <div className="flex shrink-0 items-center gap-2.5 md:gap-3">
               <Button href={siteNavigation.cta.href} size="sm" className="hidden md:inline-flex">
-                {siteNavigation.cta.label}
+                {CTA_LABELS.bookCall}
               </Button>
               <button
                 type="button"

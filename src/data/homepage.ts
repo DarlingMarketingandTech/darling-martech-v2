@@ -1,5 +1,6 @@
 import type { PageMeta } from "@/types";
 import { siteConfig } from "@/data/site-config";
+import { CTA_LABELS, CTA_LINKS } from "@/lib/cta";
 
 export const homepageMeta: PageMeta = {
   title: "Revenue Systems, AI Automation & Custom Build",
@@ -21,8 +22,8 @@ export const homepageData = {
     },
     subhead:
       "I diagnose, rebuild, and run growth systems that capture leads, convert demand, automate follow-up, and make reporting trustworthy. If your stack is broken or missing, this is where I fix it.",
-    primaryCta: { label: "Find your bottleneck →", href: "/tools/growth-bottleneck-quiz" },
-    secondaryCta: { label: "Book a system diagnostic →", href: "/contact" },
+    primaryCta: { label: CTA_LABELS.startHere, href: CTA_LINKS.startHere },
+    secondaryCta: { label: CTA_LABELS.bookCall, href: CTA_LINKS.bookCall },
   },
   proofBar: [
     { value: "+212%", label: "qualified leads — Graston Technique®" },
@@ -195,8 +196,8 @@ export const homepageData = {
   closingCta: {
     headline: "Choose the next step based on your current trust level.",
     body: "Browse, diagnose, and evaluate first - or start a direct conversation if the problem is already clear.",
-    primaryCta: { label: "Start with a free diagnostic tool →", href: "/tools" },
-    secondaryCta: { label: "Evaluate with proof and process →", href: "/proof" },
-    readyLink: { label: "Ready now? Book a call →", href: siteConfig.calComLink },
+    primaryCta: { label: CTA_LABELS.startHere, href: CTA_LINKS.startHere },
+    secondaryCta: { label: CTA_LABELS.proof, href: CTA_LINKS.proof },
+    readyLink: { label: CTA_LABELS.bookCall, href: siteConfig.calComLink },
   },
 };

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { PageWrapper } from "@/components/layout/PageWrapper";
+import { MobileStickyCtaBar } from "@/components/layout/MobileStickyCtaBar";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 
@@ -14,6 +15,7 @@ export function SiteShell({ children, hideNewsletterSignup = false }: SiteShellP
       <SiteHeader />
       <PageWrapper>{children}</PageWrapper>
       <SiteFooter showNewsletterSignup={!hideNewsletterSignup} />
+      <MobileStickyCtaBar />
     </div>
   );
 }

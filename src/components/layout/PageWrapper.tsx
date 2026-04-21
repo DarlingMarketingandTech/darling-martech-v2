@@ -11,7 +11,7 @@ export function PageWrapper({ children, className }: PageWrapperProps) {
     <main
       id="main-content"
       className={cn(
-        "mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pb-20 pt-10 md:px-12 md:pb-28 md:pt-16",
+        "mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pb-36 pt-10 md:px-12 md:pb-28 md:pt-16",
         className
       )}
     >

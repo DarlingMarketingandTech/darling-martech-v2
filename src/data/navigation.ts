@@ -1,5 +1,6 @@
 import type { SiteNavigation } from "@/types";
 import { siteConfig } from "@/data/site-config";
+import { CTA_LABELS } from "@/lib/cta";
 
 export const siteNavigation: SiteNavigation = {
   primary: [
@@ -50,7 +51,7 @@ export const siteNavigation: SiteNavigation = {
     ],
   },
   cta: {
-    label: "Let's talk",
+    label: CTA_LABELS.bookCall,
     href: "https://cal.com/jacob-darling/30min",
   },
 };

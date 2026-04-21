@@ -79,7 +79,7 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
   ];
 
   return (
-    <SiteShell>
+    <SiteShell hideNewsletterSignup>
       <PageHero
         eyebrow="SERVICE"
         headline={service.title}

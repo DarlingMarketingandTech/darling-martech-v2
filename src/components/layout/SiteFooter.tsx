@@ -4,15 +4,21 @@ import { siteConfig } from "@/data/site-config";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { NewsletterSignup } from "@/components/ui/NewsletterSignup";
 
-export function SiteFooter() {
+type SiteFooterProps = {
+  showNewsletterSignup?: boolean;
+};
+
+export function SiteFooter({ showNewsletterSignup = true }: SiteFooterProps) {
   const year = new Date().getFullYear();
 
   return (
     <footer className="mt-10 border-t border-[#F5F4F0]/8 px-6 pb-10 pt-16 md:px-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12">
-          <NewsletterSignup headline="One martech insight per week." compact />
-        </div>
+        {showNewsletterSignup ? (
+          <div className="mb-12">
+            <NewsletterSignup headline="One martech insight per week." compact />
+          </div>
+        ) : null}
 
         <div className="grid gap-10 xl:grid-cols-[minmax(0,1.4fr)_repeat(4,minmax(0,1fr))]">
           <div className="surface-card grain-mask rounded-[2rem] p-7">

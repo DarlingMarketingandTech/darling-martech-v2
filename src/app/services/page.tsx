@@ -65,7 +65,7 @@ export default function ServicesIndexPage() {
   );
 
   return (
-    <SiteShell>
+    <SiteShell hideNewsletterSignup>
       <div className="relative isolate">
         <ServicesIndexAmbient />
         <div className="relative z-10">

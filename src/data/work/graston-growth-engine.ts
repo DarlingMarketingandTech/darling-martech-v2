@@ -89,7 +89,7 @@ export const grastonGrowthEngine: CaseStudy = {
     "mysql",
   ],
   liveUrl: "https://graston-growth-engine.jacob-ba2.workers.dev",
-  cloudinaryImages: ["studio/graston-growth-engine"],
+  cloudinaryImages: ["3-website-page-promo"],
   featured: true,
   publishedAt: "2024-01-01",
 };

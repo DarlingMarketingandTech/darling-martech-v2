@@ -1,0 +1,27 @@
+
+file                          url                                     formFactor  perf  a11y     bp    seo   lcp_ms inp_ms  cls
+----                          ---                                     ----------  ----  ----     --    ---   ------ ------  ---
+dapper.about.desktop.json     https://www.dapper.agency/about         desktop    56.00 76.00  54.00 100.00  1319.00   0.00 0.11
+dapper.about.mobile.json      https://www.dapper.agency/about         mobile     29.00 76.00  54.00 100.00 14683.00   0.00 0.00
+dapper.blog.desktop.json      https://www.dapper.agency/blog          desktop    56.00 83.00  54.00 100.00  6039.00   0.00 0.04
+dapper.blog.mobile.json       https://www.dapper.agency/blog          mobile     27.00 83.00  54.00 100.00 33825.00   0.00 0.00
+dapper.cases.desktop.json     https://www.dapper.agency/cases         desktop    53.00 88.00  54.00 100.00  1295.00   0.00 0.82
+dapper.cases.mobile.json      https://www.dapper.agency/cases         mobile     27.00 91.00  54.00 100.00 23498.00   0.00 0.00
+dapper.contact.desktop.json   https://www.dapper.agency/contact       desktop    82.00 90.00  54.00 100.00  1594.00   0.00 0.00
+dapper.contact.mobile.json    https://www.dapper.agency/contact       mobile     34.00 90.00  54.00 100.00 17574.00   0.00 0.00
+dapper.home.desktop.json      https://www.dapper.agency/              desktop    53.00 85.00  54.00 100.00  1894.00   0.00 0.01
+dapper.home.mobile.json       https://www.dapper.agency/              mobile     26.00 85.00  54.00 100.00 25412.00   0.00 0.00
+darling.contact.desktop.json  https://www.darlingmartech.com/contact  desktop    98.00 94.00 100.00 100.00  1037.00   0.00 0.00
+darling.contact.mobile.json   https://www.darlingmartech.com/contact  mobile     66.00 94.00 100.00 100.00  5517.00   0.00 0.00
+darling.home.desktop.json     https://www.darlingmartech.com/         desktop    92.00 96.00  96.00 100.00  1595.00   0.00 0.00
+darling.home.mobile.json      https://www.darlingmartech.com/         mobile     56.00 96.00  96.00 100.00  5830.00   0.00 0.00
+darling.process.desktop.json  https://www.darlingmartech.com/process  desktop    97.00 94.00 100.00 100.00  1243.00   0.00 0.00
+darling.process.mobile.json   https://www.darlingmartech.com/process  mobile     70.00 94.00 100.00 100.00  4920.00   0.00 0.00
+darling.services.desktop.json https://www.darlingmartech.com/services desktop    95.00 96.00 100.00 100.00  1456.00   0.00 0.00
+darling.services.mobile.json  https://www.darlingmartech.com/services mobile     74.00 96.00 100.00 100.00  5692.00   0.00 0.00
+darling.tools.desktop.json    https://www.darlingmartech.com/tools    desktop    95.00 96.00 100.00 100.00  1423.00   0.00 0.00
+darling.tools.mobile.json     https://www.darlingmartech.com/tools    mobile     77.00 96.00 100.00 100.00  4373.00   0.00 0.01
+darling.work.desktop.json     https://www.darlingmartech.com/proof    desktop    96.00 96.00 100.00 100.00  1264.00   0.00 0.00
+darling.work.mobile.json      https://www.darlingmartech.com/proof    mobile     64.00 96.00 100.00 100.00  4727.00   0.00 0.00
+
+

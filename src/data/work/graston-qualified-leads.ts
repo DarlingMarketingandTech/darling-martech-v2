@@ -68,7 +68,7 @@ export const grastonQualifiedLeads: CaseStudy = {
   ],
   implementationStackCategories: ["revenue-crm", "analytics-growth"],
   implementationPlatformSlugs: ["salesforce", "google", "wordpress"],
-  cloudinaryImages: ["studio/graston-growth-engine"],
+  cloudinaryImages: ["3-website-page-promo"],
   featured: true,
   publishedAt: "2024-01-01",
 };

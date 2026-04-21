@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
@@ -196,9 +197,14 @@ export default function HomePage() {
             <Button href={homepageData.closingCta.secondaryCta.href} variant="ghost" size="lg">
               {homepageData.closingCta.secondaryCta.label}
             </Button>
-            <Button href={homepageData.closingCta.tertiaryCta.href} variant="secondary" size="lg">
-              {homepageData.closingCta.tertiaryCta.label}
-            </Button>
+          </div>
+          <div className="mt-5">
+            <Link
+              href={homepageData.closingCta.readyLink.href}
+              className="text-sm font-medium text-[#F05A28] transition-colors hover:text-[#ff6d40]"
+            >
+              {homepageData.closingCta.readyLink.label}
+            </Link>
           </div>
         </SectionReveal>
       </SectionWrapper>

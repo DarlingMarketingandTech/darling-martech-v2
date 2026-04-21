@@ -4,7 +4,7 @@ import { siteConfig } from "@/data/site-config";
 export const homepageMeta: PageMeta = {
   title: "Revenue Systems, AI Automation & Custom Build",
   description:
-    "Darling MarTech bridges marketing strategy, AI-enabled automation, and custom technical infrastructure for growth-stage businesses with complex stacks. One accountable operator builds, integrates, and runs the full system.",
+    "Darling MarTech builds and runs connected growth systems — from first-working foundations to complex stack repairs. One accountable operator diagnoses the bottleneck, integrates the tools, and makes the system measurable.",
   canonicalUrl: "https://darlingmartech.com",
 };
 
@@ -197,6 +197,6 @@ export const homepageData = {
     body: "Browse, diagnose, and evaluate first - or start a direct conversation if the problem is already clear.",
     primaryCta: { label: "Start with a free diagnostic tool →", href: "/tools" },
     secondaryCta: { label: "Evaluate with proof and process →", href: "/proof" },
-    tertiaryCta: { label: "Ready now? Book a call →", href: siteConfig.calComLink },
+    readyLink: { label: "Ready now? Book a call →", href: siteConfig.calComLink },
   },
 };

@@ -108,7 +108,7 @@ export const grastonTechnique: CaseStudy = {
     "CE tracking and delivery",
   ],
   liveUrl: "https://graston-growth-engine.jacob-ba2.workers.dev",
-  cloudinaryImages: ["studio/graston-growth-engine"],
+  cloudinaryImages: ["3-website-page-promo"],
   featured: true,
   publishedAt: "2024-06-01",
 };

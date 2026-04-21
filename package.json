@@ -14,8 +14,7 @@
     "design:report": "node agent-system/scripts/design-report.mjs",
     "strategy:audit": "node agent-system/scripts/strategy-report.mjs",
     "strategy:audit:json": "node agent-system/scripts/strategy-report.mjs --json",
-    "postbuild": "next-sitemap",
-    "upload:hero-textures": "node scripts/upload-hero-textures-to-cloudinary.mjs"
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
@@ -53,8 +52,6 @@
     "@types/react-dom": "^19",
     "@types/three": "^0.184.0",
     "babel-plugin-react-compiler": "1.0.0",
-    "cloudinary": "^2.9.0",
-    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.15",
     "tailwindcss": "^4",

@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { HomeHeroSignalStrip } from "@/components/hero/HomeHeroSignalStrip";
 import { HomepageHeroPrimaryCta } from "@/components/hero/HomepageHeroPrimaryCta";
 import { HomepageHeroVisual } from "@/components/hero/HomepageHeroVisual";
-import { HomepageHeroTextureVideo } from "@/components/hero/HomepageHeroTextureVideo";
 import { HomepageHeroTerminalLayer } from "@/components/hero/HomepageHeroTerminalLayer";
 import { homepageData } from "@/data/homepage";
 import { CTA_LABELS, CTA_LINKS } from "@/lib/cta";
@@ -17,7 +16,6 @@ const HERO_SIGNAL_METRICS = homepageData.proofBar.slice(0, 3);
 export function HomepageHero() {
   return (
     <section className="hero-mesh grain-mask relative overflow-hidden rounded-[2.5rem] border border-[#F5F4F0]/8">
-      <HomepageHeroTextureVideo />
       <HomepageHeroTerminalLayer />
       <div className="relative z-10 flex flex-col">
         <div className="grid grid-cols-1 gap-12 px-6 py-20 md:px-10 md:py-24 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:items-center lg:gap-10 lg:py-24 xl:gap-14 xl:px-12 xl:py-28">

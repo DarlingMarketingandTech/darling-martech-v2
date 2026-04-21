@@ -4,13 +4,11 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { PageHero } from "@/components/hero/PageHero";
-import { ServiceEcosystemSupportBlock } from "@/components/capabilities/CapabilityPanels";
 import { ServiceHeroVisual } from "@/components/services/ServiceHeroVisual";
-import { ServiceDetailContextStrip } from "@/components/services/ServiceDetailContextStrip";
 import { ServiceOutcomesGrid } from "@/components/services/ServiceOutcomesGrid";
-import { ServiceRelatedProblemsBlock } from "@/components/services/ServiceRelatedProblemsBlock";
 import { ServiceProofConnection } from "@/components/services/ServiceProofConnection";
 import { ServiceDetailCtas } from "@/components/services/ServiceDetailCtas";
+import Link from "next/link";
 import { services } from "@/data/services";
 import { problemPages } from "@/data/problems";
 import { caseStudies } from "@/data/work/work-index";
@@ -56,6 +54,13 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
 
   const relatedProblems = problemPages.filter((p) => service.problemClusters.includes(p.slug));
   const proof = caseStudies.filter((c) => service.proofReferences.includes(c.slug));
+  const featuredProof = proof[0];
+  const primaryProblem = relatedProblems[0];
+  const processSteps = [
+    "Clarify constraints, decision criteria, and what success looks like in this context.",
+    "Implement the highest-leverage work first and cut low-impact complexity.",
+    "Instrument outcomes so every adjustment ties back to revenue signal and operating clarity.",
+  ];
 
   return (
     <SiteShell>
@@ -78,26 +83,66 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
       />
 
       <SectionWrapper className="py-12 md:py-16">
-        <ServiceDetailContextStrip service={service} />
+        <section className="max-w-4xl" aria-labelledby="service-change-heading">
+          <p className="meta-label text-[#0FD9C8]/90">What this service changes</p>
+          <h2
+            id="service-change-heading"
+            className="font-display mt-3 text-balance text-2xl font-semibold tracking-[-0.02em] text-[#F5F4F0] md:text-3xl"
+          >
+            From fragmented execution to one clear operating system
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-[#F5F4F0]/72 md:text-lg">
+            {service.description}
+          </p>
+          {primaryProblem ? (
+            <p className="mt-6 text-sm leading-relaxed text-[#F5F4F0]/58">
+              Common friction behind this service:{" "}
+              <Link
+                href={`/problems/${primaryProblem.slug}`}
+                className="text-[#F05A28] underline decoration-[#F05A28]/35 underline-offset-4 transition-colors hover:text-[#ff6d40]"
+              >
+                {primaryProblem.title}
+              </Link>
+              .
+            </p>
+          ) : null}
+        </section>
       </SectionWrapper>
 
       <BandSection className="py-12 md:py-16">
         <ServiceOutcomesGrid outcomes={service.outcomes} serviceTitle={service.title} />
       </BandSection>
 
-      <ServiceEcosystemSupportBlock serviceSlug={service.slug} />
-
-      {relatedProblems.length ? (
+      {featuredProof ? (
         <SectionWrapper className="py-12 md:py-16">
-          <ServiceRelatedProblemsBlock problems={relatedProblems} />
+          <ServiceProofConnection serviceTitle={service.title} caseStudy={featuredProof} />
         </SectionWrapper>
       ) : null}
 
-      {proof.length ? (
-        <SectionWrapper className="py-12 md:py-16">
-          <ServiceProofConnection serviceTitle={service.title} caseStudies={proof} />
+      <SectionWrapper className="py-12 md:py-16">
+        <section
+          className="rounded-[2rem] border border-[#F5F4F0]/8 bg-[#0D0D12]/45 px-6 py-10 md:px-9 md:py-12"
+          aria-labelledby="service-delivery-heading"
+        >
+          <p className="meta-label text-[#0FD9C8]/90">Process</p>
+          <h2
+            id="service-delivery-heading"
+            className="font-display mt-3 text-balance text-2xl font-semibold tracking-[-0.02em] text-[#F5F4F0] md:text-3xl"
+          >
+            How delivery stays focused and measurable
+          </h2>
+          <ul className="mt-8 space-y-4">
+            {processSteps.map((step, index) => (
+              <li key={step} className="border-b border-[#F5F4F0]/8 pb-4 last:border-b-0 last:pb-0">
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#F5F4F0]/42">
+                  Step 0{index + 1}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/72 md:text-base">{step}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
         </SectionWrapper>
-      ) : null}
 
       <SectionWrapper className="pb-20 pt-4 md:pb-24">
         <ServiceDetailCtas service={service} />

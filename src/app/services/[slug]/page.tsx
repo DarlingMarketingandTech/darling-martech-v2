@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/layout/site-shell";
 import { BandSection } from "@/components/layout/BandSection";
+import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { PageHero } from "@/components/hero/PageHero";
-import { ProofGrid } from "@/components/proof/ProofGrid";
-import { Button } from "@/components/ui/button";
 import { ServiceEcosystemSupportBlock } from "@/components/capabilities/CapabilityPanels";
 import { ServiceHeroVisual } from "@/components/services/ServiceHeroVisual";
+import { ServiceDetailContextStrip } from "@/components/services/ServiceDetailContextStrip";
+import { ServiceOutcomesGrid } from "@/components/services/ServiceOutcomesGrid";
+import { ServiceRelatedProblemsBlock } from "@/components/services/ServiceRelatedProblemsBlock";
+import { ServiceProofConnection } from "@/components/services/ServiceProofConnection";
+import { ServiceDetailCtas } from "@/components/services/ServiceDetailCtas";
 import { services } from "@/data/services";
 import { problemPages } from "@/data/problems";
 import { caseStudies } from "@/data/work/work-index";
@@ -59,7 +62,7 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
       <PageHero
         eyebrow="SERVICE"
         headline={service.title}
-        body={service.description}
+        body={[service.headline, service.description]}
         splitAside={
           service.visualPublicId ? (
             <ServiceHeroVisual
@@ -68,51 +71,37 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
             />
           ) : undefined
         }
+        ctas={[
+          { label: "Book a 30-minute call →", href: siteConfig.calComLink, variant: "primary" },
+          { label: "Run the diagnostic →", href: "/tools/growth-bottleneck-quiz", variant: "secondary" },
+        ]}
       />
 
-      <BandSection className="mt-14">
-        <p className="text-sm uppercase tracking-[0.24em] text-[#0FD9C8]">Outcomes</p>
-        <ul className="mt-4 list-inside list-disc space-y-2 text-lg text-[#F5F4F0]/75">
-          {service.outcomes.map((o) => (
-            <li key={o}>{o}</li>
-          ))}
-        </ul>
+      <SectionWrapper className="py-12 md:py-16">
+        <ServiceDetailContextStrip service={service} />
+      </SectionWrapper>
+
+      <BandSection className="py-12 md:py-16">
+        <ServiceOutcomesGrid outcomes={service.outcomes} serviceTitle={service.title} />
       </BandSection>
 
       <ServiceEcosystemSupportBlock serviceSlug={service.slug} />
 
       {relatedProblems.length ? (
-        <BandSection className="mt-10">
-          <p className="text-sm uppercase tracking-[0.24em] text-[#F05A28]">Related problems</p>
-          <ul className="mt-4 flex flex-col gap-3">
-            {relatedProblems.map((p) => (
-              <li key={p.slug}>
-                <Link href={`/problems/${p.slug}`} className="text-[#F05A28] hover:underline">
-                  {p.title} →
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </BandSection>
+        <SectionWrapper className="py-12 md:py-16">
+          <ServiceRelatedProblemsBlock problems={relatedProblems} />
+        </SectionWrapper>
       ) : null}
 
       {proof.length ? (
-        <div className="mt-14">
-          <p className="text-sm uppercase tracking-[0.24em] text-[#F05A28]">Proof</p>
-          <div className="mt-8">
-            <ProofGrid caseStudies={proof} />
-          </div>
-        </div>
+        <SectionWrapper className="py-12 md:py-16">
+          <ServiceProofConnection serviceTitle={service.title} caseStudies={proof} />
+        </SectionWrapper>
       ) : null}
 
-      <div className="mt-14 flex flex-col gap-4 sm:flex-row">
-        <Button href={siteConfig.calComLink} size="lg">
-          Start a conversation →
-        </Button>
-        <Button href="/tools/growth-bottleneck-quiz" variant="secondary" size="lg">
-          Run the diagnostic first →
-        </Button>
-      </div>
+      <SectionWrapper className="pb-20 pt-4 md:pb-24">
+        <ServiceDetailCtas service={service} />
+      </SectionWrapper>
     </SiteShell>
   );
 }

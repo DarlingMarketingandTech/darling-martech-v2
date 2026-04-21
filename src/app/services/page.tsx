@@ -13,11 +13,12 @@ import {
 } from "@/data/services";
 import { getProofAnglesForDisplayCluster } from "@/data/proof-angles";
 import { buildMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/data/site-config";
 import { ServicesIndexAmbient } from "@/components/services/ServicesIndexAmbient";
 import { ServicesBuyerPathSplit } from "@/components/services/ServicesBuyerPathSplit";
 import { FoundationPathwayMini } from "@/components/shared/FoundationPathwayMini";
 import { caseStudies } from "@/data/work/work-index";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const PROOF_BRIDGE_SLUGS = [
   "barbershop-command-center",
@@ -25,6 +26,7 @@ const PROOF_BRIDGE_SLUGS = [
   "primarycare-indy",
   "317-bbq",
 ] as const;
+const CALENDAR_APP_URL = "https://app.cal.com/";
 
 export const metadata = buildMetadata({
   title: "Services",
@@ -117,9 +119,19 @@ export default function ServicesIndexPage() {
                   <Button href={`/services/${strategicLead.slug}`} size="lg">
                     Review Fractional CMO fit →
                   </Button>
-                  <Button href={siteConfig.calComLink} variant="ghost" size="lg">
-                    Book a strategic conversation
-                  </Button>
+                  <Link
+                    href={CALENDAR_APP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "group relative")}
+                  >
+                    <span className="transition-opacity duration-200 group-hover:opacity-0 group-focus-visible:opacity-0">
+                      Book a strategic conversation
+                    </span>
+                    <span className="absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                      View My Calendar
+                    </span>
+                  </Link>
                 </div>
               </div>
             </BandSection>
@@ -329,9 +341,19 @@ export default function ServicesIndexPage() {
               <Button href="/proof" variant="ghost" size="lg">
                 See the proof →
               </Button>
-              <Button href={siteConfig.calComLink} variant="ghost" size="lg">
-                Book a strategic conversation
-              </Button>
+              <Link
+                href={CALENDAR_APP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "group relative")}
+              >
+                <span className="transition-opacity duration-200 group-hover:opacity-0 group-focus-visible:opacity-0">
+                  Book a strategic conversation
+                </span>
+                <span className="absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  View My Calendar
+                </span>
+              </Link>
             </div>
             <p className="mt-6 text-sm text-[#F5F4F0]/45">
               Prefer symptoms first?{" "}

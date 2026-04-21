@@ -13,6 +13,9 @@ type ReportTopologyFocusProps = {
   caseStudies: CaseStudy[];
 };
 
+const MAX_DISPLAYED_SERVICES = 4;
+const MAX_DISPLAYED_TOOLS = 3;
+
 export function ReportTopologyFocus({
   accent,
   problemSlug,
@@ -36,7 +39,7 @@ export function ReportTopologyFocus({
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#F5F4F0]/42">Service layer</p>
         <p className="mt-2 font-mono text-xs text-[#0FD9C8]">{primaryServiceSlug}</p>
         <ul className="mt-3 space-y-1.5 text-sm text-[#F5F4F0]/62">
-          {servicesForSystem.slice(0, 4).map((service) => (
+          {servicesForSystem.slice(0, MAX_DISPLAYED_SERVICES).map((service) => (
             <li key={service.slug}>• {service.title}</li>
           ))}
         </ul>
@@ -48,7 +51,7 @@ export function ReportTopologyFocus({
           {stackTools.length} tools · {caseStudies.length} proof links
         </p>
         <ul className="mt-3 space-y-1.5 text-sm text-[#F5F4F0]/62">
-          {stackTools.slice(0, 3).map((tool) => (
+          {stackTools.slice(0, MAX_DISPLAYED_TOOLS).map((tool) => (
             <li key={tool.slug}>• {tool.title}</li>
           ))}
         </ul>

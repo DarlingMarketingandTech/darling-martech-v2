@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseStudies } from "@/data/work/work-index";
 import { cn } from "@/lib/utils";
+import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import type { CaseStudy } from "@/types";
 
-/** Homepage rail order — anchor case first for hierarchy. */
 const RAIL_SLUGS = [
   "graston-technique",
   "primarycare-indy",
@@ -13,12 +17,9 @@ const RAIL_SLUGS = [
 ] as const;
 
 function getRailCaseStudies(): CaseStudy[] {
-  const out: CaseStudy[] = [];
-  for (const slug of RAIL_SLUGS) {
-    const c = caseStudies.find((s) => s.slug === slug);
-    if (c) out.push(c);
-  }
-  return out;
+  return RAIL_SLUGS.map((slug) => caseStudies.find((s) => s.slug === slug)).filter(
+    (study): study is CaseStudy => Boolean(study)
+  );
 }
 
 type HomepageProofRailProps = {
@@ -26,23 +27,36 @@ type HomepageProofRailProps = {
 };
 
 export function HomepageProofRail({ className }: HomepageProofRailProps) {
-  const studies = getRailCaseStudies();
+  const studies = useMemo(() => getRailCaseStudies(), []);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeStudy = studies[activeIndex];
+
+  useEffect(() => {
+    if (studies.length < 2) return;
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % studies.length);
+    }, 6800);
+    return () => window.clearInterval(interval);
+  }, [studies.length]);
+
+  if (!activeStudy) return null;
+
+  const activeImage = activeStudy.cloudinaryImages?.[0];
 
   return (
     <section
       className={cn(
-        "border-y border-[#F5F4F0]/10 bg-[#0e0e12] px-4 py-16 md:px-8 md:py-20",
-        "mt-6 md:mt-8",
+        "mt-6 border-y border-[#F5F4F0]/10 bg-[#0e0e12] px-4 py-16 md:mt-8 md:px-8 md:py-20",
         className
       )}
       aria-label="Selected client work"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-[1200px]">
         <div className="mb-10 flex flex-col justify-between gap-4 sm:mb-12 sm:flex-row sm:items-end">
           <div>
             <p className="meta-label text-[#F05A28]/90">Proof in practice</p>
             <h2 className="font-display mt-2 max-w-xl text-balance text-xl font-semibold tracking-[-0.02em] text-[#F5F4F0] md:text-2xl">
-              Representative engagements — not a link farm.
+              A cinematic proof showcase with live signal.
             </h2>
           </div>
           <Link
@@ -53,76 +67,94 @@ export function HomepageProofRail({ className }: HomepageProofRailProps) {
           </Link>
         </div>
 
-        <ul
-          className={cn(
-            "flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-pl-4 scroll-pr-4 pb-3 [-ms-overflow-style:none] [scrollbar-width:none]",
-            "md:grid md:grid-cols-6 md:gap-4 md:overflow-visible md:scroll-pl-0 md:scroll-pr-0 md:pb-0",
-            "[&::-webkit-scrollbar]:hidden"
-          )}
-        >
-          {studies.map((study, index) => (
-            <li
-              key={study.slug}
-              className={cn(
-                "min-w-[min(88vw,300px)] shrink-0 snap-center sm:min-w-[min(72vw,280px)] md:min-w-0",
-                index === 0 && "md:col-span-2"
-              )}
-            >
-              <RailCard study={study} featured={index === 0} />
-            </li>
-          ))}
-        </ul>
+        <div className="relative overflow-hidden rounded-[2rem] border border-[#F5F4F0]/12 bg-[#101015]">
+          <div className="absolute inset-0">
+            {activeImage ? (
+              <CloudinaryImage
+                publicId={activeImage}
+                alt={activeStudy.clientName}
+                width={1600}
+                height={900}
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="h-full w-full object-cover opacity-55 transition-opacity duration-700"
+                transforms="e_blur:180"
+              />
+            ) : null}
+            <div className="absolute inset-0 bg-linear-to-r from-[#0C0C0E]/92 via-[#0C0C0E]/72 to-[#0C0C0E]/90" />
+            <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_10%_10%,rgba(15,217,200,0.18),transparent_50%)]" />
+          </div>
+
+          <div className="relative z-10 grid min-h-[460px] items-end gap-6 px-6 py-8 md:min-h-[540px] md:grid-cols-[1.15fr_0.85fr] md:px-10 md:py-10">
+            <div className="max-w-xl">
+              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#F5F4F0]/50">Featured engagement</p>
+              <h3 className="font-display mt-3 text-balance text-2xl font-semibold tracking-[-0.02em] text-[#F5F4F0] md:text-4xl">
+                {activeStudy.clientName}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#F5F4F0]/70 md:text-base">{activeStudy.heroSubhead}</p>
+              <p className="mt-5 text-lg font-semibold text-[#0FD9C8] md:text-2xl">{activeStudy.outcomeHeadline}</p>
+              <p className="mt-3 max-w-lg text-sm leading-relaxed text-[#F5F4F0]/72">{activeStudy.resultSummary}</p>
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <Link
+                  href={`/proof/${activeStudy.slug}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-[#F05A28]/50 bg-[#F05A28]/12 px-5 py-2.5 text-sm font-medium text-[#F5F4F0] transition-colors hover:bg-[#F05A28]/22"
+                >
+                  Read proof
+                  <span aria-hidden>→</span>
+                </Link>
+                <p className="text-xs uppercase tracking-[0.13em] text-[#F5F4F0]/48">{activeStudy.clientContext}</p>
+              </div>
+            </div>
+
+            <div className="flex items-end justify-start gap-2 md:justify-end">
+              <button
+                type="button"
+                onClick={() => setActiveIndex((current) => (current - 1 + studies.length) % studies.length)}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#F5F4F0]/20 bg-[#0f1015]/70 text-[#F5F4F0]/78 transition-colors hover:border-[#F5F4F0]/35 hover:text-[#F5F4F0]"
+                aria-label="Previous proof"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveIndex((current) => (current + 1) % studies.length)}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#F5F4F0]/20 bg-[#0f1015]/70 text-[#F5F4F0]/78 transition-colors hover:border-[#F5F4F0]/35 hover:text-[#F5F4F0]"
+                aria-label="Next proof"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="relative z-10 border-t border-[#F5F4F0]/10 bg-[#0d0e13]/88 px-4 py-4 md:px-6">
+            <ul className="grid gap-2 md:grid-cols-5">
+              {studies.map((study, index) => (
+                <li key={study.slug}>
+                  <button
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    className={cn(
+                      "w-full rounded-xl border px-3 py-3 text-left transition-colors",
+                      index === activeIndex
+                        ? "border-[#F05A28]/55 bg-[#F05A28]/12"
+                        : "border-[#F5F4F0]/10 bg-[#12131a]/70 hover:border-[#F5F4F0]/20"
+                    )}
+                  >
+                    <p className="line-clamp-1 text-xs font-semibold text-[#F5F4F0]">{study.clientName}</p>
+                    <p
+                      className={cn(
+                        "mt-1 line-clamp-1 text-[11px]",
+                        index === activeIndex ? "text-[#0FD9C8]" : "text-[#F5F4F0]/52"
+                      )}
+                    >
+                      {study.outcomeHeadline}
+                    </p>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
-  );
-}
-
-function RailCard({ study, featured }: { study: CaseStudy; featured: boolean }) {
-  return (
-    <Link
-      href={`/proof/${study.slug}`}
-      className={cn(
-        "group relative isolate block h-full overflow-hidden rounded-2xl border border-[#F5F4F0]/09 bg-[#12121a] p-5 shadow-[0_16px_48px_rgba(0,0,0,0.38)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-        "before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(90%_70%_at_0%_0%,rgba(240,90,40,0.09),transparent_55%)] before:opacity-90 before:transition-opacity before:duration-300 group-hover:before:opacity-100",
-        "motion-safe:hover:scale-[1.02] motion-safe:hover:border-[#F5F4F0]/14 motion-safe:hover:shadow-[0_22px_56px_rgba(0,0,0,0.48),0_0_0_1px_rgba(240,90,40,0.06)]",
-        featured && "md:rounded-3xl md:p-7 md:before:rounded-3xl md:shadow-[0_20px_56px_rgba(0,0,0,0.42)]"
-      )}
-    >
-      {/* Accent line — width grows on hover */}
-      <span
-        className="block h-0.5 w-8 rounded-full bg-gradient-to-r from-[#F05A28]/80 to-[#F05A28]/15 transition-[width,opacity] duration-300 ease-out group-hover:w-14 group-hover:opacity-100 md:group-hover:w-20"
-        aria-hidden
-      />
-      <span
-        className={cn(
-          "mt-4 block font-display font-semibold tracking-[-0.02em] text-[#F5F4F0] transition-colors duration-200 group-hover:text-[#F5F4F0]",
-          featured ? "text-lg leading-snug md:text-xl" : "text-base leading-snug"
-        )}
-      >
-        {study.clientName}
-      </span>
-      <span
-        className={cn(
-          "mt-2 block text-pretty font-medium leading-snug text-[#F5F4F0]/52 transition-colors duration-200 group-hover:text-[#F5F4F0]/68 line-clamp-2",
-          featured ? "text-sm md:text-[0.9375rem]" : "text-xs md:text-sm"
-        )}
-      >
-        {study.heroSubhead}
-      </span>
-      <span
-        className={cn(
-          "mt-4 block border-t border-[#F5F4F0]/08 pt-3 font-mono text-[0.7rem] font-semibold leading-snug tracking-wide text-[#0FD9C8]/88 md:text-xs",
-          featured && "md:pt-4 md:text-[0.8125rem]"
-        )}
-      >
-        {study.outcomeHeadline}
-      </span>
-      <span className="mt-3 flex items-center gap-1 text-xs font-medium text-[#F05A28]/90 transition-[gap,color] duration-200 group-hover:gap-1.5 group-hover:text-[#ff6d40]">
-        Read proof
-        <span aria-hidden className="translate-x-0 transition-transform duration-200 group-hover:translate-x-0.5">
-          →
-        </span>
-      </span>
-    </Link>
   );
 }

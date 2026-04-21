@@ -1,7 +1,7 @@
-import { Gauge, Layers2, LineChart, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { Check } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const OUTCOME_ICONS: LucideIcon[] = [Target, LineChart, ShieldCheck, Layers2, Gauge, Sparkles];
+const OUTCOME_ICONS: LucideIcon[] = [Check];
 
 type ServiceOutcomesGridProps = {
   outcomes: string[];
@@ -23,25 +23,17 @@ export function ServiceOutcomesGrid({ outcomes, serviceTitle }: ServiceOutcomesG
         </p>
       </div>
 
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-8 grid gap-3 lg:grid-cols-3">
         {outcomes.map((outcome, index) => {
           const Icon = OUTCOME_ICONS[index % OUTCOME_ICONS.length];
           return (
             <li key={outcome}>
-              <article className="panel-obsidian relative h-full overflow-hidden rounded-3xl p-5 md:p-6">
-                <span
-                  className="pointer-events-none absolute left-0 top-0 h-full w-1 rounded-l-3xl bg-linear-to-b from-[#F05A28]/55 via-[#0FD9C8]/25 to-transparent"
-                  aria-hidden
-                />
-                <div className="relative pl-4">
-                  <div className="flex items-start gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#F5F4F0]/10 bg-[#12121a]/80 text-[#F05A28]/88">
-                      <Icon className="h-[1.125rem] w-[1.125rem]" strokeWidth={1.65} aria-hidden />
-                    </span>
-                    <p className="pt-1 text-sm font-medium leading-snug text-[#F5F4F0]/82 md:text-[0.9375rem] md:leading-snug">
-                      {outcome}
-                    </p>
-                  </div>
+              <article className="h-full rounded-2xl border border-[#F5F4F0]/10 bg-[#101017]/50 p-5">
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#0FD9C8]/35 bg-[#0FD9C8]/10 text-[#0FD9C8]">
+                    <Icon className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden />
+                  </span>
+                  <p className="text-sm leading-relaxed text-[#F5F4F0]/80 md:text-[0.95rem]">{outcome}</p>
                 </div>
               </article>
             </li>

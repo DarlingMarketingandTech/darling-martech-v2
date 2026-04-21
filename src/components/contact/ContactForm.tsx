@@ -20,6 +20,7 @@ type ContactFormProps = {
   formSectionLabel: string;
   budgetOptions: BudgetOption[];
   budgetIntentLabel: string;
+  fitExpectations: string[];
 };
 
 export function ContactForm({
@@ -28,6 +29,7 @@ export function ContactForm({
   formSectionLabel,
   budgetOptions,
   budgetIntentLabel,
+  fitExpectations,
 }: ContactFormProps) {
   const selected = useMemo(
     () => intents.find((intent) => intent.label === selectedIntent) ?? intents[0],
@@ -108,6 +110,16 @@ export function ContactForm({
   return (
     <form id="contact-form" className="surface-card rounded-4xl p-7 md:p-8" onSubmit={handleSubmit}>
       <p className="text-sm text-[#F5F4F0]/55">{formSectionLabel}</p>
+      <div className="mt-4 rounded-2xl border border-[#F5F4F0]/12 bg-[#13131A]/45 px-4 py-4">
+        <p className="meta-label text-[#0FD9C8]">Fit and response expectations</p>
+        <ul className="mt-3 space-y-2">
+          {fitExpectations.map((item) => (
+            <li key={item} className="text-sm leading-relaxed text-[#F5F4F0]/68">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {status === "error" && responseMessage ? (
         <p className="mt-4 text-sm text-[#F05A28]" role="alert">
@@ -160,6 +172,9 @@ export function ContactForm({
               </option>
             ))}
           </select>
+          <span className="text-xs text-[#F5F4F0]/45">
+            Estimate only. This is used for scoping context, not a commitment.
+          </span>
         </label>
       ) : null}
 
@@ -176,6 +191,17 @@ export function ContactForm({
       </label>
 
       <div className="mt-6">
+        <div className="mb-3 flex flex-wrap gap-2">
+          <span className="rounded-full border border-[#F5F4F0]/12 bg-[#13131A]/60 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-[#F5F4F0]/72">
+            No obligation
+          </span>
+          <span className="rounded-full border border-[#F5F4F0]/12 bg-[#13131A]/60 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-[#F5F4F0]/72">
+            Human reply
+          </span>
+          <span className="rounded-full border border-[#F5F4F0]/12 bg-[#13131A]/60 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-[#F5F4F0]/72">
+            1 business day
+          </span>
+        </div>
         <button
           type="submit"
           disabled={status === "submitting"}

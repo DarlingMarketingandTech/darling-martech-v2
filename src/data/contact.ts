@@ -70,6 +70,16 @@ export const contactPageData = {
       },
     ],
   },
+  fitExpectations: [
+    "Best fit: teams that want system-level fixes, not isolated tactics.",
+    "If it's not a fit, you'll get a direct answer and an alternative path.",
+    "No hand-off queue: replies come directly from Jacob.",
+  ],
+  recentOutcomes: [
+    "B2B growth stack triage call -> roadmap in 72 hours -> implementation decision same week.",
+    "Healthcare conversion breakdown -> intake and follow-up fixes prioritized before paid media spend.",
+    "Second-opinion request on vendor plan -> avoided low-leverage rebuild and focused on pipeline blockers.",
+  ],
   alternatives: [
     {
       title: "Run a free diagnostic first",

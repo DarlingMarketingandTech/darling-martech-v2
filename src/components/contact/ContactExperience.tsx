@@ -38,6 +38,7 @@ export function ContactExperience() {
             formSectionLabel={contactPageData.formSectionLabel}
             budgetOptions={contactPageData.budgetOptions}
             budgetIntentLabel={contactPageData.budgetIntentLabel}
+            fitExpectations={contactPageData.fitExpectations}
           />
         </div>
         <div className="grid gap-6">
@@ -45,6 +46,16 @@ export function ContactExperience() {
             eyebrow={contactPageData.whatHappensNext.eyebrow}
             steps={contactPageData.whatHappensNext.steps}
           />
+          <article className="surface-card rounded-4xl p-7">
+            <p className="text-sm uppercase tracking-[0.24em] text-[#0FD9C8]">Recent inquiry outcomes</p>
+            <ul className="mt-4 space-y-3">
+              {contactPageData.recentOutcomes.map((item) => (
+                <li key={item} className="rounded-2xl border border-[#F5F4F0]/10 bg-[#0C0C0E]/28 px-4 py-3 text-sm leading-relaxed text-[#F5F4F0]/72">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
           <DirectContactBlock />
         </div>
       </div>

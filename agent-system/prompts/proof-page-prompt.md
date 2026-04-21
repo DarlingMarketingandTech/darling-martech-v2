@@ -32,3 +32,6 @@ Required output (scannable, results-first):
 Asset note:
 - If proof needs new visuals, switch to `asset_system` and use `asset-brief-prompt.md` and/or `component-visual-prompt.md`.
 
+Homepage proof rail:
+- Homepage slider copy follows the same proof-first sequence (stakes → pre-state → intervention → outcomes → principle → CTAs) in `src/data/homepage-proof-rail.ts` — no client naming in rail UI; full narratives stay on `/proof/[slug]`.
+

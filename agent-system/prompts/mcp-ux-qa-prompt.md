@@ -7,7 +7,7 @@ This prompt does **not** change product strategy, IA, or copy. It is a QA + evid
 Before running:
 - Confirm the active task profile and scope (only test pages that were touched).
 - Confirm which MCP tools are available in the current environment.
-- If MCP tools are unavailable, fall back to: `pnpm build` + manual QA checklist output.
+- If MCP tools are unavailable, fall back to:  manual QA checklist output.
 
 Targets (declare explicitly):
 1. Routes to verify (max 5 per pass).

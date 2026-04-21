@@ -13,14 +13,14 @@ export function ProofIndexAmbient() {
       aria-hidden
     >
       <CloudinaryImage
-        publicId="curated/proof-index/strategic-alignment-hero"
+        publicId="curated/regenerated/storytelling-2026-04/network-dataflow-02"
         alt=""
         width={1024}
         height={1024}
         sizes="100vw"
         transforms="e_blur:2200"
         cloudinaryQuality="auto"
-        className="h-full w-full object-cover object-[48%_44%]"
+        className="ambient-visual-drift h-full w-full object-cover object-[48%_44%]"
       />
     </div>
   );

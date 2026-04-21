@@ -26,10 +26,10 @@ export const homepageData = {
     secondaryCta: { label: CTA_LABELS.bookCall, href: CTA_LINKS.bookCall },
   },
   proofBar: [
-    { value: "+212%", label: "qualified leads — Graston Technique®" },
-    { value: "+45%", label: "patient growth over 3 years — Pike Medical Consultants" },
-    { value: "95%", label: "less manual overhead — Graston Growth Engine" },
-    { value: "4.9★", label: "local trust conversion — Russell Painting" },
+    { value: "+212%", label: "qualified leads — CRM + lifecycle automation rebuild" },
+    { value: "+45%", label: "patient pipeline — multi-year intake + CRM alignment" },
+    { value: "95%", label: "manual overhead removed — stack consolidation + workflows" },
+    { value: "4.9★", label: "local trust conversion — reputation + request flow system" },
     { value: "15+", label: "years · Healthcare · Legal · Finance · SaaS · B2B" },
   ],
   diagnosticBand: {

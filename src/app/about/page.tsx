@@ -49,12 +49,12 @@ export default function AboutPage() {
         />
         <div className="mt-8 overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]">
           <CloudinaryImage
-            publicId="curated/about/system-pipeline-visualization"
-            alt="System pipeline visualization generated from Stitch and served via Cloudinary."
+            publicId="curated/regenerated/storytelling-2026-04/team-strategy-02"
+            alt="Executive team planning growth strategy over shared business metrics."
             width={1376}
             height={768}
             sizes="(max-width: 1024px) 100vw, 1200px"
-            className="h-auto w-full object-cover"
+            className="ambient-visual-drift h-auto w-full object-cover"
           />
         </div>
       </BandSection>

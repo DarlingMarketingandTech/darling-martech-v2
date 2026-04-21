@@ -34,7 +34,7 @@ export function SiteHeader() {
         <div
           className={cn(
             "mx-auto max-w-7xl rounded-3xl border transition-[border-color,box-shadow,background-color] duration-300 ease-out",
-            "border-[#F5F4F0]/[0.06] bg-[#0C0C0E]/55 shadow-[inset_0_1px_0_rgba(245,244,240,0.04)] backdrop-blur-md",
+            "border-[#F5F4F0]/6 bg-[#0C0C0E]/55 shadow-[inset_0_1px_0_rgba(245,244,240,0.04)] backdrop-blur-md",
             isScrolled &&
               "header-sheen border-[#2A2A2E] shadow-[0_20px_80px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(245,244,240,0.05)] backdrop-blur-xl"
           )}
@@ -66,7 +66,7 @@ export function SiteHeader() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "rounded-full px-3 py-2 text-sm text-[#F5F4F0]/72 transition-colors duration-200 hover:bg-[#F5F4F0]/[0.04] hover:text-[#F5F4F0]",
+                      "rounded-full px-3 py-2 text-sm text-[#F5F4F0]/72 transition-colors duration-200 hover:bg-[#F5F4F0]/4 hover:text-[#F5F4F0]",
                       active && "bg-[#F05A28]/10 font-medium text-[#F05A28] hover:bg-[#F05A28]/12 hover:text-[#F05A28]"
                     )}
                   >

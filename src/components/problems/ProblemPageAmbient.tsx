@@ -3,7 +3,7 @@
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 
 /** Neutral wash when a problem has no hero asset (matches proof index fallback tone). */
-const FALLBACK_PUBLIC_ID = "curated/proof-index/strategic-alignment-hero";
+const FALLBACK_PUBLIC_ID = "curated/regenerated/storytelling-2026-04/network-dataflow-02";
 
 type ProblemPageAmbientProps = {
   imagePublicId?: string;
@@ -29,7 +29,7 @@ export function ProblemPageAmbient({ imagePublicId }: ProblemPageAmbientProps) {
         sizes="100vw"
         transforms="e_blur:2200"
         cloudinaryQuality="auto"
-        className="h-full w-full object-cover object-[48%_42%]"
+        className="ambient-visual-drift h-full w-full object-cover object-[48%_42%]"
       />
     </div>
   );

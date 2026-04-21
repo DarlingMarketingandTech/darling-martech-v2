@@ -485,8 +485,27 @@ select {
   animation: service-hero-visual-drift 32s ease-in-out infinite;
 }
 
+/* Ambient visual plates: micro-movement to avoid static/template feel. */
+@keyframes ambient-visual-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0.4%, -0.25%, 0) scale(1.01);
+  }
+}
+
+.ambient-visual-drift {
+  animation: ambient-visual-drift 36s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .service-hero-visual-drift {
+    animation: none;
+  }
+
+  .ambient-visual-drift {
     animation: none;
   }
 }

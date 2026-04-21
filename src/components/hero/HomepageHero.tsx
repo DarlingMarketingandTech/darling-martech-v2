@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { HomeHeroSignalStrip } from "@/components/hero/HomeHeroSignalStrip";
 import { HomepageHeroPrimaryCta } from "@/components/hero/HomepageHeroPrimaryCta";
 import { HomepageHeroVisual } from "@/components/hero/HomepageHeroVisual";
+import { HomepageHeroTextureVideo } from "@/components/hero/HomepageHeroTextureVideo";
+import { HomepageHeroTerminalLayer } from "@/components/hero/HomepageHeroTerminalLayer";
 import { homepageData } from "@/data/homepage";
 import { CTA_LABELS, CTA_LINKS } from "@/lib/cta";
 import styles from "@/components/hero/homepage-hero-v2.module.css";
@@ -15,6 +17,8 @@ const HERO_SIGNAL_METRICS = homepageData.proofBar.slice(0, 3);
 export function HomepageHero() {
   return (
     <section className="hero-mesh grain-mask relative overflow-hidden rounded-[2.5rem] border border-[#F5F4F0]/8">
+      <HomepageHeroTextureVideo />
+      <HomepageHeroTerminalLayer />
       <div className="relative z-10 flex flex-col">
         <div className="grid grid-cols-1 gap-12 px-6 py-20 md:px-10 md:py-24 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:items-center lg:gap-10 lg:py-24 xl:gap-14 xl:px-12 xl:py-28">
           <div className="relative max-w-[700px] text-left lg:max-w-none lg:pr-4">
@@ -77,7 +81,7 @@ export function HomepageHero() {
             )}
           >
             <div
-              className="pointer-events-none absolute -inset-[1px] rounded-[1.85rem] bg-[linear-gradient(135deg,rgba(240,90,40,0.22)_0%,rgba(245,244,240,0.06)_42%,rgba(15,217,200,0.12)_100%)] opacity-90 sm:rounded-[2.05rem] lg:rounded-l-[2.05rem] lg:rounded-r-none"
+              className="pointer-events-none absolute -inset-px rounded-[1.85rem] bg-[linear-gradient(135deg,rgba(240,90,40,0.22)_0%,rgba(245,244,240,0.06)_42%,rgba(15,217,200,0.12)_100%)] opacity-90 sm:rounded-[2.05rem] lg:rounded-l-[2.05rem] lg:rounded-r-none"
               aria-hidden
             />
             <div
@@ -87,11 +91,11 @@ export function HomepageHero() {
               )}
             >
               <span
-                className="pointer-events-none absolute left-3 top-3 z-20 hidden h-6 w-px bg-gradient-to-b from-[#F05A28]/70 to-transparent lg:block"
+                className="pointer-events-none absolute left-3 top-3 z-20 hidden h-6 w-px bg-linear-to-b from-[#F05A28]/70 to-transparent lg:block"
                 aria-hidden
               />
               <span
-                className="pointer-events-none absolute left-3 top-3 z-20 hidden h-px w-6 bg-gradient-to-r from-[#F05A28]/70 to-transparent lg:block"
+                className="pointer-events-none absolute left-3 top-3 z-20 hidden h-px w-6 bg-linear-to-r from-[#F05A28]/70 to-transparent lg:block"
                 aria-hidden
               />
               <HomepageHeroVisual />

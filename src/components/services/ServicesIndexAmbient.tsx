@@ -13,14 +13,14 @@ export function ServicesIndexAmbient() {
       aria-hidden
     >
       <CloudinaryImage
-        publicId="curated/about/system-pipeline-visualization"
+        publicId="curated/regenerated/storytelling-2026-04/team-strategy-02"
         alt=""
         width={1376}
         height={768}
         sizes="100vw"
         transforms="e_blur:2200"
         cloudinaryQuality="auto"
-        className="h-full w-full object-cover object-[54%_40%]"
+        className="ambient-visual-drift h-full w-full object-cover object-[54%_40%]"
       />
     </div>
   );

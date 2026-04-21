@@ -39,6 +39,12 @@ export const appEnv = {
   supabaseAnonKey: readOptionalEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "SUPABASE_ANON_KEY"),
   supabaseServiceRoleKey: readOptionalEnv("SUPABASE_SERVICE_ROLE_KEY"),
   plausibleDomain: readOptionalEnv("NEXT_PUBLIC_PLAUSIBLE_DOMAIN"),
+  calOauthClientId: readOptionalEnv("CAL_OAUTH_CLIENT_ID", "NEXT_PUBLIC_CAL_OAUTH_CLIENT_ID"),
+  calOauthRedirectUri: readOptionalEnv("CAL_OAUTH_REDIRECT_URI"),
+  calOauthRedirectUriProd: readOptionalEnv("CAL_OAUTH_REDIRECT_URI_PROD"),
+  calOauthAuthorizeUrl: readOptionalEnv("CAL_OAUTH_AUTHORIZE_URL") ?? "https://app.cal.com/oauth/authorize",
+  calOauthScope: readOptionalEnv("CAL_OAUTH_SCOPE") ?? "read_bookings read_availability read_event_types",
+  appBaseUrl: readOptionalEnv("APP_BASE_URL"),
 } as const;
 
 export function getMissingEnvVars(envMap: Record<string, OptionalEnvValue>) {

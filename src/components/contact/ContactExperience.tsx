@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { contactPageData } from "@/data/contact";
 import { FormbricksSurvey } from "@/components/contact/FormbricksSurvey";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -32,14 +32,28 @@ export function ContactExperience() {
             </div>
           </div>
           <FormbricksSurvey />
-          <ContactForm
-            intents={contactPageData.intents}
-            selectedIntent={selectedIntent}
-            formSectionLabel={contactPageData.formSectionLabel}
-            budgetOptions={contactPageData.budgetOptions}
-            budgetIntentLabel={contactPageData.budgetIntentLabel}
-            fitExpectations={contactPageData.fitExpectations}
-          />
+          <Suspense
+            fallback={
+              <div
+                className="surface-card rounded-4xl p-7 md:p-8"
+                aria-busy="true"
+                aria-label="Loading contact form"
+              >
+                <div className="h-4 w-40 animate-pulse rounded bg-[#F5F4F0]/10" />
+                <div className="mt-6 h-32 animate-pulse rounded-2xl bg-[#F5F4F0]/6" />
+                <div className="mt-4 h-24 animate-pulse rounded-2xl bg-[#F5F4F0]/6" />
+              </div>
+            }
+          >
+            <ContactForm
+              intents={contactPageData.intents}
+              selectedIntent={selectedIntent}
+              formSectionLabel={contactPageData.formSectionLabel}
+              budgetOptions={contactPageData.budgetOptions}
+              budgetIntentLabel={contactPageData.budgetIntentLabel}
+              fitExpectations={contactPageData.fitExpectations}
+            />
+          </Suspense>
         </div>
         <div className="grid gap-6">
           <WhatHappensNext

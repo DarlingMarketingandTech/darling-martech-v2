@@ -2,13 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { getHeroTextureVideoSrc } from "@/lib/hero-ambient-video";
 import styles from "@/components/hero/homepage-hero-v2.module.css";
 
-const rawA = process.env.NEXT_PUBLIC_HERO_TEXTURE_VIDEO_A_URL?.trim();
-const rawB = process.env.NEXT_PUBLIC_HERO_TEXTURE_VIDEO_B_URL?.trim();
-/** Prefer Cloudinary delivery URLs in prod; local `/public/video` for dev fallback. */
-const VIDEO_SRC_A = rawA && rawA.length > 0 ? rawA : "/video/texture-lab-hero.webm";
-const VIDEO_SRC_B = rawB && rawB.length > 0 ? rawB : "/video/texture-lab-hero-b.webm";
+const VIDEO_SRC_A = getHeroTextureVideoSrc("a");
+const VIDEO_SRC_B = getHeroTextureVideoSrc("b");
 
 /**
  * Dual “texture lab” stack under `hero-mesh` + FaultyTerminal:

@@ -59,14 +59,10 @@ async function main() {
     console.log(`  secure_url: ${res.secure_url}\n`);
   }
 
-  console.log("Add to .env.local (then rebuild / restart dev):\n");
   console.log(
-    `NEXT_PUBLIC_HERO_TEXTURE_VIDEO_A_URL=https://res.cloudinary.com/${cloudName}/video/upload/curated/homepage/texture-lab-hero-a.webm`
+    "\nDone. The app builds video URLs from NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME + fixed public_ids — no extra env vars."
   );
-  console.log(
-    `NEXT_PUBLIC_HERO_TEXTURE_VIDEO_B_URL=https://res.cloudinary.com/${cloudName}/video/upload/curated/homepage/texture-lab-hero-b.webm`
-  );
-  console.log("\n(Exact URLs may include a version segment; prefer the secure_url lines printed above.)");
+  console.log("If cloud name is unset locally, `/public/video/*.webm` fallbacks are used instead.\n");
 }
 
 main().catch((err) => {

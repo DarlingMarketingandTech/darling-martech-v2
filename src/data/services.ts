@@ -434,3 +434,18 @@ export function getServicesByCluster(clusterId: ServiceDisplayClusterId): Servic
     .map((slug) => serviceBySlug.get(slug))
     .filter((service): service is Service => Boolean(service));
 }
+
+/** Which implementation lane (`/services` index) lists this service, if any. */
+export function getDisplayClusterIdForServiceSlug(slug: ServiceCluster): ServiceDisplayClusterId | null {
+  for (const id of SERVICE_DISPLAY_CLUSTER_ORDER) {
+    if (SERVICE_DISPLAY_CLUSTERS[id].serviceSlugs.includes(slug)) {
+      return id;
+    }
+  }
+  return null;
+}
+
+/** Hash fragment for the lane section on `/services` (matches `services/page.tsx` ids). */
+export function getServicesIndexLaneHash(clusterId: ServiceDisplayClusterId): string {
+  return clusterId === "foundation" ? "lane-foundation" : `lane-${clusterId}`;
+}

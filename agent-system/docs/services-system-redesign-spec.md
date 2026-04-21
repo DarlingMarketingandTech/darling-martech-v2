@@ -38,6 +38,19 @@ The redesigned page should:
 - use evaluation-stage CTA logic
 - feel like a system map, not an agency list
 
+## Selectivity rules (prevent relationship overload)
+
+`/services` is an implementation-layer page, but it still must remain selective.
+
+Hard constraints:
+- The page must primarily showcase **the service system** (lanes + how work happens).
+- Related surfaces (problems/proof/tools) support the lanes but must not become a “relationship map.”
+- Prefer “See more” routing to hubs over expanding the page.
+
+Default caps (see `agent-system/context/relationship_display_limits.md`):
+- Per lane: **max 2 proofs** and **max 1 tool** shown inline.
+- Keep problem linkage conceptual (“this lane solves these failure layers”) unless a specific curated problem link is essential.
+
 ## Proposed Architecture
 
 ### 1. Hero
@@ -144,6 +157,7 @@ Each lane should include:
 - where the visitor can see proof
 
 Do not rely only on passive “related proof” blocks beneath cards.
+Do not list every connected proof item.
 
 ### 6. CTA Layer
 The bottom section should focus on evaluation-stage actions.

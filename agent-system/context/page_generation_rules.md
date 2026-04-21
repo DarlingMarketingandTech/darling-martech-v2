@@ -22,11 +22,13 @@ This file exists to stop generic page generation and force stronger strategic al
 ## Required Inputs Before Generating a Page
 The agent should identify:
 - page type
+- primary page object (what the page is *for*)
 - primary buyer state
 - trust stage of the page
 - primary cluster
 - supporting proof path
 - recommended CTA pattern
+ - relationship display plan (what is shown vs routed to hubs)
 
 If those are not clear, the page plan is incomplete.
 
@@ -118,6 +120,7 @@ Questions to answer:
 Every page should choose one primary CTA based on trust stage and buyer state.
 
 Optional secondary CTAs are allowed only if they support progression cleanly.
+Default cap: **one primary + at most one secondary CTA** (see `relationship_display_limits.md`).
 
 ## Failure Patterns to Block
 - page sounds like a generic full-service agency

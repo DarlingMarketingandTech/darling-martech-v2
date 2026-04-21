@@ -12,11 +12,21 @@ const STRATEGIC_FILE_MAP = {
   problemServiceMapping: path.join("context", "problem_service_mapping.md"),
   trustLadderCtas: path.join("context", "trust_ladder_ctas.md"),
   pageGenerationRules: path.join("context", "page_generation_rules.md"),
+  pagePurposeBoundaries: path.join("context", "page-purpose-boundaries.md"),
+  relationshipDisplayLimits: path.join("context", "relationship_display_limits.md"),
+  proofStorytellingRules: path.join("context", "proof_storytelling_rules.md"),
 };
 
 const STRATEGIC_CORE = ["strategicStandards", "positioningRules", "buyerPsychology", "systemFoundationPath"];
 const STRATEGIC_SCORING = ["strategicScorecard"];
-const STRATEGIC_PAGE_FLOW = ["pageGenerationRules", "trustLadderCtas", "problemServiceMapping"];
+const STRATEGIC_PAGE_FLOW = [
+  "pagePurposeBoundaries",
+  "relationshipDisplayLimits",
+  "proofStorytellingRules",
+  "pageGenerationRules",
+  "trustLadderCtas",
+  "problemServiceMapping",
+];
 const STRATEGIC_ARCH = ["serviceClusters", "problemServiceMapping", "systemFoundationPath"];
 
 const MODE_STRATEGIC_BUNDLES = {
@@ -33,7 +43,13 @@ const MODE_STRATEGIC_BUNDLES = {
 
 const PROMPT_KEYWORD_BUNDLES = [
   {
-    bundle: ["pageGenerationRules", "trustLadderCtas", "problemServiceMapping"],
+    bundle: [
+      "pagePurposeBoundaries",
+      "relationshipDisplayLimits",
+      "pageGenerationRules",
+      "trustLadderCtas",
+      "problemServiceMapping",
+    ],
     triggers: ["page", "homepage", "rewrite", "ia", "navigation", "structure"],
   },
   {
@@ -43,6 +59,10 @@ const PROMPT_KEYWORD_BUNDLES = [
   {
     bundle: ["trustLadderCtas", "buyerPsychology", "positioningRules"],
     triggers: ["cta", "trust", "qualify", "buyer", "segmentation"],
+  },
+  {
+    bundle: ["proofStorytellingRules", "relationshipDisplayLimits", "pagePurposeBoundaries"],
+    triggers: ["proof", "project", "case study", "work"],
   },
   {
     bundle: ["positioningRules", "strategicStandards", "buyerPsychology"],

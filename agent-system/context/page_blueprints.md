@@ -9,6 +9,7 @@ Define preferred narrative and section sequencing for core Darling Martech page 
 - Keep sections fewer and stronger; avoid thin filler bands.
 - Ensure each major section advances a single narrative job.
 - Match CTA intent to trust stage.
+- Keep “related” surfaces small and curated (see `relationship_display_limits.md`).
 
 ## Home Blueprint
 1. Hero: problem pressure + strategic positioning + primary CTA.

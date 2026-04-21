@@ -4,7 +4,7 @@
 Reduce prompt churn by making each implementation batch follow the same packet, build order, and verification standard.
 
 ## Standard Build Order
-1. Read `CLAUDE.md` and the relevant copy docs in `docs/`.
+1. Read `AGENT_SYSTEM.md` + the relevant `docs/agent/*` guidance, then the relevant reference/copy docs in `docs/`.
 2. Update `src/types/index.ts` only if the data contract is missing something.
 3. Create or update matching `src/data/*` modules first.
 4. Build the route or component against typed data exports.
@@ -38,10 +38,12 @@ Verification required:
 - Agent 3: verification, browser checks, and regression review.
 
 ## MCP Usage
-- `cursor-ide-browser`: local and preview route validation.
-- `plugin-vercel-vercel`: deployment and build log inspection.
+- Repo truth first: use `src/` + `src/data/` + `docs/agent/*` before reaching for external inspection tools.
+- `cursor-ide-browser`: local and preview route validation (only when a visible surface changed).
+- `plugin-vercel-vercel`: deployment and build log inspection (only when deployment is in-scope).
 - `user-github`: PR review and status once collaboration begins.
-- `plugin-cloudinary-cloudinary-analysis`: authenticate before media-heavy work.
+- `plugin-cloudinary-cloudinary-analysis`: authenticate only in media-heavy work **after** the asset brief defines purpose/placement/size/style/naming/mapping.
+- Firecrawl/browser scraping: only when the task explicitly needs live reference inspection; do not browse “because you can.”
 
 ## Phase 4 — Operator checklist (n8n · Twenty · Loops)
 

@@ -1,5 +1,7 @@
 # 3D asset sources — Darling MarTech
 
+**Status:** Reference-only. Do not start asset sourcing/browsing unless the task is explicitly in **`asset_system` mode** and an asset brief exists (purpose, placement, size, style, naming, mapping).
+
 Self-hosted GLB files live under **`/public/models/`**. Optional textures live under **`/public/textures/`**. Load in R3F with `useGLTF("/models/your-file.glb")` from `@react-three/drei` (client components only; lazy-load).
 
 ## Current layout
@@ -39,4 +41,4 @@ Self-hosted GLB files live under **`/public/models/`**. Optional textures live u
 1. Pick a source and confirm **license + attribution** requirements.
 2. Download `.glb` (or use a Spline-hosted scene URL).
 3. Place under `public/models/` (or wire Spline by URL).
-4. Load in a **client** component; keep SSR off for heavy viewers (`next/dynamic` with `ssr: false` when appropriate).
+4. Load in a **client** component; keep visuals route-scoped and lazy-loaded.

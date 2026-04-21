@@ -25,6 +25,7 @@ This file should be used when planning or auditing:
 - tools and audits should be visible on low-trust pages
 - proof and process should support mid-trust pages
 - direct conversation CTAs should be strongest on high-trust pages
+- default to **one primary CTA** and **at most one secondary CTA** (see `relationship_display_limits.md`)
 
 ## CTA Patterns by Stage
 
@@ -142,32 +143,28 @@ Good wording:
 ## Page-Type Guidance
 ### Homepage
 Should normally offer:
-- one browse/diagnose CTA
-- one evaluate/ready CTA
+- one primary CTA (browse/diagnose)
+- one secondary CTA (evaluate/ready)
 
 ### Problem Pages
 Should normally offer:
-- one diagnose CTA
-- one proof/learn CTA
-- optional evaluate CTA lower on the page
+- one primary CTA (diagnose)
+- one secondary CTA (proof *or* service direction), not both by default
 
 ### Service Pages
 Should normally offer:
-- one evaluate CTA
-- one proof/learn CTA
-- one diagnose CTA if the page is high-friction or early-stage
+- one primary CTA (evaluate)
+- one secondary CTA (proof/learn)
 
 ### Proof Pages
 Should normally offer:
-- one learn/evaluate CTA
-- one service or process bridge
-- optional lower-friction tool CTA for visitors not ready yet
+- one primary CTA (learn/evaluate)
+- one secondary bridge (service/process *or* tool), not both by default
 
 ### Resource Pages
 Should normally offer:
-- one learn CTA
-- one diagnose CTA
-- one lightweight subscription / follow-up CTA
+- one primary CTA (learn)
+- optional one secondary CTA (diagnose *or* subscription), not both by default
 
 ## Failure Modes
 Flag CTA strategy when:

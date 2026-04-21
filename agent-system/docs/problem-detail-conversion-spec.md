@@ -13,6 +13,8 @@ Each problem page must:
 - show how the system is fixed
 - route the visitor to the correct next step
 
+This is a **decision page**, not an encyclopedia page.
+
 ## Required Structure
 
 ### 1. Hero
@@ -50,9 +52,12 @@ Explain:
 
 ### 6. Next Best Step Module
 Must include:
-- diagnose (tool)
-- learn (proof)
-- evaluate (service direction)
+- **one** diagnose action (tool) as the primary CTA
+- **at most two** supporting paths total across learn + evaluate
+
+Default caps (see `agent-system/context/relationship_display_limits.md`):
+- proofs surfaced here: **max 2**
+- services surfaced here: **max 1**
 
 This is the core routing mechanism.
 

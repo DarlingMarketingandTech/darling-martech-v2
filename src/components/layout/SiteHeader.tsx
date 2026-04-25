@@ -66,8 +66,9 @@ export function SiteHeader() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "rounded-full px-3 py-2 text-sm text-[#F5F4F0]/72 transition-colors duration-200 hover:bg-[#F5F4F0]/4 hover:text-[#F5F4F0]",
-                      active && "bg-[#F05A28]/10 font-medium text-[#F05A28] hover:bg-[#F05A28]/12 hover:text-[#F05A28]"
+                      "rounded-full px-3 py-2 text-sm text-[#F5F4F0] transition-colors duration-200 hover:bg-[#F5F4F0]/5 hover:text-[#F5F4F0]",
+                      active &&
+                        "bg-[#ff6d40]/14 font-medium text-[#ff7b50] hover:bg-[#ff6d40]/18 hover:text-[#ff8a5f]"
                     )}
                   >
                     {item.label}

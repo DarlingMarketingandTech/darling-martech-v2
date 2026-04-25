@@ -13,6 +13,13 @@ export function ViewCanvas({ className, eventSource }: ViewCanvasProps) {
   return (
     <Canvas
       className={cn("pointer-events-none fixed inset-0 z-0", className)}
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100vw",
+        height: "100vh",
+        pointerEvents: "none",
+      }}
       dpr={[1, 2]}
       shadows
       eventSource={eventSource}

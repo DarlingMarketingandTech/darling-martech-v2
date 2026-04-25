@@ -31,7 +31,7 @@ export function HomepageHero() {
             </p>
             <h1 className="font-display text-balance text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-[#F5F4F0] sm:text-5xl md:text-[3.25rem] md:leading-[1.06] lg:text-6xl lg:leading-[1.05]">
               <span className={cn(styles.reveal, styles.revealDelay1, "block")}>
-                Your marketing, website, and systems should work together.
+                Your marketing, website, and systems should work as one.
               </span>
               <span
                 className={cn(styles.reveal, styles.revealDelay2, "mt-2 block text-[#F05A28]")}
@@ -46,15 +46,14 @@ export function HomepageHero() {
                 "text-pretty mt-8 max-w-[640px] text-base leading-8 text-[#F5F4F0]/74 md:text-lg md:leading-9"
               )}
             >
-              I design and build connected growth systems — aligning brand, website, and marketing infrastructure so they
-              actually drive pipeline.
+              I build connected growth systems that align your brand, website, and marketing stack to drive pipeline.
             </p>
             <ul className="mt-5 flex flex-wrap gap-2.5">
               <li className="rounded-full border border-[#F5F4F0]/14 bg-[#13131A]/60 px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.12em] text-[#0FD9C8]">
-                +212% qualified leads
+                +212% qualified lead lift
               </li>
               <li className="rounded-full border border-[#F5F4F0]/14 bg-[#13131A]/60 px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.12em] text-[#F5F4F0]/72">
-                3-minute diagnosis
+                3-minute diagnostic
               </li>
             </ul>
             <div

@@ -4,10 +4,6 @@ import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { HomepageHero } from "@/components/hero/HomepageHero";
 import { HomepageProofRail } from "@/components/home/HomepageProofRail";
-import { DiagnosticOrangeBand } from "@/components/home/DiagnosticOrangeBand";
-import { InsightsNewsletterBand } from "@/components/home/InsightsNewsletterBand";
-import { IcpBlock } from "@/components/home/IcpBlock";
-import { EvaluationTrio } from "@/components/home/EvaluationTrio";
 import { ProblemHubGrid } from "@/components/problems/ProblemHubGrid";
 import { Button } from "@/components/ui/button";
 import { ProcessTimeline } from "@/components/process/ProcessTimeline";
@@ -22,76 +18,66 @@ export const metadata = buildMetadata(homepageMeta);
 
 export default function HomePage() {
   const featuredProblems = problemPages.slice(0, 4);
-  const newsletterSubscriberLine = process.env.NEXT_PUBLIC_NEWSLETTER_SUBSCRIBERS?.trim()
-    ? `Join ${process.env.NEXT_PUBLIC_NEWSLETTER_SUBSCRIBERS.trim()} readers on the list`
-    : homepageData.newsletterBand.subscriberLineFallback;
+  const brokenSystemPath = homepageData.buyerPathSection.paths[0];
+  const missingSystemPath = homepageData.buyerPathSection.paths[1];
+  const triggerMoments = [...brokenSystemPath.signals.slice(0, 2), ...missingSystemPath.signals.slice(0, 2)].slice(0, 4);
 
   return (
     <SiteShell>
+      {/* 1) Hero */}
       <HomepageHero />
 
-      <HomepageProofRail />
-
-      <SectionWrapper className="mt-14">
+      {/* 2) Qualification */}
+      <SectionWrapper className="mt-12 md:mt-16">
         <SectionReveal>
           <SectionHeader
-            eyebrow={homepageData.buyerPathSection.eyebrow}
-            title={homepageData.buyerPathSection.headline}
-            body={homepageData.buyerPathSection.body}
+            eyebrow="FIT CHECK"
+            title="Who this is for — and who it's not for."
+            body="Fit depends on system state and operating behavior — not company size."
           />
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {homepageData.buyerPathSection.paths.map((path) => (
-              <article key={path.title} className="panel-obsidian rounded-4xl p-6 md:p-8">
-                <p className="meta-label text-[#0FD9C8]">{path.stateLabel}</p>
-                <h3 className="font-display mt-4 text-2xl font-semibold tracking-[-0.02em] text-[#F5F4F0]">
-                  {path.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#F5F4F0]/70">{path.body}</p>
-                <ul className="mt-5 space-y-2">
-                  {path.signals.map((signal) => (
-                    <li key={signal} className="text-sm leading-relaxed text-[#F5F4F0]/58">
-                      - {signal}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-7 flex flex-wrap items-center gap-3">
-                  <Button href={path.primaryCta.href} size="md">
-                    {path.primaryCta.label}
-                  </Button>
-                  <Button href={path.secondaryCta.href} variant="ghost" size="md">
-                    {path.secondaryCta.label}
-                  </Button>
-                </div>
-              </article>
-            ))}
+          <div className="mt-8 grid gap-5 md:mt-10 md:gap-6 lg:grid-cols-2">
+            <article className="panel-obsidian rounded-4xl p-5 md:p-7">
+              <p className="meta-label text-[#0FD9C8]">{brokenSystemPath.stateLabel}</p>
+              <h3 className="font-display mt-4 text-2xl font-semibold tracking-[-0.02em] text-[#F5F4F0]">
+                {brokenSystemPath.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#F5F4F0]/70">{brokenSystemPath.body}</p>
+            </article>
+            <article className="panel-obsidian rounded-4xl p-5 md:p-7">
+              <p className="meta-label text-[#0FD9C8]">{missingSystemPath.stateLabel}</p>
+              <h3 className="font-display mt-4 text-2xl font-semibold tracking-[-0.02em] text-[#F5F4F0]">
+                {missingSystemPath.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#F5F4F0]/70">{missingSystemPath.body}</p>
+            </article>
+          </div>
+
+          <div className="mt-6 grid gap-5 md:mt-8 md:gap-6 lg:grid-cols-[1.4fr_1fr]">
+            <article className="rounded-4xl border border-[#F5F4F0]/10 bg-[#0F1015]/70 p-5 md:p-7">
+              <p className="meta-label text-[#F05A28]/90">Common trigger moments</p>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[#F5F4F0]/62">
+                {triggerMoments.map((signal) => (
+                  <li key={signal} className="flex items-start gap-2">
+                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0FD9C8]/70" />
+                    <span>{signal}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className="rounded-4xl border border-[#F5F4F0]/10 bg-[#0F1015]/58 p-5 md:p-7">
+              <p className="meta-label text-[#F05A28]/90">Not a fit</p>
+              <p className="mt-4 text-sm leading-relaxed text-[#F5F4F0]/58">{homepageData.icpSection.notAFit}</p>
+            </article>
           </div>
         </SectionReveal>
       </SectionWrapper>
 
-      <BandSection className="mt-14">
-        <SectionReveal delay={0.03}>
-          <SectionHeader
-            eyebrow={homepageData.systemLogicSection.eyebrow}
-            title={homepageData.systemLogicSection.headline}
-            body={homepageData.systemLogicSection.body}
-          />
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {homepageData.systemLogicSection.steps.map((step) => (
-              <article key={step.title} className="rounded-3xl border border-[#F5F4F0]/10 bg-[#0F0F13] p-5 md:p-6">
-                <p className="meta-label text-[#F05A28]/90">{step.label}</p>
-                <h3 className="mt-3 text-lg font-semibold text-[#F5F4F0]">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/62">{step.body}</p>
-              </article>
-            ))}
-          </div>
-        </SectionReveal>
-      </BandSection>
-
-      <SectionWrapper className="mt-14">
+      {/* 3) Core problems */}
+      <SectionWrapper className="mt-12 md:mt-16">
         <SectionReveal>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeader eyebrow={homepageData.problemSection.eyebrow} title={homepageData.problemSection.headline} />
-            <Button href={homepageData.problemSection.diagnosticCta.href} variant="ghost">
+            <Button href={homepageData.problemSection.diagnosticCta.href} variant="secondary">
               {homepageData.problemSection.diagnosticCta.label}
             </Button>
           </div>
@@ -102,15 +88,11 @@ export default function HomePage() {
         </SectionReveal>
       </SectionWrapper>
 
-      <div className="mt-14">
-        <DiagnosticOrangeBand
-          headline={homepageData.diagnosticBand.headline}
-          body={homepageData.diagnosticBand.body}
-          cta={homepageData.diagnosticBand.cta}
-        />
-      </div>
+      {/* 4) Proof */}
+      <HomepageProofRail />
 
-      <BandSection className="mt-16 py-12 md:mt-20 md:py-16">
+      {/* 5) How this works */}
+      <BandSection className="mt-16 py-10 md:mt-20 md:py-14">
         <SectionReveal delay={0.04}>
           <SectionHeader
             eyebrow={homepageData.processSection.eyebrow}
@@ -131,70 +113,39 @@ export default function HomePage() {
         </SectionReveal>
       </BandSection>
 
-      <HomepageCapabilityModule />
-
-      <SectionWrapper className="mt-14">
-        <EvaluationTrio
-          eyebrow={homepageData.evaluationTrio.eyebrow}
-          headline={homepageData.evaluationTrio.headline}
-          items={homepageData.evaluationTrio.items}
-        />
-      </SectionWrapper>
-
-      <SectionWrapper className="mt-14">
+      {/* 6) Services */}
+      <SectionWrapper className="mt-12 md:mt-16">
         <SectionReveal>
           <SectionHeader
-            eyebrow={homepageData.proofBridgeSection.eyebrow}
-            title={homepageData.proofBridgeSection.headline}
-            body={homepageData.proofBridgeSection.body}
+            eyebrow="IMPLEMENTATION PATHS"
+            title="Choose the service lane your system needs now."
+            body="From first-working foundations to stack repair and expansion, each lane is built as a measurable system engagement."
           />
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {homepageData.proofBridgeSection.frames.map((frame) => (
-              <article key={frame.metric} className="panel-obsidian rounded-3xl p-5 md:p-6">
-                <p className="font-mono text-2xl font-semibold text-[#22C55E]">{frame.metric}</p>
-                <p className="mt-2 text-sm font-semibold text-[#F5F4F0]">{frame.context}</p>
-                <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/58">{frame.whyItMatters}</p>
-              </article>
-            ))}
+          <div className="mt-10">
+            <HomepageCapabilityModule />
           </div>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Button href={homepageData.proofBridgeSection.primaryCta.href} variant="secondary">
-              {homepageData.proofBridgeSection.primaryCta.label}
-            </Button>
-            <Button href={homepageData.proofBridgeSection.secondaryCta.href} variant="ghost">
-              {homepageData.proofBridgeSection.secondaryCta.label}
+          <div className="mt-8">
+            <Button href="/services" variant="secondary">
+              See all service paths
             </Button>
           </div>
         </SectionReveal>
       </SectionWrapper>
 
-      <SectionWrapper className="mt-14">
-        <IcpBlock
-          eyebrow={homepageData.icpSection.eyebrow}
-          headline={homepageData.icpSection.headline}
-          body={homepageData.icpSection.body}
-          items={homepageData.icpSection.items}
-          notAFit={homepageData.icpSection.notAFit}
-          cta={homepageData.icpSection.cta}
-        />
-      </SectionWrapper>
-
-      <InsightsNewsletterBand
-        eyebrow={homepageData.newsletterBand.eyebrow}
-        headline={homepageData.newsletterBand.headline}
-        body={homepageData.newsletterBand.body}
-        subscriberLine={newsletterSubscriberLine}
-        microcopy={homepageData.newsletterBand.microcopy}
-      />
-
-      <SectionWrapper className="mt-14 text-center">
+      {/* 7) Final CTA */}
+      <SectionWrapper className="mt-12 text-center md:mt-16">
         <SectionReveal delay={0.06}>
           <SectionHeader title={homepageData.closingCta.headline} body={homepageData.closingCta.body} align="center" />
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button href={homepageData.closingCta.primaryCta.href} size="lg">
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <Button href={homepageData.closingCta.primaryCta.href} size="lg" className="w-full sm:w-auto">
               {homepageData.closingCta.primaryCta.label}
             </Button>
-            <Button href={homepageData.closingCta.secondaryCta.href} variant="ghost" size="lg">
+            <Button
+              href={homepageData.closingCta.secondaryCta.href}
+              variant="ghost"
+              size="lg"
+              className="w-full border border-[#F5F4F0]/12 sm:w-auto"
+            >
               {homepageData.closingCta.secondaryCta.label}
             </Button>
           </div>

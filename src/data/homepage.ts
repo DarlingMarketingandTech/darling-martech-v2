@@ -14,7 +14,7 @@ export const homepageData = {
     logo: "Darling MarTech",
   },
   hero: {
-    eyebrow: "INDIANAPOLIS, IN · OWNER-OPERATED · BUILT FOR GROWTH",
+    eyebrow: "INDIANAPOLIS, IN · OWNER-OPERATED · SYSTEMS-FIRST",
     headline: {
       beforeAccent: "Most teams do not need more marketing. They need ",
       accent: "a system that works.",
@@ -39,8 +39,8 @@ export const homepageData = {
   },
   problemSection: {
     eyebrow: "Find your problem",
-    headline: "Most growth problems start in one of four places.",
-    body: "Use this if you need a fast diagnosis before choosing a path.",
+    headline: "Most growth bottlenecks start in one of four places.",
+    body: "Use this to diagnose fast before choosing a path.",
     diagnosticCta: { label: "Run the 3-minute diagnostic", href: "/tools/growth-bottleneck-quiz" },
   },
   buyerPathSection: {
@@ -98,8 +98,8 @@ export const homepageData = {
   },
   processSection: {
     eyebrow: "How this works",
-    headline: "One person. The whole stack. No hand-offs.",
-    body: "I don't sell you a strategy and disappear. I build it, run it, and measure it directly.",
+    headline: "One operator. Full stack ownership. No handoffs.",
+    body: "I don't hand over a strategy deck and disappear. I build, run, and measure the system myself.",
     columns: [
       {
         number: "01",
@@ -194,8 +194,8 @@ export const homepageData = {
     cta: { label: "See if your problem is on the list →", href: "/problems" },
   },
   closingCta: {
-    headline: "Choose the next step based on your current trust level.",
-    body: "Browse, diagnose, and evaluate first - or start a direct conversation if the problem is already clear.",
+    headline: "Choose your next step based on your current level of trust.",
+    body: "Browse, diagnose, and evaluate first — or start a direct conversation if the problem is already clear.",
     primaryCta: { label: CTA_LABELS.startHere, href: CTA_LINKS.startHere },
     secondaryCta: { label: CTA_LABELS.proof, href: CTA_LINKS.proof },
     readyLink: { label: CTA_LABELS.bookCall, href: siteConfig.calComLink },

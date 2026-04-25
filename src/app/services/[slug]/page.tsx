@@ -5,6 +5,7 @@ import { BandSection } from "@/components/layout/BandSection";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { PageHero } from "@/components/hero/PageHero";
 import { ServiceHeroVisual } from "@/components/services/ServiceHeroVisual";
+import { LeadCaptureCrmBeam } from "@/components/services/LeadCaptureCrmBeam";
 import { ServiceOutcomesGrid } from "@/components/services/ServiceOutcomesGrid";
 import { ServiceProofConnection } from "@/components/services/ServiceProofConnection";
 import { ServiceDetailCtas } from "@/components/services/ServiceDetailCtas";
@@ -80,6 +81,15 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
     "Implement the highest-leverage work first and cut low-impact complexity.",
     "Instrument outcomes so every adjustment ties back to revenue signal and operating clarity.",
   ];
+  const heroVisual =
+    service.slug === "conversion-optimization" ? (
+      <LeadCaptureCrmBeam />
+    ) : service.visualPublicId ? (
+      <ServiceHeroVisual
+        publicId={service.visualPublicId}
+        alt={service.visualAlt ?? service.title}
+      />
+    ) : undefined;
 
   return (
     <SiteShell hideNewsletterSignup>
@@ -87,14 +97,7 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
         eyebrow="SERVICE"
         headline={service.title}
         body={[service.headline, service.description]}
-        splitAside={
-          service.visualPublicId ? (
-            <ServiceHeroVisual
-              publicId={service.visualPublicId}
-              alt={service.visualAlt ?? service.title}
-            />
-          ) : undefined
-        }
+        splitAside={heroVisual}
         ctas={heroCtas}
       />
 

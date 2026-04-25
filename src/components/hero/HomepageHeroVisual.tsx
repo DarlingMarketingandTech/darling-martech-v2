@@ -1,10 +1,7 @@
-import { HomepageHeroStitchImage } from "@/components/hero/HomepageHeroStitchImage";
+import Image from "next/image";
+import { RetroGrid } from "@/components/ui/retro-grid";
 
-/**
- * Cloudinary public_id for the homepage hero Stitch asset (1024×1024).
- * Verified asset: `curated/homepage/hero-positional-drift` — positional drift / modular plates.
- */
-export const HOMEPAGE_HERO_STITCH_PUBLIC_ID = "curated/homepage/hero-positional-drift";
+export const HOMEPAGE_SYSTEM_BLUEPRINT_SRC = "/engine-3d-variant-1.png";
 
 /**
  * Homepage hero visual: Stitch raster base + atmospheric gradients + localized
@@ -18,9 +15,20 @@ export function HomepageHeroVisual() {
       className="relative h-full min-h-0 w-full overflow-hidden rounded-[inherit] bg-[#0C0C0E]"
       aria-hidden
     >
-      <HomepageHeroStitchImage
-        publicId={HOMEPAGE_HERO_STITCH_PUBLIC_ID}
-        className="absolute inset-0 h-full w-full origin-[58%_48%] scale-[1.06] object-cover object-[56%_46%] mask-[radial-gradient(ellipse_104%_104%_at_50%_49%,#000_36%,transparent_78%)] sm:origin-[56%_46%] sm:scale-[1.065] sm:object-[54%_44%] lg:origin-[52%_50%] lg:scale-[1.09] lg:object-[50%_48%]"
+      <RetroGrid
+        className="z-0 opacity-35"
+        darkLineColor="#0FD9C8"
+        lightLineColor="#0FD9C8"
+        cellSize={72}
+        angle={68}
+      />
+      <Image
+        src={HOMEPAGE_SYSTEM_BLUEPRINT_SRC}
+        alt=""
+        width={1600}
+        height={1200}
+        priority
+        className="absolute inset-0 z-1 h-full w-full origin-[58%_48%] scale-[1.06] object-cover object-[56%_46%] mask-[radial-gradient(ellipse_104%_104%_at_50%_49%,#000_36%,transparent_78%)] sm:origin-[56%_46%] sm:scale-[1.065] sm:object-[54%_44%] lg:origin-[52%_50%] lg:scale-[1.09] lg:object-[50%_48%]"
       />
 
       {/* Depth: vignette — softer center, slower falloff toward edges */}

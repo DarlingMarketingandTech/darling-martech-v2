@@ -1,4 +1,16 @@
 {
+  "mcpServers": {
+    "inliner": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@inliner/mcp-server"
+      ],
+      "env": {
+        "INLINER_API_KEY": "inl_6f11198c915eb2f701e0dc703a71d1cc4541eb11"
+      }
+    }
+  },
   "plugins": {
     "cloudinary": {
       "enabled": true

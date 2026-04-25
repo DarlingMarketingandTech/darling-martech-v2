@@ -17,6 +17,7 @@ The Darling MarTech repo has moved to a modular agent instruction system.
 ## Source of truth
 
 If anything in this file conflicts with:
+
 - the current repo
 - `AGENT_SYSTEM.md`
 - `docs/agent/*`
@@ -26,6 +27,7 @@ Then those sources win.
 ## Purpose of this file
 
 This file exists only to:
+
 - support legacy workflows
 - provide compatibility with tools expecting `CLAUDE.md`
 

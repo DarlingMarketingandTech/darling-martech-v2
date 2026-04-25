@@ -8,6 +8,7 @@
  * - /industries + /industries/[sector slugs]
  * - /tools + /tools/[slug] (hub + QuizEngine slugs + dedicated tool routes)
  * - /resources, /resources/blog, /resources/blog/[article slugs], /resources/frameworks
+ * - /newsroom, /newsroom/[article slugs]
  * - /about, /process, /contact, /studio, /privacy-policy
  */
 module.exports = {

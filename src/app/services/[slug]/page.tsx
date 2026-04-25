@@ -12,6 +12,8 @@ import { ServiceRelatedProblemsBlock } from "@/components/services/ServiceRelate
 import Link from "next/link";
 import { services } from "@/data/services";
 import { problemPages } from "@/data/problems";
+import { getNewsroomArticlesByServiceSlug } from "@/data/newsroom";
+import { NewsroomRelatedStrip } from "@/components/newsroom/NewsroomRelatedStrip";
 import { caseStudies } from "@/data/work/work-index";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
@@ -58,6 +60,7 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
   const curatedProblems = relatedProblems.slice(0, 2);
   const proof = caseStudies.filter((c) => service.proofReferences.includes(c.slug));
   const featuredProof = proof[0];
+  const newsroomForService = getNewsroomArticlesByServiceSlug(service.slug);
   const primaryProblem = relatedProblems[0];
   const states = new Set(service.problemClusters.map((slug) => getProblemBuyerState(slug)));
   const buyerStateLabel =
@@ -165,6 +168,12 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
           </ul>
         </section>
         </SectionWrapper>
+
+      {newsroomForService.length > 0 ? (
+        <SectionWrapper className="max-w-3xl pb-4 pt-2 md:pb-6">
+          <NewsroomRelatedStrip articles={newsroomForService} eyebrow="From the newsroom" />
+        </SectionWrapper>
+      ) : null}
 
       <SectionWrapper className="pb-20 pt-4 md:pb-24">
         <ServiceDetailCtas service={service} />

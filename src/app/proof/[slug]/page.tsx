@@ -17,6 +17,8 @@ import { problemPages } from "@/data/problems";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
 import { getProofDetailHeroPublicId } from "@/data/proof-visuals";
+import { getNewsroomArticlesByProofSlug } from "@/data/newsroom";
+import { NewsroomRelatedStrip } from "@/components/newsroom/NewsroomRelatedStrip";
 import { siteConfig } from "@/data/site-config";
 import { cn } from "@/lib/utils";
 const layerChipClass =
@@ -66,6 +68,7 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
   );
 
   const proofAngles = getProofAnglesForProject(study.slug).slice(0, 3);
+  const newsroomForProof = getNewsroomArticlesByProofSlug(study.slug);
   const heroImagePublicId = getProofDetailHeroPublicId(study);
   const heroImageAlt = `${study.clientName} — engagement visual`;
   const metricGridClass =
@@ -259,6 +262,12 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
           </div>
         </SectionWrapper>
       )}
+
+      {newsroomForProof.length > 0 ? (
+        <SectionWrapper className="mt-14 max-w-3xl">
+          <NewsroomRelatedStrip articles={newsroomForProof} eyebrow="From the newsroom" />
+        </SectionWrapper>
+      ) : null}
 
       {/* CTA */}
       <SectionWrapper className="mt-14 text-center">

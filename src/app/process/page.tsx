@@ -8,6 +8,8 @@ import { WhatIDontDoList } from "@/components/process/WhatIDontDoList";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { processData } from "@/data/process";
+import { getNewsroomArticlesLinkedToProcess } from "@/data/newsroom";
+import { NewsroomRelatedStrip } from "@/components/newsroom/NewsroomRelatedStrip";
 import { routeMetadata } from "@/data/routes";
 import { buildMetadata } from "@/lib/metadata";
 import Link from "next/link";
@@ -15,6 +17,8 @@ import Link from "next/link";
 export const metadata = buildMetadata(routeMetadata["/process"]);
 
 export default function ProcessPage() {
+  const newsroomForProcess = getNewsroomArticlesLinkedToProcess();
+
   return (
     <SiteShell>
       <PageHero
@@ -22,17 +26,17 @@ export default function ProcessPage() {
         headline="Every engagement starts with a diagnosis, not a proposal."
         body="The process is structured so the real bottleneck gets named before anything is scoped, built, or measured."
       />
-      <div className="mt-14">
+      <div id="principles" className="mt-14 scroll-mt-28">
         <PrinciplesGrid principles={processData.principles} />
       </div>
-      <BandSection className="mt-14">
+      <BandSection id="timeline" className="mt-14 scroll-mt-28">
         <SectionHeader eyebrow="Process timeline" title="What the engagement actually looks like." />
         <div className="tech-grid-bg mt-8 rounded-3xl p-3 md:p-4">
           <ProcessTimeline steps={processData.steps} />
         </div>
       </BandSection>
 
-      <BandSection className="mt-14">
+      <BandSection id="engagements" className="mt-14 scroll-mt-28">
         <SectionHeader
           eyebrow="ENGAGEMENT SHAPES"
           title="Three ways this works, depending on what you need."
@@ -41,12 +45,12 @@ export default function ProcessPage() {
         <EngagementFormatsRow formats={processData.engagementFormats} />
       </BandSection>
 
-      <BandSection className="mt-14">
+      <BandSection id="fit" className="mt-14 scroll-mt-28">
         <SectionHeader eyebrow="HONEST ABOUT FIT" title="A few things I'm clear about upfront." />
         <WhatIDontDoList items={processData.whatIDontDo} />
       </BandSection>
 
-      <BandSection className="mt-14">
+      <BandSection id="scenarios" className="mt-14 scroll-mt-28">
         <SectionHeader eyebrow="IS THIS RIGHT FOR YOU?" title="The work looks different depending on where you are." />
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           {processData.whatGoodLooksLike.map((scenario, i) => (
@@ -63,6 +67,12 @@ export default function ProcessPage() {
           ))}
         </div>
       </BandSection>
+
+      {newsroomForProcess.length > 0 ? (
+        <div className="mx-auto mt-14 max-w-3xl md:mt-20">
+          <NewsroomRelatedStrip articles={newsroomForProcess} eyebrow="From the newsroom" />
+        </div>
+      ) : null}
 
       <div className="mt-14 md:mt-20">
         <div className="mx-auto max-w-2xl text-center">

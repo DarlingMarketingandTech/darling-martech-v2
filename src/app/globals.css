@@ -608,3 +608,26 @@ select {
     text-decoration-color: rgba(15, 217, 200, 0.6);
   }
 }
+
+/* Newsroom article — editorial reading column */
+.newsroom-prose > p:first-child {
+  text-wrap: pretty;
+}
+
+.newsroom-prose > p:first-child::first-letter {
+  float: left;
+  margin-right: 0.55rem;
+  margin-top: 0.12em;
+  font-family: var(--font-syne), Syne, ui-sans-serif, system-ui, sans-serif;
+  font-size: 3.25rem;
+  line-height: 0.82;
+  font-weight: 700;
+  color: rgba(240, 90, 40, 0.92);
+}
+
+@media (min-width: 768px) {
+  .newsroom-prose > p:first-child::first-letter {
+    font-size: 3.75rem;
+    margin-right: 0.65rem;
+  }
+}

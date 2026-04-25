@@ -6,6 +6,7 @@ export * from "@/data/frameworks";
 export * from "@/data/homepage";
 export * from "@/data/labs";
 export * from "@/data/navigation";
+export * from "@/data/newsroom";
 export * from "@/data/platform-capabilities";
 export * from "@/data/process";
 export * from "@/data/problems";

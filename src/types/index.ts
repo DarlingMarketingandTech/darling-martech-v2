@@ -466,6 +466,29 @@ export interface BlogPost {
   coverImage?: string;
 }
 
+/** Section ids on `/process` for deep links from newsroom (`/process#timeline`, etc.). */
+export type ProcessNewsroomAnchor = "principles" | "timeline" | "engagements" | "fit" | "scenarios";
+
+/**
+ * Editorial articles for `/newsroom`. Use `categories` and `tags` for hub filters; use relation fields
+ * to tie each piece to proof, problems, services, and process sections.
+ */
+export interface NewsroomArticle {
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishedAt: string;
+  readingTime: number;
+  categories: string[];
+  tags: string[];
+  relatedProofSlugs?: string[];
+  relatedProblemSlugs?: string[];
+  relatedServiceSlugs?: string[];
+  relatedProcessAnchors?: ProcessNewsroomAnchor[];
+  coverImage?: string;
+  body: string[];
+}
+
 export type DownloadableResourceFileType = "PDF" | "Spreadsheet" | "Template";
 
 export interface DownloadableResource {

@@ -36,6 +36,7 @@ export const siteNavigation: SiteNavigation = {
         links: [
           { label: "About", href: "/about" },
           { label: "Contact", href: "/contact" },
+          { label: "Newsroom", href: "/newsroom" },
           { label: "Resources", href: "/resources" },
           { label: "Newsletter", href: "/resources/newsletter" },
         ],

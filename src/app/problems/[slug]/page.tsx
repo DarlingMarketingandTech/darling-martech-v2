@@ -17,6 +17,8 @@ import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { SectionReveal } from "@/components/ui/section-reveal";
 import { problemPages } from "@/data/problems";
 import { getProofAnglesForProblem } from "@/data/proof-angles";
+import { getNewsroomArticlesByProblemSlug } from "@/data/newsroom";
+import { NewsroomRelatedStrip } from "@/components/newsroom/NewsroomRelatedStrip";
 import { caseStudies } from "@/data/work/work-index";
 import { getProblemBuyerState } from "@/lib/buyer-state";
 import { buildMetadata } from "@/lib/metadata";
@@ -77,6 +79,8 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
   const hasProofBlock = proofAnglesForProblem.length > 0 || relatedProof.length > 0;
 
   const proofConnectLead = `These outcomes map to the same operating break as "${problem.title}" — read them as validation that this class of fix holds in production, not as unrelated portfolio filler.`;
+
+  const newsroomForProblem = getNewsroomArticlesByProblemSlug(problem.slug);
 
   return (
     <SiteShell>
@@ -243,6 +247,14 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
               <ProblemNav problems={problemPages} activeProblem={problem.slug} />
             </section>
           </SectionReveal>
+
+          {newsroomForProblem.length > 0 ? (
+            <SectionReveal delay={0.23} motion="fade">
+              <div className="mt-14 max-w-3xl sm:mt-16">
+                <NewsroomRelatedStrip articles={newsroomForProblem} eyebrow="From the newsroom" />
+              </div>
+            </SectionReveal>
+          ) : null}
 
           <SectionReveal delay={0.24} motion="fade">
             <div className="mt-14 sm:mt-16">

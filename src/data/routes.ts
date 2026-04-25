@@ -67,4 +67,10 @@ export const routeMetadata: Record<string, PageMeta> = {
       "Get one practical martech insight per week from Jacob, focused on strategy, systems, and execution.",
     canonicalUrl: "https://darlingmartech.com/resources/newsletter",
   },
+  "/newsroom": {
+    title: "Newsroom",
+    description:
+      "Editorial notes on strategy, systems, and execution — tagged and linked to proof, problems, services, and process.",
+    canonicalUrl: "https://darlingmartech.com/newsroom",
+  },
 };

@@ -17,6 +17,9 @@
     },
     "vercel": {
       "enabled": true
+    },
+    "gsap-skills": {
+      "enabled": true
     }
   }
 }

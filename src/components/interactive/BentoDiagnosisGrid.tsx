@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode, type Ref, type RefObject } from "react";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -18,6 +18,7 @@ type BentoCellProps = {
   accent?: string;
   withTexture?: boolean;
   withDoodle?: boolean;
+  noiseId?: string;
   trackRef?: RefObject<HTMLElement>;
 };
 
@@ -62,9 +63,7 @@ function DoodleStroke({ className }: { className?: string }) {
   );
 }
 
-function NoiseTexture({ className }: { className?: string }) {
-  const id = useId();
-
+function NoiseTexture({ className, id }: { className?: string; id: string }) {
   return (
     <svg
       className={cn("pointer-events-none absolute inset-0 h-full w-full opacity-35", className)}
@@ -109,6 +108,7 @@ function MagneticBentoCell({
   accent,
   withTexture = false,
   withDoodle = false,
+  noiseId,
 }: BentoCellProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
@@ -178,7 +178,7 @@ function MagneticBentoCell({
         )}
         aria-hidden
       />
-      {withTexture ? <NoiseTexture /> : null}
+      {withTexture ? <NoiseTexture id={noiseId ?? "bento-noise-default"} /> : null}
       {withDoodle ? <DoodleStroke /> : null}
       <div className="relative z-10 h-full">{children}</div>
     </motion.article>
@@ -325,7 +325,7 @@ function OrbScene() {
 function ViewTrackedOrb({ trackRef }: { trackRef: RefObject<HTMLElement> }) {
   return (
     <div
-      ref={trackRef as unknown as RefObject<HTMLDivElement>}
+      ref={trackRef as unknown as Ref<HTMLDivElement>}
       className="relative h-full min-h-[210px] overflow-hidden rounded-[1.2rem] border border-[#F5F4F0]/10 bg-[#0C0C0E]/80"
     >
       <View track={trackRef} className="absolute inset-0 h-full w-full">
@@ -411,6 +411,7 @@ export function BentoDiagnosisGrid() {
             accent="bg-[radial-gradient(circle_at_18%_20%,rgba(240,90,40,0.16),transparent_28%),radial-gradient(circle_at_74%_28%,rgba(15,217,200,0.12),transparent_22%)]"
             withTexture
             withDoodle
+            noiseId="bento-noise-a"
           >
             <AuditorState />
           </MagneticBentoCell>
@@ -477,6 +478,7 @@ export function BentoDiagnosisGrid() {
             className="min-h-[240px] lg:col-span-3"
             accent="bg-[radial-gradient(circle_at_70%_30%,rgba(245,244,240,0.08),transparent_35%),linear-gradient(135deg,rgba(15,217,200,0.08)_0%,transparent_100%)]"
             withTexture
+            noiseId="bento-noise-b"
           >
             <div className="flex h-full flex-col justify-between">
               <div>

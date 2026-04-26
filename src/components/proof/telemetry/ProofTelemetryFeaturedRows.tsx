@@ -1,16 +1,82 @@
 import { ProofTelemetryRow } from "./ProofTelemetryRow";
-import type { CaseStudy } from "@/types";
+import type { CaseStudy, ProjectTypeId } from "@/types";
 
 type ProofTelemetryFeaturedRowsProps = {
   caseStudies: CaseStudy[];
 };
 
+const FEATURED_ROW_LIMIT = 4;
+
+const PRIORITY_PROJECT_TYPES: ProjectTypeId[] = [
+  "crm-automation-system",
+  "custom-infrastructure-product",
+  "local-growth-system",
+  "brand-identity-system",
+];
+
+function selectFeaturedRows(caseStudies: CaseStudy[], limit = FEATURED_ROW_LIMIT) {
+  const clientFrequency = caseStudies.reduce<Map<string, number>>((counts, study) => {
+    counts.set(study.clientName, (counts.get(study.clientName) ?? 0) + 1);
+    return counts;
+  }, new Map());
+
+  const selectedSlugs = new Set<string>();
+  const rows: CaseStudy[] = [];
+
+  const sortedByDiversity = [...caseStudies].sort((left, right) => {
+    const leftClientFrequency = clientFrequency.get(left.clientName) ?? 0;
+    const rightClientFrequency = clientFrequency.get(right.clientName) ?? 0;
+
+    if (leftClientFrequency !== rightClientFrequency) {
+      return leftClientFrequency - rightClientFrequency;
+    }
+
+    if (left.featured !== right.featured) {
+      return left.featured ? -1 : 1;
+    }
+
+    return 0;
+  });
+
+  for (const projectType of PRIORITY_PROJECT_TYPES) {
+    const match = sortedByDiversity.find(
+      (study) => study.projectType === projectType && !selectedSlugs.has(study.slug)
+    );
+
+    if (!match) {
+      continue;
+    }
+
+    selectedSlugs.add(match.slug);
+    rows.push(match);
+
+    if (rows.length >= limit) {
+      return rows;
+    }
+  }
+
+  const featuredByProjectType = sortedByDiversity.filter(
+    (study) => study.featured && !selectedSlugs.has(study.slug)
+  );
+
+  for (const study of featuredByProjectType) {
+    selectedSlugs.add(study.slug);
+    rows.push(study);
+
+    if (rows.length >= limit) {
+      break;
+    }
+  }
+
+  return rows;
+}
+
 /**
- * Featured-only “proof log” telemetry blocks for the hub (max 3).
- * Non-featured work stays on {@link ProofCard} in the grid below.
+ * Representative “proof log” telemetry blocks for the hub.
+ * First pass prioritizes one-per-project-type variety, then falls back to featured anchors.
  */
 export function ProofTelemetryFeaturedRows({ caseStudies }: ProofTelemetryFeaturedRowsProps) {
-  const rows = caseStudies.filter((c) => c.featured).slice(0, 3);
+  const rows = selectFeaturedRows(caseStudies);
   if (rows.length === 0) return null;
 
   return (

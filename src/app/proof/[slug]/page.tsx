@@ -16,7 +16,7 @@ import { caseStudies } from "@/data/work/work-index";
 import { problemPages } from "@/data/problems";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
-import { getSimilarCaseStudies } from "@/lib/proof-similar";
+import { getSimilarProof } from "@/lib/proof-similar";
 import { getProofDetailHeroPublicId } from "@/data/proof-visuals";
 import { PROJECT_TYPE_LABELS } from "@/data/taxonomy";
 import { getNewsroomArticlesByProofSlug } from "@/data/newsroom";
@@ -65,13 +65,7 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
     study.relatedServiceSlugs?.includes(s.slug)
   );
 
-  const relatedProofs = caseStudies.filter(
-    (c) => study.relatedProofSlugs?.includes(c.slug)
-  );
-
-  const similarProjects = getSimilarCaseStudies(study, caseStudies, 4);
-  const similarSlugs = new Set(similarProjects.map((c) => c.slug));
-  const relatedProofsExtra = relatedProofs.filter((c) => !similarSlugs.has(c.slug));
+  const similarProjects = getSimilarProof(study, caseStudies);
 
   const proofAngles = getProofAnglesForProject(study.slug).slice(0, 3);
   const newsroomForProof = getNewsroomArticlesByProofSlug(study.slug);
@@ -268,24 +262,6 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
                 className="rounded-full border border-[#F5F4F0]/10 px-4 py-2 text-sm text-[#F5F4F0]/68 transition-colors hover:border-[#0FD9C8]/40 hover:text-[#0FD9C8]"
               >
                 {PROJECT_TYPE_LABELS[c.projectType]} — {c.outcomeHeadline} →
-              </Link>
-            ))}
-          </div>
-        </SectionWrapper>
-      )}
-
-      {relatedProofsExtra.length > 0 && (
-        <SectionWrapper className="mt-10">
-          <p className="meta-label text-[#F5F4F0]/42">Complementary proof</p>
-          <div className="tech-divider my-4 max-w-sm" />
-          <div className="mt-2 flex flex-wrap gap-3">
-            {relatedProofsExtra.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/proof/${c.slug}`}
-                className="rounded-full border border-[#F5F4F0]/10 px-4 py-2 text-sm text-[#F5F4F0]/56 transition-colors hover:border-[#F5F4F0]/25"
-              >
-                {c.outcomeHeadline} →
               </Link>
             ))}
           </div>

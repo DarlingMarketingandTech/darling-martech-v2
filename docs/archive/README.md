@@ -5,7 +5,6 @@ This folder contains legacy/reference documents (often exported from `.docx`) th
 Use these only as historical context or raw source material — do not treat them as live page specs.
 
 Canonical guidance lives in:
-- `AGENT_SYSTEM.md`
-- `docs/agent/*`
-- `agent-system/context/*`
-
+- `AGENTS.md`
+- `docs/revamp/*`
+- current implementation docs in `docs/*`

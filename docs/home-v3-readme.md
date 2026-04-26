@@ -20,7 +20,7 @@
 
 ## Verification run
 
-- `pnpm lint` completed with 3 pre-existing warnings in `agent-system/scripts/*` (no new lint errors).
+- `pnpm lint` completed without cleanup-related lint regressions at the time of this build note.
 - `pnpm typecheck` passed.
 - `pnpm build` passed.
 - Browser QA (`/home-v3`) checked at:

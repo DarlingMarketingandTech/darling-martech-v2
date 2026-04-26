@@ -1,6 +1,6 @@
 export const implementationPacketTemplate = {
   checklist: [
-    "Read CLAUDE.md and relevant page copy docs before making edits.",
+    "Read AGENTS.md and relevant page copy docs before making edits.",
     "Update or create data files before page or component JSX.",
     "Verify metadata exists for every route touched.",
     "Run lint, typecheck, and build before closing the batch.",

@@ -15,11 +15,10 @@ The current homepage has strong pieces but too many sections performing overlapp
 
 This design aligns to:
 
-- `AGENT_SYSTEM.md` (problem-first, proof-backed, systems-oriented, solo-operator)
-- `docs/agent/site-architecture.md` (diagnose -> validate -> understand -> act)
-- `agent-system/context/page_blueprints.md` (fewer, stronger sections)
-- `agent-system/context/page-purpose-boundaries.md` (no “everything page” drift)
-- `agent-system/context/trust_ladder_ctas.md` + `relationship_display_limits.md` (one primary CTA pattern)
+- `AGENTS.md` (problem-first, proof-backed, systems-oriented, solo-operator)
+- `docs/revamp/proof-taxonomy-strategy.md` (decision-useful proof organization)
+- `docs/revamp/growth-system-audit-strategy.md` (simplified trust ladder and CTA discipline)
+- `docs/revamp/codex-implementation-plan.md` (data-first sequencing and implementation guardrails)
 
 ## 2) Primary Object, Question, CTA
 
@@ -224,4 +223,3 @@ These can be handled after IA/content structure is locked.
 3. Remove merged/redundant sections/components from homepage composition only (do not delete shared components yet).
 4. Validate type/build and run focused UX pass on CTA hierarchy and scroll fatigue.
 5. Decide if newsletter module remains inline or footer-only based on conversion telemetry.
-

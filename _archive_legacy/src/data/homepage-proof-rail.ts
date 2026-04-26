@@ -1,6 +1,6 @@
 /**
  * Homepage proof rail: proof-first, system-change-first copy.
- * Aligns with `agent-system/prompts/proof-page-prompt.md` — stakes, pre-state,
+ * Aligns with the repo proof strategy — stakes, pre-state,
  * intervention, outcomes with context, principle, single next step (handled in UI).
  * Client names stay on full `/proof/[slug]` pages only.
  */

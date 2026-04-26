@@ -1,0 +1,24 @@
+---
+description: Darling MarTech v2 revamp guardrails
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+Defer to `AGENTS.md` as the primary source of truth.
+
+Enforce these repo rules:
+
+- Organize proof by project type, buyer scenario, complexity, scope shape, and decision usefulness.
+- Block company-first proof taxonomy.
+- Block industry-first proof taxonomy when it becomes the primary organizing model.
+- Block parent-company proof nesting as a default pattern.
+- Do not reintroduce a Pike Medical parent proof concept.
+- Keep client names as optional context, not the main taxonomy.
+- Prevent CTA overload; default to the simplified ladder:
+  - low trust: Growth System Audit
+  - mid trust: see similar proof
+  - high trust: book a diagnostic call
+- When content structure changes, update `src/types` and `src/data` before JSX.
+- Do not hardcode approved copy directly in JSX.
+- Reuse existing components before creating new ones when a suitable pattern already exists.

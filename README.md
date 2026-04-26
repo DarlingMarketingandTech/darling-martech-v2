@@ -12,9 +12,11 @@ Ground-up rebuild of `darlingmartech.com` as a typed, data-driven Next.js App Ro
 
 ## Project Rules
 
-- Read `AGENT_SYSTEM.md` + `docs/agent/*` before making architecture or implementation decisions (`CLAUDE.md` is compatibility-only).
+- Read `AGENTS.md` first.
+- Use `docs/revamp/*` for current revamp strategy and implementation sequencing.
 - Treat `src/types/index.ts` and `src/data/*` as the content contract layer.
 - Do not hardcode approved site copy directly in JSX.
+- Reuse existing components before creating new ones.
 - Keep server components as the default unless interactivity requires a client boundary.
 
 ## Local Commands
@@ -30,7 +32,7 @@ pnpm verify
 
 ## Build Workflow
 
-1. Read the relevant copy docs in `docs/`.
+1. Read `AGENTS.md` and the relevant docs in `docs/`.
 2. Create or update the matching typed data file in `src/data/`.
 3. Build the page or component against those typed exports.
 4. Run `pnpm verify` before closing the batch.

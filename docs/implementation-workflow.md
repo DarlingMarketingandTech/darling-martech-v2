@@ -4,7 +4,7 @@
 Reduce prompt churn by making each implementation batch follow the same packet, build order, and verification standard.
 
 ## Standard Build Order
-1. Read `AGENT_SYSTEM.md` + the relevant `docs/agent/*` guidance, then the relevant reference/copy docs in `docs/`.
+1. Read `AGENTS.md`, then the relevant `docs/revamp/*` and other reference/copy docs in `docs/`.
 2. Update `src/types/index.ts` only if the data contract is missing something.
 3. Create or update matching `src/data/*` modules first.
 4. Build the route or component against typed data exports.
@@ -38,7 +38,7 @@ Verification required:
 - Agent 3: verification, browser checks, and regression review.
 
 ## MCP Usage
-- Repo truth first: use `src/` + `src/data/` + `docs/agent/*` before reaching for external inspection tools.
+- Repo truth first: use `src/` + `src/data/` + `AGENTS.md` + `docs/revamp/*` before reaching for external inspection tools.
 - `cursor-ide-browser`: local and preview route validation (only when a visible surface changed).
 - `plugin-vercel-vercel`: deployment and build log inspection (only when deployment is in-scope).
 - `user-github`: PR review and status once collaboration begins.

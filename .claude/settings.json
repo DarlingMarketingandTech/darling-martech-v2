@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(node --stack-trace-limit=100 node_modules/next/dist/bin/next build)"
-    ]
-  }
-}

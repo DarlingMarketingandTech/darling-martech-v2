@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Opt-in smooth scrolling + ScrollTrigger sync.
- * Do not mount in root layout without anchor/modal/accessibility QA (see CLAUDE.md).
+ * Do not mount in root layout without anchor/modal/accessibility QA (see AGENTS.md).
  * Skips entirely when the user prefers reduced motion.
  */
 export function useSmoothScroll() {

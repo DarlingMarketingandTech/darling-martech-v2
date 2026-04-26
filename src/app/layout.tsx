@@ -41,6 +41,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const enableVercelAnalytics = appEnv.nodeEnv === "production";
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -87,7 +88,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <Analytics />
+        {enableVercelAnalytics ? <Analytics debug={false} /> : null}
       </body>
     </html>
   );

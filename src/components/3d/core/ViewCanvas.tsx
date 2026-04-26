@@ -20,9 +20,10 @@ export function ViewCanvas({ className, eventSource }: ViewCanvasProps) {
         height: "100vh",
         pointerEvents: "none",
       }}
-      dpr={[1, 2]}
-      shadows
+      dpr={[1, 1.35]}
+      shadows={false}
       eventSource={eventSource}
+      performance={{ min: 0.5 }}
       gl={{
         antialias: false,
         alpha: true,

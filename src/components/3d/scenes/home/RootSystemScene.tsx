@@ -8,7 +8,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   AdditiveBlending,
-  Color,
   DynamicDrawUsage,
   Euler,
   InstancedMesh,
@@ -16,7 +15,6 @@ import {
   Mesh,
   Object3D,
   PerspectiveCamera as ThreePerspectiveCamera,
-  Vector3,
   type Group,
 } from "three";
 import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
@@ -38,8 +36,9 @@ type RootSystemSceneProps = {
 
 const PARTICLE_COUNT = 42;
 const PACKET_COUNT = 8;
+const PARTICLE_CONVERGENCE_EPSILON = 0.001;
+const PACKET_LANE_Y = [-0.92, -0.42, 0.42, 0.92] as const;
 const tempObject = new Object3D();
-const tempVector = new Vector3();
 
 const nodePositions = [
   [-1.12, 0.98, 0.2],
@@ -69,8 +68,8 @@ function makeParticle(index: number) {
   const y = ((index % 9) - 4) * 0.34;
 
   return {
-    origin: new Vector3(Math.cos(angle) * radius, y, Math.sin(angle) * 0.74),
-    target: new Vector3(Math.cos(angle) * 0.46, y * 0.16, Math.sin(angle) * 0.22),
+    origin: [Math.cos(angle) * radius, y, Math.sin(angle) * 0.74] as const,
+    target: [Math.cos(angle) * 0.46, y * 0.16, Math.sin(angle) * 0.22] as const,
     scale: 0.045 + (index % 5) * 0.012,
     phase: index * 0.37,
   };
@@ -86,6 +85,8 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
   const gridRef = useRef<Group>(null);
   const healthRef = useRef<Group>(null);
   const cameraRef = useRef<ThreePerspectiveCamera>(null);
+  const isVisibleRef = useRef(false);
+  const lastParticleConvergenceRef = useRef(-1);
   const [activeStep, setActiveStep] = useState(0);
   const { invalidate } = useThree();
 
@@ -121,6 +122,26 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
     }
   }, []);
 
+  useEffect(() => {
+    const target = trackRef.current;
+
+    if (!target || typeof IntersectionObserver === "undefined") {
+      isVisibleRef.current = true;
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry?.isIntersecting ?? false;
+        if (isVisibleRef.current) invalidate();
+      },
+      { rootMargin: "240px 0px" }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [trackRef, invalidate]);
+
   useGSAP(
     () => {
       if (!trackRef.current) return;
@@ -147,6 +168,8 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
   );
 
   useFrame((state, delta) => {
+    if (!isVisibleRef.current) return;
+
     const progress = reduceMotion ? 1 : progressRef.current;
     const convergence = easeInOut(remap(progress, 0, 0.28));
     const gridBuild = easeInOut(remap(progress, 0.24, 0.52));
@@ -184,20 +207,31 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
     }
 
     if (particleRef.current) {
-      particles.forEach((particle, index) => {
-        tempVector.copy(particle.origin).lerp(particle.target, convergence);
-        if (!reduceMotion && convergence < 0.98) {
-          tempVector.x += Math.sin(elapsed * 0.8 + particle.phase) * 0.045;
-          tempVector.y += Math.cos(elapsed * 0.7 + particle.phase) * 0.035;
+      const particleMotionActive = !reduceMotion && convergence < 0.98;
+      const convergenceChanged =
+        Math.abs(convergence - lastParticleConvergenceRef.current) > PARTICLE_CONVERGENCE_EPSILON;
+
+      if (particleMotionActive || convergenceChanged) {
+        for (let index = 0; index < particles.length; index += 1) {
+          const particle = particles[index]!;
+          const [originX, originY, originZ] = particle.origin;
+          const [targetX, targetY, targetZ] = particle.target;
+          const x = MathUtils.lerp(originX, targetX, convergence);
+          const y = MathUtils.lerp(originY, targetY, convergence);
+          const z = MathUtils.lerp(originZ, targetZ, convergence);
+          const jitterX = particleMotionActive ? Math.sin(elapsed * 0.8 + particle.phase) * 0.045 : 0;
+          const jitterY = particleMotionActive ? Math.cos(elapsed * 0.7 + particle.phase) * 0.035 : 0;
+          const rotationTime = particleMotionActive ? elapsed : 0;
+          const scalar = particle.scale * (1 + convergence * 0.55);
+          tempObject.position.set(x + jitterX, y + jitterY, z);
+          tempObject.rotation.set(rotationTime * 0.2 + particle.phase, rotationTime * 0.12, particle.phase);
+          tempObject.scale.setScalar(scalar);
+          tempObject.updateMatrix();
+          particleRef.current.setMatrixAt(index, tempObject.matrix);
         }
-        const scalar = particle.scale * (1 + convergence * 0.55);
-        tempObject.position.copy(tempVector);
-        tempObject.rotation.set(elapsed * 0.2 + particle.phase, elapsed * 0.12, particle.phase);
-        tempObject.scale.setScalar(scalar);
-        tempObject.updateMatrix();
-        particleRef.current?.setMatrixAt(index, tempObject.matrix);
-      });
-      particleRef.current.instanceMatrix.needsUpdate = true;
+        particleRef.current.instanceMatrix.needsUpdate = true;
+        lastParticleConvergenceRef.current = convergence;
+      }
     }
 
     packetRefs.current.forEach((packet, index) => {
@@ -206,7 +240,7 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
       const direction = index % 2 === 0 ? 1 : -1;
       const offset = (elapsed * (0.18 + lane * 0.025) + index * 0.17) % 1;
       const x = MathUtils.lerp(-1.58, 1.58, direction > 0 ? offset : 1 - offset);
-      const y = [-0.92, -0.42, 0.42, 0.92][lane];
+      const y = PACKET_LANE_Y[lane];
       packet.position.set(x, y, 0.08 + lane * 0.015);
       packet.scale.setScalar((0.05 + lane * 0.006) * automation);
       packet.visible = automation > 0.04;
@@ -256,21 +290,21 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
           <meshBasicMaterial color="#0FD9C8" wireframe transparent opacity={0.12} blending={AdditiveBlending} />
         </mesh>
 
-        <mesh ref={reactorRef} castShadow receiveShadow>
-          <icosahedronGeometry args={[0.72, 2]} />
+        <mesh ref={reactorRef}>
+          <icosahedronGeometry args={[0.72, 1]} />
           <MeshTransmissionMaterial
-            samples={8}
-            resolution={768}
+            samples={2}
+            resolution={256}
             transmission={1}
-            thickness={1.2}
-            roughness={0.035}
-            chromaticAberration={0.18}
-            anisotropy={0.18}
-            distortion={0.08}
-            distortionScale={0.22}
-            temporalDistortion={0.09}
+            thickness={0.82}
+            roughness={0.05}
+            chromaticAberration={0.08}
+            anisotropy={0.08}
+            distortion={0.05}
+            distortionScale={0.14}
+            temporalDistortion={0.04}
             backside
-            backsideThickness={0.48}
+            backsideThickness={0.24}
             color="#F5F4F0"
           />
         </mesh>
@@ -286,7 +320,7 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
             <sphereGeometry args={[1, 12, 12]} />
             <meshStandardMaterial
               color={index % 2 === 0 ? "#0FD9C8" : "#F05A28"}
-              emissive={new Color(index % 2 === 0 ? "#0FD9C8" : "#F05A28")}
+              emissive={index % 2 === 0 ? "#0FD9C8" : "#F05A28"}
               emissiveIntensity={2.6}
               toneMapped={false}
             />
@@ -295,11 +329,11 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
 
         <group ref={healthRef} visible={false}>
           <mesh>
-            <torusGeometry args={[1.75, 0.008, 8, 128]} />
+            <torusGeometry args={[1.75, 0.008, 8, 72]} />
             <meshBasicMaterial color="#0FD9C8" transparent opacity={0.72} blending={AdditiveBlending} />
           </mesh>
           <mesh rotation={[Math.PI / 2, 0, 0]}>
-            <torusGeometry args={[1.64, 0.007, 8, 128]} />
+            <torusGeometry args={[1.64, 0.007, 8, 72]} />
             <meshBasicMaterial color="#0FD9C8" transparent opacity={0.42} blending={AdditiveBlending} />
           </mesh>
         </group>
@@ -321,6 +355,9 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
                 scale={0.56}
                 transform
                 occlude={false}
+                // Clamp three.js depth-derived z-index to [10,0] so this element
+                // never escapes the Canvas compositor layer and beats page content.
+                zIndexRange={[10, 0]}
                 className="pointer-events-none select-none"
               >
                 <div
@@ -346,6 +383,7 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
                 scale={0.54}
                 transform
                 occlude={false}
+                zIndexRange={[10, 0]}
                 className="pointer-events-none select-none"
               >
                 <span
@@ -367,7 +405,13 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
 
 export function RootSystemScene({ trackRef, steps }: RootSystemSceneProps) {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 isolate">
+    // isolation: isolate  → strict local stacking context; no child z-index escapes
+    // transform-style: flat → collapses the CSS 3D depth axis so Html matrix3d
+    //   transforms cannot visually intersect elements outside this layer
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 z-0 isolate [transform-style:flat]"
+    >
       <View track={trackRef} className="pointer-events-none absolute inset-0 z-0 h-full w-full">
         <EngineRoomScene trackRef={trackRef} steps={steps} />
       </View>

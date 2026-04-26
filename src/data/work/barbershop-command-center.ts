@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const barbershopCommandCenter: CaseStudy = {
   slug: "barbershop-command-center",
-  title: "Barbershop Command Center — Booking CRM & Retention Operating System",
+  title: "Hoosier Boy Barbershop — Local Booking, Reminders, Reviews & Repeat Visits",
   clientName: "Hoosier Boy Barbershop",
   clientContext: "Local service business · Indianapolis, IN",
   location: "Indianapolis, IN",
@@ -12,45 +12,45 @@ export const barbershopCommandCenter: CaseStudy = {
   problemClusters: ["disconnected-systems", "not-visible-enough", "site-not-converting"],
   trustLadderStage: "evaluate",
   metrics: [
-    { value: "4.9★", label: "Average Google rating maintained", isHighlighted: true },
-    { value: "3×", label: "Increase in repeat booking rate" },
-    { value: "60%", label: "Reduction in no-shows via automated reminders" },
+    { value: "3×", label: "Increase in repeat booking rate", isHighlighted: true },
+    { value: "60%", label: "Fewer no-shows with automated reminders" },
+    { value: "4.9★", label: "Google rating maintained" },
   ],
   primaryMetric: {
-    value: "4.9★",
-    label: "Average Google rating maintained",
+    value: "3×",
+    label: "Increase in repeat booking rate",
     isHighlighted: true,
   },
-  primaryOutcomeSlug: "system-consolidation",
-  outcomeHeadline: "4.9★ rating + 3× repeat bookings — local system built",
+  primaryOutcomeSlug: "conversion-lift",
+  outcomeHeadline: "3× repeat bookings, fewer no-shows, strong local reviews",
   resultSummary:
-    "Hoosier Boy rebuilt booking, retention, and owner operations as one connected system. Public booking flow, CRM lifecycle states, and automation sequences now run as an integrated command center that tripled repeat bookings while maintaining a 4.9-star reputation signal.",
+    "Hoosier Boy connected public booking, CRM, reminders, and review asks so repeat visits and show-up rates improved. Repeat bookings about tripled, no-shows dropped with reminder automation, and Google ratings stayed in the high 4.9 range.",
   heroSubhead:
-    "A high-quality local shop with strong service delivery but disconnected booking, follow-up, and owner reporting surfaces. Rebuilt into one operating system.",
+    "A strong local shop with disconnected booking, follow-up, and owner visibility. Wired booking, CRM, reminders, and reviews into one practical setup.",
   whyThisMattered:
-    "For appointment-based service businesses, retention and utilization determine margin more than net-new traffic alone. Without a lifecycle system, even strong demand leaks through no-shows, inactive client segments, and inconsistent rebooking behavior.",
+    "For appointment-based businesses, repeat visits and chair time matter as much as new traffic. When booking, reminders, and follow-up are disconnected, strong demand still leaks through no-shows, quiet clients, and missed rebooks.",
   whatWasBroken: [
-    "No central CRM lifecycle model — client history existed, but outreach logic was disconnected from booking behavior",
-    "No review request system — high-quality visits rarely converted into fresh trust signals",
-    "Rebooking was verbal or ad hoc — no lifecycle triggers for reminder, retention, or reactivation",
-    "Local SEO was unstructured — citations inconsistent, Google Business Profile incomplete",
-    "No-show rate was high — appointment reminders relied on the booking app's defaults",
+    "Client history lived in the booking app, but follow-up and outreach were not tied to that record",
+    "No steady review request flow—great cuts rarely became fresh public proof",
+    "Rebooking was informal—no clear reminders for the next visit or lapsed clients",
+    "Local listings were messy—inconsistent citations and an incomplete Google Business Profile",
+    "No-shows were high—default reminders from the booking app were not enough",
   ],
   buildSections: [
     {
-      title: "Public booking surface and CRM integration",
+      title: "Public booking tied to a CRM client record",
       description:
-        "Public booking flow was aligned to a CRM-backed client record so every appointment updated lifecycle state, visit cadence, and follow-up eligibility. New and returning clients were segmented into distinct operational tracks.",
+        "Every appointment updated the client record, visit pattern, and who was due for a nudge. New and returning clients could be handled with clear segments.",
     },
     {
-      title: "Lifecycle retention and review automation",
+      title: "Reminders, review asks, and win-back on a schedule",
       description:
-        "Post-visit flows were rebuilt into lifecycle automation: thank-you, review request, next-visit reminder, and lapsed-client reactivation. Trigger rules reduced manual outreach and made review velocity and retention more predictable.",
+        "After each visit, thank-you, review request, next-cut reminder, and lapsed-client messages ran on rules instead of someone remembering. Review cadence and repeat visits became more predictable.",
     },
     {
-      title: "Owner-admin command center workflow",
+      title: "Owner view of bookings, segments, and follow-ups",
       description:
-        "A command-center operating view centralized booking status, lifecycle segments, and outreach queues so owner/admin decisions no longer depended on memory or disconnected tools.",
+        "One place to see who booked, who needs a reminder, and which outreach is queued—so the owner is not piecing it together from three apps.",
     },
     {
       title: "Local conversion and reputation support layer",
@@ -59,15 +59,15 @@ export const barbershopCommandCenter: CaseStudy = {
     },
   ],
   operatingImpact:
-    "The shop now operates from a connected booking-to-retention system instead of fragmented tools. Owner/admin can see lifecycle state, trigger outreach by segment, and sustain retention/review operations without daily manual coordination.",
+    "The shop runs booking, follow-up, and reviews as one program instead of separate tools. The owner can see who is due for what and keep retention and review cadence without daily manual chasing.",
   implementationLayers: [
-    "Public booking surface",
-    "CRM lifecycle state model",
-    "SMS and email lifecycle automation",
-    "Owner/admin command-center view",
-    "Google Business Profile optimization",
+    "Public booking flow",
+    "CRM-backed client model",
+    "SMS and email reminder automation",
+    "Owner view of bookings and follow-up queues",
+    "Google Business Profile cleanup",
     "Citation cleanup",
-    "Retention and reactivation orchestration",
+    "Retention and reactivation messages",
   ],
   implementationStackCategories: [
     "revenue-crm",
@@ -91,19 +91,20 @@ export const barbershopCommandCenter: CaseStudy = {
   relatedProblemSlugs: ["disconnected-systems", "not-visible-enough", "site-not-converting"],
   relatedProofSlugs: ["russell-painting"],
   systemsBuilt: [
-    "Booking + CRM integration",
-    "Lifecycle automation hub",
-    "Owner-admin command center",
-    "Review velocity pipeline",
-    "Retention and reactivation system",
+    "Booking and CRM integration",
+    "Scheduled reminders and follow-up",
+    "Owner dashboard for segment and queue visibility",
+    "Review request flow",
+    "Reactivation and retention messages",
   ],
   cloudinaryImages: ["hoosier-boy-barbershop-website-design", "hoosierboy-logo-anchor"],
   featured: false,
-  projectType: "crm-automation-system",
+  projectType: "local-growth-system",
   buyerScenario: "operations-manual-fragmented",
-  projectComplexity: "integration",
+  projectComplexity: "multi-surface",
   scopeShape: "crm-lifecycle",
+  evidenceType: "reputation-and-retention",
   primarySimilaritySummary:
-    "Local service brands connecting booking, CRM, and retention in one command layer.",
+    "This is a fit if you run an appointment-based local business and need booking, reminders, and reviews to work together without a full enterprise CRM roll-out story.",
   publishedAt: "2023-09-01",
 };

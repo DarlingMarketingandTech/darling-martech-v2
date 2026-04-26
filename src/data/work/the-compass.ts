@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const theCompass: CaseStudy = {
   slug: "the-compass",
-  title: "The Compass — Strategic Clarity Tool for B2B Buyers",
+  title: "The Compass — Interactive Marketing Diagnostic (Next.js + CRM)",
   clientName: "Internal · Darling MarTech",
   clientContext: "Product-led lead generation · Interactive diagnostic tool",
   location: "Indianapolis, IN",
@@ -32,7 +32,7 @@ export const theCompass: CaseStudy = {
   whatWasBroken: [
     "Cold outreach and ads produced low-intent leads who needed extensive qualification before a diagnosis could happen",
     "Homepage CTAs drove traffic to a booking page, bypassing buyers who were not yet ready to commit to a call",
-    "No mid-funnel touchpoint existed between 'arrived at the site' and 'booked a call'",
+    "Nothing useful sat between 'landed on the site' and 'book a call' for people who were not ready to talk yet",
   ],
   buildSections: [
     {
@@ -73,7 +73,7 @@ export const theCompass: CaseStudy = {
   ],
   implementationPlatformSlugs: [
     "nextjs",
-    "salesforce",
+    "hubspot",
     "google",
     "github",
     "figma",
@@ -94,7 +94,8 @@ export const theCompass: CaseStudy = {
   buyerScenario: "trust-routing-weak",
   projectComplexity: "multi-surface",
   scopeShape: "single-flow",
+  evidenceType: "product-usage-conversion",
   primarySimilaritySummary:
-    "B2B teams shipping an interactive product surface with CRM-backed routing and nurture.",
+    "This is a fit if you want a structured quiz or diagnostic on your site that turns browsers into named leads and routes them in CRM by problem type.",
   publishedAt: "2024-03-01",
 };

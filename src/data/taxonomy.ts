@@ -1,10 +1,10 @@
 import type {
   BuyerScenarioId,
   EngagementFormat,
-  EvidenceType,
   OutcomeSlug,
   OutcomeTag,
   ProblemCluster,
+  ProofEvidenceType,
   ProjectComplexity,
   ProjectPathId,
   ProjectTypeId,
@@ -111,6 +111,7 @@ export const OUTCOME_SLUG_ORDER: OutcomeSlug[] = [
 /** Primary proof hub browse order — project shape first */
 export const PROJECT_TYPE_ORDER: ProjectTypeId[] = [
   "website-brand-rebuild",
+  "brand-identity-system",
   "conversion-path-repair",
   "crm-automation-system",
   "local-growth-system",
@@ -122,8 +123,9 @@ export const PROJECT_TYPE_ORDER: ProjectTypeId[] = [
 
 export const PROJECT_TYPE_LABELS: Record<ProjectTypeId, string> = {
   "website-brand-rebuild": "Website & brand system",
+  "brand-identity-system": "Brand identity & guidelines",
   "conversion-path-repair": "Conversion path repair",
-  "crm-automation-system": "CRM & automation system",
+  "crm-automation-system": "CRM & automation",
   "local-growth-system": "Local growth & visibility",
   "reporting-attribution-system": "Reporting & attribution",
   "custom-infrastructure-product": "Custom product & infrastructure",
@@ -140,11 +142,11 @@ export const BUYER_SCENARIO_ORDER: BuyerScenarioId[] = [
 ];
 
 export const BUYER_SCENARIO_LABELS: Record<BuyerScenarioId, string> = {
-  "demand-exists-conversion-leaks": "Demand exists but conversion leaks",
-  "operations-manual-fragmented": "Operations are manual and fragmented",
-  "trust-routing-weak": "Trust exists but routing is weak",
-  "spend-visible-attribution-weak": "Spend is visible but attribution is weak",
-  "visibility-demand-gap": "Visibility & demand gap",
+  "demand-exists-conversion-leaks": "You already have interest, but too few people become customers",
+  "operations-manual-fragmented": "Leads and follow-up live in spreadsheets, inboxes, and one-off tools",
+  "trust-routing-weak": "People find you, but the next step (book, buy, call) is unclear",
+  "spend-visible-attribution-weak": "You’re spending on growth, but can’t see what actually works",
+  "visibility-demand-gap": "Not enough of the right people discover you yet",
 };
 
 export const PROJECT_COMPLEXITY_ORDER: ProjectComplexity[] = [
@@ -170,21 +172,30 @@ export const SCOPE_SHAPE_ORDER: ScopeShape[] = [
 ];
 
 export const SCOPE_SHAPE_LABELS: Record<ScopeShape, string> = {
-  "single-flow": "Single route or flow",
-  "multi-page": "Multi-page architecture",
-  "crm-lifecycle": "CRM & lifecycle automation",
-  "reporting-visibility": "Reporting & operational visibility",
-  "multi-channel": "Multi-channel / full stack",
+  "single-flow": "One primary user path (e.g. one tool or funnel)",
+  "multi-page": "Site or experience spanning multiple pages",
+  "crm-lifecycle": "CRM, email/SMS, and follow-up tied to the customer record",
+  "reporting-visibility": "Dashboards, attribution, or operational reporting",
+  "multi-channel": "Several channels and systems working as one (e.g. web + CRM + ads)",
 };
 
-export const EVIDENCE_TYPE_ORDER: EvidenceType[] = [
-  "outcome-metrics",
-  "system-build",
-  "mixed-evidence",
+export const PROOF_EVIDENCE_TYPE_ORDER: ProofEvidenceType[] = [
+  "quantified-pipeline",
+  "quantified-efficiency",
+  "quantified-traffic-local",
+  "reputation-and-retention",
+  "product-usage-conversion",
+  "documented-delivery",
+  "mixed",
 ];
 
-export const EVIDENCE_TYPE_LABELS: Record<EvidenceType, string> = {
-  "outcome-metrics": "Outcome metrics",
-  "system-build": "System build",
-  "mixed-evidence": "Mixed evidence",
+export const PROOF_EVIDENCE_TYPE_LABELS: Record<ProofEvidenceType, string> = {
+  "quantified-pipeline": "Pipeline or conversion lift (numbers)",
+  "quantified-efficiency": "Time saved or overhead reduced (numbers)",
+  "quantified-traffic-local": "Traffic, local pack, or discovery (numbers)",
+  "reputation-and-retention": "Reviews, repeat business, or trust signals",
+  "product-usage-conversion": "In-product behavior (sessions, completion, tool conversion)",
+  "documented-delivery": "Delivered system or creative, narrated outcome",
+  mixed: "More than one evidence type",
 };
+

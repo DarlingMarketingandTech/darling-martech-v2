@@ -2,9 +2,9 @@ import type { CaseStudy } from "@/types";
 
 export const clinicalCompass: CaseStudy = {
   slug: "clinical-compass",
-  title: "Clinical Compass — Patient Intake & Navigation System",
-  clientName: "Pike Medical Consultants",
-  clientContext: "Regional healthcare practice · Multi-provider group",
+  title: "Clinical Compass — CRM, Intake & Patient Follow-Up for a Medical Group",
+  clientName: "Regional multi-provider practice",
+  clientContext: "Outpatient medical group · Indianapolis, IN",
   location: "Indianapolis, IN",
   timeline: "90-day project engagement",
   engagementFormat: "project",
@@ -26,7 +26,7 @@ export const clinicalCompass: CaseStudy = {
   resultSummary:
     "Patient intake, follow-up, and pipeline visibility rebuilt as a connected system. Front-desk intake time reduced 40%. New patient pipeline grew 45% within the engagement period as referral and digital leads stopped leaking through manual handoffs.",
   heroSubhead:
-    "A regional medical practice growing on referrals but losing new patients to intake friction and follow-up gaps. Rebuilt the front-end of patient acquisition as a system.",
+    "A growing practice with strong referrals but new patients lost to intake friction and missed follow-up. Rebuilt intake, CRM, and follow-up as one connected workflow.",
   whyThisMattered:
     "Healthcare practices that grow through referrals often have excellent clinical delivery but a broken acquisition system. Each patient who calls and doesn't book, or books and doesn't show, represents lost revenue and wasted marketing spend. For a practice managing multiple providers, the intake gap compounded daily.",
   whatWasBroken: [
@@ -38,12 +38,12 @@ export const clinicalCompass: CaseStudy = {
   ],
   buildSections: [
     {
-      title: "CRM implementation and intake unification",
+      title: "CRM and intake in one place",
       description:
         "Practice management platform connected to CRM via API integration. All new patient touchpoints — phone, web form, online booking, and referral — unified into a single pipeline. Each lead assigned a source tag and an intake status. Staff visibility shifted from inbox-based to pipeline-based.",
     },
     {
-      title: "Automated follow-up sequences",
+      title: "Automated follow-up (email/SMS) from CRM",
       description:
         "Three sequences built: new inquiry follow-up (same-day and 48-hour touchpoints for non-responders), appointment confirmation and preparation, and no-show reactivation. All triggered by CRM status changes, not staff action. Front-desk time shifted from follow-up to patient care.",
     },
@@ -96,7 +96,8 @@ export const clinicalCompass: CaseStudy = {
   buyerScenario: "operations-manual-fragmented",
   projectComplexity: "integration",
   scopeShape: "crm-lifecycle",
+  evidenceType: "quantified-pipeline",
   primarySimilaritySummary:
-    "Multi-site healthcare groups where new patient demand leaks between intake, booking, and follow-up.",
+    "This is a fit if new patient calls and forms slip through the cracks between the front desk, email, and booking tools.",
   publishedAt: "2023-08-01",
 };

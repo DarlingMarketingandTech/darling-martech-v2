@@ -2,9 +2,10 @@ import type { CaseStudy } from "@/types";
 
 export const blackLetter: CaseStudy = {
   slug: "black-letter",
-  title: "Black Letter — Brand Identity System",
+  // Entry-level, scope-delivered proof — brand kit only (no full site or CRM work in this engagement).
+  title: "Black Letter — Brand Identity & Visual Standards",
   clientName: "Black Letter",
-  clientContext: "Brand identity engagement",
+  clientContext: "Brand identity project",
   timeline: "Project engagement",
   engagementFormat: "project",
   outcomeTags: ["Systems Built"],
@@ -76,12 +77,13 @@ export const blackLetter: CaseStudy = {
     "Usage and governance guide",
   ],
   featured: false,
-  projectType: "website-brand-rebuild",
+  projectType: "brand-identity-system",
   buyerScenario: "trust-routing-weak",
   projectComplexity: "focused",
-  scopeShape: "multi-page",
+  scopeShape: "single-flow",
+  evidenceType: "documented-delivery",
   primarySimilaritySummary:
-    "Firms with strong delivery but brand drift across site, sales, and campaigns.",
+    "This is a fit if you need a clear logo, type, and color system before you invest in a new site or campaigns.",
   publishedAt: "2024-03-01",
   cloudinaryImages: [
     "Gemini_Generated_Image_aadwklaadwklaadw",

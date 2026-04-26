@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const licenseRequirementsNavigator: CaseStudy = {
   slug: "license-requirements-navigator",
-  title: "License Requirements Navigator — CE Compliance Tool",
+  title: "License Requirements Navigator — CE Lookup Web App (State-by-State)",
   clientName: "Graston Technique®",
   clientContext: "Healthcare training · Clinician certification · Continuing education",
   location: "Indianapolis, IN",
@@ -18,11 +18,11 @@ export const licenseRequirementsNavigator: CaseStudy = {
   ],
   primaryMetric: {
     value: "34%",
-    label: "Tool-to-registration conversion rate",
+    label: "Registration rate after using the tool (30 days)",
     isHighlighted: true,
   },
   primaryOutcomeSlug: "lead-gen",
-  outcomeHeadline: "34% tool-to-registration rate — CE compliance tool",
+  outcomeHeadline: "34% of tool users registered for training within 30 days",
   resultSummary:
     "A state-by-state continuing education requirements tool built as a lead-generation asset. Licensed clinicians look up their state's CE requirements, confirm Graston coursework qualifies, and register — without leaving the tool. 34% of tool users converted to a training registration within 30 days.",
   heroSubhead:
@@ -95,7 +95,8 @@ export const licenseRequirementsNavigator: CaseStudy = {
   buyerScenario: "visibility-demand-gap",
   projectComplexity: "multi-surface",
   scopeShape: "multi-page",
+  evidenceType: "product-usage-conversion",
   primarySimilaritySummary:
-    "Regulated programs that need compliance-grade lookup UX plus structured, discoverable state content.",
+    "This is a fit if your buyers have to look up complex rules (licensing, CE, compliance) and you want a self-serve path that also feeds your CRM and SEO.",
   publishedAt: "2024-02-01",
 };

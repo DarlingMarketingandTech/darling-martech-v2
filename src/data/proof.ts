@@ -70,8 +70,13 @@ export const proofPageData = {
     },
     {
       projectTypeLabel: "CRM & automation system",
-      description: "Intake, follow-up, and visibility rebuilt as a connected operating layer.",
-      caseStudySlugs: ["clinical-compass", "barbershop-command-center"],
+      description: "Connected operating layers where booking, lifecycle, and day-to-day follow-up stop depending on memory.",
+      caseStudySlugs: ["graston-growth-engine", "barbershop-command-center"],
+    },
+    {
+      projectTypeLabel: "Custom workflow & diagnostic products",
+      description: "Guided tools and workflow products built to help users decide, qualify, or act in one focused flow.",
+      caseStudySlugs: ["clinical-compass", "the-compass", "license-requirements-navigator"],
     },
     {
       projectTypeLabel: "Local growth & visibility",

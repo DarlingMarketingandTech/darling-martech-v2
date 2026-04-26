@@ -172,7 +172,7 @@ export function FunnelRoiForecaster() {
         body="Want help finding the real bottleneck? These proofs show what a conversion-system rebuild actually changes, and the service behind it."
         links={[
           { label: "317 BBQ proof", href: "/proof/317-bbq" },
-          { label: "See similar proof", href: "/proof/clinical-compass", tone: "ghost" },
+          { label: "See similar proof", href: "/proof/primarycare-indy", tone: "ghost" },
           { label: "Conversion optimization service", href: "/services/conversion-optimization", tone: "ghost" },
         ]}
       />

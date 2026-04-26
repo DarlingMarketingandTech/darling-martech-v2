@@ -3,12 +3,18 @@ import type { CaseStudy } from "@/types";
 const DEFAULT_LIMIT = 4;
 
 const SIMILARITY_WEIGHTS = {
-  projectType: 6,
-  buyerScenario: 3,
+  projectType: 8,
+  buyerScenario: 5,
+  scopeShape: 4,
+  evidenceType: 3,
   primaryOutcomeSlug: 3,
   engagementFormat: 2,
   systemsBuilt: 1,
 } as const;
+
+export type SimilarProofOptions = {
+  limit?: number;
+};
 
 function normalizeSystemName(system: string) {
   return system.trim().toLowerCase();
@@ -39,6 +45,14 @@ function getSimilarityScore(current: CaseStudy, candidate: CaseStudy) {
     score += SIMILARITY_WEIGHTS.buyerScenario;
   }
 
+  if (candidate.scopeShape === current.scopeShape) {
+    score += SIMILARITY_WEIGHTS.scopeShape;
+  }
+
+  if (candidate.evidenceType === current.evidenceType) {
+    score += SIMILARITY_WEIGHTS.evidenceType;
+  }
+
   if (candidate.primaryOutcomeSlug === current.primaryOutcomeSlug) {
     score += SIMILARITY_WEIGHTS.primaryOutcomeSlug;
   }
@@ -56,8 +70,8 @@ function comparePublishedAtDescending(left: CaseStudy, right: CaseStudy) {
   return new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime();
 }
 
-function clampLimit(limit: number) {
-  if (!Number.isFinite(limit)) {
+function clampLimit(limit: number | undefined) {
+  if (typeof limit !== "number" || !Number.isFinite(limit)) {
     return DEFAULT_LIMIT;
   }
 
@@ -67,9 +81,9 @@ function clampLimit(limit: number) {
 export function getSimilarProof(
   caseStudy: CaseStudy,
   allCaseStudies: CaseStudy[],
-  limit = DEFAULT_LIMIT
+  options?: SimilarProofOptions
 ): CaseStudy[] {
-  const safeLimit = clampLimit(limit);
+  const safeLimit = clampLimit(options?.limit);
   const studiesBySlug = new Map(allCaseStudies.map((study) => [study.slug, study]));
 
   const manualMatches = (caseStudy.relatedProofSlugs ?? [])
@@ -93,6 +107,19 @@ export function getSimilarProof(
 
       if (right.sharedSystemsCount !== left.sharedSystemsCount) {
         return right.sharedSystemsCount - left.sharedSystemsCount;
+      }
+
+      if (right.candidate.projectComplexity !== left.candidate.projectComplexity) {
+        const complexityRank = {
+          focused: 0,
+          "multi-surface": 1,
+          integration: 2,
+          ongoing: 3,
+        } as const;
+
+        return (
+          complexityRank[right.candidate.projectComplexity] - complexityRank[left.candidate.projectComplexity]
+        );
       }
 
       return comparePublishedAtDescending(left.candidate, right.candidate);

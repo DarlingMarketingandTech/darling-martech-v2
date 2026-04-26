@@ -2,6 +2,7 @@ import { create, insertMultiple, search, type AnyOrama, type Results } from "@or
 import {
   BUYER_SCENARIO_LABELS,
   OUTCOME_SLUG_LABELS,
+  PROJECT_TYPE_ORDER,
   PROJECT_TYPE_LABELS,
 } from "@/data/taxonomy";
 import { getBuyerStateLabel, getCaseStudyBuyerState } from "@/lib/buyer-state";
@@ -208,6 +209,71 @@ export type ProofHubFacets = {
   complexity: Set<ProjectComplexity>;
   scopeShapes: Set<ScopeShape>;
 };
+
+function comparePublishedAtDescending(left: CaseStudy, right: CaseStudy) {
+  return new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime();
+}
+
+/**
+ * Default Proof Hub order should help buyers scan across project shapes before
+ * they encounter a second proof from the same cluster. We round-robin through
+ * project types, prefer featured anchors inside each type, and lightly
+ * penalize repeated client names to reduce company clustering.
+ */
+export function buildProofHubDefaultRankMap(caseStudies: CaseStudy[]): Map<string, number> {
+  const clientFrequency = caseStudies.reduce<Map<string, number>>((counts, study) => {
+    counts.set(study.clientName, (counts.get(study.clientName) ?? 0) + 1);
+    return counts;
+  }, new Map());
+
+  const studiesByProjectType = new Map(
+    PROJECT_TYPE_ORDER.map((projectType) => [projectType, [] as CaseStudy[]])
+  );
+
+  for (const study of caseStudies) {
+    const bucket = studiesByProjectType.get(study.projectType);
+    if (bucket) {
+      bucket.push(study);
+    }
+  }
+
+  for (const bucket of studiesByProjectType.values()) {
+    bucket.sort((left, right) => {
+      if (left.featured !== right.featured) {
+        return left.featured ? -1 : 1;
+      }
+
+      const leftClientFrequency = clientFrequency.get(left.clientName) ?? 0;
+      const rightClientFrequency = clientFrequency.get(right.clientName) ?? 0;
+      if (leftClientFrequency !== rightClientFrequency) {
+        return leftClientFrequency - rightClientFrequency;
+      }
+
+      return comparePublishedAtDescending(left, right);
+    });
+  }
+
+  const rankBySlug = new Map<string, number>();
+  let rank = 0;
+  let added = true;
+
+  while (added) {
+    added = false;
+
+    for (const projectType of PROJECT_TYPE_ORDER) {
+      const nextStudy = studiesByProjectType.get(projectType)?.shift();
+      if (!nextStudy) {
+        continue;
+      }
+
+      rankBySlug.set(nextStudy.slug, rank);
+      rank += 1;
+      added = true;
+    }
+  }
+
+  return rankBySlug;
+}
 
 /**
  * Applies the multi-select facet predicates without touching search ordering,

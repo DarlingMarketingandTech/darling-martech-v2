@@ -18,6 +18,7 @@ import {
 } from "@/data/taxonomy";
 import {
   applyFacets,
+  buildProofHubDefaultRankMap,
   buildProofSearchIndex,
   PROOF_SORT_OPTIONS,
   searchProofIndex,
@@ -77,9 +78,7 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
   const [searchSlugs, setSearchSlugs] = useState<Set<string> | null>(null);
 
   const defaultRanks = useMemo(() => {
-    const map = new Map<string, number>();
-    caseStudies.forEach((study, index) => map.set(study.slug, index));
-    return map;
+    return buildProofHubDefaultRankMap(caseStudies);
   }, [caseStudies]);
 
   useEffect(() => {

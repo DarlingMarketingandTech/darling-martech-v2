@@ -122,7 +122,7 @@ export const tools: Tool[] = [
         description:
           "The current site likely does not explain the offer clearly enough or move the right visitor to the next step quickly enough.",
         problemCluster: "site-not-converting",
-        recommendedProofSlug: "clinical-compass",
+        recommendedProofSlug: "primarycare-indy",
         recommendedService: "content-seo-systems",
         ctaLabel: "See the website problem",
         ctaHref: "/problems/site-not-converting",
@@ -271,7 +271,7 @@ export const tools: Tool[] = [
         description:
           "You likely have pockets of maturity with uneven handoffs. Tightening definitions, ownership, and instrumentation now prevents a costly rewrite later.",
         problemCluster: "disconnected-systems",
-        recommendedProofSlug: "clinical-compass",
+        recommendedProofSlug: "graston-growth-engine",
         recommendedService: "martech-stack-build",
         ctaLabel: "See how I integrate stacks",
         ctaHref: "/problems/disconnected-systems",
@@ -445,7 +445,7 @@ export const tools: Tool[] = [
         description:
           "When runway is workable and instrumentation is not blocking, the roadmap should emphasize shipping weekly improvements tied to conversion and pipeline, not another strategy deck.",
         problemCluster: "site-not-converting",
-        recommendedProofSlug: "clinical-compass",
+        recommendedProofSlug: "primarycare-indy",
         recommendedService: "content-seo-systems",
         ctaLabel: "See the website problem",
         ctaHref: "/problems/site-not-converting",

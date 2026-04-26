@@ -125,8 +125,8 @@ export default function ProofPage() {
               Case studies
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#F5F4F0]/56">
-              Filter by the outcome you care about. Each row opens a single engagement with full context
-              — not blended averages.
+              Start with project type or buyer situation, then use outcomes to narrow. Each row opens a
+              single engagement with full context — not blended averages.
             </p>
             <ProofTelemetryFeaturedRows caseStudies={caseStudies} />
             <ProofFilterClient caseStudies={caseStudies} />

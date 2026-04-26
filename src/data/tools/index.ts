@@ -8,7 +8,7 @@ export const TOOL_META: DiagnosticToolMeta[] = [
     isProofLinked: true,
     relatedProblemSlugs: ["site-not-converting", "pipeline-not-predictable"],
     relatedServiceSlugs: ["conversion-optimization", "attribution-analytics"],
-    relatedProofSlugs: ["317-bbq", "clinical-compass"],
+    relatedProofSlugs: ["317-bbq", "primarycare-indy"],
   },
   {
     slug: "demand-capture-cac-simulator",
@@ -53,7 +53,7 @@ export const TOOL_META: DiagnosticToolMeta[] = [
     isProofLinked: true,
     relatedProblemSlugs: ["no-strategy-owner", "brand-system-broken"],
     relatedServiceSlugs: ["fractional-cmo", "digital-marketing-strategy"],
-    relatedProofSlugs: ["graston-technique", "clinical-compass"],
+    relatedProofSlugs: ["graston-technique", "graston-qualified-leads"],
   },
   {
     slug: "cmo-simulator",

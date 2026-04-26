@@ -80,7 +80,7 @@ export const primarycareIndy: CaseStudy = {
     "brand-identity",
   ],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough", "brand-system-broken"],
-  relatedProofSlugs: ["urgentcare-indy", "clinical-compass"],
+  relatedProofSlugs: ["urgentcare-indy"],
   systemsBuilt: [
     "Patient booking conversion flow",
     "Service architecture by care intent",

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { OUTCOME_SLUG_LABELS, PROJECT_TYPE_LABELS } from "@/data/taxonomy";
 import type { CaseStudy } from "@/types";
-import { getBuyerStateLabel, getCaseStudyBuyerState } from "@/lib/buyer-state";
 import { cn } from "@/lib/utils";
 
 export type ProofCardSize = "sm" | "md" | "lg";
@@ -49,9 +48,12 @@ const sizeStyles: Record<
 
 export function ProofCard({ caseStudy, showSystems, size = "md" }: ProofCardProps) {
   const outcomeLabel = OUTCOME_SLUG_LABELS[caseStudy.primaryOutcomeSlug];
-  const buyerStateTag = getBuyerStateLabel(getCaseStudyBuyerState(caseStudy));
   const variant = sizeStyles[size];
   const renderSystems = showSystems ?? variant.showSystemsByDefault;
+  const contextLine =
+    caseStudy.showClientName === false
+      ? (caseStudy.clientContextLabel ?? caseStudy.clientContext)
+      : `${caseStudy.clientName} · ${caseStudy.clientContext}`;
 
   return (
     <Link
@@ -92,9 +94,6 @@ export function ProofCard({ caseStudy, showSystems, size = "md" }: ProofCardProp
           >
             {outcomeLabel}
           </span>
-          <span className="rounded-full border border-[#F5F4F0]/14 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-[#F5F4F0]/68">
-            {buyerStateTag}
-          </span>
           {size === "lg" ? (
             <span className="rounded-full border border-[#0FD9C8]/35 bg-[#0FD9C8]/10 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-[#0FD9C8]">
               Featured outcome
@@ -128,9 +127,7 @@ export function ProofCard({ caseStudy, showSystems, size = "md" }: ProofCardProp
           {caseStudy.resultSummary}
         </p>
 
-        <p className="relative z-2 meta-label mt-8 text-[#F5F4F0]/36">
-          {caseStudy.clientName} · {caseStudy.clientContext}
-        </p>
+        <p className="relative z-2 meta-label mt-8 text-[#F5F4F0]/36">{contextLine}</p>
 
         {renderSystems ? (
           <div className="relative z-2 mt-4 flex flex-wrap gap-2">

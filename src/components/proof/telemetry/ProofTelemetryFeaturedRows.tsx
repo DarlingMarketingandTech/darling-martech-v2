@@ -5,13 +5,14 @@ type ProofTelemetryFeaturedRowsProps = {
   caseStudies: CaseStudy[];
 };
 
-const FEATURED_ROW_LIMIT = 4;
+const FEATURED_ROW_LIMIT = 5;
 
 const PRIORITY_PROJECT_TYPES: ProjectTypeId[] = [
   "crm-automation-system",
   "custom-infrastructure-product",
   "local-growth-system",
   "brand-identity-system",
+  "conversion-path-repair",
 ];
 
 function selectFeaturedRows(caseStudies: CaseStudy[], limit = FEATURED_ROW_LIMIT) {
@@ -24,6 +25,10 @@ function selectFeaturedRows(caseStudies: CaseStudy[], limit = FEATURED_ROW_LIMIT
   const rows: CaseStudy[] = [];
 
   const sortedByDiversity = [...caseStudies].sort((left, right) => {
+    if (left.featured !== right.featured) {
+      return left.featured ? -1 : 1;
+    }
+
     const leftClientFrequency = clientFrequency.get(left.clientName) ?? 0;
     const rightClientFrequency = clientFrequency.get(right.clientName) ?? 0;
 
@@ -31,11 +36,7 @@ function selectFeaturedRows(caseStudies: CaseStudy[], limit = FEATURED_ROW_LIMIT
       return leftClientFrequency - rightClientFrequency;
     }
 
-    if (left.featured !== right.featured) {
-      return left.featured ? -1 : 1;
-    }
-
-    return 0;
+    return new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime();
   });
 
   for (const projectType of PRIORITY_PROJECT_TYPES) {
@@ -56,7 +57,7 @@ function selectFeaturedRows(caseStudies: CaseStudy[], limit = FEATURED_ROW_LIMIT
   }
 
   const featuredByProjectType = sortedByDiversity.filter(
-    (study) => study.featured && !selectedSlugs.has(study.slug)
+    (study) => !selectedSlugs.has(study.slug)
   );
 
   for (const study of featuredByProjectType) {

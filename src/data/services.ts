@@ -118,7 +118,7 @@ const servicesUnmerged: Omit<Service, "visualPublicId" | "visualAlt">[] = [
       "Segmented follow-up that runs automatically",
       "Real-time pipeline visibility for sales and leadership",
     ],
-    proofReferences: ["barbershop-command-center", "clinical-compass"],
+    proofReferences: ["barbershop-command-center", "graston-technique"],
     problemClusters: ["disconnected-systems", "pipeline-not-predictable"],
     engagementFormats: ["project", "diagnostic"],
     isFeatured: false,

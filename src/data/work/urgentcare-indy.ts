@@ -79,7 +79,7 @@ export const urgentcareIndy: CaseStudy = {
     "content-seo-systems",
   ],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough"],
-  relatedProofSlugs: ["primarycare-indy", "clinical-compass"],
+  relatedProofSlugs: ["primarycare-indy"],
   systemsBuilt: [
     "Urgent booking and check-in flow",
     "Online check-in path",

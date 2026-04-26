@@ -188,60 +188,59 @@ export const PROOF_ANGLES: ProofAngle[] = [
 
   // clinical-compass
   {
-    id: "clinical-compass-crm-intake",
+    id: "clinical-compass-protocol-routing",
     anchorProjectSlug: "clinical-compass",
-    title: "CRM and Intake Unification",
-    problemKey: "disconnected-systems",
-    primaryServiceSlug: "crm-architecture",
-    secondaryServiceSlugs: ["automation-systems", "martech-stack-build"],
+    title: "Point-of-Care Protocol Routing",
+    problemKey: "site-not-converting",
+    primaryServiceSlug: "custom-infrastructure",
+    secondaryServiceSlugs: ["website-design"],
     summary:
-      "Practice management data connected to a CRM pipeline so phone, web, booking, and referral leads landed in one place with source tags and intake status.",
+      "The protocol was turned into a guided decision path so clinicians could move one step at a time instead of interpreting a dense static reference at the point of care.",
     metrics: [
-      { value: "+45%", label: "Patient pipeline growth over engagement period", isHighlighted: true },
-      { value: "60 days", label: "Time to live pipeline visibility" },
+      { value: "Progressive disclosure", label: "Only the next relevant protocol step is shown", isHighlighted: true },
+      { value: "Single flow", label: "One guided pathway instead of dense document scanning" },
     ],
   },
   {
-    id: "clinical-compass-follow-up-automation",
+    id: "clinical-compass-json-pathways",
     anchorProjectSlug: "clinical-compass",
-    title: "Automated Inquiry and Appointment Sequences",
-    problemKey: "disconnected-systems",
-    primaryServiceSlug: "automation-systems",
-    secondaryServiceSlugs: ["crm-architecture"],
+    title: "JSON-Backed Pathway Architecture",
+    problemKey: "site-not-converting",
+    primaryServiceSlug: "custom-infrastructure",
     summary:
-      "Same-day and 48-hour inquiry follow-up, confirmations, and no-show reactivation sequences triggered from CRM status instead of staff memory.",
+      "Branch logic and content live in structured JSON so updates happen in pathway data instead of hardcoded UI branches, keeping the workflow maintainable.",
     metrics: [
-      { value: "40%", label: "Reduction in front-desk intake time" },
-      { value: "+45%", label: "Patient pipeline growth over engagement period", isHighlighted: true },
+      { value: "JSON-backed", label: "Branching content modeled outside the UI", isHighlighted: true },
+      { value: "Maintainable", label: "Protocol changes do not require UI rewrites" },
     ],
   },
   {
-    id: "clinical-compass-referral-tracking",
+    id: "clinical-compass-static-delivery",
     anchorProjectSlug: "clinical-compass",
-    title: "Referral Source Tracking System",
-    problemKey: "pipeline-not-predictable",
-    primaryServiceSlug: "attribution-analytics",
-    secondaryServiceSlugs: ["crm-architecture"],
-    summary:
-      "Referral sources captured at intake and surfaced in reporting so the practice could see which partners produced volume, conversion, and patient value.",
-    metrics: [
-      { value: "+45%", label: "Patient pipeline growth over engagement period", isHighlighted: true },
-      { value: "60 days", label: "Time to live pipeline visibility" },
-    ],
-  },
-  {
-    id: "clinical-compass-web-intake",
-    anchorProjectSlug: "clinical-compass",
-    title: "Conversion-Focused Web Intake",
+    title: "Static Embed Delivery Model",
     problemKey: "site-not-converting",
     primaryServiceSlug: "website-design",
-    secondaryServiceSlugs: ["conversion-optimization", "crm-architecture"],
+    secondaryServiceSlugs: ["custom-infrastructure"],
+    summary:
+      "Built with vanilla HTML, CSS, and JavaScript so the workflow can be embedded anywhere without a framework runtime or app-shell dependency.",
+    metrics: [
+      { value: "Static embed", label: "Deployable inside lightweight environments", isHighlighted: true },
+      { value: "Vanilla JS", label: "No heavy framework dependency required" },
+    ],
+  },
+  {
+    id: "clinical-compass-protocol-ux",
+    anchorProjectSlug: "clinical-compass",
+    title: "Low-Friction Protocol UX",
+    problemKey: "site-not-converting",
+    primaryServiceSlug: "website-design",
+    secondaryServiceSlugs: ["custom-infrastructure"],
     toolSlug: "growth-system-audit",
     summary:
-      "Online intake simplified for mobile, with completions entering the CRM immediately so same-day lead lag from manual entry dropped.",
+      "The interface was tuned for clarity in the care moment: progressive disclosure, simple branching choices, and copy that helps users commit to the next protocol step quickly.",
     metrics: [
-      { value: "40%", label: "Reduction in front-desk intake time" },
-      { value: "+45%", label: "Patient pipeline growth over engagement period", isHighlighted: true },
+      { value: "Point-of-care", label: "Designed for in-context clinical use" },
+      { value: "Progressive disclosure", label: "Reduced cognitive load in complex pathways", isHighlighted: true },
     ],
   },
   // russell-painting

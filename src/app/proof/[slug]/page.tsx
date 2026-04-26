@@ -11,6 +11,7 @@ import { ProofImplementationStackBlock } from "@/components/capabilities/Capabil
 import { ProofAnglesDemonstration } from "@/components/proof/ProofAnglesDemonstration";
 import { ProofDetailAmbient } from "@/components/proof/ProofDetailAmbient";
 import { ProofMetricTile } from "@/components/proof/ProofMetricTile";
+import { ProofSystemSnapshot } from "@/components/proof/ProofSystemSnapshot";
 import { getProofAnglesForProject } from "@/data/proof-angles";
 import { caseStudies } from "@/data/work/work-index";
 import { problemPages } from "@/data/problems";
@@ -25,6 +26,11 @@ import { siteConfig } from "@/data/site-config";
 import { cn } from "@/lib/utils";
 const layerChipClass =
   "rounded-md border border-[#F5F4F0]/12 bg-[#0C0C0E]/35 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#F5F4F0]/58";
+
+function getProjectFirstTitle(title: string) {
+  const [clientLead, projectLead] = title.split(" — ");
+  return projectLead?.trim() ? projectLead.trim() : clientLead.trim();
+}
 
 type ProofSlugPageProps = {
   params: Promise<{ slug: string }>;
@@ -70,7 +76,12 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
   const proofAngles = getProofAnglesForProject(study.slug).slice(0, 3);
   const newsroomForProof = getNewsroomArticlesByProofSlug(study.slug);
   const heroImagePublicId = getProofDetailHeroPublicId(study);
-  const heroImageAlt = `${study.clientName} — engagement visual`;
+  const heroTitle = getProjectFirstTitle(study.title);
+  const heroImageAlt = `${heroTitle} — proof visual`;
+  const contextLine =
+    study.showClientName === false
+      ? (study.clientContextLabel ?? study.clientContext)
+      : `${study.clientName} · ${study.clientContext}`;
   const metricGridClass =
     study.metrics.length >= 4
       ? "sm:grid-cols-2 lg:grid-cols-4"
@@ -85,10 +96,10 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
         <div className="relative z-10">
       <PageHero
         eyebrow={PROJECT_TYPE_LABELS[study.projectType]}
-        headline={study.title}
+        headline={heroTitle}
         body={[
-          `${study.clientName} · ${study.clientContext}`,
           study.heroSubhead ?? study.resultSummary,
+          contextLine,
         ]}
         splitAside={<ServiceHeroVisual publicId={heroImagePublicId} alt={heroImageAlt} />}
       />
@@ -102,6 +113,8 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
           ))}
         </div>
       </BandSection>
+
+      <ProofSystemSnapshot caseStudy={study} />
 
       {/* Why this mattered + what was broken */}
       {(study.whyThisMattered || study.whatWasBroken?.length) && (
@@ -276,17 +289,17 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
 
       <SectionWrapper className="mt-14 text-center">
         <h2 className="font-display text-balance text-2xl font-semibold text-[#F5F4F0] md:text-3xl">
-          High trust, clear problem, ready to move?
+          Still deciding how similar this is to your situation?
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-sm text-[#F5F4F0]/55">
-          Mid trust: keep browsing similar proof. High trust: book a short diagnostic call.
+          Low trust: run the Growth System Audit. High trust: book a short diagnostic call once the shape is clear.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button href={siteConfig.calComLink} size="lg">
-            Book a diagnostic call
+          <Button href="/tools/growth-system-audit" size="lg">
+            Run the Growth System Audit →
           </Button>
-          <Button href="/proof" variant="secondary" size="lg">
-            See more proof
+          <Button href={siteConfig.calComLink} variant="secondary" size="lg">
+            Book a diagnostic call
           </Button>
         </div>
       </SectionWrapper>

@@ -98,6 +98,32 @@ export type PlatformSlug =
 
 export type EngagementFormat = "fractional" | "project" | "diagnostic";
 
+export type ProjectPathId =
+  | "funnel-architecture"
+  | "ops-automation"
+  | "brand-visibility"
+  | "diagnostic-products";
+
+export type ProjectTypeId =
+  | "full-funnel-system-build"
+  | "crm-and-lifecycle-automation"
+  | "local-visibility-and-conversion"
+  | "brand-identity-system"
+  | "interactive-diagnostic-product";
+
+export type BuyerScenarioId =
+  | "needs-strategic-ownership"
+  | "needs-intake-and-follow-up-system"
+  | "needs-local-demand-capture"
+  | "needs-brand-clarity-system"
+  | "needs-self-serve-decision-support";
+
+export type ProjectComplexity = "moderate" | "high" | "very-high";
+
+export type ScopeShape = "single-system" | "cross-system" | "platform-layer";
+
+export type EvidenceType = "outcome-metrics" | "system-build" | "mixed-evidence";
+
 /** URL-safe keys for /proof?outcome= — aligned with site blueprint. */
 export type OutcomeSlug =
   | "lead-gen"
@@ -124,6 +150,18 @@ export interface CaseStudy {
   title: string;
   clientName: string;
   clientContext: string;
+  projectPath: ProjectPathId;
+  projectType: ProjectTypeId;
+  buyerScenario: BuyerScenarioId;
+  projectComplexity: ProjectComplexity;
+  scopeShape: ScopeShape;
+  evidenceType: EvidenceType;
+  /** Optional one-line taxonomy signal used for "see similar proof" matching */
+  primarySimilaritySummary?: string;
+  /** Default true; set false when client should be de-emphasized in cards/lists */
+  showClientName?: boolean;
+  /** Optional replacement chip for client context where anonymity is preferred */
+  clientContextLabel?: string;
   location?: string;
   timeline: string;
   engagementFormat: EngagementFormat;

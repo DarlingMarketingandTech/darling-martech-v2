@@ -133,15 +133,16 @@ export function HeroV3() {
           </motion.div>
 
           <motion.div variants={itemVariants} transition={{ duration: 0.55 }}>
-            <p className="max-w-[580px] text-pretty text-lg leading-relaxed text-[#F5F4F0]/74 md:text-xl">
+            <p className="max-w-[580px] text-pretty text-sm leading-relaxed text-[#F5F4F0]/74 md:text-base">
               {hero.subhead}
             </p>
           </motion.div>
 
+          {/* Buttons + trust row — visible on mobile/tablet, hidden on desktop (moved below diagnostic card) */}
           <motion.div
             variants={itemVariants}
             transition={{ duration: 0.6 }}
-            className="flex flex-wrap items-center gap-3 pt-1"
+            className="flex flex-wrap items-center gap-3 pt-1 lg:hidden"
           >
             <MagneticLink>
               <Button href={hero.primaryCta.href} size="lg" className="gap-2">
@@ -156,11 +157,11 @@ export function HeroV3() {
             </MagneticLink>
           </motion.div>
 
-          {/* Trust micro-row */}
+          {/* Trust micro-row — visible on mobile/tablet, hidden on desktop */}
           <motion.div
             variants={itemVariants}
             transition={{ duration: 0.65 }}
-            className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-3 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-[#F5F4F0]/52"
+            className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-3 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-[#F5F4F0]/52 lg:hidden"
           >
             <span className="inline-flex items-center gap-2">
               <Cpu className="size-3.5 text-[#0FD9C8]" /> Owner-operated
@@ -209,6 +210,32 @@ export function HeroV3() {
           </div>
           {/* Glow under the card */}
           <div className="pointer-events-none absolute -inset-x-6 -bottom-10 h-24 bg-[radial-gradient(60%_60%_at_50%_50%,rgba(240,90,40,0.25)_0%,rgba(240,90,40,0)_70%)] blur-2xl" />
+
+          {/* Buttons + trust row — desktop only, placed below the diagnostic card */}
+          <div className="mt-6 hidden lg:block">
+            <div className="flex flex-wrap items-center gap-3">
+              <MagneticLink>
+                <Button href={hero.primaryCta.href} size="lg" className="gap-2">
+                  {hero.primaryCta.label}
+                  <ArrowRight className="size-4" />
+                </Button>
+              </MagneticLink>
+              <MagneticLink>
+                <Button href={hero.secondaryCta.href} variant="ghost" size="lg" className="gap-2 text-[#F5F4F0]">
+                  {hero.secondaryCta.label}
+                </Button>
+              </MagneticLink>
+            </div>
+            <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-[#F5F4F0]/52">
+              <span className="inline-flex items-center gap-2">
+                <Cpu className="size-3.5 text-[#0FD9C8]" /> Owner-operated
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Activity className="size-3.5 text-[#0FD9C8]" /> Healthcare · Legal · B2B
+              </span>
+              <span>15+ years · Indianapolis, IN</span>
+            </div>
+          </div>
         </motion.div>
       </motion.div>
     </BleedSection>

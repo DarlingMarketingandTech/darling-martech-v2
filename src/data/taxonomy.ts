@@ -6,6 +6,7 @@ import type {
   OutcomeTag,
   ProblemCluster,
   ProjectComplexity,
+  ProjectPathId,
   ProjectTypeId,
   ScopeShape,
   ServiceCluster,
@@ -79,6 +80,21 @@ export const OUTCOME_SLUG_LABELS: Record<OutcomeSlug, string> = {
   "brand-awareness": "Brand awareness",
   "pipeline-automation": "Pipeline automation",
   "system-consolidation": "System consolidation",
+};
+
+/** Buyer-facing implementation paths — aligns with /services lane IDs. */
+export const PROJECT_PATH_ORDER: ProjectPathId[] = [
+  "foundation",
+  "build",
+  "scale",
+  "grow",
+];
+
+export const PROJECT_PATH_LABELS: Record<ProjectPathId, string> = {
+  foundation: "Foundation",
+  build: "Build",
+  scale: "Scale",
+  grow: "Grow",
 };
 
 /** Order of filter chips on /proof */

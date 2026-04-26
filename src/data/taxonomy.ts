@@ -1,11 +1,11 @@
 import type {
   BuyerScenarioId,
   EngagementFormat,
+  EvidenceType,
   OutcomeSlug,
   OutcomeTag,
   ProblemCluster,
   ProjectComplexity,
-  ProjectPathId,
   ProjectTypeId,
   ScopeShape,
   ServiceCluster,
@@ -71,76 +71,6 @@ export const ENGAGEMENT_FORMATS: EngagementFormat[] = [
   "diagnostic",
 ];
 
-export const PROJECT_PATH_ORDER: ProjectPathId[] = [
-  "funnel-architecture",
-  "ops-automation",
-  "brand-visibility",
-  "diagnostic-products",
-];
-
-export const PROJECT_PATH_LABELS: Record<ProjectPathId, string> = {
-  "funnel-architecture": "Funnel Architecture",
-  "ops-automation": "Ops Automation",
-  "brand-visibility": "Brand & Visibility",
-  "diagnostic-products": "Diagnostic Products",
-};
-
-export const PROJECT_TYPE_ORDER: ProjectTypeId[] = [
-  "full-funnel-system-build",
-  "crm-and-lifecycle-automation",
-  "local-visibility-and-conversion",
-  "brand-identity-system",
-  "interactive-diagnostic-product",
-];
-
-export const PROJECT_TYPE_LABELS: Record<ProjectTypeId, string> = {
-  "full-funnel-system-build": "Full Funnel System Build",
-  "crm-and-lifecycle-automation": "CRM & Lifecycle Automation",
-  "local-visibility-and-conversion": "Local Visibility & Conversion",
-  "brand-identity-system": "Brand Identity System",
-  "interactive-diagnostic-product": "Interactive Diagnostic Product",
-};
-
-export const BUYER_SCENARIO_ORDER: BuyerScenarioId[] = [
-  "needs-strategic-ownership",
-  "needs-intake-and-follow-up-system",
-  "needs-local-demand-capture",
-  "needs-brand-clarity-system",
-  "needs-self-serve-decision-support",
-];
-
-export const BUYER_SCENARIO_LABELS: Record<BuyerScenarioId, string> = {
-  "needs-strategic-ownership": "Needs strategic ownership",
-  "needs-intake-and-follow-up-system": "Needs intake and follow-up system",
-  "needs-local-demand-capture": "Needs local demand capture",
-  "needs-brand-clarity-system": "Needs brand clarity system",
-  "needs-self-serve-decision-support": "Needs self-serve decision support",
-};
-
-export const PROJECT_COMPLEXITY_ORDER: ProjectComplexity[] = [
-  "moderate",
-  "high",
-  "very-high",
-];
-
-export const PROJECT_COMPLEXITY_LABELS: Record<ProjectComplexity, string> = {
-  moderate: "Moderate",
-  high: "High",
-  "very-high": "Very high",
-};
-
-export const SCOPE_SHAPE_ORDER: ScopeShape[] = [
-  "single-system",
-  "cross-system",
-  "platform-layer",
-];
-
-export const SCOPE_SHAPE_LABELS: Record<ScopeShape, string> = {
-  "single-system": "Single system",
-  "cross-system": "Cross-system",
-  "platform-layer": "Platform layer",
-};
-
 export const OUTCOME_SLUG_LABELS: Record<OutcomeSlug, string> = {
   "lead-gen": "Lead generation",
   "conversion-lift": "Conversion lift",
@@ -161,3 +91,84 @@ export const OUTCOME_SLUG_ORDER: OutcomeSlug[] = [
   "system-consolidation",
   "brand-awareness",
 ];
+
+/** Primary proof hub browse order — project shape first */
+export const PROJECT_TYPE_ORDER: ProjectTypeId[] = [
+  "website-brand-rebuild",
+  "conversion-path-repair",
+  "crm-automation-system",
+  "local-growth-system",
+  "reporting-attribution-system",
+  "custom-infrastructure-product",
+  "content-distribution-system",
+  "ops-diagnostics",
+];
+
+export const PROJECT_TYPE_LABELS: Record<ProjectTypeId, string> = {
+  "website-brand-rebuild": "Website & brand system",
+  "conversion-path-repair": "Conversion path repair",
+  "crm-automation-system": "CRM & automation system",
+  "local-growth-system": "Local growth & visibility",
+  "reporting-attribution-system": "Reporting & attribution",
+  "custom-infrastructure-product": "Custom product & infrastructure",
+  "content-distribution-system": "Content & distribution",
+  "ops-diagnostics": "Operations & diagnostic layer",
+};
+
+export const BUYER_SCENARIO_ORDER: BuyerScenarioId[] = [
+  "demand-exists-conversion-leaks",
+  "operations-manual-fragmented",
+  "trust-routing-weak",
+  "spend-visible-attribution-weak",
+  "visibility-demand-gap",
+];
+
+export const BUYER_SCENARIO_LABELS: Record<BuyerScenarioId, string> = {
+  "demand-exists-conversion-leaks": "Demand exists but conversion leaks",
+  "operations-manual-fragmented": "Operations are manual and fragmented",
+  "trust-routing-weak": "Trust exists but routing is weak",
+  "spend-visible-attribution-weak": "Spend is visible but attribution is weak",
+  "visibility-demand-gap": "Visibility & demand gap",
+};
+
+export const PROJECT_COMPLEXITY_ORDER: ProjectComplexity[] = [
+  "focused",
+  "multi-surface",
+  "integration",
+  "ongoing",
+];
+
+export const PROJECT_COMPLEXITY_LABELS: Record<ProjectComplexity, string> = {
+  focused: "Focused fix",
+  "multi-surface": "Multi-surface rebuild",
+  integration: "System integration",
+  ongoing: "Ongoing operating layer",
+};
+
+export const SCOPE_SHAPE_ORDER: ScopeShape[] = [
+  "single-flow",
+  "multi-page",
+  "crm-lifecycle",
+  "reporting-visibility",
+  "multi-channel",
+];
+
+export const SCOPE_SHAPE_LABELS: Record<ScopeShape, string> = {
+  "single-flow": "Single route or flow",
+  "multi-page": "Multi-page architecture",
+  "crm-lifecycle": "CRM & lifecycle automation",
+  "reporting-visibility": "Reporting & operational visibility",
+  "multi-channel": "Multi-channel / full stack",
+};
+
+export const EVIDENCE_TYPE_ORDER: EvidenceType[] = [
+  "outcome-metrics",
+  "system-build",
+  "mixed-evidence",
+];
+
+export const EVIDENCE_TYPE_LABELS: Record<EvidenceType, string> = {
+  "outcome-metrics": "Outcome metrics",
+  "system-build": "System build",
+  "mixed-evidence": "Mixed evidence",
+};

@@ -3,7 +3,19 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from "react";
 import { Search, X } from "lucide-react";
 import { ProofGrid } from "@/components/proof/ProofGrid";
-import { OUTCOME_SLUG_LABELS, OUTCOME_SLUG_ORDER, OUTCOME_TAGS } from "@/data/taxonomy";
+import {
+  BUYER_SCENARIO_LABELS,
+  BUYER_SCENARIO_ORDER,
+  OUTCOME_SLUG_LABELS,
+  OUTCOME_SLUG_ORDER,
+  OUTCOME_TAGS,
+  PROJECT_COMPLEXITY_LABELS,
+  PROJECT_COMPLEXITY_ORDER,
+  PROJECT_TYPE_LABELS,
+  PROJECT_TYPE_ORDER,
+  SCOPE_SHAPE_LABELS,
+  SCOPE_SHAPE_ORDER,
+} from "@/data/taxonomy";
 import {
   applyFacets,
   buildProofSearchIndex,
@@ -14,7 +26,15 @@ import {
   type ProofSortMode,
 } from "@/lib/proof-search";
 import { cn } from "@/lib/utils";
-import type { CaseStudy, OutcomeSlug, OutcomeTag } from "@/types";
+import type {
+  BuyerScenarioId,
+  CaseStudy,
+  OutcomeSlug,
+  OutcomeTag,
+  ProjectComplexity,
+  ProjectTypeId,
+  ScopeShape,
+} from "@/types";
 
 type ProofFilterClientProps = {
   caseStudies: CaseStudy[];
@@ -28,10 +48,30 @@ function countByOutcomeTag(studies: CaseStudy[], tag: OutcomeTag): number {
   return studies.filter((c) => c.outcomeTags.includes(tag)).length;
 }
 
+function countByProjectType(studies: CaseStudy[], id: ProjectTypeId): number {
+  return studies.filter((c) => c.projectType === id).length;
+}
+
+function countByBuyerScenario(studies: CaseStudy[], id: BuyerScenarioId): number {
+  return studies.filter((c) => c.buyerScenario === id).length;
+}
+
+function countByComplexity(studies: CaseStudy[], id: ProjectComplexity): number {
+  return studies.filter((c) => c.projectComplexity === id).length;
+}
+
+function countByScope(studies: CaseStudy[], id: ScopeShape): number {
+  return studies.filter((c) => c.scopeShape === id).length;
+}
+
 export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
   const [query, setQuery] = useState("");
   const [outcomes, setOutcomes] = useState<Set<OutcomeSlug>>(new Set());
   const [tags, setTags] = useState<Set<OutcomeTag>>(new Set());
+  const [projectTypes, setProjectTypes] = useState<Set<ProjectTypeId>>(new Set());
+  const [buyerScenarios, setBuyerScenarios] = useState<Set<BuyerScenarioId>>(new Set());
+  const [complexity, setComplexity] = useState<Set<ProjectComplexity>>(new Set());
+  const [scopeShapes, setScopeShapes] = useState<Set<ScopeShape>>(new Set());
   const [sortMode, setSortMode] = useState<ProofSortMode>("default");
   const [searchIndex, setSearchIndex] = useState<ProofSearchIndex | null>(null);
   const [searchSlugs, setSearchSlugs] = useState<Set<string> | null>(null);
@@ -76,9 +116,27 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
     if (searchSlugs) {
       next = next.filter((study) => searchSlugs.has(study.slug));
     }
-    next = applyFacets(next, outcomes, tags);
+    next = applyFacets(next, {
+      outcomes,
+      outcomeTags: tags,
+      projectTypes,
+      buyerScenarios,
+      complexity,
+      scopeShapes,
+    });
     return sortCaseStudies(next, sortMode, defaultRanks);
-  }, [caseStudies, defaultRanks, outcomes, searchSlugs, sortMode, tags]);
+  }, [
+    caseStudies,
+    defaultRanks,
+    outcomes,
+    searchSlugs,
+    sortMode,
+    tags,
+    projectTypes,
+    buyerScenarios,
+    complexity,
+    scopeShapes,
+  ]);
 
   const outcomeCounts = useMemo(() => {
     const record = {} as Record<OutcomeSlug, number>;
@@ -96,8 +154,47 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
     return record;
   }, [caseStudies]);
 
+  const projectTypeCounts = useMemo(() => {
+    const record = {} as Record<ProjectTypeId, number>;
+    for (const id of PROJECT_TYPE_ORDER) {
+      record[id] = countByProjectType(caseStudies, id);
+    }
+    return record;
+  }, [caseStudies]);
+
+  const buyerScenarioCounts = useMemo(() => {
+    const record = {} as Record<BuyerScenarioId, number>;
+    for (const id of BUYER_SCENARIO_ORDER) {
+      record[id] = countByBuyerScenario(caseStudies, id);
+    }
+    return record;
+  }, [caseStudies]);
+
+  const complexityCounts = useMemo(() => {
+    const record = {} as Record<ProjectComplexity, number>;
+    for (const id of PROJECT_COMPLEXITY_ORDER) {
+      record[id] = countByComplexity(caseStudies, id);
+    }
+    return record;
+  }, [caseStudies]);
+
+  const scopeCounts = useMemo(() => {
+    const record = {} as Record<ScopeShape, number>;
+    for (const id of SCOPE_SHAPE_ORDER) {
+      record[id] = countByScope(caseStudies, id);
+    }
+    return record;
+  }, [caseStudies]);
+
   const hasActiveFilter =
-    outcomes.size > 0 || tags.size > 0 || query.trim().length >= 2 || sortMode !== "default";
+    outcomes.size > 0 ||
+    tags.size > 0 ||
+    projectTypes.size > 0 ||
+    buyerScenarios.size > 0 ||
+    complexity.size > 0 ||
+    scopeShapes.size > 0 ||
+    query.trim().length >= 2 ||
+    sortMode !== "default";
 
   function toggleOutcome(slug: OutcomeSlug) {
     setOutcomes((prev) => {
@@ -127,7 +224,47 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
     setQuery("");
     setOutcomes(new Set());
     setTags(new Set());
+    setProjectTypes(new Set());
+    setBuyerScenarios(new Set());
+    setComplexity(new Set());
+    setScopeShapes(new Set());
     setSortMode("default");
+  }
+
+  function toggleProjectType(id: ProjectTypeId) {
+    setProjectTypes((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function toggleBuyerScenario(id: BuyerScenarioId) {
+    setBuyerScenarios((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function toggleComplexity(id: ProjectComplexity) {
+    setComplexity((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function toggleScope(id: ScopeShape) {
+    setScopeShapes((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   }
 
   return (
@@ -141,6 +278,28 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
           visibleCount={filtered.length}
           isReady={searchIndex !== null}
         />
+
+        <div
+          role="group"
+          aria-label="Filter by project type"
+          className="mt-4 flex gap-6 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          <FilterPill
+            label="All project types"
+            count={caseStudies.length}
+            isActive={projectTypes.size === 0}
+            onSelect={() => setProjectTypes(new Set())}
+          />
+          {PROJECT_TYPE_ORDER.map((id) => (
+            <FilterPill
+              key={id}
+              label={PROJECT_TYPE_LABELS[id]}
+              count={projectTypeCounts[id]}
+              isActive={projectTypes.has(id)}
+              onSelect={() => toggleProjectType(id)}
+            />
+          ))}
+        </div>
 
         <div
           role="group"
@@ -163,6 +322,60 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
             />
           ))}
         </div>
+
+        <details className="mt-3 group/situation">
+          <summary className="flex w-full cursor-pointer list-none items-center justify-between gap-3 py-2 text-left font-mono text-[10px] uppercase tracking-[0.16em] text-[#F5F4F0]/45 transition-colors hover:text-[#F5F4F0]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05A28]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0E] [&::-webkit-details-marker]:hidden">
+            <span className="flex items-center gap-3">
+              Buyer situation, complexity &amp; scope
+              {buyerScenarios.size + complexity.size + scopeShapes.size > 0 ? (
+                <span className="rounded-full bg-[#0FD9C8]/12 px-2 py-0.5 font-mono text-[10px] tabular-nums text-[#F5F4F0]">
+                  {buyerScenarios.size + complexity.size + scopeShapes.size}
+                </span>
+              ) : null}
+            </span>
+            <span aria-hidden className="transition-transform duration-200 group-open/situation:rotate-90">
+              ▸
+            </span>
+          </summary>
+          <div className="mt-3 space-y-3">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#F5F4F0]/38">Buyer situation</p>
+            <div className="flex flex-wrap gap-2">
+              {BUYER_SCENARIO_ORDER.map((id) => (
+                <TagChip
+                  key={id}
+                  label={BUYER_SCENARIO_LABELS[id]}
+                  count={buyerScenarioCounts[id]}
+                  isActive={buyerScenarios.has(id)}
+                  onSelect={() => toggleBuyerScenario(id)}
+                />
+              ))}
+            </div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#F5F4F0]/38">Complexity</p>
+            <div className="flex flex-wrap gap-2">
+              {PROJECT_COMPLEXITY_ORDER.map((id) => (
+                <TagChip
+                  key={id}
+                  label={PROJECT_COMPLEXITY_LABELS[id]}
+                  count={complexityCounts[id]}
+                  isActive={complexity.has(id)}
+                  onSelect={() => toggleComplexity(id)}
+                />
+              ))}
+            </div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#F5F4F0]/38">Scope shape</p>
+            <div className="flex flex-wrap gap-2">
+              {SCOPE_SHAPE_ORDER.map((id) => (
+                <TagChip
+                  key={id}
+                  label={SCOPE_SHAPE_LABELS[id]}
+                  count={scopeCounts[id]}
+                  isActive={scopeShapes.has(id)}
+                  onSelect={() => toggleScope(id)}
+                />
+              ))}
+            </div>
+          </div>
+        </details>
 
         <details className="mt-3 group/facets">
           <summary className="flex w-full cursor-pointer list-none items-center justify-between gap-3 py-2 text-left font-mono text-[10px] uppercase tracking-[0.16em] text-[#F5F4F0]/45 transition-colors hover:text-[#F5F4F0]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05A28]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0E] [&::-webkit-details-marker]:hidden">
@@ -244,7 +457,7 @@ function SearchInput({ value, onChange, onClear, totalCount, visibleCount, isRea
         onChange={onChange}
         placeholder={
           isReady
-            ? "Search by client, system, outcome…"
+            ? "Search by project type, system build, outcome…"
             : "Loading proof index…"
         }
         aria-label="Search proof"

@@ -5,12 +5,6 @@ export const barbershopCommandCenter: CaseStudy = {
   title: "Barbershop Command Center — Booking CRM & Retention Operating System",
   clientName: "Hoosier Boy Barbershop",
   clientContext: "Local service business · Indianapolis, IN",
-  projectPath: "ops-automation",
-  projectType: "crm-and-lifecycle-automation",
-  buyerScenario: "needs-intake-and-follow-up-system",
-  projectComplexity: "high",
-  scopeShape: "cross-system",
-  evidenceType: "mixed-evidence",
   location: "Indianapolis, IN",
   timeline: "Project engagement",
   engagementFormat: "project",
@@ -86,7 +80,7 @@ export const barbershopCommandCenter: CaseStudy = {
     "wordpress",
     "apache",
   ],
-  relatedToolSlugs: ["geo-readiness-auditor", "growth-bottleneck-quiz"],
+  relatedToolSlugs: ["geo-readiness-auditor", "growth-system-audit"],
   relatedServiceSlugs: [
     "crm-architecture",
     "automation-systems",
@@ -105,5 +99,11 @@ export const barbershopCommandCenter: CaseStudy = {
   ],
   cloudinaryImages: ["hoosier-boy-barbershop-website-design", "hoosierboy-logo-anchor"],
   featured: false,
+  projectType: "crm-automation-system",
+  buyerScenario: "operations-manual-fragmented",
+  projectComplexity: "integration",
+  scopeShape: "crm-lifecycle",
+  primarySimilaritySummary:
+    "Local service brands connecting booking, CRM, and retention in one command layer.",
   publishedAt: "2023-09-01",
 };

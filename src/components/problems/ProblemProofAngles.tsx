@@ -21,11 +21,11 @@ export function ProblemProofAngles({ angles, parentTitles, connectLead }: Proble
       ) : null}
       <ul className="mt-4 divide-y divide-[#F5F4F0]/8 overflow-hidden rounded-2xl border border-[#F5F4F0]/10 bg-[#13131A]/35">
         {angles.map((angle) => {
-          const parentTitle = parentTitles.get(angle.parentProjectSlug) ?? "Case study";
+          const parentTitle = parentTitles.get(angle.anchorProjectSlug) ?? "Case study";
           return (
             <li key={angle.id}>
               <Link
-                href={`/proof/${angle.parentProjectSlug}`}
+                href={`/proof/${angle.anchorProjectSlug}`}
                 className="group block px-4 py-3.5 transition-colors hover:bg-[#13131A]/80 md:px-5 md:py-4"
               >
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#F5F4F0]/42">

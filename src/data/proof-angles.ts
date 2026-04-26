@@ -9,8 +9,8 @@ const TOOL_SLUGS = new Set(tools.map((t) => t.slug));
 
 function assertDatasetIntegrity(rows: readonly ProofAngle[]) {
   for (const row of rows) {
-    if (!CASE_SLUGS.has(row.parentProjectSlug)) {
-      throw new Error(`ProofAngle ${row.id}: unknown parentProjectSlug "${row.parentProjectSlug}"`);
+    if (!CASE_SLUGS.has(row.anchorProjectSlug)) {
+      throw new Error(`ProofAngle ${row.id}: unknown anchorProjectSlug "${row.anchorProjectSlug}"`);
     }
     if (!SERVICE_SLUGS.has(row.primaryServiceSlug)) {
       throw new Error(`ProofAngle ${row.id}: unknown primaryServiceSlug "${row.primaryServiceSlug}"`);
@@ -30,7 +30,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // graston-technique
   {
     id: "graston-technique-attribution-reporting",
-    parentProjectSlug: "graston-technique",
+    anchorProjectSlug: "graston-technique",
     title: "Attribution and Reporting Layer",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "attribution-analytics",
@@ -45,7 +45,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "graston-technique-crm-unification",
-    parentProjectSlug: "graston-technique",
+    anchorProjectSlug: "graston-technique",
     title: "CRM Architecture and Lead Unification",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "crm-architecture",
@@ -59,7 +59,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "graston-technique-provider-directory",
-    parentProjectSlug: "graston-technique",
+    anchorProjectSlug: "graston-technique",
     title: "Provider Directory and Membership Funnel",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "custom-infrastructure",
@@ -73,7 +73,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "graston-technique-paid-channel-attribution",
-    parentProjectSlug: "graston-technique",
+    anchorProjectSlug: "graston-technique",
     title: "Analytics and Attribution Overhaul",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "paid-media-management",
@@ -90,7 +90,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // graston-qualified-leads
   {
     id: "graston-qualified-leads-pipeline",
-    parentProjectSlug: "graston-qualified-leads",
+    anchorProjectSlug: "graston-qualified-leads",
     title: "Qualified Lead Engine",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "fractional-cmo",
@@ -104,7 +104,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "graston-qualified-leads-automation",
-    parentProjectSlug: "graston-qualified-leads",
+    anchorProjectSlug: "graston-qualified-leads",
     title: "Manual Process Replacement",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "automation-systems",
@@ -118,7 +118,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "graston-qualified-leads-strategy-ownership",
-    parentProjectSlug: "graston-qualified-leads",
+    anchorProjectSlug: "graston-qualified-leads",
     title: "Single-Owner Marketing System",
     problemKey: "no-strategy-owner",
     primaryServiceSlug: "digital-marketing-strategy",
@@ -131,7 +131,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // graston-growth-engine
   {
     id: "graston-growth-engine-overhead",
-    parentProjectSlug: "graston-growth-engine",
+    anchorProjectSlug: "graston-growth-engine",
     title: "Manual Overhead Reduction",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "automation-systems",
@@ -145,7 +145,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "graston-growth-engine-workflow-platform",
-    parentProjectSlug: "graston-growth-engine",
+    anchorProjectSlug: "graston-growth-engine",
     title: "Training Lifecycle Automation",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "ai-automation",
@@ -159,7 +159,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "graston-growth-engine-spatial-directory",
-    parentProjectSlug: "graston-growth-engine",
+    anchorProjectSlug: "graston-growth-engine",
     title: "Provider Directory Operations Layer",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "custom-infrastructure",
@@ -173,7 +173,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "graston-growth-engine-connected-stack",
-    parentProjectSlug: "graston-growth-engine",
+    anchorProjectSlug: "graston-growth-engine",
     title: "AI and Smart Support Tools Layer",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "martech-stack-build",
@@ -186,54 +186,10 @@ export const PROOF_ANGLES: ProofAngle[] = [
     ],
   },
 
-  // pike-medical
-  {
-    id: "pike-medical-crm-build",
-    parentProjectSlug: "pike-medical",
-    title: "CRM Build and Pipeline Visibility",
-    problemKey: "disconnected-systems",
-    primaryServiceSlug: "crm-architecture",
-    secondaryServiceSlugs: ["automation-systems", "martech-stack-build"],
-    summary:
-      "CRM architecture implemented from scratch with intake wired in so the practice went from inbox tracking to a live pipeline view within 60 days.",
-    metrics: [
-      { value: "+45%", label: "Patient pipeline growth", isHighlighted: true },
-      { value: "60 days", label: "Time to real-time visibility" },
-    ],
-  },
-  {
-    id: "pike-medical-patient-pipeline",
-    parentProjectSlug: "pike-medical",
-    title: "Patient Pipeline System",
-    problemKey: "site-not-converting",
-    primaryServiceSlug: "conversion-optimization",
-    secondaryServiceSlugs: ["crm-architecture", "automation-systems"],
-    summary:
-      "Intake and follow-up unified so patient growth could compound instead of depending on manual follow-up from spreadsheets and inboxes.",
-    metrics: [
-      { value: "+45%", label: "Patient pipeline growth", isHighlighted: true },
-      { value: "60 days", label: "Time to real-time visibility" },
-    ],
-  },
-  {
-    id: "pike-medical-intake-stack",
-    parentProjectSlug: "pike-medical",
-    title: "Intake and Reporting Stack",
-    problemKey: "disconnected-systems",
-    primaryServiceSlug: "martech-stack-build",
-    secondaryServiceSlugs: ["crm-architecture", "automation-systems"],
-    summary:
-      "Intake, follow-up, and reporting wired together so the practice could see patient pipeline state instead of reconciling inboxes and spreadsheets.",
-    metrics: [
-      { value: "+45%", label: "Patient pipeline growth", isHighlighted: true },
-      { value: "60 days", label: "Time to real-time visibility" },
-    ],
-  },
-
   // clinical-compass
   {
     id: "clinical-compass-crm-intake",
-    parentProjectSlug: "clinical-compass",
+    anchorProjectSlug: "clinical-compass",
     title: "CRM and Intake Unification",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "crm-architecture",
@@ -247,7 +203,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "clinical-compass-follow-up-automation",
-    parentProjectSlug: "clinical-compass",
+    anchorProjectSlug: "clinical-compass",
     title: "Automated Inquiry and Appointment Sequences",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "automation-systems",
@@ -261,7 +217,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "clinical-compass-referral-tracking",
-    parentProjectSlug: "clinical-compass",
+    anchorProjectSlug: "clinical-compass",
     title: "Referral Source Tracking System",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "attribution-analytics",
@@ -275,12 +231,12 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "clinical-compass-web-intake",
-    parentProjectSlug: "clinical-compass",
+    anchorProjectSlug: "clinical-compass",
     title: "Conversion-Focused Web Intake",
     problemKey: "site-not-converting",
     primaryServiceSlug: "website-design",
     secondaryServiceSlugs: ["conversion-optimization", "crm-architecture"],
-    toolSlug: "growth-bottleneck-quiz",
+    toolSlug: "growth-system-audit",
     summary:
       "Online intake simplified for mobile, with completions entering the CRM immediately so same-day lead lag from manual entry dropped.",
     metrics: [
@@ -291,7 +247,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // russell-painting
   {
     id: "russell-painting-attribution",
-    parentProjectSlug: "russell-painting",
+    anchorProjectSlug: "russell-painting",
     title: "Attribution Layer to Booked Jobs",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "attribution-analytics",
@@ -306,7 +262,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "russell-painting-local-visibility",
-    parentProjectSlug: "russell-painting",
+    anchorProjectSlug: "russell-painting",
     title: "Local Demand Visibility",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "content-seo-systems",
@@ -320,7 +276,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "russell-painting-paid-local",
-    parentProjectSlug: "russell-painting",
+    anchorProjectSlug: "russell-painting",
     title: "Paid Media and Local Lead Optimization",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "paid-media-management",
@@ -336,7 +292,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // barbershop-command-center
   {
     id: "barbershop-crm-booking",
-    parentProjectSlug: "barbershop-command-center",
+    anchorProjectSlug: "barbershop-command-center",
     title: "Booking CRM System",
     problemKey: "disconnected-systems",
     primaryServiceSlug: "crm-architecture",
@@ -350,7 +306,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "barbershop-review-pipeline",
-    parentProjectSlug: "barbershop-command-center",
+    anchorProjectSlug: "barbershop-command-center",
     title: "Review Pipeline and Local Conversion Support",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "social-media-marketing",
@@ -365,7 +321,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "barbershop-retention",
-    parentProjectSlug: "barbershop-command-center",
+    anchorProjectSlug: "barbershop-command-center",
     title: "Lifecycle Retention Automation",
     problemKey: "site-not-converting",
     primaryServiceSlug: "ai-automation",
@@ -379,7 +335,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "barbershop-local-seo",
-    parentProjectSlug: "barbershop-command-center",
+    anchorProjectSlug: "barbershop-command-center",
     title: "Owner-Admin Command Center Workflow",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "custom-infrastructure",
@@ -396,7 +352,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // primarycare-indy
   {
     id: "primarycare-indy-booking-conversion",
-    parentProjectSlug: "primarycare-indy",
+    anchorProjectSlug: "primarycare-indy",
     title: "Patient Booking Conversion System",
     problemKey: "site-not-converting",
     primaryServiceSlug: "conversion-optimization",
@@ -407,7 +363,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "primarycare-indy-local-visibility",
-    parentProjectSlug: "primarycare-indy",
+    anchorProjectSlug: "primarycare-indy",
     title: "Local Search Visibility Alignment",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "content-seo-systems",
@@ -419,7 +375,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "primarycare-indy-service-architecture",
-    parentProjectSlug: "primarycare-indy",
+    anchorProjectSlug: "primarycare-indy",
     title: "Patient-Centered Service Architecture",
     problemKey: "site-not-converting",
     primaryServiceSlug: "website-design",
@@ -430,7 +386,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "primarycare-indy-trust-system",
-    parentProjectSlug: "primarycare-indy",
+    anchorProjectSlug: "primarycare-indy",
     title: "Healthcare Trust System",
     problemKey: "brand-system-broken",
     primaryServiceSlug: "brand-identity",
@@ -443,7 +399,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // urgentcare-indy
   {
     id: "urgentcare-indy-checkin-flow",
-    parentProjectSlug: "urgentcare-indy",
+    anchorProjectSlug: "urgentcare-indy",
     title: "Online Check-In Flow",
     problemKey: "site-not-converting",
     primaryServiceSlug: "website-design",
@@ -454,7 +410,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "urgentcare-indy-booking-conversion",
-    parentProjectSlug: "urgentcare-indy",
+    anchorProjectSlug: "urgentcare-indy",
     title: "Urgent Care Booking Conversion",
     problemKey: "site-not-converting",
     primaryServiceSlug: "conversion-optimization",
@@ -465,7 +421,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "urgentcare-indy-local-visibility",
-    parentProjectSlug: "urgentcare-indy",
+    anchorProjectSlug: "urgentcare-indy",
     title: "Urgent-Intent Local Visibility",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "content-seo-systems",
@@ -477,7 +433,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "urgentcare-indy-trust-ux",
-    parentProjectSlug: "urgentcare-indy",
+    anchorProjectSlug: "urgentcare-indy",
     title: "Urgency-Meets-Trust UX System",
     problemKey: "site-not-converting",
     primaryServiceSlug: "website-design",
@@ -490,12 +446,12 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // the-compass
   {
     id: "the-compass-diagnostic-product",
-    parentProjectSlug: "the-compass",
+    anchorProjectSlug: "the-compass",
     title: "Interactive Diagnostic Product",
     problemKey: "no-strategy-owner",
     primaryServiceSlug: "digital-marketing-strategy",
     secondaryServiceSlugs: ["fractional-cmo"],
-    toolSlug: "growth-bottleneck-quiz",
+    toolSlug: "growth-system-audit",
     summary:
       "Eight-question diagnostic mapped to the six failure modes so buyers could name a problem cluster before booking, improving qualification depth.",
     metrics: [
@@ -505,7 +461,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "the-compass-crm-routing",
-    parentProjectSlug: "the-compass",
+    anchorProjectSlug: "the-compass",
     title: "CRM-Tagged Result Routing",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "crm-architecture",
@@ -519,7 +475,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "the-compass-segmented-automation",
-    parentProjectSlug: "the-compass",
+    anchorProjectSlug: "the-compass",
     title: "Outcome-Branching Lifecycle Automation",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "ai-automation",
@@ -533,7 +489,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "the-compass-booking-lift",
-    parentProjectSlug: "the-compass",
+    anchorProjectSlug: "the-compass",
     title: "High-Intent Booking Lift",
     problemKey: "pipeline-not-predictable",
     primaryServiceSlug: "fractional-cmo",
@@ -549,7 +505,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // license-requirements-navigator
   {
     id: "license-navigator-ce-database",
-    parentProjectSlug: "license-requirements-navigator",
+    anchorProjectSlug: "license-requirements-navigator",
     title: "Structured CE Requirements Database",
     problemKey: "site-not-converting",
     primaryServiceSlug: "custom-infrastructure",
@@ -563,7 +519,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "license-navigator-tool-conversion",
-    parentProjectSlug: "license-requirements-navigator",
+    anchorProjectSlug: "license-requirements-navigator",
     title: "Tool-to-Registration Conversion Path",
     problemKey: "site-not-converting",
     primaryServiceSlug: "conversion-optimization",
@@ -577,7 +533,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "license-navigator-ce-content-acquisition",
-    parentProjectSlug: "license-requirements-navigator",
+    anchorProjectSlug: "license-requirements-navigator",
     title: "Compliance Content and Organic Acquisition",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "content-creation",
@@ -594,7 +550,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // 317-bbq
   {
     id: "317-bbq-brand-system",
-    parentProjectSlug: "317-bbq",
+    anchorProjectSlug: "317-bbq",
     title: "Brand Identity System",
     problemKey: "brand-system-broken",
     primaryServiceSlug: "brand-identity",
@@ -608,7 +564,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "317-bbq-local-pack",
-    parentProjectSlug: "317-bbq",
+    anchorProjectSlug: "317-bbq",
     title: "Local Pack Ranking System",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "content-seo-systems",
@@ -623,7 +579,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "317-bbq-citations-schema",
-    parentProjectSlug: "317-bbq",
+    anchorProjectSlug: "317-bbq",
     title: "Citation and Schema Layer",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "website-design",
@@ -637,7 +593,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   },
   {
     id: "317-bbq-review-velocity",
-    parentProjectSlug: "317-bbq",
+    anchorProjectSlug: "317-bbq",
     title: "Review Velocity and Reputation System",
     problemKey: "not-visible-enough",
     primaryServiceSlug: "social-media-marketing",
@@ -652,7 +608,7 @@ export const PROOF_ANGLES: ProofAngle[] = [
   // black-letter
   {
     id: "black-letter-brand-identity-system",
-    parentProjectSlug: "black-letter",
+    anchorProjectSlug: "black-letter",
     title: "Brand Identity System Build",
     problemKey: "brand-system-broken",
     primaryServiceSlug: "brand-identity",
@@ -670,9 +626,9 @@ const byTool = new Map<string, ProofAngle[]>();
 const byProblem = new Map<ProblemCluster, ProofAngle[]>();
 
 for (const angle of PROOF_ANGLES) {
-  const projectList = byProject.get(angle.parentProjectSlug) ?? [];
+  const projectList = byProject.get(angle.anchorProjectSlug) ?? [];
   projectList.push(angle);
-  byProject.set(angle.parentProjectSlug, projectList);
+  byProject.set(angle.anchorProjectSlug, projectList);
 
   const primaryList = byService.get(angle.primaryServiceSlug) ?? [];
   primaryList.push(angle);
@@ -689,8 +645,8 @@ for (const angle of PROOF_ANGLES) {
   }
 }
 
-export function getProofAnglesForProject(parentProjectSlug: string): ProofAngle[] {
-  return byProject.get(parentProjectSlug) ?? [];
+export function getProofAnglesForProject(anchorProjectSlug: string): ProofAngle[] {
+  return byProject.get(anchorProjectSlug) ?? [];
 }
 
 export type GetProofAnglesForProblemOptions = {
@@ -726,16 +682,16 @@ export function getProofAnglesForProblem(
   if (!matches.length) return [];
 
   const sorted = [...matches].sort((a, b) => {
-    const aIn = preferredSet.has(a.parentProjectSlug) ? 1 : 0;
-    const bIn = preferredSet.has(b.parentProjectSlug) ? 1 : 0;
+    const aIn = preferredSet.has(a.anchorProjectSlug) ? 1 : 0;
+    const bIn = preferredSet.has(b.anchorProjectSlug) ? 1 : 0;
     if (aIn !== bIn) return aIn - bIn;
 
     if (aIn === 1) {
-      const pa = prefIndex(a.parentProjectSlug);
-      const pb = prefIndex(b.parentProjectSlug);
+      const pa = prefIndex(a.anchorProjectSlug);
+      const pb = prefIndex(b.anchorProjectSlug);
       if (pa !== pb) return pa - pb;
     } else {
-      const pc = a.parentProjectSlug.localeCompare(b.parentProjectSlug);
+      const pc = a.anchorProjectSlug.localeCompare(b.anchorProjectSlug);
       if (pc !== 0) return pc;
     }
 
@@ -749,9 +705,9 @@ export function getProofAnglesForProblem(
   const seenParents = new Set<string>();
 
   for (const angle of sorted) {
-    if (seenParents.has(angle.parentProjectSlug)) continue;
+    if (seenParents.has(angle.anchorProjectSlug)) continue;
     out.push(angle);
-    seenParents.add(angle.parentProjectSlug);
+    seenParents.add(angle.anchorProjectSlug);
     if (out.length >= limit) return out;
   }
 
@@ -791,9 +747,9 @@ export function getProofAnglesForDisplayCluster(clusterId: ServiceDisplayCluster
 
   const byParent = new Map<string, ProofAngle[]>();
   for (const a of matched) {
-    const list = byParent.get(a.parentProjectSlug) ?? [];
+    const list = byParent.get(a.anchorProjectSlug) ?? [];
     list.push(a);
-    byParent.set(a.parentProjectSlug, list);
+    byParent.set(a.anchorProjectSlug, list);
   }
   const parents = [...byParent.keys()].sort();
   const out: ProofAngle[] = [];

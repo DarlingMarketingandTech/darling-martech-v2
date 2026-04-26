@@ -45,7 +45,7 @@ export const problemPages: ProblemPage[] = [
     relatedProof: ["graston-qualified-leads", "graston-technique"],
     relevantTools: [
       { label: "Build vs Buy Stack Calculator", href: "/tools/build-vs-buy-stack-calculator" },
-      { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
+      { label: "Growth System Audit", href: "/tools/growth-system-audit" },
     ],
     relatedService: "fractional-cmo",
     closingBlock: {
@@ -201,7 +201,7 @@ export const problemPages: ProblemPage[] = [
     relatedProof: ["urgentcare-indy", "primarycare-indy"],
     relevantTools: [
       { label: "GEO Readiness Auditor", href: "/tools/geo-readiness-auditor" },
-      { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
+      { label: "Growth System Audit", href: "/tools/growth-system-audit" },
     ],
     relatedService: "content-seo-systems",
     closingBlock: {
@@ -253,7 +253,7 @@ export const problemPages: ProblemPage[] = [
     relatedProof: ["black-letter", "317-bbq"],
     relevantTools: [
       { label: "Build vs Buy Stack Calculator", href: "/tools/build-vs-buy-stack-calculator" },
-      { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" },
+      { label: "Growth System Audit", href: "/tools/growth-system-audit" },
     ],
     relatedService: "fractional-cmo",
     closingBlock: {

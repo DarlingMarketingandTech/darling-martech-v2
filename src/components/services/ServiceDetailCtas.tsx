@@ -13,7 +13,7 @@ export function ServiceDetailCtas({ service }: ServiceDetailCtasProps) {
   const diagnosePath =
     clusterId === "foundation" || clusterId === "scale"
       ? { href: "/services/technical-roadmap", label: "Diagnose with the Technical Roadmap →" }
-      : { href: "/tools/growth-bottleneck-quiz", label: "Diagnose with the Growth Bottleneck Quiz →" };
+      : { href: "/tools/growth-system-audit", label: "Run the Growth System Audit →" };
   const learnPath = { href: "/proof", label: "Review related proof first →" };
 
   return (

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { OUTCOME_SLUG_LABELS } from "@/data/taxonomy";
+import { OUTCOME_SLUG_LABELS, PROJECT_TYPE_LABELS } from "@/data/taxonomy";
 import type { CaseStudy } from "@/types";
 import { getBuyerStateLabel, getCaseStudyBuyerState } from "@/lib/buyer-state";
 import { cn } from "@/lib/utils";
@@ -85,7 +85,13 @@ export function ProofCard({ caseStudy, showSystems, size = "md" }: ProofCardProp
         />
 
         <div className="relative z-2 flex flex-wrap items-center gap-2">
-          <p className="meta-label-accent">{outcomeLabel}</p>
+          <p className="meta-label-accent">{PROJECT_TYPE_LABELS[caseStudy.projectType]}</p>
+          <span
+            className="rounded-full border border-[#F5F4F0]/14 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-[#F5F4F0]/55"
+            title="Outcome lens"
+          >
+            {outcomeLabel}
+          </span>
           <span className="rounded-full border border-[#F5F4F0]/14 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-[#F5F4F0]/68">
             {buyerStateTag}
           </span>
@@ -95,9 +101,7 @@ export function ProofCard({ caseStudy, showSystems, size = "md" }: ProofCardProp
             </span>
           ) : null}
         </div>
-        <p className="relative z-2 font-mono mt-3 text-[10px] font-medium uppercase tracking-[0.16em] text-[#F5F4F0]/38">
-          ref · {caseStudy.slug}
-        </p>
+        <span className="sr-only">Reference {caseStudy.slug}</span>
 
         <div className="relative z-2 tech-divider mt-5" />
 
@@ -110,13 +114,21 @@ export function ProofCard({ caseStudy, showSystems, size = "md" }: ProofCardProp
           {caseStudy.outcomeHeadline}
         </p>
 
+        {caseStudy.primarySimilaritySummary ? (
+          <p
+            className={cn("relative z-2 mt-3 text-[#F5F4F0]/60", size === "lg" ? "text-base" : "text-sm")}
+          >
+            {caseStudy.primarySimilaritySummary}
+          </p>
+        ) : null}
+
         <div className="relative z-2 tech-divider my-5 max-w-md" />
 
         <p className={cn("relative z-2 flex-1 text-[#F5F4F0]/74", variant.summary)}>
           {caseStudy.resultSummary}
         </p>
 
-        <p className="relative z-2 meta-label mt-8 text-[#F5F4F0]/42">
+        <p className="relative z-2 meta-label mt-8 text-[#F5F4F0]/36">
           {caseStudy.clientName} · {caseStudy.clientContext}
         </p>
 

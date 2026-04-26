@@ -15,7 +15,7 @@ type ToolSlugPageProps = {
 const EXCLUDED_TOOL_SLUGS = new Set([
   "attribution-snapshot",
   "geo-readiness-auditor",
-  "growth-bottleneck-quiz",
+  "growth-system-audit",
   "cmo-simulator",
   "funnel-roi-forecaster",
   "demand-capture-cac-simulator",

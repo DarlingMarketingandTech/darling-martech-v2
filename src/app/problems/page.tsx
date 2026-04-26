@@ -16,7 +16,7 @@ import type { ProblemPage } from "@/types";
 
 export const metadata = buildMetadata(routeMetadata["/problems"]);
 
-const QUIZ_HREF = "/tools/growth-bottleneck-quiz";
+const QUIZ_HREF = "/tools/growth-system-audit";
 const FOUNDATION_HREF = "/services/technical-roadmap";
 
 function getCaseStudyForProblem(problem: ProblemPage) {
@@ -32,7 +32,7 @@ function getServiceForProblem(problem: ProblemPage) {
 function getRecommendedTool(problem: ProblemPage) {
   const pick =
     problem.relevantTools.find((t) => !t.href.includes(QUIZ_HREF)) ?? problem.relevantTools[0];
-  return pick ?? { label: "Growth Bottleneck Quiz", href: QUIZ_HREF };
+  return pick ?? { label: "Growth System Audit", href: QUIZ_HREF };
 }
 
 function ProblemsHubCard({ problem }: { problem: ProblemPage }) {
@@ -187,7 +187,7 @@ export default function ProblemsPage() {
         <DiagnosticOrangeBand
           headline="Still not sure which one is your bottleneck?"
           body="Five questions. About three minutes. A specific answer — not a generic recommendation. No email required to see results."
-          cta={{ label: "Take the Growth Bottleneck Quiz →", href: QUIZ_HREF }}
+          cta={{ label: "Run the Growth System Audit →", href: QUIZ_HREF }}
         />
       </div>
 

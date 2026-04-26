@@ -73,7 +73,7 @@ export default function TechnicalRoadmapPage() {
         body="A paid diagnostic engagement before any retainer commitment. You get a named, prioritized plan for exactly what to build — and the fee credits toward implementation if you proceed."
         ctas={[
           { label: "Book a roadmap scoping call →", href: siteConfig.calComLink, variant: "primary" },
-          { label: "Not ready? Run the free diagnostic →", href: "/tools/growth-bottleneck-quiz", variant: "secondary" },
+          { label: "Not ready? Run the free diagnostic →", href: "/tools/growth-system-audit", variant: "secondary" },
         ]}
         splitAside={
           <ServiceHeroVisual publicId={visual.visualPublicId} alt={visual.visualAlt} />
@@ -114,7 +114,7 @@ export default function TechnicalRoadmapPage() {
 
       <SectionWrapper className="mt-12">
         <FoundationPathwayMini
-          primaryHref="/tools/growth-bottleneck-quiz"
+          primaryHref="/tools/growth-system-audit"
           primaryLabel="Run free diagnostic first →"
           secondaryHref="/problems"
           secondaryLabel="Then map your problem path →"
@@ -186,8 +186,8 @@ export default function TechnicalRoadmapPage() {
             Get a problem-class diagnosis first, then decide whether you need a written implementation sequence.
           </p>
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button href="/tools/growth-bottleneck-quiz" variant="secondary" size="lg">
-              Growth Bottleneck Quiz →
+            <Button href="/tools/growth-system-audit" variant="secondary" size="lg">
+              Growth System Audit →
             </Button>
             <Button href="/problems" variant="ghost" size="lg">
               Browse the problem map →

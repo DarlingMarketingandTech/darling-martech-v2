@@ -16,9 +16,9 @@ export function ProofTelemetryFeaturedRows({ caseStudies }: ProofTelemetryFeatur
   return (
     <div className="mt-10 space-y-8 md:mt-12 md:space-y-10" aria-label="Featured proof telemetry">
       <div>
-        <p className="meta-label text-[#F05A28]/90">Featured telemetry</p>
+        <p className="meta-label text-[#F05A28]/90">Featured projects</p>
         <p className="font-display mt-2 max-w-2xl text-balance text-lg font-semibold tracking-[-0.02em] text-[#F5F4F0] md:text-xl">
-          Operating outcomes with architecture context — full dossiers stay one click away.
+          Outcomes with implementation context — full case studies stay one click away.
         </p>
       </div>
       {rows.map((study) => (

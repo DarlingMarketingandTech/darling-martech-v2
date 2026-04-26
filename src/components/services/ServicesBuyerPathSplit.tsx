@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const PROBLEMS_HREF = "/problems";
 const ROADMAP_HREF = "/services/technical-roadmap";
-const QUIZ_HREF = "/tools/growth-bottleneck-quiz";
+const QUIZ_HREF = "/tools/growth-system-audit";
 const PROOF_HREF = "/proof";
 
 export function ServicesBuyerPathSplit() {
@@ -55,7 +55,7 @@ export function ServicesBuyerPathSplit() {
         <ul className="mt-6 space-y-2.5 text-sm text-[#F5F4F0]/72">
           <li className="flex gap-2">
             <span className="text-[#F05A28]">→</span>
-            <span>Self-check with the <Link href={QUIZ_HREF} className="text-[#0FD9C8] hover:underline">Growth Bottleneck Quiz</Link></span>
+            <span>Self-check with the <Link href={QUIZ_HREF} className="text-[#0FD9C8] hover:underline">Growth System Audit</Link></span>
           </li>
           <li className="flex gap-2">
             <span className="text-[#F05A28]">→</span>

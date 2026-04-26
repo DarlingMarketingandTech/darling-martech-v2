@@ -2,7 +2,6 @@ import type { CaseStudy } from "@/types";
 import { grastonGrowthEngine } from "@/data/work/graston-growth-engine";
 import { grastonQualifiedLeads } from "@/data/work/graston-qualified-leads";
 import { grastonTechnique } from "@/data/work/graston-technique";
-import { pikeMedical } from "@/data/work/pike-medical";
 import { clinicalCompass } from "@/data/work/clinical-compass";
 import { primarycareIndy } from "@/data/work/primarycare-indy";
 import { urgentcareIndy } from "@/data/work/urgentcare-indy";
@@ -18,7 +17,6 @@ export const caseStudies: CaseStudy[] = [
   grastonTechnique,
   grastonQualifiedLeads,
   grastonGrowthEngine,
-  pikeMedical,
   clinicalCompass,
   primarycareIndy,
   urgentcareIndy,

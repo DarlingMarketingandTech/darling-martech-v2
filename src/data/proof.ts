@@ -11,7 +11,7 @@ export const proofPageData = {
   hero: {
     eyebrow: "PROOF OF WORK",
     headline: "Documented outcomes — not pitch deck claims.",
-    body: "Each story below is one engagement: named context, sourced metrics, and what was actually built. Filter by the result you care about, then open the full write-up.",
+    body: "Each story below is one engagement: sourced metrics and what was actually built. Filter by project type and buyer situation first, then by outcome — then open the full write-up.",
   },
   navigator: {
     eyebrow: "How to use this page",
@@ -19,8 +19,8 @@ export const proofPageData = {
     steps: [
       {
         kicker: "01",
-        title: "Filter by outcome",
-        body: "Narrow the list to the kind of result you need: leads, conversion lift, time saved, systems, and more.",
+        title: "Filter by project type",
+        body: "Start with the kind of system or project: CRM build, local growth, conversion repair, custom product, and more. Add buyer situation and outcome when you need to narrow further.",
       },
       {
         kicker: "02",
@@ -61,21 +61,22 @@ export const proofPageData = {
       },
     ],
   },
-  proofGroupsByProblem: [
+  /** Optional editorial groupings by project type — for future sections; hub filters are client-driven. */
+  proofGroupsByProjectType: [
     {
-      problemLabel: "Pipeline attribution",
-      description: "Engagements where marketing activity was connected to closed revenue for the first time.",
-      caseStudySlugs: ["graston-qualified-leads", "graston-growth-engine"],
+      projectTypeLabel: "Reporting & full-stack systems",
+      description: "Attribution, CRM, and product layers wired so leadership can read pipeline and channel truth.",
+      caseStudySlugs: ["graston-technique", "graston-growth-engine", "graston-qualified-leads"],
     },
     {
-      problemLabel: "Systems & automation",
-      description: "Manual operations replaced with durable, connected automation systems.",
-      caseStudySlugs: ["graston-growth-engine", "pike-medical"],
+      projectTypeLabel: "CRM & automation system",
+      description: "Intake, follow-up, and visibility rebuilt as a connected operating layer.",
+      caseStudySlugs: ["clinical-compass", "barbershop-command-center"],
     },
     {
-      problemLabel: "Patient & client acquisition",
-      description: "Regulated-industry growth built on compliant, measurement-first infrastructure.",
-      caseStudySlugs: ["primarycare-indy", "urgentcare-indy"],
+      projectTypeLabel: "Local growth & visibility",
+      description: "Geo and brand surfaces tuned so demand finds the business and converts.",
+      caseStudySlugs: ["primarycare-indy", "urgentcare-indy", "russell-painting", "317-bbq"],
     },
   ],
   antiClaims: [

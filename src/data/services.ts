@@ -1,4 +1,4 @@
-import type { Service, ServiceCluster } from "@/types";
+import type { ProjectPathId, Service, ServiceCluster } from "@/types";
 import { SERVICE_VISUAL_BY_SLUG } from "@/data/service-visuals";
 
 const servicesUnmerged: Omit<Service, "visualPublicId" | "visualAlt">[] = [
@@ -362,7 +362,7 @@ export const SERVICE_DISPLAY_CLUSTERS: Record<ServiceDisplayClusterId, ServiceDi
       "Practical visibility into what is converting and what is leaking",
     ],
     nextStep: { href: "/services/technical-roadmap", label: "Start with the Technical Roadmap →" },
-    optionalStep: { href: "/tools/growth-bottleneck-quiz", label: "Run the Growth Bottleneck Quiz →" },
+    optionalStep: { href: "/tools/growth-system-audit", label: "Run the Growth System Audit →" },
     serviceSlugs: [
       "technical-roadmap",
       "website-design",
@@ -416,7 +416,7 @@ export const SERVICE_DISPLAY_CLUSTERS: Record<ServiceDisplayClusterId, ServiceDi
       "Paid and organic spend read against pipeline, not vanity metrics",
     ],
     nextStep: { href: "/proof", label: "See demand and visibility proof →" },
-    optionalStep: { href: "/tools/growth-bottleneck-quiz", label: "Pressure-test channel focus with the quiz →" },
+    optionalStep: { href: "/tools/growth-system-audit", label: "Pressure-test channel focus with the audit →" },
     serviceSlugs: [
       "content-seo-systems",
       "digital-marketing-strategy",
@@ -443,6 +443,12 @@ export function getDisplayClusterIdForServiceSlug(slug: ServiceCluster): Service
     }
   }
   return null;
+}
+
+/** Buyer-facing project paths (lanes) for this service — same ids as `SERVICE_DISPLAY_CLUSTERS`. */
+export function getProjectPathIdsForService(slug: ServiceCluster): ProjectPathId[] {
+  const cluster = getDisplayClusterIdForServiceSlug(slug);
+  return cluster ? [cluster] : [];
 }
 
 /** Hash fragment for the lane section on `/services` (matches `services/page.tsx` ids). */

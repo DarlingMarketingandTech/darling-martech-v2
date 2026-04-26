@@ -185,7 +185,7 @@ export function BuildVsBuyStackCalculator() {
         body="Need help deciding what should be built internally and what should not? These engagements show what the operator-led model produced."
         links={[
           { label: "Graston Technique proof", href: "/proof/graston-technique" },
-          { label: "Pike Medical proof", href: "/proof/pike-medical", tone: "ghost" },
+          { label: "See similar proof", href: "/proof/clinical-compass", tone: "ghost" },
           { label: "Fractional CMO service", href: "/services/fractional-cmo", tone: "ghost" },
         ]}
       />

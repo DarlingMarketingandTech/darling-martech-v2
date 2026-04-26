@@ -35,13 +35,13 @@ export const homepageData = {
   diagnosticBand: {
     headline: "Not sure where to start? There's an 8-question diagnostic for that.",
     body: "Answer 8 questions. Get a specific diagnosis — not a generic checklist. No email required to see your results.",
-    cta: { label: "Take the Growth Bottleneck Quiz →", href: "/tools/growth-bottleneck-quiz" },
+    cta: { label: "Run the Growth System Audit →", href: "/tools/growth-system-audit" },
   },
   problemSection: {
     eyebrow: "Find your problem",
     headline: "Most growth bottlenecks start in one of four places.",
     body: "Use this to diagnose fast before choosing a path.",
-    diagnosticCta: { label: "Run the 3-minute diagnostic", href: "/tools/growth-bottleneck-quiz" },
+    diagnosticCta: { label: "Run the Growth System Audit", href: "/tools/growth-system-audit" },
   },
   buyerPathSection: {
     eyebrow: "Start from your current system state",
@@ -69,7 +69,7 @@ export const homepageData = {
           "Booking, intake, and follow-up are not connected",
           "No clear visibility into what is working",
         ],
-        primaryCta: { label: "Map what your system is missing →", href: "/tools/growth-bottleneck-quiz" },
+        primaryCta: { label: "Map what your system is missing →", href: "/tools/growth-system-audit" },
         secondaryCta: { label: "See foundation problems →", href: "/problems/no-strategy-owner" },
       },
     ],
@@ -164,7 +164,7 @@ export const homepageData = {
       },
       {
         metric: "+45%",
-        context: "patient pipeline growth - Pike Medical",
+        context: "patient pipeline — clinical intake & CRM system",
         whyItMatters: "CRM, intake, and follow-up improvements turned disconnected activity into measurable pipeline lift.",
       },
     ],

@@ -8,12 +8,12 @@ import { problemPages } from "@/data/problems";
 import { cn } from "@/lib/utils";
 import type { ProblemCluster, Tool } from "@/types";
 
-const TOOL_SLUG = "growth-bottleneck-quiz" as const;
+const TOOL_SLUG = "growth-system-audit" as const;
 
 function getGrowthBottleneckQuizTool(): Tool {
   const entry = tools.find((t) => t.slug === TOOL_SLUG);
   if (!entry) {
-    throw new Error("labs.ts must define the growth-bottleneck-quiz tool.");
+    throw new Error("labs.ts must define the growth-system-audit tool.");
   }
   return entry;
 }
@@ -212,7 +212,7 @@ function getPrimaryToolCta(cluster: ProblemCluster) {
   const preferred =
     page.relevantTools.find((t) => !t.href.includes(TOOL_SLUG)) ?? page.relevantTools[0];
   if (!preferred) {
-    return { label: "Growth Bottleneck Quiz", href: "/tools/growth-bottleneck-quiz" };
+    return { label: "Growth System Audit", href: "/tools/growth-system-audit" };
   }
   return preferred;
 }
@@ -328,7 +328,7 @@ export function GrowthBottleneckQuizClient() {
       <section className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <p className="text-xs font-normal uppercase tracking-widest text-[#F05A28]">
-            Growth Diagnostic · {growthBottleneckTool.estimatedTime}
+            Growth System Audit · {growthBottleneckTool.estimatedTime}
           </p>
           <h1 className="font-display mt-5 text-balance text-5xl font-bold leading-tight text-[#F5F4F0] md:text-6xl lg:text-[5.5rem]">
             {growthBottleneckTool.tagline}

@@ -98,29 +98,42 @@ export type PlatformSlug =
 
 export type EngagementFormat = "fractional" | "project" | "diagnostic";
 
-export type ProjectPathId =
-  | "funnel-architecture"
-  | "ops-automation"
-  | "brand-visibility"
-  | "diagnostic-products";
+/**
+ * Buyer-facing implementation paths (align with /services lanes).
+ * Used to relate services to paths without a flat capability menu.
+ */
+export type ProjectPathId = "foundation" | "build" | "scale" | "grow";
 
+/** Primary proof browse dimension — project shape, not company hierarchy. */
 export type ProjectTypeId =
-  | "full-funnel-system-build"
-  | "crm-and-lifecycle-automation"
-  | "local-visibility-and-conversion"
-  | "brand-identity-system"
-  | "interactive-diagnostic-product";
+  | "website-brand-rebuild"
+  | "conversion-path-repair"
+  | "crm-automation-system"
+  | "local-growth-system"
+  | "reporting-attribution-system"
+  | "custom-infrastructure-product"
+  | "content-distribution-system"
+  | "ops-diagnostics";
 
+/**
+ * Buyer situation the project addressed — maps to proof taxonomy strategy
+ * (demand, operations, trust/routing, attribution, visibility).
+ */
 export type BuyerScenarioId =
-  | "needs-strategic-ownership"
-  | "needs-intake-and-follow-up-system"
-  | "needs-local-demand-capture"
-  | "needs-brand-clarity-system"
-  | "needs-self-serve-decision-support";
+  | "demand-exists-conversion-leaks"
+  | "operations-manual-fragmented"
+  | "trust-routing-weak"
+  | "spend-visible-attribution-weak"
+  | "visibility-demand-gap";
 
-export type ProjectComplexity = "moderate" | "high" | "very-high";
+export type ProjectComplexity = "focused" | "multi-surface" | "integration" | "ongoing";
 
-export type ScopeShape = "single-system" | "cross-system" | "platform-layer";
+export type ScopeShape =
+  | "single-flow"
+  | "multi-page"
+  | "crm-lifecycle"
+  | "reporting-visibility"
+  | "multi-channel";
 
 export type EvidenceType = "outcome-metrics" | "system-build" | "mixed-evidence";
 
@@ -150,12 +163,14 @@ export interface CaseStudy {
   title: string;
   clientName: string;
   clientContext: string;
-  projectPath: ProjectPathId;
+  projectPath?: ProjectPathId;
+  /** Project-type browse facet */
   projectType: ProjectTypeId;
+  /** Buyer-situation facet */
   buyerScenario: BuyerScenarioId;
   projectComplexity: ProjectComplexity;
   scopeShape: ScopeShape;
-  evidenceType: EvidenceType;
+  evidenceType?: EvidenceType;
   /** Optional one-line taxonomy signal used for "see similar proof" matching */
   primarySimilaritySummary?: string;
   /** Default true; set false when client should be de-emphasized in cards/lists */
@@ -207,12 +222,17 @@ export interface CaseStudy {
   relatedProblemSlugs?: string[];
   /** Other proof slugs that reinforce or complement this one */
   relatedProofSlugs?: string[];
+  /** Optional cross-links for "similar risk / shape" */
+  decisionTags?: string[];
 }
 
-/** Focused slice of an existing case study — entry points only; parent lives at `/proof/[slug]`. */
+/**
+ * Focused slice of a case study for tools/services bridges — content reuse only;
+ * canonical story stays at `/proof/[anchorProjectSlug]`.
+ */
 export interface ProofAngle {
   id: string;
-  parentProjectSlug: string;
+  anchorProjectSlug: string;
   title: string;
   problemKey: ProblemCluster;
   primaryServiceSlug: ServiceCluster;

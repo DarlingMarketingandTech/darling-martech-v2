@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 
 const PRIORITIZED_TOOL_SLUGS = [
-  "growth-bottleneck-quiz",
+  "growth-system-audit",
   "cmo-simulator",
   "geo-readiness-auditor",
   "attribution-snapshot",

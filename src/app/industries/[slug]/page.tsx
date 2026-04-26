@@ -153,7 +153,7 @@ export default async function IndustryDetailPage({ params }: IndustrySlugPagePro
           <Button href="/services/technical-roadmap" variant="secondary" size="lg">
             Start with a paid roadmap
           </Button>
-          <Button href="/tools/growth-bottleneck-quiz" variant="ghost" size="lg">
+          <Button href="/tools/growth-system-audit" variant="ghost" size="lg">
             Free diagnostic first
           </Button>
         </div>

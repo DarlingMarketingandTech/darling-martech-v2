@@ -5,12 +5,6 @@ export const primarycareIndy: CaseStudy = {
   title: "PrimaryCare Indy — Patient Booking & Local Visibility System",
   clientName: "PrimaryCare Indy",
   clientContext: "Primary care practice network · Indianapolis, IN",
-  projectPath: "brand-visibility",
-  projectType: "local-visibility-and-conversion",
-  buyerScenario: "needs-local-demand-capture",
-  projectComplexity: "high",
-  scopeShape: "cross-system",
-  evidenceType: "mixed-evidence",
   location: "Indianapolis, IN",
   timeline: "Project engagement",
   engagementFormat: "project",
@@ -78,7 +72,7 @@ export const primarycareIndy: CaseStudy = {
     "build-workflow-ai",
   ],
   implementationPlatformSlugs: ["wordpress", "google", "figma", "cloudinary"],
-  relatedToolSlugs: ["growth-bottleneck-quiz", "geo-readiness-auditor"],
+  relatedToolSlugs: ["growth-system-audit", "geo-readiness-auditor"],
   relatedServiceSlugs: [
     "website-design",
     "conversion-optimization",
@@ -86,7 +80,7 @@ export const primarycareIndy: CaseStudy = {
     "brand-identity",
   ],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough", "brand-system-broken"],
-  relatedProofSlugs: ["urgentcare-indy", "clinical-compass", "pike-medical"],
+  relatedProofSlugs: ["urgentcare-indy", "clinical-compass"],
   systemsBuilt: [
     "Patient booking conversion flow",
     "Service architecture by care intent",
@@ -95,5 +89,11 @@ export const primarycareIndy: CaseStudy = {
   ],
   cloudinaryImages: ["primary-care-indy-website", "primarycare-logo-anchor"],
   featured: true,
+  projectType: "local-growth-system",
+  buyerScenario: "visibility-demand-gap",
+  projectComplexity: "multi-surface",
+  scopeShape: "multi-page",
+  primarySimilaritySummary:
+    "Local and regional healthcare groups competing on search, trust, and first-call conversion.",
   publishedAt: "2024-04-01",
 };

@@ -1,8 +1,20 @@
 import { create, insertMultiple, search, type AnyOrama, type Results } from "@orama/orama";
-import { OUTCOME_SLUG_LABELS } from "@/data/taxonomy";
+import {
+  BUYER_SCENARIO_LABELS,
+  OUTCOME_SLUG_LABELS,
+  PROJECT_TYPE_LABELS,
+} from "@/data/taxonomy";
 import { getBuyerStateLabel, getCaseStudyBuyerState } from "@/lib/buyer-state";
 import { isQuantitativeProofMetric } from "@/lib/proof-metric";
-import type { CaseStudy, OutcomeSlug, OutcomeTag } from "@/types";
+import type {
+  BuyerScenarioId,
+  CaseStudy,
+  OutcomeSlug,
+  OutcomeTag,
+  ProjectComplexity,
+  ProjectTypeId,
+  ScopeShape,
+} from "@/types";
 
 /**
  * Lightweight Orama schema covering the fields the Proof Hub revamp brief calls
@@ -22,6 +34,13 @@ const proofSchema = {
   primaryOutcomeSlug: "string",
   primaryOutcomeLabel: "string",
   buyerStateLabel: "string",
+  projectType: "string",
+  projectTypeLabel: "string",
+  buyerScenario: "string",
+  buyerScenarioLabel: "string",
+  projectComplexity: "string",
+  scopeShape: "string",
+  primarySimilaritySummary: "string",
 } as const;
 
 export type ProofSearchDocument = {
@@ -36,6 +55,13 @@ export type ProofSearchDocument = {
   primaryOutcomeSlug: OutcomeSlug;
   primaryOutcomeLabel: string;
   buyerStateLabel: string;
+  projectType: ProjectTypeId;
+  projectTypeLabel: string;
+  buyerScenario: BuyerScenarioId;
+  buyerScenarioLabel: string;
+  projectComplexity: ProjectComplexity;
+  scopeShape: ScopeShape;
+  primarySimilaritySummary: string;
 };
 
 export type ProofSearchIndex = AnyOrama;
@@ -53,6 +79,13 @@ function toDocument(study: CaseStudy): ProofSearchDocument {
     primaryOutcomeSlug: study.primaryOutcomeSlug,
     primaryOutcomeLabel: OUTCOME_SLUG_LABELS[study.primaryOutcomeSlug],
     buyerStateLabel: getBuyerStateLabel(getCaseStudyBuyerState(study)),
+    projectType: study.projectType,
+    projectTypeLabel: PROJECT_TYPE_LABELS[study.projectType],
+    buyerScenario: study.buyerScenario,
+    buyerScenarioLabel: BUYER_SCENARIO_LABELS[study.buyerScenario],
+    projectComplexity: study.projectComplexity,
+    scopeShape: study.scopeShape,
+    primarySimilaritySummary: study.primarySimilaritySummary ?? "",
   };
 }
 
@@ -90,6 +123,9 @@ export async function searchProofIndex(
       "outcomeTags",
       "primaryOutcomeLabel",
       "buyerStateLabel",
+      "projectTypeLabel",
+      "buyerScenarioLabel",
+      "primarySimilaritySummary",
     ],
     tolerance: 1,
     limit: caseStudyHardLimit,
@@ -164,22 +200,41 @@ export function sortCaseStudies(
   return next;
 }
 
+export type ProofHubFacets = {
+  outcomes: Set<OutcomeSlug>;
+  outcomeTags: Set<OutcomeTag>;
+  projectTypes: Set<ProjectTypeId>;
+  buyerScenarios: Set<BuyerScenarioId>;
+  complexity: Set<ProjectComplexity>;
+  scopeShapes: Set<ScopeShape>;
+};
+
 /**
  * Applies the multi-select facet predicates without touching search ordering,
  * so search-driven order is preserved when active.
  */
-export function applyFacets(
-  studies: CaseStudy[],
-  outcomes: Set<OutcomeSlug>,
-  outcomeTags: Set<OutcomeTag>
-): CaseStudy[] {
-  if (outcomes.size === 0 && outcomeTags.size === 0) return studies;
+export function applyFacets(studies: CaseStudy[], facets: ProofHubFacets): CaseStudy[] {
+  const { outcomes, outcomeTags, projectTypes, buyerScenarios, complexity, scopeShapes } = facets;
+  if (
+    outcomes.size === 0 &&
+    outcomeTags.size === 0 &&
+    projectTypes.size === 0 &&
+    buyerScenarios.size === 0 &&
+    complexity.size === 0 &&
+    scopeShapes.size === 0
+  ) {
+    return studies;
+  }
   return studies.filter((study) => {
     if (outcomes.size > 0 && !outcomes.has(study.primaryOutcomeSlug)) return false;
     if (outcomeTags.size > 0) {
       const hasMatch = study.outcomeTags.some((tag) => outcomeTags.has(tag));
       if (!hasMatch) return false;
     }
+    if (projectTypes.size > 0 && !projectTypes.has(study.projectType)) return false;
+    if (buyerScenarios.size > 0 && !buyerScenarios.has(study.buyerScenario)) return false;
+    if (complexity.size > 0 && !complexity.has(study.projectComplexity)) return false;
+    if (scopeShapes.size > 0 && !scopeShapes.has(study.scopeShape)) return false;
     return true;
   });
 }

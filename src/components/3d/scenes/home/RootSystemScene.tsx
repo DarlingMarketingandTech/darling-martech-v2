@@ -32,6 +32,7 @@ export type RootSystemStep = {
 type RootSystemSceneProps = {
   trackRef: RefObject<HTMLElement>;
   steps: RootSystemStep[];
+  onStepChange?: (index: number) => void;
 };
 
 const PARTICLE_COUNT = 42;
@@ -75,7 +76,7 @@ function makeParticle(index: number) {
   };
 }
 
-function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
+function EngineRoomScene({ trackRef, steps, onStepChange }: RootSystemSceneProps) {
   const reduceMotion = useReducedMotion();
   const progressRef = useRef(0);
   const reactorRef = useRef<Mesh>(null);
@@ -154,17 +155,24 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
         onUpdate: (self) => {
           progressRef.current = reduceMotion ? 1 : self.progress;
           const nextStep = Math.min(3, Math.floor(progressRef.current * 4));
-          setActiveStep((current) => (current === nextStep ? current : nextStep));
+          setActiveStep((current) => {
+            if (current === nextStep) return current;
+            onStepChange?.(nextStep);
+            return nextStep;
+          });
           invalidate();
         },
       });
 
       progressRef.current = reduceMotion ? 1 : progressRef.current;
-      if (reduceMotion) setActiveStep(3);
+      if (reduceMotion) {
+        setActiveStep(3);
+        onStepChange?.(3);
+      }
 
       return () => trigger.kill();
     },
-    { scope: trackRef, dependencies: [reduceMotion, invalidate], revertOnUpdate: true }
+    { scope: trackRef, dependencies: [reduceMotion, invalidate, onStepChange], revertOnUpdate: true }
   );
 
   useFrame((state, delta) => {
@@ -354,15 +362,15 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
                 distanceFactor={6.2}
                 scale={0.56}
                 transform
-                occlude={false}
+                occlude="blending"
                 // Clamp three.js depth-derived z-index to [10,0] so this element
                 // never escapes the Canvas compositor layer and beats page content.
-                zIndexRange={[10, 0]}
+                zIndexRange={[5, 0]}
                 className="pointer-events-none select-none"
               >
                 <div
                   className={cn(
-                    "w-[10.25rem] rounded-2xl border bg-[#0C0C0E]/78 px-3 py-2.5 text-left shadow-[0_18px_45px_rgba(0,0,0,0.42)] backdrop-blur-md transition-all duration-300",
+                    "pointer-events-none w-41 rounded-2xl border bg-[#0C0C0E]/78 px-3 py-2.5 text-left shadow-[0_18px_45px_rgba(0,0,0,0.42)] backdrop-blur-md transition-all duration-300",
                     active
                       ? "border-[#0FD9C8]/35 text-[#F5F4F0] opacity-100"
                       : "border-[#F5F4F0]/10 text-[#F5F4F0]/45 opacity-55"
@@ -382,13 +390,13 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
                 distanceFactor={7.4}
                 scale={0.54}
                 transform
-                occlude={false}
-                zIndexRange={[10, 0]}
+                occlude="blending"
+                zIndexRange={[5, 0]}
                 className="pointer-events-none select-none"
               >
                 <span
                   className={cn(
-                    "font-mono text-[0.55rem] uppercase tracking-[0.18em] transition-opacity duration-200",
+                    "pointer-events-none font-mono text-[0.55rem] uppercase tracking-[0.18em] transition-opacity duration-200",
                     active ? "animate-pulse text-[#0FD9C8]/80 opacity-100" : "text-[#F5F4F0]/25 opacity-30"
                   )}
                 >
@@ -403,17 +411,17 @@ function EngineRoomScene({ trackRef, steps }: RootSystemSceneProps) {
   );
 }
 
-export function RootSystemScene({ trackRef, steps }: RootSystemSceneProps) {
+export function RootSystemScene({ trackRef, steps, onStepChange }: RootSystemSceneProps) {
   return (
     // isolation: isolate  → strict local stacking context; no child z-index escapes
     // transform-style: flat → collapses the CSS 3D depth axis so Html matrix3d
     //   transforms cannot visually intersect elements outside this layer
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 isolate [transform-style:flat]"
+      className="pointer-events-none absolute inset-0 z-0 isolate transform-flat"
     >
       <View track={trackRef} className="pointer-events-none absolute inset-0 z-0 h-full w-full">
-        <EngineRoomScene trackRef={trackRef} steps={steps} />
+        <EngineRoomScene trackRef={trackRef} steps={steps} onStepChange={onStepChange} />
       </View>
     </div>
   );

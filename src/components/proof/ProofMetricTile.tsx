@@ -8,17 +8,23 @@ import { cn } from "@/lib/utils";
 
 type ProofMetricTileProps = {
   metric: ProofMetric;
+  /** Disable count-up animation for tiles where stillness reads better (e.g. dense detail strips). */
+  animateValue?: boolean;
 };
 
 /**
  * Numeric proof → {@link MonoMetric}. Narrative outcomes → editorial tile with optional
  * blurred Cloudinary wash (does not compete with hero typography).
+ *
+ * Numeric values animate by default to reinforce the "live signal" feel called out in
+ * the Proof Hub revamp; pass `animateValue={false}` to opt out. Reduced-motion is
+ * always respected by `MonoMetric` itself.
  */
-export function ProofMetricTile({ metric }: ProofMetricTileProps) {
+export function ProofMetricTile({ metric, animateValue = true }: ProofMetricTileProps) {
   if (isQuantitativeProofMetric(metric)) {
     return (
       <div className="card-elevated-dark rounded-2xl px-4 py-4 md:px-5 md:py-5">
-        <MonoMetric value={metric.value} label={metric.label} animateValue={false} />
+        <MonoMetric value={metric.value} label={metric.label} animateValue={animateValue} />
       </div>
     );
   }
@@ -47,7 +53,7 @@ export function ProofMetricTile({ metric }: ProofMetricTileProps) {
             className="h-full w-full scale-105 object-cover opacity-45"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-br from-[#0C0C0E]/94 via-[#0C0C0E]/88 to-[#0C0C0E]/93"
+            className="absolute inset-0 bg-linear-to-br from-[#0C0C0E]/94 via-[#0C0C0E]/88 to-[#0C0C0E]/93"
             aria-hidden
           />
         </div>

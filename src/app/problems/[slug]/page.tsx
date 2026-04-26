@@ -16,6 +16,8 @@ import { PageHero } from "@/components/hero/PageHero";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { SectionReveal } from "@/components/ui/section-reveal";
 import { problemPages } from "@/data/problems";
+import { PROBLEM_SYSTEM_MAPS } from "@/data/system-maps";
+import { SystemMap } from "@/components/shared/SystemMap";
 import { getProofAnglesForProblem } from "@/data/proof-angles";
 import { getNewsroomArticlesByProblemSlug } from "@/data/newsroom";
 import { NewsroomRelatedStrip } from "@/components/newsroom/NewsroomRelatedStrip";
@@ -43,6 +45,7 @@ export async function generateMetadata({ params }: ProblemSlugPageProps): Promis
     title: problem.title,
     description: problem.heroSubhead,
     canonicalUrl: `https://darlingmartech.com/problems/${problem.slug}`,
+    type: "article",
   });
 }
 
@@ -81,6 +84,7 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
   const proofConnectLead = `These outcomes map to the same operating break as "${problem.title}" — read them as validation that this class of fix holds in production, not as unrelated portfolio filler.`;
 
   const newsroomForProblem = getNewsroomArticlesByProblemSlug(problem.slug);
+  const systemMap = PROBLEM_SYSTEM_MAPS[problem.slug];
 
   return (
     <SiteShell>
@@ -176,6 +180,12 @@ export default async function ProblemSlugPage({ params }: ProblemSlugPageProps) 
               </div>
             </section>
           </SectionReveal>
+
+          {systemMap ? (
+            <SectionReveal delay={0.15} motion="fade" className="mt-12 scroll-mt-28 sm:mt-14">
+              <SystemMap id="system-map" {...systemMap} />
+            </SectionReveal>
+          ) : null}
 
           {hasProofBlock ? (
             <SectionReveal delay={0.16} motion="fade">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, JetBrains_Mono, Syne, Geist } from "next/font/google";
+import { Inter, JetBrains_Mono, Syne } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AppProviders } from "@/components/providers/app-providers";
 import { siteConfig } from "@/data/site-config";
@@ -8,8 +8,6 @@ import { appEnv } from "@/lib/env";
 import { buildMetadata } from "@/lib/metadata";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const syne = Syne({
   subsets: ["latin"],
@@ -19,7 +17,6 @@ const syne = Syne({
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   variable: "--font-inter",
 });
 
@@ -73,8 +70,8 @@ export default function RootLayout({
   ];
 
   return (
-    <html lang="en" className={cn("h-full", "antialiased", syne.variable, inter.variable, jetbrainsMono.variable, "font-sans", geist.variable)}>
-      <body className="min-h-full flex flex-col bg-[#0C0C0E] text-[#F5F4F0]">
+    <html lang="en" className={cn("h-full", "antialiased", syne.variable, inter.variable, jetbrainsMono.variable, "font-sans")}>
+      <body className="min-h-full flex flex-col text-[#F5F4F0]">
         <AppProviders>{children}</AppProviders>
         {appEnv.plausibleDomain ? (
           <Script

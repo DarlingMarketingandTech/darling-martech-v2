@@ -116,6 +116,9 @@ export interface ProofMetric {
   accentImagePublicId?: string;
 }
 
+/** Closed set for featured proof telemetry canvas (lazy-loaded per type). */
+export type ProofVisualizerType = "stack" | "logic" | "target" | "merge" | "pulse" | "trend";
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -139,6 +142,8 @@ export interface CaseStudy {
   liveUrl?: string;
   cloudinaryImages?: string[];
   featured: boolean;
+  /** Featured hub telemetry row only — picks lazy-loaded visual metaphor. */
+  proofVisualizerType?: ProofVisualizerType;
   publishedAt: string;
   /** One-line proof page subtitle shown beneath the headline */
   heroSubhead?: string;
@@ -506,6 +511,7 @@ export interface PageMeta {
   description: string;
   ogImage?: string;
   canonicalUrl?: string;
+  type?: "article" | "website";
   noIndex?: boolean;
 }
 

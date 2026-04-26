@@ -30,13 +30,13 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 px-3 pt-3 md:px-6 md:pt-4">
+      <header className="sticky top-0 z-50 isolate px-3 pt-3 md:px-6 md:pt-4">
         <div
           className={cn(
             "mx-auto max-w-7xl rounded-3xl border transition-[border-color,box-shadow,background-color] duration-300 ease-out",
             "border-[#F5F4F0]/6 bg-[#0C0C0E]/55 shadow-[inset_0_1px_0_rgba(245,244,240,0.04)] backdrop-blur-md",
             isScrolled &&
-              "header-sheen border-[#2A2A2E] shadow-[0_20px_80px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(245,244,240,0.05)] backdrop-blur-xl"
+              "header-sheen border-[#2A2A2E] shadow-[0_20px_80px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(245,244,240,0.05)] backdrop-blur-xl [-webkit-backdrop-filter:blur(16px)] [backdrop-filter:blur(16px)]"
           )}
         >
           <div className="mx-auto flex items-center justify-between gap-5 px-4 py-3.5 md:gap-8 md:px-6 md:py-4">
@@ -52,7 +52,7 @@ export function SiteHeader() {
                 <span className="font-display block truncate text-lg font-semibold tracking-[-0.04em] text-[#F5F4F0] md:text-xl">
                   Darling
                 </span>
-                <span className="font-mono block text-[10px] uppercase tracking-[0.28em] text-[#F5F4F0]/48 md:text-[11px] md:tracking-[0.32em]">
+                <span className="font-mono block text-[10px] uppercase tracking-[0.28em] text-[#A1A1AA] md:text-[11px] md:tracking-[0.32em]">
                   MarTech
                 </span>
               </span>

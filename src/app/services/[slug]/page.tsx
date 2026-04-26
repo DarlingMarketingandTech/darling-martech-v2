@@ -10,6 +10,8 @@ import { ServiceOutcomesGrid } from "@/components/services/ServiceOutcomesGrid";
 import { ServiceProofConnection } from "@/components/services/ServiceProofConnection";
 import { ServiceDetailCtas } from "@/components/services/ServiceDetailCtas";
 import { ServiceRelatedProblemsBlock } from "@/components/services/ServiceRelatedProblemsBlock";
+import { SystemMap } from "@/components/shared/SystemMap";
+import { SERVICE_SYSTEM_MAPS } from "@/data/system-maps";
 import Link from "next/link";
 import { services } from "@/data/services";
 import { problemPages } from "@/data/problems";
@@ -134,6 +136,12 @@ export default async function ServiceDetailPage({ params }: ServiceSlugPageProps
       <BandSection className="py-12 md:py-16">
         <ServiceOutcomesGrid outcomes={service.outcomes} serviceTitle={service.title} />
       </BandSection>
+
+      {SERVICE_SYSTEM_MAPS[service.slug] ? (
+        <SectionWrapper className="py-12 md:py-16">
+          <SystemMap id="service-system-map" {...SERVICE_SYSTEM_MAPS[service.slug]!} />
+        </SectionWrapper>
+      ) : null}
 
       {featuredProof ? (
         <SectionWrapper className="py-12 md:py-16">

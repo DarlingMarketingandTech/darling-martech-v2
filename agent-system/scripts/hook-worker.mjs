@@ -10,6 +10,39 @@ import { preparePR } from "./prepare-pr.mjs";
 const BASE = path.join(process.cwd(), "agent-system");
 const MEMORY = path.join(BASE, "memory");
 
+/**
+ * 2026 REVAMP GUARDRAILS
+ * These rules enforce the architectural integrity of the new cinematic engine.
+ */
+const REVAMP_RULES = [
+  {
+    id: "NO_LEGACY_IMPORTS",
+    severity: "CRITICAL",
+    message: "Regressive import detected from _archive_legacy. Use new RootSystemScene components instead.",
+    test: (content) => /from ['"].*\/_archive_legacy\//.test(content),
+  },
+  {
+    id: "CONTRAST_VIOLATION",
+    severity: "WARNING",
+    message: "Text opacity below 82% detected. Use solid muted colors (#A1A1AA) to meet WCAG AA 4.5:1.",
+    test: (content, filePath) => 
+      (filePath.endsWith(".tsx") || filePath.endsWith(".css")) && 
+      /\/(?:[0-7][0-9]|4[0-8])\b/.test(content),
+  },
+  {
+    id: "STACKING_RISK",
+    severity: "WARNING",
+    message: "Z-index > 100 detected. Protect the SiteHeader (z-50) and MobileNav (z-100) hierarchy.",
+    test: (content) => /\bz-(?:\[?(?:10[1-9]|[2-9][0-9]{2,})\]?)\b/.test(content),
+  },
+  {
+    id: "THREE_DEPRECATION",
+    severity: "WARNING",
+    message: "THREE.Clock is deprecated. Upgrade to THREE.Timer for modern R3F performance.",
+    test: (content) => /THREE\.Clock/.test(content),
+  }
+];
+
 async function ensureMemoryFiles() {
   await fs.mkdir(MEMORY, { recursive: true });
   const defaults = {
@@ -105,21 +138,9 @@ async function handleBeforeSubmitPrompt(payload) {
     profile: classification.mode,
     lastUpdatedAt: new Date().toISOString(),
   };
-  const nextDecisions = {
-    decisions: [
-      ...(decisions.decisions ?? []),
-      {
-        at: new Date().toISOString(),
-        type: "classification",
-        mode: classification.mode,
-        riskLevel: classification.riskLevel,
-      },
-    ].slice(-50),
-  };
-
+  
   await writeJson("task_state.json", nextTaskState);
   await writeJson("session_state.json", nextSession);
-  await writeJson("recent_decisions.json", nextDecisions);
 }
 
 async function handleObservation(payload, eventName) {
@@ -133,10 +154,38 @@ async function handleObservation(payload, eventName) {
 
 async function handleAfterFileEdit(payload) {
   const taskState = await readJson("task_state.json", {});
-  const existing = new Set(Array.isArray(taskState.changedFiles) ? taskState.changedFiles : []);
-  const edited = payload?.filePath || payload?.path;
-  if (typeof edited === "string" && edited.length > 0) existing.add(edited.replaceAll("\\", "/"));
-  const next = { ...taskState, changedFiles: [...existing], lastEvent: "afterFileEdit" };
+  const observations = Array.isArray(taskState.observations) ? taskState.observations : [];
+  const editedPath = payload?.filePath || payload?.path;
+  
+  if (typeof editedPath !== "string") return;
+
+  const normalizedPath = editedPath.replaceAll("\\", "/");
+  let revampObservations = [];
+
+  // Content Audit for 2026 Standards
+  try {
+    const content = await fs.readFile(editedPath, "utf8");
+    for (const rule of REVAMP_RULES) {
+      if (rule.test(content, normalizedPath)) {
+        revampObservations.push({
+          source: "REVAMP_AUDITOR",
+          detail: `[${rule.severity}] ${rule.id} in ${normalizedPath}: ${rule.message}`,
+          at: new Date().toISOString()
+        });
+      }
+    }
+  } catch (err) { /* File might be deleted or inaccessible */ }
+
+  const existingFiles = new Set(Array.isArray(taskState.changedFiles) ? taskState.changedFiles : []);
+  existingFiles.add(normalizedPath);
+
+  const next = { 
+    ...taskState, 
+    changedFiles: [...existingFiles], 
+    observations: [...observations, ...revampObservations],
+    lastEvent: "afterFileEdit" 
+  };
+  
   await writeJson("task_state.json", next);
 }
 
@@ -144,11 +193,18 @@ async function handleStop() {
   const taskState = await readJson("task_state.json", {});
   const mode = taskState?.activeTask?.mode ?? "implementation";
   const context = taskState?.context ?? {};
-  const profile = context?.profile ?? {};
-  const validationProfile = context?.validation ?? {};
+  const observations = taskState?.observations ?? [];
 
-  const diffAnalysis = analyzeDiff({ mode, profile });
-  const validationResult = runValidation({ mode, validationProfile, diffAnalysis });
+  const diffAnalysis = analyzeDiff({ mode, context });
+  const validationResult = runValidation({ mode, diffAnalysis, observations });
+  
+  // Flag revamp violations in the final report
+  const hasCritical = observations.some(obs => obs.detail?.includes("[CRITICAL]"));
+  if (hasCritical) {
+    validationResult.isSafeToComplete = false;
+    validationResult.errors.push("Revamp architecture violation detected. See observations.");
+  }
+
   const prSummary = preparePR({
     diffAnalysis,
     validationResult,
@@ -177,6 +233,7 @@ async function main() {
   await ensureMemoryFiles();
   const eventName = process.argv[2] ?? "";
   const payload = await readPayload();
+  
   if (eventName === "beforeSubmitPrompt") await handleBeforeSubmitPrompt(payload);
   if (eventName === "afterMCPExecution" || eventName === "afterShellExecution") await handleObservation(payload, eventName);
   if (eventName === "afterFileEdit") await handleAfterFileEdit(payload);
@@ -189,8 +246,6 @@ main()
     try {
       const message = error?.stack || error?.message || String(error);
       await fs.writeFile(path.join(BASE, "hook-worker-error.log"), `${message}\n`);
-    } catch {
-      // swallow
-    }
+    } catch { /* swallow */ }
     process.exit(0);
   });

@@ -28,7 +28,7 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
     <AnimatePresence>
       {isOpen ? (
         <motion.div
-          className="fixed inset-0 z-40 md:hidden"
+          className="fixed inset-0 z-[100] md:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -60,14 +60,14 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
                     <p className="font-display truncate text-lg font-semibold tracking-[-0.03em] text-[#F5F4F0]">
                       Darling
                     </p>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#F5F4F0]/45">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#A1A1AA]">
                       MarTech
                     </p>
                   </div>
                 </div>
                 <button
                   type="button"
-                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#F5F4F0]/12 px-4 text-sm text-[#F5F4F0]/76"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#F5F4F0]/12 px-4 text-sm text-[#F5F4F0]/82"
                   onClick={onClose}
                 >
                   Close

@@ -110,5 +110,6 @@ export const grastonTechnique: CaseStudy = {
   liveUrl: "https://graston-growth-engine.jacob-ba2.workers.dev",
   cloudinaryImages: ["3-website-page-promo"],
   featured: true,
+  proofVisualizerType: "stack",
   publishedAt: "2024-06-01",
 };

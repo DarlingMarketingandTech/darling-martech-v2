@@ -43,14 +43,14 @@ export default function AboutPage() {
 
       <BandSection className="mt-14">
         <SectionHeader
-          eyebrow="Cloudinary stitch visual"
-          title="Connected media pipeline test on About."
-          body="This image is loaded from the Cloudinary `darling martech v2/stitch images` folder using the site's standard Cloudinary image loader."
+          eyebrow="Where the work happens"
+          title="Operating from Indianapolis, embedded with the team."
+          body="Engagements run as a focused operating partnership — same operator from diagnosis through implementation, with weekly cadence and shared visibility."
         />
-        <div className="mt-8 overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]">
+        <div className="mt-8 overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A] shadow-[0_30px_90px_rgba(0,0,0,0.45)]">
           <CloudinaryImage
             publicId="curated/regenerated/storytelling-2026-04/team-strategy-02"
-            alt="Executive team planning growth strategy over shared business metrics."
+            alt="Operating partner mapping a growth system on a shared dashboard."
             width={1376}
             height={768}
             sizes="(max-width: 1024px) 100vw, 1200px"

@@ -70,5 +70,6 @@ export const grastonQualifiedLeads: CaseStudy = {
   implementationPlatformSlugs: ["salesforce", "google", "wordpress"],
   cloudinaryImages: ["3-website-page-promo"],
   featured: true,
+  proofVisualizerType: "trend",
   publishedAt: "2024-01-01",
 };

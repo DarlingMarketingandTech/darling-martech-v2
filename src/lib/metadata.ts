@@ -10,6 +10,7 @@ export function buildMetadata(meta: PageMeta): Metadata {
   const description = meta.description;
   const canonicalPath = meta.canonicalUrl ?? siteConfig.url;
   const image = meta.ogImage ?? siteConfig.defaultMeta.ogImage ?? "/og-default.png";
+  const openGraphType = meta.type ?? "website";
 
   return {
     title,
@@ -25,7 +26,7 @@ export function buildMetadata(meta: PageMeta): Metadata {
       siteName: siteConfig.name,
       images: [{ url: image, width: 1200, height: 630 }],
       locale: "en_US",
-      type: "website",
+      type: openGraphType,
     },
     twitter: {
       card: "summary_large_image",

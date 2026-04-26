@@ -91,5 +91,6 @@ export const grastonGrowthEngine: CaseStudy = {
   liveUrl: "https://graston-growth-engine.jacob-ba2.workers.dev",
   cloudinaryImages: ["3-website-page-promo"],
   featured: true,
+  proofVisualizerType: "pulse",
   publishedAt: "2024-01-01",
 };

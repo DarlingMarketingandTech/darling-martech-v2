@@ -29,11 +29,21 @@ const buttonVariants = cva(
   }
 );
 
-type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-    href?: string;
+type ButtonBaseProps = VariantProps<typeof buttonVariants> & {
+  asChild?: boolean;
+};
+
+type ButtonAsButtonProps = React.ComponentPropsWithoutRef<"button"> &
+  ButtonBaseProps & {
+    href?: never;
   };
+
+type ButtonAsLinkProps = Omit<React.ComponentPropsWithoutRef<typeof Link>, "href"> &
+  ButtonBaseProps & {
+    href: string;
+  };
+
+type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
 
 export function Button({
   className,
@@ -47,17 +57,20 @@ export function Button({
   const classes = cn(buttonVariants({ variant, size }), className);
 
   if (href) {
+    const linkProps = props as Omit<ButtonAsLinkProps, "href" | keyof ButtonBaseProps>;
+
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} {...linkProps}>
         {children}
       </Link>
     );
   }
 
   const Comp = asChild ? Slot : "button";
+  const buttonProps = props as Omit<ButtonAsButtonProps, "href" | keyof ButtonBaseProps>;
 
   return (
-    <Comp className={classes} {...props}>
+    <Comp className={classes} {...buttonProps}>
       {children}
     </Comp>
   );

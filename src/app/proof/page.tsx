@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { PageHero } from "@/components/hero/PageHero";
 import { AntiClaimRow } from "@/components/proof/AntiClaimRow";
 import { ProofFilterClient } from "@/components/proof/ProofFilterClient";
+import { ProofTelemetryFeaturedRows } from "@/components/proof/telemetry/ProofTelemetryFeaturedRows";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/button";
 import { MonoMetric } from "@/components/ui/MonoMetric";
@@ -127,6 +128,7 @@ export default function ProofPage() {
               Filter by the outcome you care about. Each row opens a single engagement with full context
               — not blended averages.
             </p>
+            <ProofTelemetryFeaturedRows caseStudies={caseStudies} />
             <ProofFilterClient caseStudies={caseStudies} />
           </div>
 

@@ -20,6 +20,12 @@
     },
     "gsap-skills": {
       "enabled": true
+    },
+    "shadcn": {
+      "enabled": true
+    },
+    "sourcegraph": {
+      "enabled": true
     }
   }
 }

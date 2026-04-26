@@ -71,5 +71,11 @@ export const grastonQualifiedLeads: CaseStudy = {
   cloudinaryImages: ["3-website-page-promo"],
   featured: true,
   proofVisualizerType: "trend",
+  projectType: "conversion-path-repair",
+  buyerScenario: "demand-exists-conversion-leaks",
+  projectComplexity: "multi-surface",
+  scopeShape: "crm-lifecycle",
+  primarySimilaritySummary:
+    "Teams with real demand but unclear qualification, lifecycle ownership, and pipeline-stage reporting.",
   publishedAt: "2024-01-01",
 };

@@ -36,5 +36,11 @@ export const russellPainting: CaseStudy = {
   implementationPlatformSlugs: ["salesforce", "google"],
   cloudinaryImages: ["russell-painting-website", "russell-painting-logo"],
   featured: true,
+  projectType: "local-growth-system",
+  buyerScenario: "spend-visible-attribution-weak",
+  projectComplexity: "integration",
+  scopeShape: "reporting-visibility",
+  primarySimilaritySummary:
+    "Local trades and services that need defensible channel-to-job attribution, not just lead volume.",
   publishedAt: "2024-03-01",
 };

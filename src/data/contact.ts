@@ -84,8 +84,8 @@ export const contactPageData = {
     {
       title: "Run a free diagnostic first",
       description:
-        "Take the Growth Bottleneck Quiz. Get a specific result in a few minutes, no email required.",
-      href: "/tools/growth-bottleneck-quiz",
+        "Run the Growth System Audit. Get a specific read in a few minutes, no email required.",
+      href: "/tools/growth-system-audit",
       ctaLabel: "Take the quiz →",
     },
     {

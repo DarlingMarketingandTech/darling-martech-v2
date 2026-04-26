@@ -78,7 +78,7 @@ export const licenseRequirementsNavigator: CaseStudy = {
     "mysql",
     "github",
   ],
-  relatedToolSlugs: ["geo-readiness-auditor", "growth-bottleneck-quiz"],
+  relatedToolSlugs: ["geo-readiness-auditor", "growth-system-audit"],
   relatedServiceSlugs: ["content-seo-systems", "custom-infrastructure", "conversion-optimization"],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough"],
   relatedProofSlugs: ["graston-technique", "graston-qualified-leads"],
@@ -91,5 +91,11 @@ export const licenseRequirementsNavigator: CaseStudy = {
   ],
   cloudinaryImages: ["3-website-page-promo", "graston-logo-png"],
   featured: false,
+  projectType: "custom-infrastructure-product",
+  buyerScenario: "visibility-demand-gap",
+  projectComplexity: "multi-surface",
+  scopeShape: "multi-page",
+  primarySimilaritySummary:
+    "Regulated programs that need compliance-grade lookup UX plus structured, discoverable state content.",
   publishedAt: "2024-02-01",
 };

@@ -251,7 +251,7 @@ export default function ServicesIndexPage() {
                       {laneProof.map((angle) => (
                         <li key={angle.id}>
                           <Link
-                            href={`/proof/${angle.parentProjectSlug}`}
+                            href={`/proof/${angle.anchorProjectSlug}`}
                             className="text-sm text-[#F5F4F0]/70 transition-colors hover:text-[#0FD9C8]"
                           >
                             <span className="text-[#F5F4F0]/35">↳</span> {angle.title}
@@ -335,7 +335,7 @@ export default function ServicesIndexPage() {
               <Button href="/services/technical-roadmap" size="lg">
                 Request the Technical Roadmap →
               </Button>
-              <Button href="/tools/growth-bottleneck-quiz" variant="secondary" size="lg">
+              <Button href="/tools/growth-system-audit" variant="secondary" size="lg">
                 Diagnose with the quiz →
               </Button>
               <Button href="/proof" variant="ghost" size="lg">

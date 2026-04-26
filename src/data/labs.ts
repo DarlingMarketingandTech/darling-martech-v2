@@ -5,11 +5,11 @@ import { problemPages } from "@/data/problems";
 
 export const tools: Tool[] = [
   {
-    slug: "growth-bottleneck-quiz",
-    title: "Growth Bottleneck Quiz",
-    tagline: "Find the problem most likely holding growth back right now.",
+    slug: "growth-system-audit",
+    title: "Growth System Audit",
+    tagline: "Find where the growth system is actually broken before you buy tactics.",
     description:
-      "A fast diagnostic built to identify the most likely strategic, conversion, systems, visibility, brand, or attribution bottleneck.",
+      "A diagnostic-first audit that maps strategic, conversion, systems, visibility, brand, and attribution constraints — and routes you toward the right proof or project path.",
     estimatedTime: "3 minutes",
     questions: [
       {
@@ -122,7 +122,7 @@ export const tools: Tool[] = [
         description:
           "The current site likely does not explain the offer clearly enough or move the right visitor to the next step quickly enough.",
         problemCluster: "site-not-converting",
-        recommendedProofSlug: "pike-medical",
+        recommendedProofSlug: "clinical-compass",
         recommendedService: "content-seo-systems",
         ctaLabel: "See the website problem",
         ctaHref: "/problems/site-not-converting",
@@ -445,7 +445,7 @@ export const tools: Tool[] = [
         description:
           "When runway is workable and instrumentation is not blocking, the roadmap should emphasize shipping weekly improvements tied to conversion and pipeline, not another strategy deck.",
         problemCluster: "site-not-converting",
-        recommendedProofSlug: "pike-medical",
+        recommendedProofSlug: "clinical-compass",
         recommendedService: "content-seo-systems",
         ctaLabel: "See the website problem",
         ctaHref: "/problems/site-not-converting",

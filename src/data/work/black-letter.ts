@@ -76,6 +76,12 @@ export const blackLetter: CaseStudy = {
     "Usage and governance guide",
   ],
   featured: false,
+  projectType: "website-brand-rebuild",
+  buyerScenario: "trust-routing-weak",
+  projectComplexity: "focused",
+  scopeShape: "multi-page",
+  primarySimilaritySummary:
+    "Firms with strong delivery but brand drift across site, sales, and campaigns.",
   publishedAt: "2024-03-01",
   cloudinaryImages: [
     "Gemini_Generated_Image_aadwklaadwklaadw",

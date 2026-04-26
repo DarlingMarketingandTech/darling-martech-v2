@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { CTA_LABELS, CTA_LINKS } from "@/lib/cta";
 
-const HIDDEN_PREFIXES = ["/tools/growth-bottleneck-quiz"];
+const HIDDEN_PREFIXES = ["/tools/growth-system-audit"];
 
 function shouldHide(pathname: string | null): boolean {
   if (!pathname) return false;

@@ -79,10 +79,10 @@ export const clinicalCompass: CaseStudy = {
     "wordpress",
     "mysql",
   ],
-  relatedToolSlugs: ["growth-bottleneck-quiz", "attribution-snapshot"],
+  relatedToolSlugs: ["growth-system-audit", "attribution-snapshot"],
   relatedServiceSlugs: ["crm-architecture", "automation-systems", "conversion-optimization"],
   relatedProblemSlugs: ["site-not-converting", "disconnected-systems"],
-  relatedProofSlugs: ["pike-medical"],
+  relatedProofSlugs: ["primarycare-indy", "urgentcare-indy"],
   systemsBuilt: [
     "CRM pipeline",
     "Intake automation",
@@ -91,6 +91,12 @@ export const clinicalCompass: CaseStudy = {
     "Reporting layer",
   ],
   cloudinaryImages: ["pike-medical_home_page_-_desktop_website_view", "pmc-webheader-med"],
-  featured: false,
+  featured: true,
+  projectType: "crm-automation-system",
+  buyerScenario: "operations-manual-fragmented",
+  projectComplexity: "integration",
+  scopeShape: "crm-lifecycle",
+  primarySimilaritySummary:
+    "Multi-site healthcare groups where new patient demand leaks between intake, booking, and follow-up.",
   publishedAt: "2023-08-01",
 };

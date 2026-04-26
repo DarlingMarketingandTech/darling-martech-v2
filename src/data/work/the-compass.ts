@@ -79,7 +79,7 @@ export const theCompass: CaseStudy = {
     "figma",
     "slack",
   ],
-  relatedToolSlugs: ["growth-bottleneck-quiz", "martech-fragmentation-scorecard"],
+  relatedToolSlugs: ["growth-system-audit", "martech-fragmentation-scorecard"],
   relatedServiceSlugs: ["fractional-cmo", "digital-marketing-strategy", "attribution-analytics"],
   relatedProblemSlugs: ["no-strategy-owner", "pipeline-not-predictable"],
   relatedProofSlugs: ["graston-technique"],
@@ -90,5 +90,11 @@ export const theCompass: CaseStudy = {
     "Segmented follow-up automation",
   ],
   featured: false,
+  projectType: "custom-infrastructure-product",
+  buyerScenario: "trust-routing-weak",
+  projectComplexity: "multi-surface",
+  scopeShape: "single-flow",
+  primarySimilaritySummary:
+    "B2B teams shipping an interactive product surface with CRM-backed routing and nurture.",
   publishedAt: "2024-03-01",
 };

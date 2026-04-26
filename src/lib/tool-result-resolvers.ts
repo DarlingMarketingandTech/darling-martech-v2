@@ -126,7 +126,7 @@ export function resolveToolResult(tool: Tool, answers: ToolAnswers): ToolResult 
   }
 
   switch (tool.slug) {
-    case "growth-bottleneck-quiz":
+    case "growth-system-audit":
       return resolveGrowthBottleneckResult(tool, answers);
     case "martech-stack-grader":
       return resolveMartechStackResult(tool, answers);

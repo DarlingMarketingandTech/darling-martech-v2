@@ -109,7 +109,7 @@ export function FoundationPathwayMini({
   body = "For missing-system buyers: this is the practical foundation path before complex optimization.",
   primaryHref = "/services/technical-roadmap",
   primaryLabel = "See foundation roadmap →",
-  secondaryHref = "/tools/growth-bottleneck-quiz",
+  secondaryHref = "/tools/growth-system-audit",
   secondaryLabel = "Run the diagnostic first →",
 }: FoundationPathwayMiniProps) {
   const sectionRef = useRef<HTMLDivElement>(null);

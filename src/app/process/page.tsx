@@ -83,7 +83,7 @@ export default function ProcessPage() {
             <Button href="/contact" size="lg">
               Start a conversation
             </Button>
-            <Button href="/tools/growth-bottleneck-quiz" variant="secondary" size="lg">
+            <Button href="/tools/growth-system-audit" variant="secondary" size="lg">
               Or run a free diagnostic
             </Button>
           </div>

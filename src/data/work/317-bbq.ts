@@ -91,6 +91,12 @@ export const bbq317: CaseStudy = {
     "Citation and schema layer",
   ],
   featured: false,
+  projectType: "local-growth-system",
+  buyerScenario: "demand-exists-conversion-leaks",
+  projectComplexity: "focused",
+  scopeShape: "multi-page",
+  primarySimilaritySummary:
+    "Hospitality brands where reputation, local discovery, and social proof drive covers.",
   publishedAt: "2023-04-01",
   cloudinaryImages: ["317_bbq_home_page_-_desktop_website_view", "317-bbq-logo-anchor"],
 };

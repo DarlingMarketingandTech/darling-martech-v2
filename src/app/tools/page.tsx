@@ -13,8 +13,12 @@ const SIMULATION_SLUGS = new Set(
   TOOL_META.filter((tool) => tool.kind === "simulation").map((tool) => tool.slug)
 );
 
+const PRIMARY_AUDIT_SLUG = "growth-system-audit";
+
 export default function ToolsPage() {
   const diagnosticTools = tools.filter((tool) => !SIMULATION_SLUGS.has(tool.slug));
+  const primaryAudit = diagnosticTools.find((t) => t.slug === PRIMARY_AUDIT_SLUG);
+  const otherDiagnostics = diagnosticTools.filter((t) => t.slug !== PRIMARY_AUDIT_SLUG);
   const simulationTools = tools.filter((tool) => SIMULATION_SLUGS.has(tool.slug));
 
   const proofAnglesByToolSlug = Object.fromEntries(
@@ -26,24 +30,39 @@ export default function ToolsPage() {
       <PageHero
         eyebrow="Tools"
         headline="Start with a diagnosis, not a sales call."
-        body="Each tool exists to answer one practical question before an engagement begins. Use the one that matches the decision you need to make."
+        body="The Growth System Audit is the default low-trust entry — map what is broken before you buy tactics. Specialist calculators sit below for specific decisions."
       />
       <div className="mt-14 space-y-16">
+        {primaryAudit ? (
+          <section className="space-y-6">
+            <header className="flex flex-col gap-2">
+              <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#F05A28]">
+                Start here
+              </p>
+              <h2 className="font-display text-2xl font-semibold md:text-3xl">Growth System Audit</h2>
+              <p className="max-w-3xl text-base leading-7 text-[#F5F4F0]/64">
+                One structured pass across strategy, conversion, systems, visibility, and attribution. Routes to
+                problems, proof, and project paths based on what you surface — not a pitch.
+              </p>
+            </header>
+            <ToolGrid tools={[primaryAudit]} proofAnglesByToolSlug={proofAnglesByToolSlug} />
+          </section>
+        ) : null}
+
         <section className="space-y-6">
           <header className="flex flex-col gap-2">
             <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#F05A28]">
-              Audits · calculators · analyzers
+              Specialist diagnostics
             </p>
             <h2 className="font-display text-2xl font-semibold md:text-3xl">
-              Problem-grounded diagnostics
+              Calculators & focused analyzers
             </h2>
             <p className="max-w-3xl text-base leading-7 text-[#F5F4F0]/64">
-              Each tool answers one practical question and links outward to the buyer problems and
-              services it connects to. Proof stays on the case study pages — tools are for finding
-              your constraint, not skipping to a sales story.
+              Use these when you already know the question — e.g. stack economics, attribution shape, or
+              channel ROI. They still link out to problems and services; proof stays on case study pages.
             </p>
           </header>
-          <ToolGrid tools={diagnosticTools} proofAnglesByToolSlug={proofAnglesByToolSlug} />
+          <ToolGrid tools={otherDiagnostics} proofAnglesByToolSlug={proofAnglesByToolSlug} />
         </section>
 
         {simulationTools.length ? (

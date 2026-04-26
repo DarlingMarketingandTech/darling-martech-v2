@@ -72,14 +72,14 @@ export const urgentcareIndy: CaseStudy = {
     "build-workflow-ai",
   ],
   implementationPlatformSlugs: ["wordpress", "google", "figma", "cloudinary"],
-  relatedToolSlugs: ["growth-bottleneck-quiz", "geo-readiness-auditor"],
+  relatedToolSlugs: ["growth-system-audit", "geo-readiness-auditor"],
   relatedServiceSlugs: [
     "website-design",
     "conversion-optimization",
     "content-seo-systems",
   ],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough"],
-  relatedProofSlugs: ["primarycare-indy", "clinical-compass", "pike-medical"],
+  relatedProofSlugs: ["primarycare-indy", "clinical-compass"],
   systemsBuilt: [
     "Urgent booking conversion flow",
     "Online check-in architecture",
@@ -88,5 +88,11 @@ export const urgentcareIndy: CaseStudy = {
   ],
   cloudinaryImages: ["urgent-care-indy_home_page_-_desktop_website_view", "urgentcare-logo-anchor"],
   featured: true,
+  projectType: "local-growth-system",
+  buyerScenario: "visibility-demand-gap",
+  projectComplexity: "multi-surface",
+  scopeShape: "multi-page",
+  primarySimilaritySummary:
+    "Urgent and acute care brands where speed-to-appointment and local trust decide conversion.",
   publishedAt: "2024-05-01",
 };

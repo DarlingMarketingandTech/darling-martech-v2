@@ -92,5 +92,11 @@ export const grastonGrowthEngine: CaseStudy = {
   cloudinaryImages: ["3-website-page-promo"],
   featured: true,
   proofVisualizerType: "pulse",
+  projectType: "crm-automation-system",
+  buyerScenario: "operations-manual-fragmented",
+  projectComplexity: "integration",
+  scopeShape: "multi-channel",
+  primarySimilaritySummary:
+    "High-volume B2B operators automating support, directory, and pipeline systems with AI-shaped workflows.",
   publishedAt: "2024-01-01",
 };

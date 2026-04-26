@@ -4,13 +4,13 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Growth Bottleneck Quiz",
+  title: "Growth System Audit",
   description:
-    "Answer 5 honest questions about where your marketing is stuck. Identify the real constraint and find out exactly where to start.",
-  canonicalUrl: "https://darlingmartech.com/tools/growth-bottleneck-quiz",
+    "A fast diagnostic that maps where the growth system is actually broken — structural, executional, or measurement-related — before you buy services or a call.",
+  canonicalUrl: "https://darlingmartech.com/tools/growth-system-audit",
 });
 
-export default function GrowthBottleneckQuizPage() {
+export default function GrowthSystemAuditPage() {
   return (
     <SiteShell>
       <GrowthBottleneckQuizClient />

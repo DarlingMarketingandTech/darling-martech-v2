@@ -16,7 +16,7 @@ export const studioPageData = {
   gallery: [
     {
       publicId: "curated/tools/growth-bottleneck-quiz",
-      alt: "Growth Bottleneck Quiz — diagnostic interface concept",
+      alt: "Growth System Audit — diagnostic interface concept",
       width: 1200,
       height: 750,
       caption: "Diagnostic tools — growth bottleneck quiz",

@@ -71,11 +71,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-display text-2xl font-semibold text-[#F5F4F0]">Want this applied to your stack?</p>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-[#F5F4F0]/60">
-            Run the Growth Bottleneck Quiz for a concrete read on where things are stuck — or send a message and
+            Run the Growth System Audit for a concrete read on where things are stuck — or send a message and
             I&apos;ll reply with something useful.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button href="/tools/growth-bottleneck-quiz" size="lg">
+            <Button href="/tools/growth-system-audit" size="lg">
               Run the quiz
             </Button>
             <Button href="/contact" variant="secondary" size="lg">

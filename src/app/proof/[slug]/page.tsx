@@ -16,7 +16,9 @@ import { caseStudies } from "@/data/work/work-index";
 import { problemPages } from "@/data/problems";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
+import { getSimilarCaseStudies } from "@/lib/proof-similar";
 import { getProofDetailHeroPublicId } from "@/data/proof-visuals";
+import { PROJECT_TYPE_LABELS } from "@/data/taxonomy";
 import { getNewsroomArticlesByProofSlug } from "@/data/newsroom";
 import { NewsroomRelatedStrip } from "@/components/newsroom/NewsroomRelatedStrip";
 import { siteConfig } from "@/data/site-config";
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }: ProofSlugPageProps): Promise<
   }
 
   return buildMetadata({
-    title: `${study.clientName} — ${study.outcomeHeadline}`,
+    title: `${PROJECT_TYPE_LABELS[study.projectType]} — ${study.outcomeHeadline}`,
     description: study.resultSummary,
     canonicalUrl: `https://darlingmartech.com/proof/${study.slug}`,
   });
@@ -67,6 +69,10 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
     (c) => study.relatedProofSlugs?.includes(c.slug)
   );
 
+  const similarProjects = getSimilarCaseStudies(study, caseStudies, 4);
+  const similarSlugs = new Set(similarProjects.map((c) => c.slug));
+  const relatedProofsExtra = relatedProofs.filter((c) => !similarSlugs.has(c.slug));
+
   const proofAngles = getProofAnglesForProject(study.slug).slice(0, 3);
   const newsroomForProof = getNewsroomArticlesByProofSlug(study.slug);
   const heroImagePublicId = getProofDetailHeroPublicId(study);
@@ -84,9 +90,12 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
         <ProofDetailAmbient imagePublicId={heroImagePublicId} />
         <div className="relative z-10">
       <PageHero
-        eyebrow={study.clientName}
+        eyebrow={PROJECT_TYPE_LABELS[study.projectType]}
         headline={study.title}
-        body={study.heroSubhead ?? study.resultSummary}
+        body={[
+          `${study.clientName} · ${study.clientContext}`,
+          study.heroSubhead ?? study.resultSummary,
+        ]}
         splitAside={<ServiceHeroVisual publicId={heroImagePublicId} alt={heroImageAlt} />}
       />
 
@@ -244,13 +253,33 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
         </SectionWrapper>
       )}
 
-      {/* Related proofs */}
-      {relatedProofs.length > 0 && (
+      {similarProjects.length > 0 && (
         <SectionWrapper className="mt-10">
-          <p className="meta-label text-[#F5F4F0]/42">Related proof</p>
+          <p className="meta-label text-[#0FD9C8]/90">Similar projects</p>
+          <div className="tech-divider my-4 max-w-sm" />
+          <p className="mb-4 max-w-2xl text-sm text-[#F5F4F0]/52">
+            Same project shape and scope — useful when you are comparing delivery risk, not company names.
+          </p>
+          <div className="mt-2 flex flex-wrap gap-3">
+            {similarProjects.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/proof/${c.slug}`}
+                className="rounded-full border border-[#F5F4F0]/10 px-4 py-2 text-sm text-[#F5F4F0]/68 transition-colors hover:border-[#0FD9C8]/40 hover:text-[#0FD9C8]"
+              >
+                {PROJECT_TYPE_LABELS[c.projectType]} — {c.outcomeHeadline} →
+              </Link>
+            ))}
+          </div>
+        </SectionWrapper>
+      )}
+
+      {relatedProofsExtra.length > 0 && (
+        <SectionWrapper className="mt-10">
+          <p className="meta-label text-[#F5F4F0]/42">Complementary proof</p>
           <div className="tech-divider my-4 max-w-sm" />
           <div className="mt-2 flex flex-wrap gap-3">
-            {relatedProofs.map((c) => (
+            {relatedProofsExtra.map((c) => (
               <Link
                 key={c.slug}
                 href={`/proof/${c.slug}`}
@@ -269,17 +298,19 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
         </SectionWrapper>
       ) : null}
 
-      {/* CTA */}
       <SectionWrapper className="mt-14 text-center">
         <h2 className="font-display text-balance text-2xl font-semibold text-[#F5F4F0] md:text-3xl">
-          If the proof is convincing, the conversation is easy.
+          High trust, clear problem, ready to move?
         </h2>
+        <p className="mx-auto mt-3 max-w-lg text-sm text-[#F5F4F0]/55">
+          Mid trust: keep browsing similar proof. High trust: book a short diagnostic call.
+        </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href={siteConfig.calComLink} size="lg">
-            Start a conversation
+            Book a diagnostic call
           </Button>
           <Button href="/proof" variant="secondary" size="lg">
-            Back to all proof
+            See more proof
           </Button>
         </div>
       </SectionWrapper>

@@ -59,7 +59,7 @@ export default function IndustriesPage() {
             <Button href={siteConfig.calComLink} size="lg">
               Start a conversation →
             </Button>
-            <Button href="/tools/growth-bottleneck-quiz" variant="ghost" size="lg">
+            <Button href="/tools/growth-system-audit" variant="ghost" size="lg">
               Run the free diagnostic first
             </Button>
           </div>

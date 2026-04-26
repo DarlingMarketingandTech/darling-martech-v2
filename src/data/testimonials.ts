@@ -21,6 +21,6 @@ export const testimonials: Testimonial[] = [
     company: "Pike Medical",
     featured: true,
     trustLadderStage: "evaluate",
-    caseStudySlug: "pike-medical",
+    caseStudySlug: "clinical-compass",
   },
 ];

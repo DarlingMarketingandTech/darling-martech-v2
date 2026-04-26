@@ -31,7 +31,7 @@ export default function ProofPage() {
             headline={proofPageData.hero.headline}
             body={proofPageData.hero.body}
             ctas={[
-              { label: "Run the 3-minute diagnostic →", href: "/tools/growth-bottleneck-quiz" },
+              { label: "Run the Growth System Audit →", href: "/tools/growth-system-audit" },
               { label: "Browse problems", href: "/problems", variant: "secondary" },
             ]}
           />
@@ -192,16 +192,21 @@ export default function ProofPage() {
               Start with a structured diagnostic — it maps to problems and capabilities, not sales fluff.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-              <Button href="/tools/growth-bottleneck-quiz" size="lg">
-                Run the diagnostic →
+              <Button href="/tools/growth-system-audit" size="lg">
+                Run the Growth System Audit →
               </Button>
               <Button href={siteConfig.calComLink} variant="secondary" size="lg">
-                Book a 30-minute call
-              </Button>
-              <Button href="/process" variant="ghost" size="lg">
-                See how engagements run
+                Book a diagnostic call
               </Button>
             </div>
+            <p className="mx-auto mt-6 max-w-md text-center text-sm text-[#F5F4F0]/42">
+              <Link
+                href="/process"
+                className="underline decoration-[#F5F4F0]/20 underline-offset-4 transition-colors hover:text-[#0FD9C8] hover:decoration-[#0FD9C8]/35"
+              >
+                How engagements run →
+              </Link>
+            </p>
           </section>
         </div>
       </div>

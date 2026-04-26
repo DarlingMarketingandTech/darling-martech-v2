@@ -23,7 +23,7 @@ export default function MergeVisualizer({ fixDeployed, reducedMotion }: Telemetr
       </div>
       <div
         className={cn(
-          "h-14 w-2/3 max-w-[14rem] rounded-xl border border-[#0FD9C8]/40 bg-[#0FD9C8]/10",
+          "h-14 w-2/3 max-w-56 rounded-xl border border-[#0FD9C8]/40 bg-[#0FD9C8]/10",
           !reducedMotion && "motion-safe:transition-all motion-safe:duration-700",
           merged ? "opacity-100" : "motion-safe:scale-75 opacity-20"
         )}

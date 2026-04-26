@@ -68,7 +68,7 @@ export function ProofMetricTile({ metric, animateValue = true }: ProofMetricTile
         <p className="font-display text-balance text-lg font-semibold leading-snug tracking-[-0.02em] text-[#F5F4F0] md:text-xl">
           {metric.value}
         </p>
-        {metric.label ? <p className="meta-label mt-4 max-w-[22rem] leading-relaxed">{metric.label}</p> : null}
+        {metric.label ? <p className="meta-label mt-4 max-w-88 leading-relaxed">{metric.label}</p> : null}
       </div>
     </div>
   );

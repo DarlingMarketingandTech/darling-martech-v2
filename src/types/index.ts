@@ -135,6 +135,8 @@ export type ScopeShape =
   | "reporting-visibility"
   | "multi-channel";
 
+export type EvidenceType = "outcome-metrics" | "system-build" | "mixed-evidence";
+
 /** URL-safe keys for /proof?outcome= — aligned with site blueprint. */
 export type OutcomeSlug =
   | "lead-gen"
@@ -161,6 +163,20 @@ export interface CaseStudy {
   title: string;
   clientName: string;
   clientContext: string;
+  projectPath?: ProjectPathId;
+  /** Project-type browse facet */
+  projectType: ProjectTypeId;
+  /** Buyer-situation facet */
+  buyerScenario: BuyerScenarioId;
+  projectComplexity: ProjectComplexity;
+  scopeShape: ScopeShape;
+  evidenceType?: EvidenceType;
+  /** Optional one-line taxonomy signal used for "see similar proof" matching */
+  primarySimilaritySummary?: string;
+  /** Default true; set false when client should be de-emphasized in cards/lists */
+  showClientName?: boolean;
+  /** Optional replacement chip for client context where anonymity is preferred */
+  clientContextLabel?: string;
   location?: string;
   timeline: string;
   engagementFormat: EngagementFormat;
@@ -206,14 +222,6 @@ export interface CaseStudy {
   relatedProblemSlugs?: string[];
   /** Other proof slugs that reinforce or complement this one */
   relatedProofSlugs?: string[];
-  /** Project-type browse facet */
-  projectType: ProjectTypeId;
-  /** Buyer-situation facet */
-  buyerScenario: BuyerScenarioId;
-  projectComplexity: ProjectComplexity;
-  scopeShape: ScopeShape;
-  /** Card hero line: "for you if…" (project-first) */
-  primarySimilaritySummary?: string;
   /** Optional cross-links for "similar risk / shape" */
   decisionTags?: string[];
 }

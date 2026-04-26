@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const grastonGrowthEngine: CaseStudy = {
   slug: "graston-growth-engine",
-  title: "Graston Growth Engine — Automation Stack",
+  title: "Graston Growth Engine — Marketing Ops, CRM & Lead Follow-Up Automation",
   clientName: "Graston Technique®",
   clientContext: "Healthcare training · Marketing automation",
   location: "Indianapolis, IN",
@@ -24,56 +24,56 @@ export const grastonGrowthEngine: CaseStudy = {
   primaryOutcomeSlug: "time-saved",
   outcomeHeadline: "95% less manual overhead",
   resultSummary:
-    "Custom marketing automation platform replaced eight separate manual workflows. Real-time spatial search, connected CRM, and pipeline visibility from none to operational.",
+    "Custom workflow layer replaced eight separate manual handoffs. Real-time map search, CRM-connected updates, and clear pipeline views from ad hoc to operational.",
   fullStory:
-    "The Growth Engine work focused on replacing brittle manual workflows with durable automation so the team could scale outreach, events, and provider lifecycle operations without adding operational overhead.",
+    "The Growth Engine work replaced brittle manual steps with reliable automation so the team could scale outreach, events, and provider follow-up without adding headcount for handoffs.",
   heroSubhead:
     "Automation-first operating layer for a national clinician education platform where training, provider operations, and support workflows were previously manual.",
   whyThisMattered:
     "At national training scale, manual process drag compounds quickly. Each extra handoff increases response lag, data inconsistency, and missed follow-up windows. This engagement converted high-friction operations into a reliable system layer.",
   whatWasBroken: [
-    "Training lifecycle steps depended on manual staff execution across multiple disconnected tools",
-    "Provider directory and membership funnel operations were fragmented from CRM state changes",
-    "Attribution and analytics signals were present but not structured as a decision-ready operating model",
-    "Support workflows lacked a scalable automation layer for recurring provider and learner requests",
+    "Training and enrollment follow-up depended on staff updating several disconnected tools by hand",
+    "Provider directory and membership updates did not track CRM state in real time",
+    "Attribution and analytics data existed but did not roll up to clear weekly decisions",
+    "Support work repeated the same questions with no shared templates or routing",
   ],
   buildSections: [
     {
-      title: "Training lifecycle automation",
+      title: "Training enrollment and follow-up on autopilot",
       description:
-        "Core training lifecycle transitions were moved to automation triggers so confirmations, sequence timing, and downstream operational updates no longer depended on manual coordination.",
+        "Enrollments, reminders, and handoffs moved to automated triggers so timing and downstream updates no longer depended on staff chasing each step.",
     },
     {
-      title: "Provider directory and membership funnel system",
+      title: "Provider directory and membership in sync with CRM",
       description:
-        "Provider status, listing visibility, and membership-funnel transitions were connected through one operational layer so directory integrity and conversion flow could stay synchronized.",
+        "Provider status, listing visibility, and membership changes were wired to one layer so the public map and internal records match.",
     },
     {
-      title: "Analytics and attribution operating overhaul",
+      title: "Attribution and reporting you can act on each week",
       description:
-        "Attribution and performance reporting were restructured around pipeline-stage visibility so operators could prioritize by measurable operating outcomes instead of isolated activity metrics.",
+        "Attribution and performance views were organized around pipeline stages so the team could prioritize by outcomes, not isolated activity metrics.",
     },
     {
-      title: "AI and smart support workflow layer",
+      title: "Smarter, repeatable support responses",
       description:
-        "Recurring support and guidance flows were standardized into automation-friendly patterns so response consistency improved without increasing manual support burden.",
+        "Recurring support questions were organized into shared patterns and routing so answers stayed consistent without growing manual support load.",
     },
   ],
   operatingImpact:
-    "The Growth Engine now functions as an operational system, not a collection of manual tasks. Teams can execute training and provider workflows with less coordination overhead while maintaining clearer pipeline and performance visibility.",
+    "The Growth Engine runs as a connected program, not a list of one-off tasks. Training and provider workflows need less day-to-day coordination, and leaders see pipeline and performance in the same place.",
   implementationLayers: [
-    "Lifecycle automation orchestration",
+    "Follow-up and enrollment orchestration",
     "Provider directory sync logic",
-    "Membership funnel state management",
+    "Membership state and CRM alignment",
     "Attribution and analytics reporting layer",
-    "Support automation framework",
-    "CRM-connected workflow triggers",
+    "Support workflow patterns",
+    "CRM-connected triggers",
   ],
   systemsBuilt: [
-    "Training lifecycle automation",
-    "Provider directory and membership funnel",
+    "Training enrollment and follow-up automation",
+    "Provider directory and membership path",
     "Attribution operating layer",
-    "AI-assisted support workflows",
+    "Assisted support workflows",
     "Spatial search infrastructure",
   ],
   implementationStackCategories: [
@@ -96,7 +96,8 @@ export const grastonGrowthEngine: CaseStudy = {
   buyerScenario: "operations-manual-fragmented",
   projectComplexity: "integration",
   scopeShape: "multi-channel",
+  evidenceType: "quantified-efficiency",
   primarySimilaritySummary:
-    "High-volume B2B operators automating support, directory, and pipeline systems with AI-shaped workflows.",
+    "This is a fit if your team is drowning in manual steps between CRM, events, the website, and support—and you need serious time back without new headcount for handoffs.",
   publishedAt: "2024-01-01",
 };

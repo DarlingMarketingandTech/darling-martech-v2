@@ -107,6 +107,7 @@ export type ProjectPathId = "foundation" | "build" | "scale" | "grow";
 /** Primary proof browse dimension — project shape, not company hierarchy. */
 export type ProjectTypeId =
   | "website-brand-rebuild"
+  | "brand-identity-system"
   | "conversion-path-repair"
   | "crm-automation-system"
   | "local-growth-system"
@@ -135,7 +136,18 @@ export type ScopeShape =
   | "reporting-visibility"
   | "multi-channel";
 
-export type EvidenceType = "outcome-metrics" | "system-build" | "mixed-evidence";
+/**
+ * What the proof actually demonstrates — avoids generic “mixed” unless the story truly spans categories.
+ * Used for data quality and hub filtering, not as a CTA.
+ */
+export type ProofEvidenceType =
+  | "quantified-pipeline"
+  | "quantified-efficiency"
+  | "quantified-traffic-local"
+  | "reputation-and-retention"
+  | "product-usage-conversion"
+  | "documented-delivery"
+  | "mixed";
 
 /** URL-safe keys for /proof?outcome= — aligned with site blueprint. */
 export type OutcomeSlug =
@@ -170,7 +182,8 @@ export interface CaseStudy {
   buyerScenario: BuyerScenarioId;
   projectComplexity: ProjectComplexity;
   scopeShape: ScopeShape;
-  evidenceType?: EvidenceType;
+  /** What the proof document shows: metrics, product behavior, or delivered artifacts */
+  evidenceType: ProofEvidenceType;
   /** Optional one-line taxonomy signal used for "see similar proof" matching */
   primarySimilaritySummary?: string;
   /** Default true; set false when client should be de-emphasized in cards/lists */

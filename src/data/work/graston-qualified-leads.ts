@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const grastonQualifiedLeads: CaseStudy = {
   slug: "graston-qualified-leads",
-  title: "Qualified Lead Pipeline & Strategy Ownership",
+  title: "Graston — Qualified Leads, CRM & Strategy Ownership",
   clientName: "Graston Technique®",
   clientContext: "Healthcare training · SaaS-adjacent",
   location: "Indianapolis, IN",
@@ -25,15 +25,15 @@ export const grastonQualifiedLeads: CaseStudy = {
   resultSummary:
     "Eight manual processes automated. Static directory rebuilt into a live training pipeline. Strategic ownership tied positioning, lead capture, and measurement together.",
   fullStory:
-    "Graston needed a senior owner for the full marketing system, not another vendor layer. The work rebuilt lead generation, lifecycle orchestration, and measurement so qualified demand could compound instead of leaking through manual handoffs.",
+    "Graston needed a senior owner for the full marketing system, not another vendor layer. The work rebuilt lead generation, handoffs and follow-up, and measurement so qualified demand could compound instead of leaking through manual steps.",
   heroSubhead:
-    "Qualified-lead growth was unlocked by pairing strategic ownership with disciplined system rebuilds across acquisition, lifecycle, and reporting.",
+    "Qualified-lead growth came from pairing strategic ownership with disciplined rebuilds across acquisition, follow-up, and reporting.",
   whyThisMattered:
     "When a clinician education brand operates across multiple channels and touchpoints, lead quality depends on system consistency. Without strategic ownership and shared pipeline logic, demand volume can grow while conversion quality declines.",
   whatWasBroken: [
-    "Qualified lead volume was constrained by disconnected lifecycle handling and manual follow-up dependencies",
-    "Channel activity was visible, but stage-based pipeline progression lacked consistent ownership",
-    "Provider and learner journeys were not measured as a unified demand system",
+    "Qualified lead volume was limited by scattered follow-up and no single owner of the pipeline",
+    "Channel activity was visible, but stage-by-stage pipeline progression lacked consistent ownership",
+    "Provider and learner journeys were not measured as one demand story",
   ],
   buildSections: [
     {
@@ -42,9 +42,9 @@ export const grastonQualifiedLeads: CaseStudy = {
         "A single operating owner aligned positioning, acquisition channels, and qualification criteria so the system optimized for qualified clinician demand, not just top-of-funnel activity.",
     },
     {
-      title: "Lifecycle automation support for lead quality",
+      title: "Follow-up automation to protect lead quality",
       description:
-        "Lifecycle checkpoints and follow-up logic were standardized so lead progression stayed consistent through training and provider conversion stages.",
+        "Checkpoints and follow-up rules were standardized so lead progression stayed consistent through training and provider conversion stages.",
     },
     {
       title: "Qualified-pipeline reporting structure",
@@ -53,16 +53,16 @@ export const grastonQualifiedLeads: CaseStudy = {
     },
   ],
   operatingImpact:
-    "Graston gained a lead-generation system that could scale qualified demand with less operational drift. Strategic decisions, lifecycle execution, and reporting now reference the same qualification model.",
+    "Graston gained a lead-generation program that can scale qualified demand with less operational drift. Strategy, follow-up, and reporting now use the same qualification model.",
   implementationLayers: [
     "Strategic lead qualification model",
-    "Lifecycle progression automation",
+    "Stage-based follow-up automation",
     "Channel-to-pipeline attribution mapping",
     "Qualified-stage reporting framework",
   ],
   systemsBuilt: [
     "Qualified lead model",
-    "Lifecycle nurture framework",
+    "Nurture and follow-up framework",
     "Training pipeline progression logic",
     "Attribution and reporting baseline",
   ],
@@ -75,7 +75,8 @@ export const grastonQualifiedLeads: CaseStudy = {
   buyerScenario: "demand-exists-conversion-leaks",
   projectComplexity: "multi-surface",
   scopeShape: "crm-lifecycle",
+  evidenceType: "quantified-pipeline",
   primarySimilaritySummary:
-    "Teams with real demand but unclear qualification, lifecycle ownership, and pipeline-stage reporting.",
+    "This is a fit if you get interest from campaigns and events but lose qualified people between handoffs, CRM stages, and reporting.",
   publishedAt: "2024-01-01",
 };

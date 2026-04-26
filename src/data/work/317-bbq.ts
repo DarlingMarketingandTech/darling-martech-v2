@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const bbq317: CaseStudy = {
   slug: "317-bbq",
-  title: "317 BBQ — Local Brand & Digital Presence Build",
+  title: "317 BBQ — Local Brand, Website & Local Search",
   clientName: "317 BBQ",
   clientContext: "Local restaurant · Indianapolis, IN",
   location: "Indianapolis, IN",
@@ -33,7 +33,7 @@ export const bbq317: CaseStudy = {
     "No consistent brand identity — logo, colors, and tone varied across materials and platforms",
     "Google Business Profile was unclaimed and incomplete",
     "Website was a single-page template with no local keyword structure or schema markup",
-    "Citations across directories were inconsistent — different phone numbers, wrong address format",
+    "Listings on directories used mismatched name, address, and phone, which weakens local trust signals",
     "No review solicitation strategy — reviews were sporadic and unmanaged",
   ],
   buildSections: [
@@ -92,11 +92,12 @@ export const bbq317: CaseStudy = {
   ],
   featured: false,
   projectType: "local-growth-system",
-  buyerScenario: "demand-exists-conversion-leaks",
+  buyerScenario: "visibility-demand-gap",
   projectComplexity: "focused",
-  scopeShape: "multi-page",
+  scopeShape: "multi-channel",
+  evidenceType: "quantified-traffic-local",
   primarySimilaritySummary:
-    "Hospitality brands where reputation, local discovery, and social proof drive covers.",
+    "This is a fit if you run a local venue or restaurant and need findability, reviews, and a site that match the quality of the experience.",
   publishedAt: "2023-04-01",
   cloudinaryImages: ["317_bbq_home_page_-_desktop_website_view", "317-bbq-logo-anchor"],
 };

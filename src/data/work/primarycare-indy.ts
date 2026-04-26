@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const primarycareIndy: CaseStudy = {
   slug: "primarycare-indy",
-  title: "PrimaryCare Indy — Patient Booking & Local Visibility System",
+  title: "PrimaryCare Indy — Healthcare Website, Booking & Local Patient Journeys",
   clientName: "PrimaryCare Indy",
   clientContext: "Primary care practice network · Indianapolis, IN",
   location: "Indianapolis, IN",
@@ -52,18 +52,18 @@ export const primarycareIndy: CaseStudy = {
         "Local-intent entry pages and on-site conversion blocks were aligned so discovery traffic landed on pages that matched search intent and offered immediate scheduling actions.",
     },
     {
-      title: "Healthcare trust system reinforcement",
+      title: "Trust and care proof before the booking ask",
       description:
-        "Provider credibility, care approach context, and patient reassurance copy were integrated directly into conversion-critical sections so trust-building happened before the booking ask, not after.",
+        "Provider credibility, care approach, and reassurance copy were placed in conversion-critical sections so patients felt confident before they scheduled, not after.",
     },
   ],
   operatingImpact:
-    "PrimaryCare Indy moved from a brochure-like site to a patient-acquisition system where intent, trust, and booking flow are connected. Teams can route more qualified appointments through online scheduling instead of relying on manual phone follow-up.",
+    "PrimaryCare Indy moved from a brochure-style site to a care journey where intent, trust, and booking work together. More qualified appointments run through online scheduling instead of manual phone follow-up alone.",
   implementationLayers: [
     "Patient-intent IA rebuild",
     "Mobile booking flow optimization",
-    "Service-to-scheduling conversion architecture",
-    "Healthcare trust signaling system",
+    "Service-to-scheduling conversion path",
+    "Trust and clinical proof on key pages",
     "Local intent landing alignment",
   ],
   implementationStackCategories: [
@@ -85,15 +85,16 @@ export const primarycareIndy: CaseStudy = {
     "Patient booking conversion flow",
     "Service architecture by care intent",
     "Local visibility entry paths",
-    "Healthcare trust signaling layer",
+    "Trust and clinical context on conversion pages",
   ],
   cloudinaryImages: ["primary-care-indy-website", "primarycare-logo-anchor"],
   featured: true,
   projectType: "local-growth-system",
-  buyerScenario: "visibility-demand-gap",
+  buyerScenario: "demand-exists-conversion-leaks",
   projectComplexity: "multi-surface",
   scopeShape: "multi-page",
+  evidenceType: "quantified-pipeline",
   primarySimilaritySummary:
-    "Local and regional healthcare groups competing on search, trust, and first-call conversion.",
+    "This is a fit if patients already look for care like yours, but the site and booking path lose them before they schedule.",
   publishedAt: "2024-04-01",
 };

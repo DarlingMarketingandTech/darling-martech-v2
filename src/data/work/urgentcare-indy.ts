@@ -2,7 +2,7 @@ import type { CaseStudy } from "@/types";
 
 export const urgentcareIndy: CaseStudy = {
   slug: "urgentcare-indy",
-  title: "UrgentCare Indy — Urgent-Intent Booking Conversion System",
+  title: "UrgentCare Indy — Urgent-Care Website & Online Check-In",
   clientName: "UrgentCare Indy",
   clientContext: "Urgent care network · Indianapolis, IN",
   location: "Indianapolis, IN",
@@ -42,7 +42,7 @@ export const urgentcareIndy: CaseStudy = {
         "Site pathways were restructured so urgent visitors reached check-in and booking actions quickly from mobile and local-search entry points. High-friction detours were removed from the top of the journey.",
     },
     {
-      title: "Urgency-meets-trust UX system",
+      title: "Urgency and trust on the same screen",
       description:
         "Core trust indicators, care expectations, and operational details were integrated into conversion-critical sections so users could make a fast decision without uncertainty.",
     },
@@ -81,18 +81,19 @@ export const urgentcareIndy: CaseStudy = {
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough"],
   relatedProofSlugs: ["primarycare-indy", "clinical-compass"],
   systemsBuilt: [
-    "Urgent booking conversion flow",
-    "Online check-in architecture",
-    "Urgent trust-and-clarity UX system",
-    "Local visibility to booking alignment",
+    "Urgent booking and check-in flow",
+    "Online check-in path",
+    "Urgent care trust and clarity on the conversion path",
+    "Local search entry points aligned to booking",
   ],
   cloudinaryImages: ["urgent-care-indy_home_page_-_desktop_website_view", "urgentcare-logo-anchor"],
   featured: true,
   projectType: "local-growth-system",
-  buyerScenario: "visibility-demand-gap",
+  buyerScenario: "demand-exists-conversion-leaks",
   projectComplexity: "multi-surface",
   scopeShape: "multi-page",
+  evidenceType: "quantified-pipeline",
   primarySimilaritySummary:
-    "Urgent and acute care brands where speed-to-appointment and local trust decide conversion.",
+    "This is a fit if people search for urgent care and you need a fast, clear path from search to booked visit.",
   publishedAt: "2024-05-01",
 };

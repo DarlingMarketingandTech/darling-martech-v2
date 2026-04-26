@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { captureClientEvent } from "@/lib/analytics";
 import { siteConfig } from "@/data/site-config";
 import { Button } from "@/components/ui/button";
@@ -38,9 +37,6 @@ export function ContactForm({
     () => intents.find((intent) => intent.label === selectedIntent) ?? intents[0],
     [intents, selectedIntent]
   );
-  const searchParams = useSearchParams();
-  const oauthStatus = searchParams.get("oauth");
-  const oauthErrorReason = searchParams.get("reason");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
@@ -129,24 +125,8 @@ export function ContactForm({
             Book a diagnostic call →
           </Button>
         </div>
-        <div className="mt-3">
-          <Button href="/api/auth/cal/start" variant="ghost" size="sm">
-            Continue with Cal (prefill beta) →
-          </Button>
-        </div>
-        {oauthStatus === "cal-connected" ? (
-          <p className="mt-3 text-xs text-[#0FD9C8]">
-            Cal account connected. You can continue with manual details while profile prefill is finalized.
-          </p>
-        ) : null}
-        {oauthStatus === "cal-error" ? (
-          <p className="mt-3 text-xs text-[#F05A28]">
-            Cal sign-in did not complete{oauthErrorReason ? ` (${oauthErrorReason.replaceAll("_", " ")})` : ""}. You can
-            still submit the form directly.
-          </p>
-        ) : null}
         <p className="mt-3 text-xs text-[#F5F4F0]/52">
-          Prefill will be expanded after OAuth provider scopes are fully verified.
+          The direct booking link is the fastest path if you prefer to skip the form.
         </p>
       </div>
       <div className="mt-4 rounded-2xl border border-[#F5F4F0]/12 bg-[#13131A]/45 px-4 py-4">

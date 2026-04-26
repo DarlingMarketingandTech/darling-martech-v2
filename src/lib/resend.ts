@@ -41,7 +41,7 @@ export async function sendContactNotification(input: ContactNotificationInput) {
 
   return resend.emails.send({
     from: appEnv.resendFromEmail,
-    to: [appEnv.resendFromEmail],
+    to: [appEnv.contactToEmail],
     replyTo: input.email,
     subject: `New Darling MarTech contact: ${input.name}`,
     text: [

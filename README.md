@@ -46,7 +46,7 @@ Use `.env.example` as the source of truth for required local variables.
 - `ENABLE_LIVE_INTEGRATIONS=false` keeps preview and local testing side-effect safe by short-circuiting external sends.
 - Set `ENABLE_LIVE_INTEGRATIONS=true` only when Resend, Loops, n8n, PostHog, and Supabase are ready for real traffic.
 - `NEXT_PUBLIC_*` variables are the canonical public/runtime keys for this repo and should be mirrored into Vercel Preview and Production.
-- `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `LOOPS_API_KEY`, `N8N_WEBHOOK_URL_CONTACT`, and `N8N_WEBHOOK_URL_TOOL` stay server-only.
+- `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `CONTACT_TO_EMAIL`, `LOOPS_API_KEY`, `N8N_WEBHOOK_URL_CONTACT`, and `N8N_WEBHOOK_URL_TOOL` stay server-only.
 
 ## Verification Standard
 

@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
     title: "Founder, Darling MarTech",
     linkedIn: "https://www.linkedin.com/in/jacobdarling",
   },
-  calComLink: "https://cal.com/jacob-darling/30min",
+  calComLink: "https://cal.com/darling-martech",
   defaultMeta: {
     title: "Darling MarTech — Revenue Systems, AI Automation & Custom Build",
     description:

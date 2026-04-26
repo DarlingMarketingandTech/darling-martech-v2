@@ -27,6 +27,7 @@ export const appEnv = {
   enableLiveIntegrations: readBooleanEnv("ENABLE_LIVE_INTEGRATIONS"),
   resendApiKey: readOptionalEnv("RESEND_API_KEY"),
   resendFromEmail: readOptionalEnv("RESEND_FROM_EMAIL") ?? "jacob@darlingmartech.com",
+  contactToEmail: readOptionalEnv("CONTACT_TO_EMAIL") ?? "jacob@darlingmartech.com",
   loopsApiKey: readOptionalEnv("LOOPS_API_KEY"),
   n8nWebhookUrlContact: readOptionalEnv("N8N_WEBHOOK_URL_CONTACT"),
   n8nWebhookUrlTool: readOptionalEnv("N8N_WEBHOOK_URL_TOOL"),
@@ -39,11 +40,6 @@ export const appEnv = {
   supabaseAnonKey: readOptionalEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "SUPABASE_ANON_KEY"),
   supabaseServiceRoleKey: readOptionalEnv("SUPABASE_SERVICE_ROLE_KEY"),
   plausibleDomain: readOptionalEnv("NEXT_PUBLIC_PLAUSIBLE_DOMAIN"),
-  calOauthClientId: readOptionalEnv("CAL_OAUTH_CLIENT_ID", "NEXT_PUBLIC_CAL_OAUTH_CLIENT_ID"),
-  calOauthRedirectUri: readOptionalEnv("CAL_OAUTH_REDIRECT_URI"),
-  calOauthRedirectUriProd: readOptionalEnv("CAL_OAUTH_REDIRECT_URI_PROD"),
-  calOauthAuthorizeUrl: readOptionalEnv("CAL_OAUTH_AUTHORIZE_URL") ?? "https://app.cal.com/oauth/authorize",
-  calOauthScope: readOptionalEnv("CAL_OAUTH_SCOPE") ?? "read_bookings read_availability read_event_types",
   appBaseUrl: readOptionalEnv("APP_BASE_URL"),
 } as const;
 

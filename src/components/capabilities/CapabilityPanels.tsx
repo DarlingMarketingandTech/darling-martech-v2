@@ -1,4 +1,9 @@
-import type { PlatformCapabilityCategory, PlatformSlug, ServiceCluster } from "@/types";
+import type {
+  PlatformCapabilityCategory,
+  PlatformSlug,
+  ProofStackGroupId,
+  ServiceCluster,
+} from "@/types";
 import { Boxes } from "lucide-react";
 import {
   HOMEPAGE_CAPABILITY_SHORTLIST,
@@ -6,6 +11,8 @@ import {
   PLATFORM_CAPABILITY_CATEGORY_ORDER,
   PLATFORM_CAPABILITY_CATEGORIES,
   PLATFORM_SLUGS_BY_CATEGORY,
+  PROOF_STACK_GROUP_ORDER,
+  PROOF_STACK_GROUPS,
   SERVICE_ECOSYSTEM_BY_SERVICE,
 } from "@/data/platform-capabilities";
 import { BandSection } from "@/components/layout/BandSection";
@@ -19,6 +26,9 @@ const categoryPanelClassName =
 
 const categoryHeaderClassName =
   "meta-label text-[10px] tracking-[0.12em] text-[#F5F4F0]/68";
+
+const proofStackLayerChipClassName =
+  "inline-flex items-center rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#F5F4F0]/58";
 
 function getPlatform(slug: PlatformSlug) {
   return PLATFORM_ASSET_MAP[slug as keyof typeof PLATFORM_ASSET_MAP];
@@ -108,59 +118,95 @@ type ProofStackBlockProps = {
   implementationStackCategories?: PlatformCapabilityCategory[];
   implementationPlatformSlugs?: PlatformSlug[];
   implementationLayers?: string[];
+  implementationGroupSummary?: Partial<Record<ProofStackGroupId, string>>;
   grouped?: boolean;
+};
+
+const LEGACY_CATEGORY_TO_PROOF_GROUP: Record<
+  PlatformCapabilityCategory,
+  ProofStackGroupId
+> = {
+  "revenue-crm": "crm-automation",
+  "analytics-growth": "analytics-data",
+  "infrastructure-platform": "infrastructure-platform",
+  "build-workflow-ai": "build-workflow",
 };
 
 export function ProofImplementationStackBlock({
   implementationStackCategories,
   implementationPlatformSlugs,
   implementationLayers,
+  implementationGroupSummary,
   grouped = true,
 }: ProofStackBlockProps) {
   const slugs = implementationPlatformSlugs ?? [];
   const curatedPlatforms = getCuratedPlatforms(slugs);
-  const inferredCategories = new Set(curatedPlatforms.map((platform) => platform.category));
-  const availableCategories = PLATFORM_CAPABILITY_CATEGORY_ORDER.filter((category) =>
-    implementationStackCategories?.includes(category) || inferredCategories.has(category)
+  const inferredGroups = new Set(curatedPlatforms.map((platform) => platform.proofStackGroup));
+  const categoryFallbackGroups = new Set(
+    (implementationStackCategories ?? []).map((category) => LEGACY_CATEGORY_TO_PROOF_GROUP[category])
   );
-  const hasCategoryOnlyData = availableCategories.length > 0 && curatedPlatforms.length === 0;
+  const summaryGroups = new Set(
+    Object.keys(implementationGroupSummary ?? {}) as ProofStackGroupId[]
+  );
+  const availableGroups = PROOF_STACK_GROUP_ORDER.filter((group) => {
+    return (
+      inferredGroups.has(group) ||
+      categoryFallbackGroups.has(group) ||
+      summaryGroups.has(group)
+    );
+  });
 
-  if (!availableCategories.length && !curatedPlatforms.length && !implementationLayers?.length) {
+  if (!availableGroups.length && !curatedPlatforms.length && !implementationLayers?.length) {
     return null;
   }
 
   return (
     <BandSection className="mt-10">
-      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#F5F4F0]/42">IMPLEMENTATION STACK</p>
+      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#F5F4F0]/42">
+        SYSTEMS INVOLVED IN THE BUILD
+      </p>
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#F5F4F0]/62">
-        Grouped systems involved in this proof. Scope varies by engagement.
+        The tools and system layers that made this project work — grouped by what they contributed.
       </p>
 
-      {availableCategories.length && grouped ? (
+      {availableGroups.length && grouped ? (
         <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-          {availableCategories.map((category) => {
+          {availableGroups.map((group) => {
             const scopedSlugs = curatedPlatforms
-              .filter((platform) => platform.category === category)
+              .filter((platform) => platform.proofStackGroup === group)
               .map((platform) => platform.slug);
+            const summary =
+              implementationGroupSummary?.[group] ?? PROOF_STACK_GROUPS[group].description;
 
             return (
-            <section key={category} className={categoryPanelClassName}>
-                <p className={categoryHeaderClassName}>{PLATFORM_CAPABILITY_CATEGORIES[category].label}</p>
+              <section key={group} className={categoryPanelClassName}>
+                <p className={categoryHeaderClassName}>{PROOF_STACK_GROUPS[group].label}</p>
                 <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+                <p className="mt-2.5 text-xs leading-relaxed text-[#F5F4F0]/56">{summary}</p>
                 {scopedSlugs.length ? (
                   <ul className="mt-2.5 flex flex-wrap gap-1.5">
                     {scopedSlugs.map((slug) => (
                       <PlatformChip key={slug} slug={slug} />
                     ))}
                   </ul>
-                ) : (
-                  <p className="mt-3 text-xs leading-relaxed text-[#F5F4F0]/50">
-                    Systems in this category are present in the engagement implementation.
-                  </p>
-                )}
+                ) : null}
               </section>
             );
           })}
+        </div>
+      ) : null}
+
+      {grouped && implementationLayers?.length ? (
+        <div className="mt-5 rounded-xl border border-[#F5F4F0]/[0.08] bg-[#0A0A0D]/30 p-3">
+          <p className={categoryHeaderClassName}>Documented implementation layers</p>
+          <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
+          <ul className="mt-2.5 flex flex-wrap gap-1.5">
+            {implementationLayers.map((layer) => (
+              <li key={layer}>
+                <span className={proofStackLayerChipClassName}>{layer}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       ) : null}
 
@@ -176,32 +222,14 @@ export function ProofImplementationStackBlock({
         </div>
       ) : null}
 
-      {hasCategoryOnlyData ? (
+      {!grouped && implementationLayers?.length ? (
         <div className="mt-5 rounded-xl border border-[#F5F4F0]/[0.08] bg-[#0A0A0D]/30 p-3">
-          <p className={categoryHeaderClassName}>Stack categories</p>
-          <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
-          <ul className="mt-2.5 flex flex-wrap gap-1.5">
-            {availableCategories.map((category) => (
-              <li key={category}>
-                <span className="inline-flex items-center rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-[#F5F4F0]/58">
-                  {PLATFORM_CAPABILITY_CATEGORIES[category].label}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-
-      {implementationLayers?.length ? (
-        <div className="mt-5 rounded-xl border border-[#F5F4F0]/[0.08] bg-[#0A0A0D]/30 p-3">
-          <p className={categoryHeaderClassName}>Build layers documented in this case</p>
+          <p className={categoryHeaderClassName}>System layers documented in this case</p>
           <div className="mt-2 h-px w-full bg-[#F5F4F0]/[0.05]" />
           <ul className="mt-2.5 flex flex-wrap gap-1.5">
             {implementationLayers.map((layer) => (
               <li key={layer}>
-                <span className="inline-flex items-center rounded-md border border-[#F5F4F0]/[0.07] bg-[#F5F4F0]/[0.02] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#F5F4F0]/58">
-                  {layer}
-                </span>
+                <span className={proofStackLayerChipClassName}>{layer}</span>
               </li>
             ))}
           </ul>

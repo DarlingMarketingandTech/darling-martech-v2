@@ -80,6 +80,18 @@ export const barbershopCommandCenter: CaseStudy = {
     "wordpress",
     "apache",
   ],
+  implementationGroupSummary: {
+    "analytics-data":
+      "Owner visibility improved because bookings, segments, and queued follow-up could be read in one place.",
+    "infrastructure-platform":
+      "The booking and public-site layers stayed connected so local demand and operational follow-up did not drift apart.",
+    "crm-automation":
+      "Client records, reminders, review asks, and win-back logic were tied to the same operating system.",
+    "visibility-seo":
+      "Google profile and local citation cleanup supported better discovery and trust before the booking step.",
+    "conversion-booking":
+      "Booking, reminders, and rebooking were treated as one customer path instead of separate tools.",
+  },
   relatedToolSlugs: ["geo-readiness-auditor", "growth-system-audit"],
   relatedServiceSlugs: [
     "crm-architecture",
@@ -90,6 +102,7 @@ export const barbershopCommandCenter: CaseStudy = {
   ],
   relatedProblemSlugs: ["disconnected-systems", "not-visible-enough", "site-not-converting"],
   relatedProofSlugs: ["russell-painting"],
+  relatedBuildTypeLabel: "Lead follow-up system",
   systemsBuilt: [
     "Booking and CRM integration",
     "Scheduled reminders and follow-up",
@@ -97,7 +110,16 @@ export const barbershopCommandCenter: CaseStudy = {
     "Review request flow",
     "Reactivation and retention messages",
   ],
-  cloudinaryImages: ["hoosier-boy-barbershop-website-design", "hoosierboy-logo-anchor"],
+  proofDetailHeroAlt:
+    "Barbershop Command Center interface showing booking, follow-up, and owner visibility in one local operating system.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "Book_Appointment_Cal_ViewI_Hoosier_Boy_Barbershop",
+      alt: "Barbershop booking calendar view connected to the command-center flow.",
+      label: "Booking and scheduling surface",
+    },
+  ],
+  cloudinaryImages: ["Barbershop_Command_Center"],
   featured: false,
   projectType: "local-growth-system",
   buyerScenario: "operations-manual-fragmented",

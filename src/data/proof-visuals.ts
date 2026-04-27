@@ -31,3 +31,11 @@ export function getProofDetailHeroPublicId(study: CaseStudy): string {
   const idx = slugCharSum(study.slug) % CURATED_PROOF_HERO_BEST.length;
   return CURATED_PROOF_HERO_BEST[idx]!;
 }
+
+export function getProofDetailHeroAlt(study: CaseStudy): string {
+  return study.proofDetailHeroAlt ?? `${study.title} — proof visual`;
+}
+
+export function getProofDetailSupportVisuals(study: CaseStudy) {
+  return study.proofDetailSupportVisuals ?? [];
+}

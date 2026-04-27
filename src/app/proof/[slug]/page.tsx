@@ -12,14 +12,19 @@ import { ProofAnglesDemonstration } from "@/components/proof/ProofAnglesDemonstr
 import { ProofDetailAmbient } from "@/components/proof/ProofDetailAmbient";
 import { ProofMetricTile } from "@/components/proof/ProofMetricTile";
 import { ProofSystemSnapshot } from "@/components/proof/ProofSystemSnapshot";
+import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { getProofAnglesForProject } from "@/data/proof-angles";
 import { caseStudies } from "@/data/work/work-index";
 import { problemPages } from "@/data/problems";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
 import { getSimilarProof } from "@/lib/proof-similar";
-import { getProofDetailHeroPublicId } from "@/data/proof-visuals";
-import { PROJECT_TYPE_LABELS } from "@/data/taxonomy";
+import {
+  getProofDetailHeroAlt,
+  getProofDetailHeroPublicId,
+  getProofDetailSupportVisuals,
+} from "@/data/proof-visuals";
+import { PROJECT_TYPE_LABELS, PROJECT_TYPE_RELATED_BUILD_LABELS } from "@/data/taxonomy";
 import { getNewsroomArticlesByProofSlug } from "@/data/newsroom";
 import { NewsroomRelatedStrip } from "@/components/newsroom/NewsroomRelatedStrip";
 import { siteConfig } from "@/data/site-config";
@@ -71,13 +76,14 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
     study.relatedServiceSlugs?.includes(s.slug)
   );
 
-  const similarProjects = getSimilarProof(study, caseStudies);
+  const similarProjects = getSimilarProof(study, caseStudies, { limit: 3 });
 
   const proofAngles = getProofAnglesForProject(study.slug).slice(0, 3);
   const newsroomForProof = getNewsroomArticlesByProofSlug(study.slug);
   const heroImagePublicId = getProofDetailHeroPublicId(study);
+  const supportVisuals = getProofDetailSupportVisuals(study).slice(0, 1);
   const heroTitle = getProjectFirstTitle(study.title);
-  const heroImageAlt = `${heroTitle} — proof visual`;
+  const heroImageAlt = getProofDetailHeroAlt(study);
   const contextLine =
     study.showClientName === false
       ? (study.clientContextLabel ?? study.clientContext)
@@ -171,35 +177,48 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
         </SectionWrapper>
       )}
 
-      {/* Operating impact + implementation layers */}
-      {(study.operatingImpact || study.implementationLayers?.length) && (
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {study.operatingImpact && (
-            <div className="panel-obsidian grain-mask rounded-3xl p-7 md:p-8">
-              <p className="meta-label-accent">Operating impact</p>
-              <div className="tech-divider my-4 max-w-sm" />
-              <p className="text-sm leading-relaxed text-[#F5F4F0]/72">{study.operatingImpact}</p>
-            </div>
-          )}
-          {study.implementationLayers?.length && (
-            <div className="panel-titanium grain-mask rounded-3xl p-7 md:p-8">
-              <p className="meta-label-accent">Implementation layers</p>
-              <div className="tech-divider my-4 max-w-sm" />
-              <ul className="flex flex-wrap gap-2">
-                {study.implementationLayers.map((layer) => (
-                  <li key={layer}>
-                    <span className={layerChipClass}>{layer}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+      {supportVisuals.length > 0 ? (
+        <SectionWrapper className="mt-14">
+          <p className="meta-label-accent">Supporting visual</p>
+          <div className="tech-divider my-5 max-w-md" />
+          <div className="overflow-hidden rounded-3xl border border-[#F5F4F0]/10 bg-[#0C0C0E]/28">
+            {supportVisuals.map((visual) => (
+              <div key={visual.publicId}>
+                <CloudinaryImage
+                  publicId={visual.publicId}
+                  alt={visual.alt}
+                  width={1600}
+                  height={960}
+                  sizes="(max-width: 1024px) 100vw, 72vw"
+                  postTransforms="e_sharpen"
+                  cloudinaryQuality="auto"
+                  className="h-auto w-full object-cover"
+                />
+                <div className="border-t border-[#F5F4F0]/10 px-5 py-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#0FD9C8]/82">
+                    {visual.label}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </SectionWrapper>
+      ) : null}
+
+      {study.operatingImpact && (
+        <div className="mt-14">
+          <div className="panel-obsidian grain-mask rounded-3xl p-7 md:p-8">
+            <p className="meta-label-accent">Operating impact</p>
+            <div className="tech-divider my-4 max-w-sm" />
+            <p className="text-sm leading-relaxed text-[#F5F4F0]/72">{study.operatingImpact}</p>
+          </div>
         </div>
       )}
       <ProofImplementationStackBlock
         implementationStackCategories={study.implementationStackCategories}
         implementationPlatformSlugs={study.implementationPlatformSlugs}
         implementationLayers={study.implementationLayers}
+        implementationGroupSummary={study.implementationGroupSummary}
       />
 
       <SectionWrapper>
@@ -222,50 +241,54 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
         </div>
       )}
 
-      {/* Related problems */}
-      {relatedProblems.length > 0 && (
+      {(relatedProblems.length > 0 || relatedServices.length > 0) && (
         <BandSection className="mt-14">
-          <p className="meta-label text-[#F05A28]/90">This work solved</p>
-          <div className="tech-divider my-4 max-w-sm" />
-          <div className="mt-2 flex flex-wrap gap-3">
-            {relatedProblems.map((problem) => (
-              <Link
-                key={problem.slug}
-                href={`/problems/${problem.slug}`}
-                className="rounded-full border border-[#F5F4F0]/10 px-4 py-2 text-sm text-[#F5F4F0]/68 transition-colors hover:border-[#F05A28]/40 hover:text-[#F05A28]"
-              >
-                {problem.title}
-              </Link>
-            ))}
+          <div className="grid gap-8 md:grid-cols-2">
+            {relatedProblems.length > 0 ? (
+              <div>
+                <p className="meta-label text-[#F05A28]/90">Problems addressed</p>
+                <div className="tech-divider my-4 max-w-sm" />
+                <div className="mt-2 flex flex-wrap gap-3">
+                  {relatedProblems.map((problem) => (
+                    <Link
+                      key={problem.slug}
+                      href={`/problems/${problem.slug}`}
+                      className="rounded-full border border-[#F5F4F0]/10 px-4 py-2 text-sm text-[#F5F4F0]/68 transition-colors hover:border-[#F05A28]/40 hover:text-[#F05A28]"
+                    >
+                      {problem.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {relatedServices.length > 0 ? (
+              <div>
+                <p className="meta-label text-[#F05A28]/90">Build capabilities involved</p>
+                <div className="tech-divider my-4 max-w-sm" />
+                <div className="mt-2 flex flex-wrap gap-3">
+                  {relatedServices.map((s) => (
+                    <Link
+                      key={s.slug}
+                      href={`/services/${s.slug}`}
+                      className="rounded-full border border-[#F5F4F0]/10 px-4 py-2 text-sm text-[#F5F4F0]/68 transition-colors hover:border-[#F05A28]/40 hover:text-[#F05A28]"
+                    >
+                      {s.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         </BandSection>
       )}
 
-      {/* Related services */}
-      {relatedServices.length > 0 && (
-        <SectionWrapper className="mt-10">
-          <p className="meta-label text-[#F05A28]/90">Capabilities demonstrated</p>
-          <div className="tech-divider my-4 max-w-sm" />
-          <div className="mt-2 flex flex-wrap gap-3">
-            {relatedServices.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                className="rounded-full border border-[#F5F4F0]/10 px-4 py-2 text-sm text-[#F5F4F0]/68 transition-colors hover:border-[#F05A28]/40 hover:text-[#F05A28]"
-              >
-                {s.title}
-              </Link>
-            ))}
-          </div>
-        </SectionWrapper>
-      )}
-
       {similarProjects.length > 0 && (
         <SectionWrapper className="mt-10">
-          <p className="meta-label text-[#0FD9C8]/90">Similar projects</p>
+          <p className="meta-label text-[#0FD9C8]/90">Related build types</p>
           <div className="tech-divider my-4 max-w-sm" />
           <p className="mb-4 max-w-2xl text-sm text-[#F5F4F0]/52">
-            Same project shape and scope — useful when you are comparing delivery risk, not company names.
+            Similar project shapes and delivery patterns — useful when you are comparing system fit, not client names.
           </p>
           <div className="mt-2 flex flex-wrap gap-3">
             {similarProjects.map((c) => (
@@ -274,7 +297,7 @@ export default async function ProofSlugPage({ params }: ProofSlugPageProps) {
                 href={`/proof/${c.slug}`}
                 className="rounded-full border border-[#F5F4F0]/10 px-4 py-2 text-sm text-[#F5F4F0]/68 transition-colors hover:border-[#0FD9C8]/40 hover:text-[#0FD9C8]"
               >
-                {PROJECT_TYPE_LABELS[c.projectType]} — {c.outcomeHeadline} →
+                {c.relatedBuildTypeLabel ?? PROJECT_TYPE_RELATED_BUILD_LABELS[c.projectType]} →
               </Link>
             ))}
           </div>

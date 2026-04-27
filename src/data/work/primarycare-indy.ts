@@ -71,7 +71,17 @@ export const primarycareIndy: CaseStudy = {
     "infrastructure-platform",
     "build-workflow-ai",
   ],
-  implementationPlatformSlugs: ["wordpress", "google", "figma", "cloudinary"],
+  implementationPlatformSlugs: ["wordpress", "google", "figma"],
+  implementationGroupSummary: {
+    "infrastructure-platform":
+      "WordPress carried the live care experience and service architecture so the team could ship and maintain patient-facing pages cleanly.",
+    "build-workflow":
+      "Figma helped restructure patient journeys and clarify care-path decisions before the rebuild went live.",
+    "visibility-seo":
+      "Local-intent search pages and discovery surfaces were aligned so the right care path matched the entry point.",
+    "conversion-booking":
+      "Booking friction was removed from the highest-intent patient path, especially on mobile.",
+  },
   relatedToolSlugs: ["growth-system-audit", "geo-readiness-auditor"],
   relatedServiceSlugs: [
     "website-design",
@@ -81,13 +91,23 @@ export const primarycareIndy: CaseStudy = {
   ],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough", "brand-system-broken"],
   relatedProofSlugs: ["urgentcare-indy"],
+  relatedBuildTypeLabel: "Website & booking conversion",
   systemsBuilt: [
     "Patient booking conversion flow",
     "Service architecture by care intent",
     "Local visibility entry paths",
     "Trust and clinical context on conversion pages",
   ],
-  cloudinaryImages: ["primary-care-indy-website", "primarycare-logo-anchor"],
+  proofDetailHeroAlt:
+    "PrimaryCare Indy website proof mockup showing patient-centered care pages and a simplified booking path.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "primary-care-indy-website-telehealth",
+      alt: "PrimaryCare Indy telehealth service page showing trust cues and patient conversion flow.",
+      label: "Service page and scheduling path",
+    },
+  ],
+  cloudinaryImages: ["Gemini_Generated_Image_qn1c5kqn1c5kqn1c"],
   featured: true,
   projectType: "local-growth-system",
   buyerScenario: "demand-exists-conversion-leaks",

@@ -95,10 +95,21 @@ export const grastonTechnique: CaseStudy = {
     "googlecloud",
     "wordpress",
   ],
+  implementationGroupSummary: {
+    "analytics-data":
+      "Attribution and reporting made qualified pipeline movement visible instead of leaving leadership with disconnected campaign activity.",
+    "infrastructure-platform":
+      "The live directory and supporting runtime turned a static asset into a searchable operational system.",
+    "crm-automation":
+      "CRM and workflow automation unified clinician records, event follow-up, and provider lifecycle changes.",
+    "visibility-seo":
+      "Discovery surfaces were tied to the provider directory and education journey so clinicians could find the right next step.",
+  },
   relatedToolSlugs: ["growth-system-audit", "attribution-snapshot"],
   relatedServiceSlugs: ["fractional-cmo", "martech-stack-build", "automation-systems", "attribution-analytics"],
   relatedProblemSlugs: ["no-strategy-owner", "disconnected-systems", "pipeline-not-predictable"],
   relatedProofSlugs: ["graston-qualified-leads", "graston-growth-engine"],
+  relatedBuildTypeLabel: "Custom product & infrastructure",
   systemsBuilt: [
     "HubSpot CRM",
     "Lead capture and attribution model",
@@ -108,7 +119,16 @@ export const grastonTechnique: CaseStudy = {
     "CE tracking and delivery",
   ],
   liveUrl: "https://graston-growth-engine.jacob-ba2.workers.dev",
-  cloudinaryImages: ["3-website-page-promo"],
+  proofDetailHeroAlt:
+    "Graston Technique provider directory proof mockup showing clinician discovery, platform structure, and connected education surfaces.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "graston_data_visualization_dashboard",
+      alt: "Graston attribution and pipeline dashboard showing reporting across clinician acquisition channels.",
+      label: "Pipeline and attribution dashboard",
+    },
+  ],
+  cloudinaryImages: ["Gemini_Generated_Image_vq6jdjvq6jdjvq6j"],
   featured: true,
   proofVisualizerType: "stack",
   projectType: "custom-infrastructure-product",

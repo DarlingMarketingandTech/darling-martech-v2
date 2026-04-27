@@ -72,6 +72,7 @@ export const clinicalCompass: CaseStudy = {
   relatedServiceSlugs: ["custom-infrastructure", "website-design"],
   relatedProblemSlugs: ["site-not-converting"],
   relatedProofSlugs: ["license-requirements-navigator", "the-compass"],
+  relatedBuildTypeLabel: "Custom product & infrastructure",
   systemsBuilt: [
     "Protocol decision workflow",
     "Progressive disclosure UX",
@@ -84,7 +85,16 @@ export const clinicalCompass: CaseStudy = {
     "Had to keep branching logic maintainable in structured data",
     "Needed point-of-care clarity without exposing the entire protocol at once",
   ],
-  cloudinaryImages: ["pike-medical_home_page_-_desktop_website_view", "pmc-webheader-med"],
+  proofDetailHeroAlt:
+    "Clinical Compass guided protocol workflow showing progressive steps and structured clinical decision branches.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "graston_instruments_-_clinical_compass-summary",
+      alt: "Clinical Compass protocol summary screen with progressive-disclosure pathway output.",
+      label: "Protocol summary screen",
+    },
+  ],
+  cloudinaryImages: ["Generated_Image_April_12_2026_-_4_24AM"],
   featured: true,
   projectType: "custom-infrastructure-product",
   buyerScenario: "trust-routing-weak",

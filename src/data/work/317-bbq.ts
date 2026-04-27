@@ -80,10 +80,23 @@ export const bbq317: CaseStudy = {
     "figma",
     "canva",
   ],
+  implementationGroupSummary: {
+    "analytics-data":
+      "Search and listing performance were tracked so visibility gains were tied to real local demand signals.",
+    "infrastructure-platform":
+      "The website and structured local presence gave the restaurant a stable destination once discovery improved.",
+    "build-workflow":
+      "Brand system work kept site, signage, packaging, and local content moving from one recognizable identity.",
+    "visibility-seo":
+      "Google Business Profile, citations, and local keyword architecture made the restaurant findable in its real market.",
+    "conversion-booking":
+      "Menu, catering, and local visit intent were clarified so search visibility translated into action instead of curiosity.",
+  },
   relatedToolSlugs: ["geo-readiness-auditor"],
   relatedServiceSlugs: ["brand-identity", "content-seo-systems", "social-media-marketing"],
   relatedProblemSlugs: ["brand-system-broken", "not-visible-enough", "site-not-converting"],
   relatedProofSlugs: ["russell-painting", "barbershop-command-center"],
+  relatedBuildTypeLabel: "Local visibility system",
   systemsBuilt: [
     "Brand identity system",
     "Local SEO structure",
@@ -99,5 +112,14 @@ export const bbq317: CaseStudy = {
   primarySimilaritySummary:
     "This is a fit if you run a local venue or restaurant and need findability, reviews, and a site that match the quality of the experience.",
   publishedAt: "2023-04-01",
-  cloudinaryImages: ["317_bbq_home_page_-_desktop_website_view", "317-bbq-logo-anchor"],
+  proofDetailHeroAlt:
+    "317 BBQ website proof mockup showing local brand presence, menu structure, and restaurant discovery surfaces.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "317_bbq_catering_page_-_desktop_website_view",
+      alt: "317 BBQ catering page showing a conversion-focused service path for local food orders.",
+      label: "Catering conversion page",
+    },
+  ],
+  cloudinaryImages: ["Gemini_Generated_Image_bgraijbgraijbgra"],
 };

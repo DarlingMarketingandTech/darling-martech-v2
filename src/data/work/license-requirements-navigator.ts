@@ -82,6 +82,7 @@ export const licenseRequirementsNavigator: CaseStudy = {
   relatedServiceSlugs: ["content-seo-systems", "custom-infrastructure", "conversion-optimization"],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough"],
   relatedProofSlugs: ["graston-technique", "graston-qualified-leads"],
+  relatedBuildTypeLabel: "Custom product & infrastructure",
   systemsBuilt: [
     "CE requirement database",
     "Interactive compliance lookup",
@@ -89,7 +90,30 @@ export const licenseRequirementsNavigator: CaseStudy = {
     "Structured state SEO pages",
     "CE-motivated nurture sequence",
   ],
-  cloudinaryImages: ["3-website-page-promo", "graston-logo-png"],
+  implementationGroupSummary: {
+    "analytics-data":
+      "State requirement data was structured so clinicians could query the right compliance answer instead of reading scattered board sites.",
+    "infrastructure-platform":
+      "The lookup experience ran as a lightweight web app with a maintained requirement store behind it.",
+    "build-workflow":
+      "Build and content workflow kept 50+ state records maintainable instead of hardcoding each path into the UI.",
+    "crm-automation":
+      "Registration paths and source tags pushed CE-motivated users into segmented CRM follow-up.",
+    "visibility-seo":
+      "State-specific search entry pages captured clinicians at the exact moment they were researching CE rules.",
+    "conversion-booking":
+      "The tool shortened the path from requirement lookup to course registration while the user was already in a compliance mindset.",
+  },
+  proofDetailHeroAlt:
+    "License Requirements Navigator product visual showing a clinician compliance lookup workflow and structured state-by-state CE guidance.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "Practitioner_License_Requirements_I_Graston_Technique_-_search_2",
+      alt: "License Requirements Navigator search result showing structured state CE requirement output.",
+      label: "State requirement lookup",
+    },
+  ],
+  cloudinaryImages: ["Generated_Image_April_12_2026_-_2_52AM"],
   featured: false,
   projectType: "custom-infrastructure-product",
   buyerScenario: "visibility-demand-gap",

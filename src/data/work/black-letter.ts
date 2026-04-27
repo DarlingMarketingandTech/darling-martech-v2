@@ -67,10 +67,15 @@ export const blackLetter: CaseStudy = {
     "Brand usage guidance",
   ],
   implementationStackCategories: ["build-workflow-ai"],
-  implementationPlatformSlugs: ["figma", "adobe-creative-cloud"],
+  implementationPlatformSlugs: ["figma"],
+  implementationGroupSummary: {
+    "build-workflow":
+      "The build work was about defining the identity system clearly enough that future creative production stops drifting.",
+  },
   relatedServiceSlugs: ["brand-identity"],
   relatedProblemSlugs: ["brand-system-broken"],
   relatedProofSlugs: ["317-bbq"],
+  relatedBuildTypeLabel: "Brand identity system",
   systemsBuilt: [
     "Brand identity architecture",
     "Visual standards system",
@@ -87,6 +92,14 @@ export const blackLetter: CaseStudy = {
   publishedAt: "2024-03-01",
   cloudinaryImages: [
     "Gemini_Generated_Image_aadwklaadwklaadw",
-    "Black_Letter_-_Full_Logo",
+  ],
+  proofDetailHeroAlt:
+    "Black Letter brand board mockup showing identity standards, visual system, and foundational brand direction.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "Black_Letter_-_Full_Logo",
+      alt: "Black Letter full logo used as the anchor mark inside the documented identity system.",
+      label: "Identity anchor mark",
+    },
   ],
 };

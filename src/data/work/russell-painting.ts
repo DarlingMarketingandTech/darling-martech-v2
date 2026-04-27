@@ -35,7 +35,25 @@ export const russellPainting: CaseStudy = {
   ],
   implementationStackCategories: ["revenue-crm", "analytics-growth"],
   implementationPlatformSlugs: ["salesforce", "google"],
-  cloudinaryImages: ["russell-painting-website", "russell-painting-logo"],
+  implementationGroupSummary: {
+    "analytics-data":
+      "Call tracking, forms, and attribution made it possible to tie demand back to booked work instead of guessing from traffic alone.",
+    "crm-automation":
+      "Lead-source visibility depended on having records move through a consistent reporting structure.",
+    "visibility-seo":
+      "Local search improvement mattered because better discovery only counts when calls and forms can be tied back to jobs.",
+  },
+  relatedBuildTypeLabel: "Reporting & attribution",
+  proofDetailHeroAlt:
+    "Russell Painting website visual showing a local service brand surface connected to reporting and job attribution work.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "russell-painting-website-services",
+      alt: "Russell Painting services page supporting local discovery and tracked lead generation.",
+      label: "Service page tied to tracked demand",
+    },
+  ],
+  cloudinaryImages: ["russell-painting-website"],
   featured: true,
   projectType: "reporting-attribution-system",
   buyerScenario: "spend-visible-attribution-weak",

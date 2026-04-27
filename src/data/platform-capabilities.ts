@@ -1,4 +1,9 @@
-import type { PlatformCapabilityCategory, PlatformSlug, ServiceCluster } from "@/types";
+import type {
+  PlatformCapabilityCategory,
+  PlatformSlug,
+  ProofStackGroupId,
+  ServiceCluster,
+} from "@/types";
 
 export type PlatformAllowedUseCase =
   | "homepage-capability-module"
@@ -9,8 +14,48 @@ export interface PlatformDefinition {
   label: string;
   category: PlatformCapabilityCategory;
   cloudinaryPublicId: string;
+  proofStackGroup: ProofStackGroupId;
   allowedUseCases: PlatformAllowedUseCase[];
 }
+
+export const PROOF_STACK_GROUP_ORDER: ProofStackGroupId[] = [
+  "analytics-data",
+  "infrastructure-platform",
+  "build-workflow",
+  "crm-automation",
+  "visibility-seo",
+  "conversion-booking",
+];
+
+export const PROOF_STACK_GROUPS: Record<
+  ProofStackGroupId,
+  { label: string; description: string }
+> = {
+  "analytics-data": {
+    label: "Analytics / data",
+    description: "Measurement, reporting, and source visibility that made the system readable.",
+  },
+  "infrastructure-platform": {
+    label: "Infrastructure / platform",
+    description: "Runtime, storage, and delivery layers that kept the build stable and usable.",
+  },
+  "build-workflow": {
+    label: "Build / workflow",
+    description: "Design and production tools used to shape, ship, and maintain the build.",
+  },
+  "crm-automation": {
+    label: "CRM / automation",
+    description: "CRM, routing, and automation layers that moved records and follow-up forward.",
+  },
+  "visibility-seo": {
+    label: "Visibility / SEO",
+    description: "Search, discovery, and local-intent surfaces that brought the right people in.",
+  },
+  "conversion-booking": {
+    label: "Conversion / booking",
+    description: "Booking, registration, and decision-path layers that turned intent into action.",
+  },
+};
 
 export const PLATFORM_CAPABILITY_CATEGORIES: Record<
   PlatformCapabilityCategory,
@@ -51,6 +96,15 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "Salesforce",
     category: "revenue-crm",
     cloudinaryPublicId: "salesforce-original",
+    proofStackGroup: "crm-automation",
+    allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
+  },
+  {
+    slug: "hubspot",
+    label: "HubSpot",
+    category: "revenue-crm",
+    cloudinaryPublicId: "HubSpot_-_Copy",
+    proofStackGroup: "crm-automation",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -58,6 +112,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "WooCommerce",
     category: "revenue-crm",
     cloudinaryPublicId: "woocommerce-original",
+    proofStackGroup: "conversion-booking",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -65,6 +120,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "WordPress",
     category: "revenue-crm",
     cloudinaryPublicId: "wordpress-original",
+    proofStackGroup: "infrastructure-platform",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -72,6 +128,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "Google",
     category: "analytics-growth",
     cloudinaryPublicId: "google-original",
+    proofStackGroup: "visibility-seo",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -79,6 +136,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "Google Cloud",
     category: "analytics-growth",
     cloudinaryPublicId: "googlecloud-original",
+    proofStackGroup: "analytics-data",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -86,6 +144,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "Apache",
     category: "infrastructure-platform",
     cloudinaryPublicId: "apache-original",
+    proofStackGroup: "infrastructure-platform",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -93,6 +152,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "MySQL",
     category: "infrastructure-platform",
     cloudinaryPublicId: "mysql-original",
+    proofStackGroup: "analytics-data",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -100,6 +160,23 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "PHP",
     category: "infrastructure-platform",
     cloudinaryPublicId: "php-original",
+    proofStackGroup: "infrastructure-platform",
+    allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
+  },
+  {
+    slug: "cloudflare",
+    label: "Cloudflare",
+    category: "infrastructure-platform",
+    cloudinaryPublicId: "CloudFlare",
+    proofStackGroup: "infrastructure-platform",
+    allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
+  },
+  {
+    slug: "cloudflare-workers",
+    label: "Cloudflare Workers",
+    category: "infrastructure-platform",
+    cloudinaryPublicId: "CloudFlare",
+    proofStackGroup: "infrastructure-platform",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -107,6 +184,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "GitHub",
     category: "build-workflow-ai",
     cloudinaryPublicId: "github-original",
+    proofStackGroup: "build-workflow",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -114,6 +192,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "Figma",
     category: "build-workflow-ai",
     cloudinaryPublicId: "figma-original",
+    proofStackGroup: "build-workflow",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -121,6 +200,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "Slack",
     category: "build-workflow-ai",
     cloudinaryPublicId: "slack-original",
+    proofStackGroup: "build-workflow",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -128,6 +208,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "Next.js",
     category: "build-workflow-ai",
     cloudinaryPublicId: "nextjs-original",
+    proofStackGroup: "infrastructure-platform",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
   {
@@ -135,6 +216,7 @@ export const PLATFORM_CATALOG: PlatformDefinition[] = [
     label: "Canva",
     category: "build-workflow-ai",
     cloudinaryPublicId: "canva-original",
+    proofStackGroup: "build-workflow",
     allowedUseCases: ["homepage-capability-module", "proof-implementation-stack"],
   },
 ];

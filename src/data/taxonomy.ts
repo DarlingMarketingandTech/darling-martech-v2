@@ -133,6 +133,18 @@ export const PROJECT_TYPE_LABELS: Record<ProjectTypeId, string> = {
   "ops-diagnostics": "Operations & diagnostic layer",
 };
 
+export const PROJECT_TYPE_RELATED_BUILD_LABELS: Record<ProjectTypeId, string> = {
+  "website-brand-rebuild": "Website & brand system",
+  "brand-identity-system": "Brand identity system",
+  "conversion-path-repair": "Conversion repair system",
+  "crm-automation-system": "Lead follow-up system",
+  "local-growth-system": "Local visibility system",
+  "reporting-attribution-system": "Reporting & attribution",
+  "custom-infrastructure-product": "Custom product & infrastructure",
+  "content-distribution-system": "Content distribution system",
+  "ops-diagnostics": "Diagnostic system",
+};
+
 export const BUYER_SCENARIO_ORDER: BuyerScenarioId[] = [
   "demand-exists-conversion-leaks",
   "operations-manual-fragmented",

@@ -51,6 +51,14 @@ export type PlatformCapabilityCategory =
   | "infrastructure-platform"
   | "build-workflow-ai";
 
+export type ProofStackGroupId =
+  | "analytics-data"
+  | "infrastructure-platform"
+  | "build-workflow"
+  | "crm-automation"
+  | "visibility-seo"
+  | "conversion-booking";
+
 export type PlatformSlug =
   | "google"
   | "googlecloud"
@@ -227,6 +235,8 @@ export interface CaseStudy {
   implementationStackCategories?: PlatformCapabilityCategory[];
   /** Canonical platform slugs represented in the stack */
   implementationPlatformSlugs?: PlatformSlug[];
+  /** Optional buyer-facing summaries for specific proof stack groups */
+  implementationGroupSummary?: Partial<Record<ProofStackGroupId, string>>;
   /** Tool slugs from /tools that are relevant to this proof */
   relatedToolSlugs?: string[];
   /** Service slugs from /services that this proof demonstrates */
@@ -237,6 +247,16 @@ export interface CaseStudy {
   relatedProofSlugs?: string[];
   /** Optional cross-links for "similar risk / shape" */
   decisionTags?: string[];
+  /** Optional short label for related-proof chips */
+  relatedBuildTypeLabel?: string;
+  /** Optional proof-detail hero alt override */
+  proofDetailHeroAlt?: string;
+  /** Optional supporting visuals shown below the hero */
+  proofDetailSupportVisuals?: {
+    publicId: string;
+    alt: string;
+    label: string;
+  }[];
 }
 
 /**

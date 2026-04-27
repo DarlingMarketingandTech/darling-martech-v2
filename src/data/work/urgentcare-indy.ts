@@ -71,7 +71,17 @@ export const urgentcareIndy: CaseStudy = {
     "infrastructure-platform",
     "build-workflow-ai",
   ],
-  implementationPlatformSlugs: ["wordpress", "google", "figma", "cloudinary"],
+  implementationPlatformSlugs: ["wordpress", "google", "figma"],
+  implementationGroupSummary: {
+    "infrastructure-platform":
+      "The urgent-care site architecture had to stay fast and legible under high-intent, mobile-heavy traffic.",
+    "build-workflow":
+      "Design workflow clarified the urgent path so trust details and next-step actions landed on the same screen.",
+    "visibility-seo":
+      "Local urgent-care entry points were aligned to pages that matched immediate care intent.",
+    "conversion-booking":
+      "Online check-in and booking actions were moved closer to the top of the path so urgent users could act faster.",
+  },
   relatedToolSlugs: ["growth-system-audit", "geo-readiness-auditor"],
   relatedServiceSlugs: [
     "website-design",
@@ -80,13 +90,23 @@ export const urgentcareIndy: CaseStudy = {
   ],
   relatedProblemSlugs: ["site-not-converting", "not-visible-enough"],
   relatedProofSlugs: ["primarycare-indy"],
+  relatedBuildTypeLabel: "Website & booking conversion",
   systemsBuilt: [
     "Urgent booking and check-in flow",
     "Online check-in path",
     "Urgent care trust and clarity on the conversion path",
     "Local search entry points aligned to booking",
   ],
-  cloudinaryImages: ["urgent-care-indy_home_page_-_desktop_website_view", "urgentcare-logo-anchor"],
+  proofDetailHeroAlt:
+    "UrgentCare Indy proof mockup showing urgent-intent website structure and a faster path to check-in.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "urgent-care-indy_home_page_top_-_desktop_website_view",
+      alt: "UrgentCare Indy homepage section emphasizing hours clarity, trust cues, and urgent next steps.",
+      label: "Urgent-intent homepage path",
+    },
+  ],
+  cloudinaryImages: ["Gemini_Generated_Image_nz0egynz0egynz0e"],
   featured: true,
   projectType: "local-growth-system",
   buyerScenario: "demand-exists-conversion-leaks",

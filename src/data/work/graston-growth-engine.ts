@@ -88,8 +88,26 @@ export const grastonGrowthEngine: CaseStudy = {
     "apache",
     "mysql",
   ],
+  implementationGroupSummary: {
+    "analytics-data":
+      "Weekly reporting was organized around pipeline and provider movement instead of one-off activity metrics.",
+    "infrastructure-platform":
+      "Directory sync, membership state, and CRM-connected triggers ran as one operating layer rather than manual handoffs.",
+    "crm-automation":
+      "Automation replaced enrollment, reminder, and follow-up tasks that staff had been handling by hand.",
+  },
+  relatedBuildTypeLabel: "Lead follow-up system",
   liveUrl: "https://graston-growth-engine.jacob-ba2.workers.dev",
-  cloudinaryImages: ["3-website-page-promo"],
+  proofDetailHeroAlt:
+    "Graston Growth Engine admin command center showing CRM-connected workflow orchestration and provider operations visibility.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "graston-growth-engine_-_ai_assistant",
+      alt: "Graston Growth Engine support assistant view for structured follow-up and repeated workflow handling.",
+      label: "Support and follow-up workflow",
+    },
+  ],
+  cloudinaryImages: ["graston-growth-engine_-_admin_command_center"],
   featured: true,
   proofVisualizerType: "pulse",
   projectType: "crm-automation-system",

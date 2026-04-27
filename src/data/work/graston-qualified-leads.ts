@@ -68,7 +68,25 @@ export const grastonQualifiedLeads: CaseStudy = {
   ],
   implementationStackCategories: ["revenue-crm", "analytics-growth"],
   implementationPlatformSlugs: ["salesforce", "google", "wordpress"],
-  cloudinaryImages: ["3-website-page-promo"],
+  implementationGroupSummary: {
+    "analytics-data":
+      "Qualified-stage reporting made it easier to see which sources created real clinician demand instead of shallow activity.",
+    "crm-automation":
+      "Follow-up and qualification rules protected lead quality between acquisition and registration.",
+    "conversion-booking":
+      "The path from interest to a qualified next step was tightened so more demand survived the handoff.",
+  },
+  relatedBuildTypeLabel: "Lead follow-up system",
+  proofDetailHeroAlt:
+    "Graston qualified-lead pipeline visual showing conversion flow from search and ads into tracked clinician demand.",
+  proofDetailSupportVisuals: [
+    {
+      publicId: "graston_data_visualization_dashboard",
+      alt: "Graston dashboard showing qualified lead reporting and channel contribution.",
+      label: "Qualified-pipeline reporting view",
+    },
+  ],
+  cloudinaryImages: ["Google_Ads_lead_conversion_pipeline_for_the_Graston_Technique"],
   featured: true,
   proofVisualizerType: "trend",
   projectType: "conversion-path-repair",

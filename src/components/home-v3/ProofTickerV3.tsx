@@ -6,7 +6,10 @@ export function ProofTickerV3() {
   const metrics = homepageData.proofBar;
 
   return (
-    <BleedSection className="relative overflow-hidden border-y border-[#F5F4F0]/10 bg-[#0F1012]/72 py-5 md:py-6">
+    <BleedSection
+      className="relative overflow-hidden border-y border-[#F5F4F0]/10 bg-[#0F1012]/72 py-5 md:py-6"
+      innerClassName="max-w-none px-0"
+    >
       {/* Edge fades */}
       <div
         aria-hidden
@@ -20,24 +23,24 @@ export function ProofTickerV3() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent_0%,rgba(15,217,200,0.4)_50%,transparent_100%)]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent_0%,rgba(240,90,40,0.35)_50%,transparent_100%)]" />
 
-      <SlowMarquee className="hidden md:block">
+      <SlowMarquee className="hidden md:block px-6 md:px-10">
         {metrics.map((metric) => (
           <div
             key={metric.label}
-            className="flex items-baseline gap-3 whitespace-nowrap"
+            className="flex shrink-0 items-baseline gap-3 whitespace-nowrap"
           >
             <span className="font-mono text-base font-medium text-[#0FD9C8]">
               {metric.value}
             </span>
-            <span className="text-sm uppercase tracking-[0.14em] text-[#F5F4F0]/64">
+            <span className="text-sm uppercase tracking-[0.14em] text-[#F5F4F0]/72">
               {metric.label}
             </span>
-            <span aria-hidden className="ml-3 size-1 rounded-full bg-[#F5F4F0]/24" />
+            <span aria-hidden className="ml-2 size-1.5 shrink-0 rounded-full bg-[#F5F4F0]/35" />
           </div>
         ))}
       </SlowMarquee>
 
-      <div className="grid gap-3 md:hidden">
+      <div className="grid gap-3 px-6 md:hidden">
         {metrics.map((metric) => (
           <div key={metric.label} className="flex items-center justify-between gap-3">
             <span className="font-mono text-sm text-[#0FD9C8]">{metric.value}</span>

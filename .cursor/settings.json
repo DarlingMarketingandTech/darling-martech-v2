@@ -26,6 +26,9 @@
     },
     "sourcegraph": {
       "enabled": true
+    },
+    "firecrawl": {
+      "enabled": true
     }
   }
 }

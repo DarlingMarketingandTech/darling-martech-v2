@@ -29,6 +29,8 @@ type CloudinaryImageProps = {
    * Default follows the loader: Next `quality` or `q_auto` if undefined.
    */
   cloudinaryQuality?: number | "auto";
+  /** Optional Cloudinary crop/resize mode for delivery. */
+  resizeMode?: "scale" | "limit" | "fill";
 };
 
 export function CloudinaryImage({
@@ -42,10 +44,12 @@ export function CloudinaryImage({
   transforms,
   postTransforms,
   cloudinaryQuality,
+  resizeMode = "scale",
 }: CloudinaryImageProps) {
   const loader = useCallback(
-    ({ src, width: w, quality }: ImageLoaderProps) =>
-      buildCloudinaryImageUrl(src, w, {
+    ({ src, width: w, quality }: ImageLoaderProps) => {
+      const derivedHeight = Math.max(1, Math.round((w * height) / width));
+      return buildCloudinaryImageUrl(src, w, {
         transforms,
         postTransforms,
         quality:
@@ -54,8 +58,11 @@ export function CloudinaryImage({
             : quality === undefined
               ? "auto"
               : quality,
-      }),
-    [transforms, postTransforms, cloudinaryQuality]
+        resizeMode,
+        height: derivedHeight,
+      });
+    },
+    [transforms, postTransforms, cloudinaryQuality, resizeMode, height, width]
   );
 
   return (

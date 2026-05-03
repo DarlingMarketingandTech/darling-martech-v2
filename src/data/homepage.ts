@@ -1,6 +1,5 @@
 import type { PageMeta } from "@/types";
-import { siteConfig } from "@/data/site-config";
-import { CTA_LABELS, CTA_LINKS } from "@/lib/cta";
+import { CTA_LINKS } from "@/lib/cta";
 
 export const homepageMeta: PageMeta = {
   title: "Revenue Systems, AI Automation & Custom Build",
@@ -16,14 +15,16 @@ export const homepageData = {
   hero: {
     eyebrow: "INDIANAPOLIS, IN · OWNER-OPERATED · SYSTEMS-FIRST",
     headline: {
-      beforeAccent: "Most teams do not need more marketing. They need ",
-      accent: "a system that works.",
+      beforeAccent: "Most teams don’t need more marketing. They need ",
+      accent: "something that actually works together.",
       afterAccent: "",
     },
     subhead:
-      "I diagnose, rebuild, and run growth systems that capture leads, convert demand, automate follow-up, and make reporting trustworthy. If your stack is broken or missing, this is where I fix it.",
-    primaryCta: { label: CTA_LABELS.startHere, href: CTA_LINKS.startHere },
-    secondaryCta: { label: CTA_LABELS.bookCall, href: CTA_LINKS.bookCall },
+      "I design and build the pieces behind better marketing, from brand and websites to lead capture, CRM, automation, and reporting, so everything works as one instead of disconnected parts.",
+    scopeLine:
+      "Start with what your business needs next: a logo, a website, a stronger brand system, better lead capture, automated follow-up, clearer reporting, or a full growth strategy.",
+    primaryCta: { label: "Find the right starting point", href: CTA_LINKS.startHere },
+    secondaryCta: { label: "See examples by project type", href: CTA_LINKS.proof },
   },
   proofBar: [
     { value: "+212%", label: "qualified leads — CRM + lifecycle automation rebuild" },
@@ -32,6 +33,37 @@ export const homepageData = {
     { value: "4.9★", label: "local trust conversion — reputation + request flow system" },
     { value: "15+", label: "years · Healthcare · Legal · Finance · SaaS · B2B" },
   ],
+  whatThisCanIncludeSection: {
+    title: "What this can include",
+    intro:
+      "The work can start simple or go deep. The point is to build the pieces your business needs next, then make sure they connect.",
+    cards: [
+      {
+        title: "Brand identity",
+        body: "Logo, visual direction, messaging, and guidelines that make the business easier to recognize and trust.",
+      },
+      {
+        title: "Websites",
+        body: "Clear, credible pages that explain what you do, who it is for, and what someone should do next.",
+      },
+      {
+        title: "Conversion paths",
+        body: "Forms, calls-to-action, page structure, booking paths, and proof placement that turn interest into action.",
+      },
+      {
+        title: "CRM and follow-up",
+        body: "Lead capture, contact records, routing, reminders, and lifecycle flows so opportunities do not slip through the cracks.",
+      },
+      {
+        title: "Automation",
+        body: "Repeatable workflows that reduce manual work and keep the right next step moving.",
+      },
+      {
+        title: "Reporting and strategy",
+        body: "Clearer visibility into what is working, what needs to change, and what to build next.",
+      },
+    ],
+  },
   diagnosticBand: {
     headline: "Not sure where to start? There's an 8-question diagnostic for that.",
     body: "Answer 8 questions. Get a specific diagnosis — not a generic checklist. No email required to see your results.",
@@ -98,25 +130,37 @@ export const homepageData = {
   },
   processSection: {
     eyebrow: "How this works",
-    headline: "One operator. Full stack ownership. No handoffs.",
-    body: "I don't hand over a strategy deck and disappear. I build, run, and measure the system myself.",
+    headline: "First we identify what needs to work better. Then I build it.",
+    body: "The process stays practical: clarify the real issue, pick the right project shape, build the useful pieces, then connect the result to action.",
     columns: [
       {
         number: "01",
-        title: "Diagnose",
-        body: "Name the real bottleneck with a structured diagnostic — tools, data, or conversation — before anything is scoped.",
+        title: "Clarify the starting point",
+        body: "Is this a brand, website, conversion, CRM, automation, reporting, or strategy problem?",
       },
       {
         number: "02",
-        title: "Build",
-        body: "Ship working systems: CRM, automation, site, and reporting — not recommendations buried in a deck.",
+        title: "Choose the right project shape",
+        body: "A focused fix, multi-page rebuild, CRM lifecycle, reporting layer, or multi-channel system.",
       },
       {
         number: "03",
-        title: "Run & Measure",
-        body: "Stay past launch: operate the stack, read the numbers, and adjust so accountability stays in one place.",
+        title: "Build the useful pieces",
+        body: "The deliverable should make the business easier to understand, easier to operate, or easier to improve.",
+      },
+      {
+        number: "04",
+        title: "Connect the result to action",
+        body: "The work should help people find you, trust you, contact you, buy, book, or make better decisions.",
       },
     ],
+  },
+  toolsSection: {
+    eyebrow: "Starting point tool",
+    headline: "Not sure what kind of project you need? Start here.",
+    body: "Answer a few questions about your brand, website, leads, follow-up, and reporting. You’ll get a clearer starting point before buying a service or booking a call.",
+    primaryCta: { label: "Find the right starting point", href: "/tools/growth-system-audit" },
+    secondaryCta: { label: "Browse all project examples", href: "/proof" },
   },
   newsletterBand: {
     eyebrow: "Insights",
@@ -194,10 +238,10 @@ export const homepageData = {
     cta: { label: "See if your problem is on the list →", href: "/problems" },
   },
   closingCta: {
-    headline: "Choose your next step based on your current level of trust.",
-    body: "Browse, diagnose, and evaluate first — or start a direct conversation if the problem is already clear.",
-    primaryCta: { label: CTA_LABELS.startHere, href: CTA_LINKS.startHere },
-    secondaryCta: { label: CTA_LABELS.proof, href: CTA_LINKS.proof },
-    readyLink: { label: CTA_LABELS.bookCall, href: siteConfig.calComLink },
+    headline: "Choose the next step that matches your confidence level.",
+    body: "Need clarity? Take the audit. Need proof? Browse examples by project type. Ready to talk? Start a conversation.",
+    primaryCta: { label: "Need clarity? Take the audit.", href: "/tools/growth-system-audit" },
+    secondaryCta: { label: "Need proof? Browse examples by project type.", href: "/proof" },
+    readyLink: { label: "Ready to talk? Start a conversation.", href: "/contact" },
   },
 };

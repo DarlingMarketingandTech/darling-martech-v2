@@ -63,7 +63,7 @@ export function ProcessColumnsV3() {
           />
         ) : null}
 
-        <RevealStagger className="grid gap-12 md:grid-cols-3 md:gap-8" staggerChildren={0.18}>
+        <RevealStagger className="grid gap-12 md:grid-cols-2 md:gap-8 xl:grid-cols-4" staggerChildren={0.18}>
           {processSection.columns.map((column, index) => (
             <RevealItem key={column.number} className="relative">
               {/* Numbered node */}
@@ -88,7 +88,7 @@ export function ProcessColumnsV3() {
               {/* Decorative micro-bracket */}
               <div className="mt-6 flex items-center gap-3 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[#F5F4F0]/36">
                 <span className="h-px w-10 bg-[#F5F4F0]/14" />
-                <span>{index === 0 ? "system_intake" : index === 1 ? "system_build" : "system_run"}</span>
+                <span>{`system_step_${index + 1}`}</span>
               </div>
             </RevealItem>
           ))}

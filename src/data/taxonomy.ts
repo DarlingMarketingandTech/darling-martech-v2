@@ -133,6 +133,27 @@ export const PROJECT_TYPE_LABELS: Record<ProjectTypeId, string> = {
   "ops-diagnostics": "Operations & diagnostic layer",
 };
 
+export const PROJECT_TYPE_HELPER_TEXT: Record<ProjectTypeId, string> = {
+  "website-brand-rebuild":
+    "Site, structure, messaging, and brand presentation working together.",
+  "brand-identity-system":
+    "Logo, visual direction, messaging, and reusable rules for consistent presentation.",
+  "conversion-path-repair":
+    "Page structure, CTAs, proof placement, and lead paths that help visitors take the next step.",
+  "crm-automation-system":
+    "Lead capture, follow-up, reminders, routing, and lifecycle workflows.",
+  "reporting-attribution-system":
+    "Knowing what is working and where leads or revenue come from.",
+  "custom-infrastructure-product":
+    "Tools, platforms, workflows, and admin surfaces built for a specific job.",
+  "local-growth-system":
+    "Service-area trust, local presence, and ways to help nearby buyers find and choose the business.",
+  "content-distribution-system":
+    "Campaigns, articles, email, and useful content systems that help the right audience move forward.",
+  "ops-diagnostics":
+    "Audits, roadmaps, scorecards, and planning tools that clarify what to fix or build next.",
+};
+
 export const PROJECT_TYPE_RELATED_BUILD_LABELS: Record<ProjectTypeId, string> = {
   "website-brand-rebuild": "Website & brand system",
   "brand-identity-system": "Brand identity system",
@@ -210,4 +231,3 @@ export const PROOF_EVIDENCE_TYPE_LABELS: Record<ProofEvidenceType, string> = {
   "documented-delivery": "Delivered system or creative, narrated outcome",
   mixed: "More than one evidence type",
 };
-

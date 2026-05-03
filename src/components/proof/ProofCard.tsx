@@ -54,6 +54,7 @@ export function ProofCard({ caseStudy, showSystems, size = "md" }: ProofCardProp
     caseStudy.showClientName === false
       ? (caseStudy.clientContextLabel ?? caseStudy.clientContext)
       : `${caseStudy.clientName} · ${caseStudy.clientContext}`;
+  const buildContextLine = `${caseStudy.timeline} · ${caseStudy.engagementFormat}`;
 
   return (
     <Link
@@ -127,7 +128,8 @@ export function ProofCard({ caseStudy, showSystems, size = "md" }: ProofCardProp
           {caseStudy.resultSummary}
         </p>
 
-        <p className="relative z-2 meta-label mt-8 text-[#F5F4F0]/36">{contextLine}</p>
+        <p className="relative z-2 mt-6 text-xs text-[#F5F4F0]/52">{buildContextLine}</p>
+        <p className="relative z-2 mt-2 text-xs text-[#F5F4F0]/36">Client context: {contextLine}</p>
 
         {renderSystems ? (
           <div className="relative z-2 mt-4 flex flex-wrap gap-2">

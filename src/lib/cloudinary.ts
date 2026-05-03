@@ -1,6 +1,6 @@
 import type { ImageLoaderProps } from "next/image";
 
-const DEFAULT_CLOUD_NAME = "c-5c7019a74c9c24ab5eda7e213055bd";
+const DEFAULT_CLOUD_NAME = "djhqowk67";
 
 export type CloudinaryImageDeliveryOptions = {
   /**
@@ -15,6 +15,13 @@ export type CloudinaryImageDeliveryOptions = {
   postTransforms?: string;
   /** `auto` uses Cloudinary `q_auto`; otherwise `q_1`–`q_100`. */
   quality?: number | "auto";
+  /**
+   * Resize mode used in the generated transformation chain.
+   * Defaults to `scale` to preserve existing behavior.
+   */
+  resizeMode?: "scale" | "limit" | "fill";
+  /** Optional target height used by `limit` / `fill` flows. */
+  height?: number;
 };
 
 function normalizePublicId(publicId: string) {
@@ -45,10 +52,21 @@ export function buildCloudinaryImageUrl(
   const post = normalizeChain(options?.postTransforms);
   const q =
     options?.quality === undefined || options?.quality === "auto" ? "q_auto" : `q_${options.quality}`;
+  const resizeMode = options?.resizeMode ?? "scale";
+  const targetHeight =
+    options?.height && Number.isFinite(options.height) && options.height > 0
+      ? Math.round(options.height)
+      : undefined;
 
   const segments: string[] = [];
   if (pre) segments.push(pre);
-  segments.push(`c_scale,w_${width}`);
+  if (resizeMode === "scale") {
+    segments.push(`c_scale,w_${width}`);
+  } else if (targetHeight) {
+    segments.push(`c_${resizeMode},w_${width},h_${targetHeight}`);
+  } else {
+    segments.push(`c_${resizeMode},w_${width}`);
+  }
   if (post) segments.push(post);
   segments.push("f_auto", q);
 

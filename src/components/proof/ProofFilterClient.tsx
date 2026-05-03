@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ChangeEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
 import { Search, X } from "lucide-react";
 import { ProofGrid } from "@/components/proof/ProofGrid";
 import {
@@ -11,6 +11,7 @@ import {
   OUTCOME_TAGS,
   PROJECT_COMPLEXITY_LABELS,
   PROJECT_COMPLEXITY_ORDER,
+  PROJECT_TYPE_HELPER_TEXT,
   PROJECT_TYPE_LABELS,
   PROJECT_TYPE_ORDER,
   SCOPE_SHAPE_LABELS,
@@ -39,6 +40,7 @@ import type {
 
 type ProofFilterClientProps = {
   caseStudies: CaseStudy[];
+  initialProjectType?: ProjectTypeId;
 };
 
 function countByOutcome(studies: CaseStudy[], slug: OutcomeSlug): number {
@@ -65,7 +67,7 @@ function countByScope(studies: CaseStudy[], id: ScopeShape): number {
   return studies.filter((c) => c.scopeShape === id).length;
 }
 
-export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
+export function ProofFilterClient({ caseStudies, initialProjectType }: ProofFilterClientProps) {
   const [query, setQuery] = useState("");
   const [outcomes, setOutcomes] = useState<Set<OutcomeSlug>>(new Set());
   const [tags, setTags] = useState<Set<OutcomeTag>>(new Set());
@@ -76,10 +78,18 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
   const [sortMode, setSortMode] = useState<ProofSortMode>("default");
   const [searchIndex, setSearchIndex] = useState<ProofSearchIndex | null>(null);
   const [searchSlugs, setSearchSlugs] = useState<Set<string> | null>(null);
+  const didApplyInitialProjectType = useRef(false);
 
   const defaultRanks = useMemo(() => {
     return buildProofHubDefaultRankMap(caseStudies);
   }, [caseStudies]);
+
+  useEffect(() => {
+    if (didApplyInitialProjectType.current) return;
+    didApplyInitialProjectType.current = true;
+    if (!initialProjectType) return;
+    setProjectTypes(new Set([initialProjectType]));
+  }, [initialProjectType]);
 
   useEffect(() => {
     let cancelled = false;
@@ -195,6 +205,15 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
     query.trim().length >= 2 ||
     sortMode !== "default";
 
+  const activeProjectTypeHelperEntries = useMemo(() => {
+    if (projectTypes.size === 0) return [];
+    return PROJECT_TYPE_ORDER.filter((id) => projectTypes.has(id)).map((id) => ({
+      id,
+      label: PROJECT_TYPE_LABELS[id],
+      helper: PROJECT_TYPE_HELPER_TEXT[id],
+    }));
+  }, [projectTypes]);
+
   function toggleOutcome(slug: OutcomeSlug) {
     setOutcomes((prev) => {
       const next = new Set(prev);
@@ -298,6 +317,21 @@ export function ProofFilterClient({ caseStudies }: ProofFilterClientProps) {
               onSelect={() => toggleProjectType(id)}
             />
           ))}
+        </div>
+        <div className="mt-2 text-sm text-[#F5F4F0]/58">
+          {activeProjectTypeHelperEntries.length === 1 ? (
+            <p>{activeProjectTypeHelperEntries[0]?.helper}</p>
+          ) : activeProjectTypeHelperEntries.length > 1 ? (
+            <div className="flex flex-wrap gap-x-4 gap-y-1">
+              {activeProjectTypeHelperEntries.map((entry) => (
+                <p key={entry.id}>
+                  <span className="text-[#F5F4F0]/78">{entry.label}:</span> {entry.helper}
+                </p>
+              ))}
+            </div>
+          ) : (
+            <p>Select a project type to narrow by the kind of build and change.</p>
+          )}
         </div>
 
         <div

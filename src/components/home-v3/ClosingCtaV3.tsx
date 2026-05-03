@@ -10,6 +10,7 @@ import { MagneticLink } from "@/components/motion";
 export function ClosingCtaV3() {
   const data = homepageData.closingCta;
   const prefersReducedMotion = useReducedMotion();
+  const isReadyLinkExternal = /^https?:\/\//.test(data.readyLink.href);
 
   return (
     <BleedSection className="relative overflow-hidden py-24 md:py-36">
@@ -68,7 +69,7 @@ export function ClosingCtaV3() {
             <span className="absolute inset-0 animate-ping rounded-full bg-[#F05A28]/70" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#F05A28]" />
           </span>
-          Booking Q2 engagements
+          Trust ladder
         </motion.p>
 
         <motion.h2
@@ -115,8 +116,8 @@ export function ClosingCtaV3() {
 
         <motion.a
           href={data.readyLink.href}
-          target="_blank"
-          rel="noreferrer"
+          target={isReadyLinkExternal ? "_blank" : undefined}
+          rel={isReadyLinkExternal ? "noreferrer" : undefined}
           initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-15%" }}

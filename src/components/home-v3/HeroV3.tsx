@@ -9,9 +9,9 @@ import { GradientMesh, MagneticLink } from "@/components/motion";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 
 const DIAGNOSTIC_LINES = [
-  { label: "scan", value: "demand-capture · crm · automation · attribution" },
-  { label: "fault", value: "fragmented handoff between forms → CRM → routing" },
-  { label: "fix", value: "rebuild capture → follow-up → reporting as one system" },
+  { label: "align", value: "brand, website, leads, follow-up, and reporting should work together" },
+  { label: "start", value: "begin with what your business needs next" },
+  { label: "connect", value: "build the right piece now, then connect the full system over time" },
 ] as const;
 
 export function HeroV3() {
@@ -135,6 +135,9 @@ export function HeroV3() {
           <motion.div variants={itemVariants} transition={{ duration: 0.55 }}>
             <p className="max-w-[580px] text-pretty text-sm leading-relaxed text-[#F5F4F0]/74 md:text-base">
               {hero.subhead}
+            </p>
+            <p className="mt-4 max-w-[620px] text-pretty text-sm leading-relaxed text-[#F5F4F0]/62 md:text-base">
+              {hero.scopeLine}
             </p>
           </motion.div>
 

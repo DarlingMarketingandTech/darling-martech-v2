@@ -1,0 +1,55 @@
+---
+description: Homepage and proof rebuild guardrails for Darling Martech V2
+globs:
+  - "src/app/page.tsx"
+  - "src/components/home-v3/**"
+  - "src/data/homepage*.ts"
+  - "src/data/proof*.ts"
+  - "src/data/work/**"
+  - "src/components/proof/**"
+alwaysApply: false
+---
+
+# Homepage and proof rebuild guardrails
+
+This rebuild should make the homepage a clear front door into the full Darling Martech capability range.
+
+Core positioning:
+- Most teams don’t need more marketing. They need something that actually works together.
+- The site should explain that Jacob builds the pieces behind better marketing: brand, websites, lead capture, CRM, automation, reporting, and strategy.
+- Do not make the hero sound like Darling Martech only fixes broken systems.
+- Do not make the hero vague or generic.
+
+Proof rules:
+- Proof must be organized by project type, not client, company, logo, or industry.
+- Company names may appear as secondary context only.
+- Homepage proof cards must explain:
+  1. what was not working
+  2. what was built
+  3. what changed
+  4. impact/result
+- Do not create a company logo wall above the fold.
+- Do not create an industry-led proof section on the homepage.
+
+Cloudinary rules:
+- Use only curated Cloudinary assets from darling martech v2/proof-assets that are homepage-ready.
+- Do not use assets from darling martech v2/archive/plain-website-screenshots.
+- Do not use assets from darling martech v2/proof-assets/review-needed.
+- Avoid raw website screenshots on homepage proof cards unless they are part of a composite or annotated visual.
+
+Architecture rules:
+- Preserve the data-first architecture.
+- Put reusable homepage copy/data in src/data files.
+- Prefer server-rendered components when possible.
+- Avoid hydration-heavy or fragile animated UI.
+- Reuse existing design tokens and components where possible.
+- Each homepage section should have one clear job.
+- Keep proof cards to 5 or 6 maximum.
+- Keep CTAs to 1 or 2 per section.
+- Do not build an everything-page.
+
+Before each implementation phase:
+- Inspect relevant files.
+- Explain the intended edits.
+- Make the smallest coherent change.
+- Pause after the phase with files changed, risks, and next recommended step.

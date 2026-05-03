@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { tools } from "@/data/labs";
+import { homepageData } from "@/data/homepage";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { GlassPanel } from "@/components/layout-v3/GlassPanel";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ const featuredTools = PRIORITIZED_TOOL_SLUGS
 
 export function ToolsPreviewV3() {
   const [hero, ...rest] = featuredTools;
+  const section = homepageData.toolsSection;
 
   return (
     <BleedSection className="relative overflow-hidden py-20 md:py-28">
@@ -35,23 +37,24 @@ export function ToolsPreviewV3() {
         <div className="max-w-2xl">
           <p className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-[#0FD9C8]/80">
             <Sparkles className="size-3.5" />
-            Tools
+            {section.eyebrow}
           </p>
           <h2 className="mt-3 font-syne text-3xl leading-[1.05] tracking-[-0.02em] text-[#F5F4F0] md:text-5xl">
-            Productized diagnostics{" "}
-            <span className="bg-[linear-gradient(180deg,#FF7A4A_0%,#F05A28_100%)] bg-clip-text text-transparent">
-              built for decision speed.
-            </span>
+            {section.headline}
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-[#F5F4F0]/72 md:text-lg">
-            Tools should surface constraints, not vanity metrics. Each one maps
-            to a real problem path and next step.
+            {section.body}
           </p>
         </div>
-        <Button href="/tools" variant="secondary" size="lg" className="self-start">
-          Explore all tools
-          <ArrowUpRight className="ml-2 size-4" />
-        </Button>
+        <div className="flex flex-wrap items-center gap-3 self-start">
+          <Button href={section.primaryCta.href} size="lg">
+            {section.primaryCta.label}
+            <ArrowUpRight className="ml-2 size-4" />
+          </Button>
+          <Button href={section.secondaryCta.href} variant="ghost" size="lg" className="text-[#F5F4F0]">
+            {section.secondaryCta.label}
+          </Button>
+        </div>
       </div>
 
       <div className="relative grid gap-5 md:grid-cols-3 md:grid-rows-2">
@@ -95,7 +98,7 @@ export function ToolsPreviewV3() {
                 </p>
                 <div className="mt-6 inline-flex items-center gap-2 text-sm text-[#F5F4F0]">
                   <span className="border-b border-current/0 transition-colors group-hover:border-current/60">
-                    Open the diagnostic
+                    {section.primaryCta.label}
                   </span>
                   <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>

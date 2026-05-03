@@ -8,9 +8,9 @@ import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 import { Button } from "@/components/ui/button";
 
 const SIGNATURE_BEATS = [
-  { label: "diagnose", value: "Find the constraint, not the symptom." },
-  { label: "build", value: "Ship the system, not the strategy deck." },
-  { label: "operate", value: "Run it weekly until it compounds." },
+  { label: "ownership", value: "One point of accountability from planning through implementation." },
+  { label: "execution", value: "Practical work shipped in the real stack, not slideware." },
+  { label: "continuity", value: "Adjustments based on real performance, not one-time handoff." },
 ] as const;
 
 export function OwnerStatementV3() {
@@ -90,13 +90,12 @@ export function OwnerStatementV3() {
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-[#F5F4F0]/74 md:text-lg">
-            I diagnose, build, and run the system myself. No strategy deck
-            handoff, no fragmented execution. The same person who identifies
-            the bottleneck is the person who ships the fix.
+            I stay responsible from planning through implementation. No strategy deck
+            handoff, no fragmented execution, and no confusion about who owns outcomes.
           </p>
           <p className="mt-4 text-base leading-relaxed text-[#F5F4F0]/72">
-            That is how momentum compounds: one operating owner, one clear
-            scoreboard, one system that keeps improving.
+            That continuity keeps momentum intact: one operating owner, one clear
+            scoreboard, and one plan that stays connected to real performance.
           </p>
 
           <ul className="mt-7 space-y-3">

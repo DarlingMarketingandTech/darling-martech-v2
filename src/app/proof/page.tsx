@@ -15,12 +15,27 @@ import { caseStudies } from "@/data/work/work-index";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
 import { cn } from "@/lib/utils";
+import { PROJECT_TYPE_ORDER } from "@/data/taxonomy";
+import type { ProjectTypeId } from "@/types";
 
 export const metadata = buildMetadata(routeMetadata["/proof"]);
 
 const METRICS_STRIP = homepageData.proofBar.slice(0, 4);
 
-export default function ProofPage() {
+type SearchParams = Record<string, string | string[] | undefined>;
+type PageProps = {
+  searchParams?: SearchParams | Promise<SearchParams>;
+};
+
+const PROJECT_TYPE_SET = new Set<ProjectTypeId>(PROJECT_TYPE_ORDER);
+
+export default async function ProofPage({ searchParams }: PageProps) {
+  const sp = (await Promise.resolve(searchParams)) ?? {};
+  const rawProjectType = typeof sp.projectType === "string" ? sp.projectType : undefined;
+  const initialProjectType = rawProjectType && PROJECT_TYPE_SET.has(rawProjectType as ProjectTypeId)
+    ? (rawProjectType as ProjectTypeId)
+    : undefined;
+
   return (
     <SiteShell>
       <div className="relative isolate">
@@ -129,7 +144,7 @@ export default function ProofPage() {
               single engagement with full context — not blended averages.
             </p>
             <ProofTelemetryFeaturedRows caseStudies={caseStudies} />
-            <ProofFilterClient caseStudies={caseStudies} />
+            <ProofFilterClient caseStudies={caseStudies} initialProjectType={initialProjectType} />
           </div>
 
           <details className="group mt-16 rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]/25 md:mt-20">

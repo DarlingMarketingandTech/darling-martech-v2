@@ -24,13 +24,13 @@ const METRICS_STRIP = homepageData.proofBar.slice(0, 4);
 
 type SearchParams = Record<string, string | string[] | undefined>;
 type PageProps = {
-  searchParams?: SearchParams | Promise<SearchParams>;
+  searchParams?: Promise<SearchParams>;
 };
 
 const PROJECT_TYPE_SET = new Set<ProjectTypeId>(PROJECT_TYPE_ORDER);
 
 export default async function ProofPage({ searchParams }: PageProps) {
-  const sp = (await Promise.resolve(searchParams)) ?? {};
+  const sp = (await searchParams) ?? {};
   const rawProjectType = typeof sp.projectType === "string" ? sp.projectType : undefined;
   const initialProjectType = rawProjectType && PROJECT_TYPE_SET.has(rawProjectType as ProjectTypeId)
     ? (rawProjectType as ProjectTypeId)

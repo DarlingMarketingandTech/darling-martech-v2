@@ -62,6 +62,14 @@ export const homepageData = {
         title: "Reporting and strategy",
         body: "Clearer visibility into what is working, what needs to change, and what to build next.",
       },
+      {
+        title: "AI agents & internal copilots",
+        body: "Custom GPTs, Claude workflows, website AI agents, and internal assistants that help teams use company knowledge, documents, and workflows through natural language.",
+      },
+      {
+        title: "Custom tools & product systems",
+        body: "Purpose-built tools, calculators, portals, dashboards, and product workflows when off-the-shelf software does not fit the job.",
+      },
     ],
   },
   diagnosticBand: {

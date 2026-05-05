@@ -16,7 +16,7 @@ export function WhatThisCanIncludeV3() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {data.cards.map((card) => (
           <GlassPanel key={card.title} className="h-full p-6">
             <h3 className="font-syne text-2xl leading-tight text-[#F5F4F0]">{card.title}</h3>

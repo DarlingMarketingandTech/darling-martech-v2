@@ -214,6 +214,16 @@ export function ProofFilterClient({ caseStudies, initialProjectType }: ProofFilt
     }));
   }, [projectTypes]);
 
+  const activeProjectTypeLabelList = useMemo(() => {
+    return PROJECT_TYPE_ORDER.filter((id) => projectTypes.has(id)).map((id) => PROJECT_TYPE_LABELS[id]);
+  }, [projectTypes]);
+
+  const singleSelectedProjectType = projectTypes.size === 1;
+
+  function clearProjectType() {
+    setProjectTypes(new Set());
+  }
+
   function toggleOutcome(slug: OutcomeSlug) {
     setOutcomes((prev) => {
       const next = new Set(prev);
@@ -314,6 +324,7 @@ export function ProofFilterClient({ caseStudies, initialProjectType }: ProofFilt
               label={PROJECT_TYPE_LABELS[id]}
               count={projectTypeCounts[id]}
               isActive={projectTypes.has(id)}
+              emphasizeActive={singleSelectedProjectType && projectTypes.has(id)}
               onSelect={() => toggleProjectType(id)}
             />
           ))}
@@ -460,7 +471,43 @@ export function ProofFilterClient({ caseStudies, initialProjectType }: ProofFilt
         </div>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-10 space-y-6">
+        {projectTypes.size > 0 ? (
+          <div
+            aria-live="polite"
+            className="rounded-2xl border border-[#F05A28]/28 bg-[#13131A]/45 px-5 py-4 shadow-[inset_0_1px_0_0_rgba(245,244,240,0.04)] md:px-6 md:py-5"
+          >
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+              <div className="min-w-0 flex-1 space-y-2">
+                <p className="text-sm leading-snug text-[#F5F4F0]/82">
+                  <span className="text-[#F5F4F0]/62">Showing proof for:</span>{" "}
+                  <span className="font-semibold text-[#F5F4F0]">{activeProjectTypeLabelList.join(", ")}</span>
+                </p>
+                {activeProjectTypeHelperEntries.length === 1 ? (
+                  <p className="text-sm leading-relaxed text-[#F5F4F0]/56">
+                    {activeProjectTypeHelperEntries[0]?.helper}
+                  </p>
+                ) : activeProjectTypeHelperEntries.length > 1 ? (
+                  <div className="flex flex-col gap-1.5 text-sm leading-relaxed text-[#F5F4F0]/56">
+                    {activeProjectTypeHelperEntries.map((entry) => (
+                      <p key={entry.id}>
+                        <span className="text-[#F5F4F0]/72">{entry.label}:</span> {entry.helper}
+                      </p>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+              <button
+                type="button"
+                onClick={clearProjectType}
+                className="shrink-0 self-start rounded-full border border-[#F5F4F0]/14 px-3 py-1.5 text-sm font-medium text-[#F5F4F0]/82 transition-colors hover:border-[#0FD9C8]/45 hover:text-[#0FD9C8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05A28]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0E]"
+              >
+                Clear project type
+              </button>
+            </div>
+          </div>
+        ) : null}
+
         {filtered.length > 0 ? (
           <ProofGrid caseStudies={filtered} weighted />
         ) : (
@@ -521,11 +568,13 @@ function FilterPill({
   label,
   count,
   isActive,
+  emphasizeActive,
   onSelect,
 }: {
   label: string;
   count: number;
   isActive: boolean;
+  emphasizeActive?: boolean;
   onSelect: () => void;
 }) {
   return (
@@ -535,6 +584,7 @@ function FilterPill({
       aria-pressed={isActive}
       className={cn(
         "flex shrink-0 items-center gap-2 border-b-2 pb-2 text-left text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05A28]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0E]",
+        emphasizeActive && isActive && "-mx-1 rounded-md px-1 ring-1 ring-[#F05A28]/35 ring-offset-2 ring-offset-[#0C0C0E]",
         isActive
           ? "border-[#F05A28] font-semibold text-[#F5F4F0]"
           : "border-transparent font-normal text-[#F5F4F0]/50 hover:text-[#F5F4F0]/72"

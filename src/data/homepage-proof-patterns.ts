@@ -115,4 +115,22 @@ export const HOMEPAGE_PROOF_PATTERNS: HomepageProofPattern[] = [
     ctaLabel: "See website & brand proof",
     ctaHref: "/proof?projectType=website-brand-rebuild",
   },
+  {
+    projectType: "conversion-path-repair",
+    headline: "Conversion path repair",
+    plainEnglishLabel: "A clearer path from interest to action",
+    whatWasNotWorking:
+      "People could reach the site or offer, but the next step was unclear, delayed, buried, or too easy to miss.",
+    whatWasBuilt:
+      "Sharper page structure, stronger calls-to-action, better proof placement, cleaner forms, and a more obvious path to book, buy, call, or inquire.",
+    whatChanged:
+      "Visitors had fewer decisions to untangle and a clearer reason to take the next step.",
+    impact:
+      "More existing interest can turn into useful action instead of leaking out through confusing pages, weak handoffs, or buried conversion points.",
+    primaryVisualPublicId: "broken_converstion_path",
+    supportingVisualPublicIds: ["Gemini_Generated_Image_qn1c5kqn1c5kqn1c"],
+    relatedProofSlugs: ["urgentcare-indy", "primarycare-indy"],
+    ctaLabel: "See conversion path proof",
+    ctaHref: "/proof?projectType=conversion-path-repair",
+  },
 ];

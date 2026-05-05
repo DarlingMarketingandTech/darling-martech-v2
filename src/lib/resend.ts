@@ -19,6 +19,23 @@ type ToolResultEmailInput = {
   ctaHref?: string;
 };
 
+type ToolLeadNotificationInput = {
+  leadId: string;
+  toolSlug: string;
+  email: string;
+  name?: string | null;
+  company?: string | null;
+  role?: string | null;
+  source?: string | null;
+  pagePath?: string | null;
+  referrer?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+  resultSummary?: Record<string, unknown> | null;
+  submittedAt: string;
+};
+
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -201,4 +218,67 @@ export async function sendToolResultEmail(input: ToolResultEmailInput) {
       <p>${escapeHtml(nextStep)}</p>
     `,
   });
+}
+
+export async function sendToolLeadNotification(input: ToolLeadNotificationInput) {
+  const resend = getResendClient();
+  const resultSummaryText = input.resultSummary ? JSON.stringify(input.resultSummary, null, 2) : "Not provided";
+  const subject = `New tool lead: ${input.toolSlug}`;
+  const text = [
+    "New tool lead captured",
+    "",
+    `Lead ID: ${input.leadId}`,
+    `Submitted at: ${input.submittedAt}`,
+    `Tool slug: ${input.toolSlug}`,
+    `Email: ${input.email}`,
+    `Name: ${input.name ?? "Not provided"}`,
+    `Company: ${input.company ?? "Not provided"}`,
+    `Role: ${input.role ?? "Not provided"}`,
+    `Source: ${input.source ?? "site"}`,
+    `Page path: ${input.pagePath ?? "Not provided"}`,
+    `Referrer: ${input.referrer ?? "Not provided"}`,
+    `UTM source: ${input.utmSource ?? "Not provided"}`,
+    `UTM medium: ${input.utmMedium ?? "Not provided"}`,
+    `UTM campaign: ${input.utmCampaign ?? "Not provided"}`,
+    "",
+    "Result summary:",
+    resultSummaryText,
+  ].join("\n");
+
+  const html = `
+    <h1>New tool lead captured</h1>
+    <p><strong>Lead ID:</strong> ${escapeHtml(input.leadId)}</p>
+    <p><strong>Submitted at:</strong> ${escapeHtml(input.submittedAt)}</p>
+    <p><strong>Tool slug:</strong> ${escapeHtml(input.toolSlug)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(input.email)}</p>
+    <p><strong>Name:</strong> ${escapeHtml(input.name ?? "Not provided")}</p>
+    <p><strong>Company:</strong> ${escapeHtml(input.company ?? "Not provided")}</p>
+    <p><strong>Role:</strong> ${escapeHtml(input.role ?? "Not provided")}</p>
+    <p><strong>Source:</strong> ${escapeHtml(input.source ?? "site")}</p>
+    <p><strong>Page path:</strong> ${escapeHtml(input.pagePath ?? "Not provided")}</p>
+    <p><strong>Referrer:</strong> ${escapeHtml(input.referrer ?? "Not provided")}</p>
+    <p><strong>UTM source:</strong> ${escapeHtml(input.utmSource ?? "Not provided")}</p>
+    <p><strong>UTM medium:</strong> ${escapeHtml(input.utmMedium ?? "Not provided")}</p>
+    <p><strong>UTM campaign:</strong> ${escapeHtml(input.utmCampaign ?? "Not provided")}</p>
+    <p><strong>Result summary:</strong></p>
+    <pre>${escapeHtml(resultSummaryText)}</pre>
+  `;
+
+  const { data, error } = await resend.emails.send(
+    {
+      from: appEnv.resendFromEmail,
+      to: [appEnv.contactToEmail],
+      replyTo: input.email,
+      subject: subject.length > 180 ? `${subject.slice(0, 177)}...` : subject,
+      text,
+      html,
+    },
+    { idempotencyKey: `tool-lead/${input.leadId}` }
+  );
+
+  if (error) {
+    throw new Error(error.message || "Resend send failed.");
+  }
+
+  return { id: data?.id ?? null };
 }

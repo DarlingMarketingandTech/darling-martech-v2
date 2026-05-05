@@ -9,6 +9,12 @@ export interface ToolLeadPayload {
   role?: string;
   toolSlug: string;
   resultSummary?: Record<string, unknown>;
+  source?: string;
+  pagePath?: string;
+  referrer?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
 }
 
 export interface ToolRecommendationLink {

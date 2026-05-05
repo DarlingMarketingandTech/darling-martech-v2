@@ -1,0 +1,23 @@
+---
+description: Next.js build cache, stale TypeScript types, and hanging-build diagnostics
+globs:
+  - ".next/**"
+  - "next.config.*"
+  - "tsconfig*.json"
+alwaysApply: false
+---
+
+# Next build cache and stale types
+
+When TypeScript or generated types look wrong after dependency or config changes but source looks fine, treat a corrupted or stale `.next` cache as a likely cause. After stopping any running Next processes for this repo, delete `.next` once and rerun the build or typecheck before chasing phantom source bugs.
+
+## Hanging or slow `next build` (no clear source error)
+
+If `pnpm build` or `pnpm verify` appears to hang inside `next build` and there is no source error, **check for lingering Next processes tied to this workspace first**.
+
+- Look for old `next dev`, `next start`, or `next build` processes still attached to this repo.
+- **Stop those processes** before changing application source.
+- **Delete `.next` once** after stopping the processes.
+- Re-run `pnpm build` or `pnpm verify`.
+- Treat `.next/trace` or other repo-local `.next` file locks as cache or process artifacts unless the issue **reproduces after** that cleanup.
+- **Do not** edit app routes, sitemap config, or Supabase code unless the clean rerun still reproduces the failure.

@@ -27,27 +27,50 @@ export function ToolLeadGate({
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [warning, setWarning] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(event: React.FormEvent) {
     event.preventDefault();
     setError(null);
+    setWarning(null);
     setLoading(true);
     trackToolEvent("lead_gate_submitted", { toolSlug });
 
+    const pagePath =
+      typeof window !== "undefined" ? `${window.location.pathname}${window.location.search}` : undefined;
+    const referrer =
+      typeof document !== "undefined" && document.referrer.length > 0 ? document.referrer : undefined;
+    const searchParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+    const utmSource = searchParams?.get("utm_source") ?? undefined;
+    const utmMedium = searchParams?.get("utm_medium") ?? undefined;
+    const utmCampaign = searchParams?.get("utm_campaign") ?? undefined;
+
     try {
-      await submitToolLead({
+      const response = await submitToolLead({
         toolSlug,
         email,
         name: name || undefined,
         company: company || undefined,
         resultSummary,
+        source: "tool-result",
+        pagePath,
+        referrer,
+        utmSource,
+        utmMedium,
+        utmCampaign,
       });
+
+      if (response.mode === "live" && response.warnings.length > 0) {
+        setWarning("Saved. Notification may be delayed.");
+      }
       setSubmitted(true);
     } catch (submissionError) {
       setError(
-        submissionError instanceof Error ? submissionError.message : "Something went wrong. Please try again."
+        submissionError instanceof Error
+          ? submissionError.message
+          : "Could not save your result right now. Please try again."
       );
     } finally {
       setLoading(false);
@@ -59,6 +82,7 @@ export function ToolLeadGate({
       <div className="rounded-2xl border border-[#F05A28]/40 bg-[#13131A] p-6 text-[#F5F4F0]">
         <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#0FD9C8]">Sent</p>
         <p className="mt-3 text-base leading-7">{successMessage}</p>
+        {warning ? <p className="mt-2 text-xs text-[#F5F4F0]/58">{warning}</p> : null}
       </div>
     );
   }

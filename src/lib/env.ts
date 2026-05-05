@@ -25,6 +25,15 @@ export const appEnv = {
   nodeEnv: process.env.NODE_ENV ?? "development",
   vercelEnv: process.env.VERCEL_ENV,
   enableLiveIntegrations: readBooleanEnv("ENABLE_LIVE_INTEGRATIONS"),
+  commitSha: readOptionalEnv(
+    "SOURCE_COMMIT",
+    "COOLIFY_SOURCE_COMMIT",
+    "VERCEL_GIT_COMMIT_SHA",
+    "NEXT_PUBLIC_COMMIT_SHA",
+    "GIT_COMMIT_SHA"
+  ),
+  branch: readOptionalEnv("COOLIFY_BRANCH", "VERCEL_GIT_COMMIT_REF", "NEXT_PUBLIC_BRANCH"),
+  deployedAt: readOptionalEnv("DEPLOYED_AT", "NEXT_PUBLIC_DEPLOYED_AT", "VERCEL_DEPLOYMENT_CREATED_AT"),
   resendApiKey: readOptionalEnv("RESEND_API_KEY"),
   resendFromEmail: readOptionalEnv("RESEND_FROM_EMAIL") ?? "jacob@darlingmartech.com",
   contactToEmail: readOptionalEnv("CONTACT_TO_EMAIL") ?? "jacob@darlingmartech.com",

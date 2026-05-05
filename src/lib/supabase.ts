@@ -12,6 +12,22 @@ type ToolCompletionRecord = {
   submitted_at: string;
 };
 
+type ToolLeadRecord = {
+  tool_slug: string;
+  email: string;
+  name?: string | null;
+  company?: string | null;
+  role?: string | null;
+  result_summary?: Record<string, unknown> | null;
+  source?: string | null;
+  distinct_id?: string | null;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
+  referrer?: string | null;
+  page_path?: string | null;
+};
+
 /** Server-side client: prefers service role for writes, falls back to anon. */
 export function createSupabaseServerClient(): SupabaseClient {
   const supabaseKey = appEnv.supabaseServiceRoleKey ?? appEnv.supabaseAnonKey;
@@ -45,6 +61,20 @@ export function createSupabaseAnonReadClient(): SupabaseClient | null {
   });
 }
 
+export function createSupabaseServiceRoleClient(): SupabaseClient {
+  assertEnvPresent("Supabase service role", {
+    NEXT_PUBLIC_SUPABASE_URL: appEnv.supabaseUrl,
+    SUPABASE_SERVICE_ROLE_KEY: appEnv.supabaseServiceRoleKey,
+  });
+
+  return createClient(appEnv.supabaseUrl as string, appEnv.supabaseServiceRoleKey as string, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+}
+
 export async function insertToolCompletion(record: ToolCompletionRecord): Promise<{ id: string }> {
   const supabase = createSupabaseServerClient();
   const { data, error } = await supabase.from("tool_completions").insert(record).select("id").single();
@@ -54,6 +84,38 @@ export async function insertToolCompletion(record: ToolCompletionRecord): Promis
   }
   if (!data?.id) {
     throw new Error("Supabase insert did not return a row id.");
+  }
+
+  return { id: data.id as string };
+}
+
+export async function insertToolLead(record: ToolLeadRecord): Promise<{ id: string }> {
+  const supabase = createSupabaseServiceRoleClient();
+  const { data, error } = await supabase
+    .from("tool_leads")
+    .insert({
+      tool_slug: record.tool_slug,
+      email: record.email,
+      name: record.name ?? null,
+      company: record.company ?? null,
+      role: record.role ?? null,
+      result_summary: record.result_summary ?? null,
+      source: record.source ?? "site",
+      distinct_id: record.distinct_id ?? null,
+      utm_source: record.utm_source ?? null,
+      utm_medium: record.utm_medium ?? null,
+      utm_campaign: record.utm_campaign ?? null,
+      referrer: record.referrer ?? null,
+      page_path: record.page_path ?? null,
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Supabase lead insert failed: ${error.message}`);
+  }
+  if (!data?.id) {
+    throw new Error("Supabase lead insert did not return a row id.");
   }
 
   return { id: data.id as string };

@@ -123,6 +123,16 @@ export const HOMEPAGE_PROOF_VISUALS: HomepageProofVisual[] = [
     height: 1536,
   },
   {
+    publicId: "Gemini_Generated_Image_qn1c5kqn1c5kqn1c",
+    alt: "Supporting composite visual for conversion path repair narrative on the homepage proof card",
+    projectType: "conversion-path-repair",
+    proofSlug: "urgentcare-indy",
+    visualRole: "supporting-card-visual",
+    recommendedSection: "conversion-path-repair",
+    width: 1024,
+    height: 1024,
+  },
+  {
     publicId: "russell-paintinglocal-visability",
     alt: "Local visibility proof visual showing search presence reviews map visibility and service area trust signals",
     projectType: "local-growth-system",

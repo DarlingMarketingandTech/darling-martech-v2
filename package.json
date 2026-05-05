@@ -16,7 +16,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "verify": "pnpm lint && pnpm typecheck && pnpm build",
+    "validate:homepage-proof": "tsx scripts/validate-homepage-proof.ts",
+    "verify": "pnpm lint && pnpm typecheck && pnpm validate:homepage-proof && pnpm build",
     "postbuild": "next-sitemap"
   },
   "dependencies": {
@@ -61,6 +62,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.15",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

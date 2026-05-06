@@ -23,6 +23,10 @@ function isPrimaryNavActive(href: string, pathname: string | null): boolean {
 
 export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
   const pathname = usePathname();
+  const isHome = pathname === "/";
+  const primaryAction = isHome
+    ? { href: CTA_LINKS.startHere, label: CTA_LABELS.startHere }
+    : { href: cta.href, label: CTA_LABELS.bookCall };
 
   return (
     <AnimatePresence>
@@ -130,8 +134,8 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
               <p className="text-sm leading-6 text-[#F5F4F0]/62">
                 Strategy. Systems. Execution. One accountable operator.
               </p>
-              <Button href={cta.href} size="lg" className="w-full" onClick={onClose}>
-                {CTA_LABELS.bookCall}
+              <Button href={primaryAction.href} size="lg" className="w-full" onClick={onClose}>
+                {primaryAction.label}
               </Button>
             </div>
           </motion.div>

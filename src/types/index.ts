@@ -621,3 +621,115 @@ export interface SiteConfig {
   calComLink: string;
   defaultMeta: PageMeta;
 }
+
+export interface HomepageLink {
+  label: string;
+  href: string;
+}
+
+export interface HomepageHeroVisual {
+  publicId: string;
+  alt: string;
+  eyebrow: string;
+  title: string;
+  points: string[];
+}
+
+export interface HomepageHero {
+  eyebrow: string;
+  title: string;
+  body: string[];
+  primaryCta: HomepageLink;
+  secondaryCta: HomepageLink;
+  processItems: string[];
+  trustItems: string[];
+  visual: HomepageHeroVisual;
+}
+
+export interface HomepageBottleneckCard {
+  title: string;
+  body: string;
+  symptoms: string[];
+}
+
+export interface HomepageBottlenecks {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  cards: HomepageBottleneckCard[];
+}
+
+export interface HomepageCapabilityProof {
+  label: string;
+  metric: string;
+  detail: string;
+  href: string;
+  publicId: string;
+  alt: string;
+}
+
+export interface HomepageCapabilityCard {
+  title: string;
+  body: string;
+  href: string;
+  proof: HomepageCapabilityProof;
+}
+
+export interface HomepageCapabilities {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  cards: HomepageCapabilityCard[];
+}
+
+export interface HomepageOutcomeHighlight {
+  slug: string;
+  label: string;
+  detail: string;
+}
+
+export interface HomepageOutcomeFeature {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  featuredSlug: string;
+  featuredLabel: string;
+  featuredTitle: string;
+  featuredBody: string;
+  featuredCta: HomepageLink;
+  highlights: HomepageOutcomeHighlight[];
+}
+
+export interface HomepageToolPreview {
+  slug: string;
+  label: string;
+  body: string;
+  ctaLabel: string;
+}
+
+export interface HomepageToolsSection {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  primaryCta: HomepageLink;
+  secondaryCta: HomepageLink;
+  cards: HomepageToolPreview[];
+}
+
+export interface HomepageClosingCta {
+  eyebrow: string;
+  title: string;
+  body: string;
+  primaryCta: HomepageLink;
+  secondaryCta: HomepageLink;
+  tertiaryCta: HomepageLink;
+}
+
+export interface HomepageV4Data {
+  hero: HomepageHero;
+  bottlenecks: HomepageBottlenecks;
+  capabilities: HomepageCapabilities;
+  featuredOutcomes: HomepageOutcomeFeature;
+  tools: HomepageToolsSection;
+  closingCta: HomepageClosingCta;
+}

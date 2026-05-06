@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { siteNavigation } from "@/data/navigation";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/layout/MobileNav";
-import { CTA_LABELS } from "@/lib/cta";
+import { CTA_LABELS, CTA_LINKS } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
 function isPrimaryNavActive(href: string, pathname: string | null): boolean {
@@ -19,6 +19,10 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const isHome = pathname === "/";
+  const headerCta = isHome
+    ? { href: CTA_LINKS.startHere, label: CTA_LABELS.startHere }
+    : { href: siteNavigation.cta.href, label: CTA_LABELS.bookCall };
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 16);
@@ -78,8 +82,8 @@ export function SiteHeader() {
             </nav>
 
             <div className="flex shrink-0 items-center gap-2.5 md:gap-3">
-              <Button href={siteNavigation.cta.href} size="sm" className="hidden md:inline-flex">
-                {CTA_LABELS.bookCall}
+              <Button href={headerCta.href} size="sm" className="hidden md:inline-flex">
+                {headerCta.label}
               </Button>
               <button
                 type="button"

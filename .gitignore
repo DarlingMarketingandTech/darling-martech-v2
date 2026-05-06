@@ -1,9 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+node_modules/
+.pnp/
 .pnp.*
+.pnpm-store/
+
+# yarn
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -11,49 +14,63 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage/
 
 # next.js
-/.next/
-/out/
+.next/
+out/
 
-# production
-/build
+# production builds
+build/
+dist/
+
+# cache folders
+.turbo/
+.vercel/
 
 # misc
 .DS_Store
 *.pem
 
-# debug
+# debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 !.env.example
-
-# vercel
-.vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated sitemap files
+public/sitemap*.xml
+public/robots.txt
 
 # agent-system runtime state
 agent-system/memory/task_state.json
 agent-system/memory/session_state.json
 agent-system/memory/recent_decisions.json
 agent-system/last-run-report.json
-public/sitemap.xml
-public/sitemap-0.xml
 
 # local research/scrape artifacts
 .firecrawl/
 
-# local agent / IDE plugin caches (do not commit)
+# local agent / IDE plugin caches
 .claude/
 .codex-home/
 .codex-tmp/
 .playwright-mcp/
+
+# editor folders
+.vscode/*
+!.vscode/extensions.json
+.idea/

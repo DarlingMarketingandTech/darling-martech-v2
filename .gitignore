@@ -70,7 +70,13 @@ agent-system/last-run-report.json
 .codex-tmp/
 .playwright-mcp/
 
+# Cursor/agent skills vendored locally (sync lock + skill trees — not for remote repo or production)
+.agents/skills/
+skills-lock.json
+
 # editor folders
 .vscode/*
 !.vscode/extensions.json
 .idea/
+# Local Cursor/editor debug logs
+.cursor/*.log

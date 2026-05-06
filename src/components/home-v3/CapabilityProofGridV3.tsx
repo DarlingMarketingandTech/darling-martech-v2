@@ -27,7 +27,7 @@ export function CapabilityProofGridV3() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-3">
+      <div className="mt-10 grid gap-5 md:grid-cols-3">
         {capabilities.cards.map((card) => (
           <motion.article
             key={card.id}
@@ -35,7 +35,7 @@ export function CapabilityProofGridV3() {
             transition={{ duration: 0.18 }}
           >
             <SectionSurface className="group h-full overflow-hidden">
-              <div className="relative h-48 overflow-hidden border-b border-foreground/10">
+              <div className="relative h-48 overflow-hidden border-b border-border-subtle">
                 <CloudinaryProofImage
                   publicId={card.proof.publicId}
                   alt={card.proof.alt}
@@ -55,7 +55,7 @@ export function CapabilityProofGridV3() {
                   {card.body}
                 </p>
 
-                <div className="mt-5 rounded-2xl border border-foreground/10 bg-foreground/3 p-4 transition-colors md:opacity-85 md:group-hover:opacity-100">
+                <div className="mt-5 rounded-2xl border border-border-subtle bg-surface-muted p-4 transition-colors md:opacity-85 md:group-hover:opacity-100">
                   <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-signal">
                     {card.proof.label}
                   </p>

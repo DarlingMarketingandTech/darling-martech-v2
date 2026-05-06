@@ -1,5 +1,22 @@
 import posthog from "posthog-js";
 
+export const CLIENT_ANALYTICS_EVENTS = [
+  "hero_cta_clicked",
+  "capability_card_clicked",
+  "proof_card_clicked",
+  "contact_form_submitted",
+  "tool_quiz_started",
+  "tool_completed",
+  "quiz_completed",
+  "geo_audit_completed",
+  "geo_audit_report_requested",
+  "closing_cta_clicked",
+] as const;
+
+export type ClientAnalyticsEvent = (typeof CLIENT_ANALYTICS_EVENTS)[number];
+
+const clientAnalyticsEventSet = new Set<string>(CLIENT_ANALYTICS_EVENTS);
+
 let posthogClientInitialized = false;
 
 export function ensurePosthogClientInitialized(): boolean {
@@ -24,12 +41,16 @@ export function ensurePosthogClientInitialized(): boolean {
   return true;
 }
 
-export function captureClientEvent(event: string, properties?: Record<string, unknown>) {
+export function captureClientEvent(event: ClientAnalyticsEvent, properties?: Record<string, unknown>) {
   if (!ensurePosthogClientInitialized()) {
     return;
   }
 
   try {
+    if (!clientAnalyticsEventSet.has(event)) {
+      return;
+    }
+
     posthog.capture(event, properties);
   } catch {
     // ignore capture failures

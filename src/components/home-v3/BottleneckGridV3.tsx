@@ -19,7 +19,7 @@ export function BottleneckGridV3() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-4 lg:grid-cols-3">
+      <div className="mt-10 grid gap-5 lg:grid-cols-3">
         {bottlenecks.cards.map((card) => (
           <SectionSurface key={card.title} className="p-6">
             <h3 className="max-w-[18ch] font-syne text-2xl leading-tight text-foreground">
@@ -29,7 +29,7 @@ export function BottleneckGridV3() {
               {card.body}
             </p>
 
-            <ul className="mt-6 space-y-3 border-t border-foreground/10 pt-5 text-sm text-body-muted">
+            <ul className="mt-6 space-y-3 border-t border-border-subtle pt-5 text-sm text-body-muted">
               {card.symptoms.map((symptom) => (
                 <li key={symptom} className="flex gap-3">
                   <span className="mt-2 size-1.5 shrink-0 rounded-full bg-brand" />

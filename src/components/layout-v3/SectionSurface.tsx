@@ -11,7 +11,7 @@ export function SectionSurface({ children, className }: SectionSurfaceProps) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-foreground/8 bg-surface",
+        "relative overflow-hidden rounded-2xl border border-border-subtle bg-surface",
         className
       )}
     >

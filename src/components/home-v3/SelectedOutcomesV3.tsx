@@ -36,10 +36,10 @@ export function SelectedOutcomesV3() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-4 xl:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)]">
+      <div className="mt-10 grid gap-5 xl:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)]">
         <SectionSurface className="overflow-hidden">
           <div className="grid gap-0 lg:grid-cols-[minmax(260px,0.9fr)_minmax(0,1.1fr)]">
-            <div className="relative min-h-[260px] overflow-hidden border-b border-foreground/10 lg:border-b-0 lg:border-r">
+            <div className="relative min-h-[260px] overflow-hidden border-b border-border-subtle lg:border-b-0 lg:border-r">
               <CloudinaryImage
                 publicId={featuredVisual}
                 alt={featuredStudy.proofDetailHeroAlt ?? featuredStudy.title}
@@ -64,7 +64,7 @@ export function SelectedOutcomesV3() {
               </p>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-foreground/10 bg-foreground/3 p-4">
+                <div className="rounded-2xl border border-border-subtle bg-surface-muted p-4">
                   <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-foreground/50">
                     Primary result
                   </p>
@@ -73,7 +73,7 @@ export function SelectedOutcomesV3() {
                   </p>
                   <p className="mt-2 text-sm text-body-muted">{featuredStudy.primaryMetric.label}</p>
                 </div>
-                <div className="rounded-2xl border border-foreground/10 bg-foreground/3 p-4">
+                <div className="rounded-2xl border border-border-subtle bg-surface-muted p-4">
                   <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-foreground/50">
                     Commercial shift
                   </p>
@@ -101,7 +101,7 @@ export function SelectedOutcomesV3() {
           </div>
         </SectionSurface>
 
-        <div className="grid gap-4">
+        <div className="grid gap-5">
           {featuredOutcomes.highlights.map((highlight) => {
             const study = studyBySlug.get(highlight.slug);
             if (!study) {

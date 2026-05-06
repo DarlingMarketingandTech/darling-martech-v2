@@ -11,7 +11,13 @@
   --color-surface: var(--surface-base);
   --surface-strong-base: #18181f;
   --color-surface-strong: var(--surface-strong-base);
+  /* Inset panel tint inside cards — equivalent to bg-foreground/3 */
+  --surface-muted-base: rgba(245, 244, 240, 0.03);
+  --color-surface-muted: var(--surface-muted-base);
   --color-border: #2a2a2e;
+  /* Hairline border inside cards — equivalent to border-foreground/10 */
+  --border-subtle-base: rgba(245, 244, 240, 0.10);
+  --color-border-subtle: var(--border-subtle-base);
   --color-orange: #f05a28;
   --color-offwhite: #f5f4f0;
   --color-teal: #0fd9c8;
@@ -66,6 +72,8 @@
   /* Darling semantic palette (Tailwind: bg-surface, text-signal, text-brand, text-body-muted) */
   --color-surface: var(--surface-base);
   --color-surface-strong: var(--surface-strong-base);
+  --color-surface-muted: var(--surface-muted-base);
+  --color-border-subtle: var(--border-subtle-base);
   --color-signal: var(--color-teal);
   --color-brand: var(--color-orange);
   --color-body-muted: var(--body-muted-base);

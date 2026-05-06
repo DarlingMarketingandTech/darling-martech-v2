@@ -6,17 +6,25 @@
 - New page composer: `src/components/home-v3/HomeV3.tsx`
 - New sections:
   - `HeroV3`
-  - `ProofTickerV3`
-  - `ProblemGridV3`
-  - `DiagnosticBandV3`
-  - `ProcessColumnsV3`
-  - `ProofStripV3`
-  - `OwnerStatementV3`
   - `ToolsPreviewV3`
   - `ClosingCtaV3`
 - New primitives:
   - Motion: `src/components/motion/*`
   - Layout: `src/components/layout-v3/BleedSection.tsx`, `src/components/layout-v3/GlassPanel.tsx`
+
+## Deprecated modules
+
+The following draft sections were removed from the active tree and should not be re-imported into `HomeV3`:
+
+- `ProofTickerV3`
+- `ProblemGridV3`
+- `DiagnosticBandV3`
+- `ProcessColumnsV3`
+- `ProofStripV3`
+- `OwnerStatementV3`
+- `FeaturedTransformationV3`
+- `WhatThisCanIncludeV3`
+- `ProjectTypeProofV3`
 
 ## Verification run
 

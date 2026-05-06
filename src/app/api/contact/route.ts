@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getRequestId, logApiEvent, runLoggedStep } from "@/lib/api-logging";
 import { appEnv } from "@/lib/env";
 import { sendToN8n } from "@/lib/n8n";
 import { asOptionalString, isJsonRecord, isValidEmail, normalizeEmail, type JsonRecord } from "@/lib/request-utils";
@@ -15,15 +16,6 @@ type ContactSubmission = {
   problemCluster?: string;
   source?: string;
 };
-
-async function runStep(label: string, action: () => Promise<void>, warnings: string[]) {
-  try {
-    await action();
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown integration error";
-    warnings.push(`${label}: ${message}`);
-  }
-}
 
 function buildAttributionSnapshotSubmission(payload: JsonRecord): ContactSubmission | null {
   const email = asOptionalString(payload.email);
@@ -55,16 +47,24 @@ function buildAttributionSnapshotSubmission(payload: JsonRecord): ContactSubmiss
 }
 
 export async function POST(request: Request) {
+  const requestId = getRequestId(request);
   let payload: unknown;
+
+  logApiEvent("api/contact", requestId, "request_received");
 
   try {
     payload = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "Request body must be valid JSON." }, { status: 400 });
+    logApiEvent("api/contact", requestId, "invalid_json", {}, "warn");
+    return NextResponse.json({ ok: false, requestId, error: "Request body must be valid JSON." }, { status: 400 });
   }
 
   if (!isJsonRecord(payload)) {
-    return NextResponse.json({ ok: false, error: "Request body must be a JSON object." }, { status: 400 });
+    logApiEvent("api/contact", requestId, "invalid_shape", { reason: "not_json_object" }, "warn");
+    return NextResponse.json(
+      { ok: false, requestId, error: "Request body must be a JSON object." },
+      { status: 400 }
+    );
   }
 
   const source = asOptionalString(payload.source);
@@ -74,7 +74,11 @@ export async function POST(request: Request) {
   if (source === "attribution-snapshot") {
     const built = buildAttributionSnapshotSubmission(payload);
     if (!built) {
-      return NextResponse.json({ ok: false, error: "A valid email address is required." }, { status: 400 });
+      logApiEvent("api/contact", requestId, "validation_failed", { source, field: "email" }, "warn");
+      return NextResponse.json(
+        { ok: false, requestId, error: "A valid email address is required." },
+        { status: 400 }
+      );
     }
     submission = built;
   } else {
@@ -85,14 +89,25 @@ export async function POST(request: Request) {
     const intent = asOptionalString(payload.intent);
 
     if (!name || !email || !message) {
+      logApiEvent("api/contact", requestId, "validation_failed", {
+        fields: ["name", "email", "message"].filter((field) => {
+          if (field === "name") return !name;
+          if (field === "email") return !email;
+          return !message;
+        }),
+      }, "warn");
       return NextResponse.json(
-        { ok: false, error: "Fields `name`, `email`, and `message` are required." },
+        { ok: false, requestId, error: "Fields `name`, `email`, and `message` are required." },
         { status: 400 }
       );
     }
 
     if (!isValidEmail(email)) {
-      return NextResponse.json({ ok: false, error: "A valid email address is required." }, { status: 400 });
+      logApiEvent("api/contact", requestId, "validation_failed", { field: "email" }, "warn");
+      return NextResponse.json(
+        { ok: false, requestId, error: "A valid email address is required." },
+        { status: 400 }
+      );
     }
 
     submission = {
@@ -105,10 +120,12 @@ export async function POST(request: Request) {
   }
 
   if (!appEnv.enableLiveIntegrations) {
+    logApiEvent("api/contact", requestId, "mock_response", { source: submission.source ?? "contact-form" });
     return NextResponse.json(
       {
         ok: true,
         mode: "mock",
+        requestId,
         submission,
         message: "Live integrations are disabled. No external services were called.",
       },
@@ -118,7 +135,9 @@ export async function POST(request: Request) {
 
   const warnings: string[] = [];
 
-  await runStep(
+  await runLoggedStep(
+    "api/contact",
+    requestId,
     "resend",
     async () => {
       await sendContactNotification({
@@ -133,7 +152,9 @@ export async function POST(request: Request) {
     warnings
   );
 
-  await runStep(
+  await runLoggedStep(
+    "api/contact",
+    requestId,
     "n8n",
     async () => {
       await sendToN8n("contact", submission as Record<string, unknown>);
@@ -142,13 +163,16 @@ export async function POST(request: Request) {
   );
 
   if (warnings.length === 2) {
-    return NextResponse.json({ ok: false, mode: "live", warnings }, { status: 502 });
+    logApiEvent("api/contact", requestId, "live_failed", { warnings }, "error");
+    return NextResponse.json({ ok: false, mode: "live", requestId, warnings }, { status: 502 });
   }
 
+  logApiEvent("api/contact", requestId, "live_success", { warnings });
   return NextResponse.json(
     {
       ok: true,
       mode: "live",
+      requestId,
       warnings,
     },
     { status: 200 }

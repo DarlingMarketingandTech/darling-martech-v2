@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getRequestId, logApiEvent } from "@/lib/api-logging";
 import { appEnv } from "@/lib/env";
 import {
   asOptionalString,
@@ -12,20 +13,25 @@ import { insertToolLead } from "@/lib/supabase";
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
+  const requestId = getRequestId(request);
   let payload: unknown;
+
+  logApiEvent("api/tool-leads", requestId, "request_received");
 
   try {
     payload = await request.json();
   } catch {
+    logApiEvent("api/tool-leads", requestId, "invalid_json", {}, "warn");
     return NextResponse.json(
-      { ok: false, error: "Request body must be valid JSON." },
+      { ok: false, requestId, error: "Request body must be valid JSON." },
       { status: 400 }
     );
   }
 
   if (!isJsonRecord(payload)) {
+    logApiEvent("api/tool-leads", requestId, "invalid_shape", { reason: "not_json_object" }, "warn");
     return NextResponse.json(
-      { ok: false, error: "Request body must be a JSON object." },
+      { ok: false, requestId, error: "Request body must be a JSON object." },
       { status: 400 }
     );
   }
@@ -34,23 +40,28 @@ export async function POST(request: Request) {
   const toolSlug = asOptionalString(payload.toolSlug);
 
   if (!email || !toolSlug) {
+    logApiEvent("api/tool-leads", requestId, "validation_failed", {
+      missing: ["email", "toolSlug"].filter((field) => (field === "email" ? !email : !toolSlug)),
+    }, "warn");
     return NextResponse.json(
-      { ok: false, error: "Fields `email` and `toolSlug` are required." },
+      { ok: false, requestId, error: "Fields `email` and `toolSlug` are required." },
       { status: 400 }
     );
   }
 
   if (!isValidEmail(email)) {
+    logApiEvent("api/tool-leads", requestId, "validation_failed", { field: "email" }, "warn");
     return NextResponse.json(
-      { ok: false, error: "A valid email address is required." },
+      { ok: false, requestId, error: "A valid email address is required." },
       { status: 400 }
     );
   }
 
   const resultSummaryValue = payload.resultSummary;
   if (resultSummaryValue !== undefined && !isJsonRecord(resultSummaryValue)) {
+    logApiEvent("api/tool-leads", requestId, "validation_failed", { field: "resultSummary" }, "warn");
     return NextResponse.json(
-      { ok: false, error: "Field `resultSummary` must be a JSON object when provided." },
+      { ok: false, requestId, error: "Field `resultSummary` must be a JSON object when provided." },
       { status: 400 }
     );
   }
@@ -86,10 +97,12 @@ export async function POST(request: Request) {
   };
 
   if (!appEnv.enableLiveIntegrations) {
+    logApiEvent("api/tool-leads", requestId, "mock_response", { toolSlug: lead.tool_slug });
     return NextResponse.json(
       {
         ok: true,
         mode: "mock",
+        requestId,
         toolSlug: lead.tool_slug,
       },
       { status: 200 }
@@ -99,6 +112,7 @@ export async function POST(request: Request) {
   try {
     const saved = await insertToolLead(lead);
     const warnings: string[] = [];
+    logApiEvent("api/tool-leads", requestId, "lead_saved", { leadId: saved.id, toolSlug: lead.tool_slug });
 
     try {
       await sendToolLeadNotification({
@@ -117,8 +131,16 @@ export async function POST(request: Request) {
         utmCampaign: lead.utm_campaign,
         resultSummary: lead.result_summary ?? null,
       });
+      logApiEvent("api/tool-leads", requestId, "notification_sent", { leadId: saved.id, toolSlug: lead.tool_slug });
     } catch (error) {
-      console.error("Tool lead notification failed", error);
+      const message = error instanceof Error ? error.message : "Unknown integration error";
+      logApiEvent(
+        "api/tool-leads",
+        requestId,
+        "notification_failed",
+        { leadId: saved.id, toolSlug: lead.tool_slug, error: message },
+        "warn"
+      );
       warnings.push("Lead saved, but notification email could not be sent.");
     }
 
@@ -126,6 +148,7 @@ export async function POST(request: Request) {
       {
         ok: true,
         mode: "live",
+        requestId,
         leadId: saved.id,
         warnings,
       },
@@ -133,6 +156,7 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Supabase error.";
-    return NextResponse.json({ ok: false, error: message }, { status: 502 });
+    logApiEvent("api/tool-leads", requestId, "insert_failed", { error: message }, "error");
+    return NextResponse.json({ ok: false, requestId, error: message }, { status: 502 });
   }
 }

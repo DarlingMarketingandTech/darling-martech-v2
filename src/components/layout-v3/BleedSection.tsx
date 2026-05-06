@@ -25,8 +25,8 @@ export function BleedSection({
       id={id}
       className={cn(
         "w-full",
-        tone === "dark" && "bg-[#0C0C0E]",
-        tone === "orange" && "bg-[#F05A28]",
+        tone === "dark" && "bg-background",
+        tone === "orange" && "bg-brand",
         tone === "metal" &&
           "bg-[linear-gradient(180deg,rgba(20,21,24,1)_0%,rgba(15,16,19,1)_58%,rgba(12,12,14,1)_100%)]",
         className

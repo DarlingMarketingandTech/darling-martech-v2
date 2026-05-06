@@ -13,16 +13,16 @@ export function ClosingCtaV3() {
 
   return (
     <BleedSection className="py-16 md:py-20 lg:py-24">
-      <GlassPanel className="border-[#F5F4F0]/10 bg-[linear-gradient(180deg,rgba(245,244,240,0.035),rgba(240,90,40,0.04))] p-6 md:p-8 lg:p-10">
+      <GlassPanel className="border-foreground/10 bg-[linear-gradient(180deg,rgba(245,244,240,0.035),rgba(240,90,40,0.04))] p-6 md:p-8 lg:p-10">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div className="max-w-3xl">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[#0FD9C8]">
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-signal">
               {closingCta.eyebrow}
             </p>
-            <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-[#F5F4F0] md:text-5xl">
+            <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-foreground md:text-5xl">
               {closingCta.title}
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#F5F4F0]/72 md:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-body-muted md:text-lg">
               {closingCta.body}
             </p>
           </div>
@@ -52,10 +52,10 @@ export function ClosingCtaV3() {
           </div>
         </div>
 
-        <div className="mt-6 border-t border-[#F5F4F0]/10 pt-5">
+        <div className="mt-6 border-t border-foreground/10 pt-5">
           <Link
             href={closingCta.tertiaryCta.href}
-            className="inline-flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-[#F05A28]"
+            className="inline-flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-brand"
             onClick={() =>
               captureClientEvent("closing_cta_clicked", { cta: "tertiary", href: closingCta.tertiaryCta.href })
             }

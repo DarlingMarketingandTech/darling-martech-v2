@@ -16,7 +16,7 @@ type HomeShellProps = {
  */
 export function HomeShell({ children, hideNewsletterSignup = false }: HomeShellProps) {
   return (
-    <div className="page-atmosphere relative isolate min-h-screen bg-[#0C0C0E] text-[#F5F4F0]">
+    <div className="page-atmosphere relative isolate min-h-screen bg-background text-foreground">
       <SiteHeader />
       <main id="main-content" className="relative z-10 flex flex-1 flex-col">
         {children}

@@ -7,7 +7,7 @@ import { captureClientEvent } from "@/lib/posthog";
 import { caseStudies } from "@/data/work/work-index";
 import { getProofDetailHeroPublicId } from "@/data/proof-visuals";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
-import { GlassPanel } from "@/components/layout-v3/GlassPanel";
+import { SectionSurface } from "@/components/layout-v3/SectionSurface";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 
 const studyBySlug = new Map(caseStudies.map((study) => [study.slug, study] as const));
@@ -25,21 +25,21 @@ export function SelectedOutcomesV3() {
   return (
     <BleedSection className="py-16 md:py-20 lg:py-24">
       <div className="max-w-3xl">
-        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[#0FD9C8]">
+        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-signal">
           {featuredOutcomes.eyebrow}
         </p>
-        <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-[#F5F4F0] md:text-5xl">
+        <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-foreground md:text-5xl">
           {featuredOutcomes.title}
         </h2>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#F5F4F0]/72 md:text-lg">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-body-muted md:text-lg">
           {featuredOutcomes.intro}
         </p>
       </div>
 
       <div className="mt-10 grid gap-4 xl:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)]">
-        <GlassPanel className="overflow-hidden border-[#F5F4F0]/10 bg-[linear-gradient(180deg,rgba(245,244,240,0.025),rgba(245,244,240,0.015))]">
+        <SectionSurface className="overflow-hidden">
           <div className="grid gap-0 lg:grid-cols-[minmax(260px,0.9fr)_minmax(0,1.1fr)]">
-            <div className="relative min-h-[260px] overflow-hidden border-b border-[#F5F4F0]/10 lg:border-b-0 lg:border-r">
+            <div className="relative min-h-[260px] overflow-hidden border-b border-foreground/10 lg:border-b-0 lg:border-r">
               <CloudinaryImage
                 publicId={featuredVisual}
                 alt={featuredStudy.proofDetailHeroAlt ?? featuredStudy.title}
@@ -53,31 +53,31 @@ export function SelectedOutcomesV3() {
             </div>
 
             <div className="p-6 md:p-7">
-              <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-[#0FD9C8]">
+              <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-signal">
                 {featuredOutcomes.featuredLabel}
               </p>
-              <h3 className="mt-3 max-w-[18ch] font-syne text-3xl leading-tight text-[#F5F4F0]">
+              <h3 className="mt-3 max-w-[18ch] font-syne text-3xl leading-tight text-foreground">
                 {featuredOutcomes.featuredTitle}
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-[#F5F4F0]/70 md:text-[0.95rem]">
+              <p className="mt-4 text-sm leading-relaxed text-body-muted md:text-[0.95rem]">
                 {featuredOutcomes.featuredBody}
               </p>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-[#F5F4F0]/10 bg-[#F5F4F0]/[0.03] p-4">
-                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-[#F5F4F0]/50">
+                <div className="rounded-2xl border border-foreground/10 bg-foreground/3 p-4">
+                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-foreground/50">
                     Primary result
                   </p>
-                  <p className="mt-2 font-syne text-3xl leading-none text-[#F5F4F0]">
+                  <p className="mt-2 font-syne text-3xl leading-none text-foreground">
                     {featuredStudy.primaryMetric.value}
                   </p>
-                  <p className="mt-2 text-sm text-[#F5F4F0]/66">{featuredStudy.primaryMetric.label}</p>
+                  <p className="mt-2 text-sm text-body-muted">{featuredStudy.primaryMetric.label}</p>
                 </div>
-                <div className="rounded-2xl border border-[#F5F4F0]/10 bg-[#F5F4F0]/[0.03] p-4">
-                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-[#F5F4F0]/50">
+                <div className="rounded-2xl border border-foreground/10 bg-foreground/3 p-4">
+                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-foreground/50">
                     Commercial shift
                   </p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/72">
+                  <p className="mt-2 text-sm leading-relaxed text-body-muted">
                     {featuredStudy.resultSummary}
                   </p>
                 </div>
@@ -85,7 +85,7 @@ export function SelectedOutcomesV3() {
 
               <Link
                 href={featuredOutcomes.featuredCta.href}
-                className="mt-6 inline-flex items-center gap-2 text-sm text-[#F5F4F0]"
+                className="mt-6 inline-flex items-center gap-2 text-sm text-foreground"
                 onClick={() =>
                   captureClientEvent("proof_card_clicked", {
                     slug: featuredOutcomes.featuredSlug,
@@ -99,7 +99,7 @@ export function SelectedOutcomesV3() {
               </Link>
             </div>
           </div>
-        </GlassPanel>
+        </SectionSurface>
 
         <div className="grid gap-4">
           {featuredOutcomes.highlights.map((highlight) => {
@@ -121,20 +121,20 @@ export function SelectedOutcomesV3() {
                   })
                 }
               >
-                <GlassPanel className="h-full border-[#F5F4F0]/10 bg-[linear-gradient(180deg,rgba(245,244,240,0.025),rgba(245,244,240,0.015))] p-5 transition-transform duration-200 group-hover:-translate-y-1">
-                  <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-[#0FD9C8]">
+                <SectionSurface className="h-full p-5 transition-transform duration-200 group-hover:-translate-y-1">
+                  <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-signal">
                     {highlight.label}
                   </p>
-                  <p className="mt-3 font-syne text-3xl leading-none text-[#F5F4F0]">
+                  <p className="mt-3 font-syne text-3xl leading-none text-foreground">
                     {study.primaryMetric.value}
                   </p>
-                  <p className="mt-1 text-sm text-[#F5F4F0]/60">{study.primaryMetric.label}</p>
-                  <p className="mt-4 text-sm leading-relaxed text-[#F5F4F0]/70">{highlight.detail}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm text-[#F5F4F0]">
+                  <p className="mt-1 text-sm text-foreground/60">{study.primaryMetric.label}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-body-muted">{highlight.detail}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm text-foreground">
                     View proof
                     <ArrowUpRight className="size-4" />
                   </span>
-                </GlassPanel>
+                </SectionSurface>
               </Link>
             );
           })}

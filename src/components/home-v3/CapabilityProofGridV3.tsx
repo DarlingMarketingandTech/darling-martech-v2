@@ -6,7 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { homepageV4Data } from "@/data/homepage";
 import { captureClientEvent } from "@/lib/posthog";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
-import { GlassPanel } from "@/components/layout-v3/GlassPanel";
+import { SectionSurface } from "@/components/layout-v3/SectionSurface";
 import { CloudinaryProofImage } from "@/components/ui/CloudinaryProofImage";
 
 export function CapabilityProofGridV3() {
@@ -16,13 +16,13 @@ export function CapabilityProofGridV3() {
   return (
     <BleedSection className="py-16 md:py-20 lg:py-24">
       <div className="max-w-3xl">
-        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[#0FD9C8]">
+        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-signal">
           {capabilities.eyebrow}
         </p>
-        <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-[#F5F4F0] md:text-5xl">
+        <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-foreground md:text-5xl">
           {capabilities.title}
         </h2>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#F5F4F0]/72 md:text-lg">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-body-muted md:text-lg">
           {capabilities.intro}
         </p>
       </div>
@@ -34,8 +34,8 @@ export function CapabilityProofGridV3() {
             whileHover={prefersReducedMotion ? undefined : { y: -4 }}
             transition={{ duration: 0.18 }}
           >
-            <GlassPanel className="group h-full overflow-hidden border-[#F5F4F0]/10 bg-[linear-gradient(180deg,rgba(245,244,240,0.025),rgba(245,244,240,0.015))]">
-              <div className="relative h-48 overflow-hidden border-b border-[#F5F4F0]/10">
+            <SectionSurface className="group h-full overflow-hidden">
+              <div className="relative h-48 overflow-hidden border-b border-foreground/10">
                 <CloudinaryProofImage
                   publicId={card.proof.publicId}
                   alt={card.proof.alt}
@@ -48,26 +48,26 @@ export function CapabilityProofGridV3() {
               </div>
 
               <div className="flex h-[calc(100%-12rem)] flex-col p-6">
-                <h3 className="font-syne text-[1.65rem] leading-tight text-[#F5F4F0]">
+                <h3 className="font-syne text-[1.65rem] leading-tight text-foreground">
                   {card.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#F5F4F0]/68 md:text-[0.95rem]">
+                <p className="mt-3 text-sm leading-relaxed text-body-muted md:text-[0.95rem]">
                   {card.body}
                 </p>
 
-                <div className="mt-5 rounded-2xl border border-[#F5F4F0]/10 bg-[#F5F4F0]/[0.03] p-4 transition-colors md:opacity-85 md:group-hover:opacity-100">
-                  <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-[#0FD9C8]">
+                <div className="mt-5 rounded-2xl border border-foreground/10 bg-foreground/3 p-4 transition-colors md:opacity-85 md:group-hover:opacity-100">
+                  <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-signal">
                     {card.proof.label}
                   </p>
-                  <p className="mt-2 font-syne text-xl leading-tight text-[#F5F4F0]">
+                  <p className="mt-2 font-syne text-xl leading-tight text-foreground">
                     {card.proof.metric}
                   </p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#F5F4F0]/66">
+                  <p className="mt-2 text-sm leading-relaxed text-body-muted">
                     {card.proof.detail}
                   </p>
                   <Link
                     href={card.proof.href}
-                    className="mt-4 inline-flex items-center gap-1.5 text-sm text-[#F5F4F0]"
+                    className="mt-4 inline-flex items-center gap-1.5 text-sm text-foreground"
                     onClick={() =>
                       captureClientEvent("capability_card_clicked", {
                         capability_id: card.id,
@@ -85,7 +85,7 @@ export function CapabilityProofGridV3() {
                 <div className="mt-auto pt-5">
                   <Link
                     href={card.href}
-                    className="inline-flex items-center gap-2 text-sm text-[#F5F4F0]/88"
+                    className="inline-flex items-center gap-2 text-sm text-foreground/88"
                     onClick={() =>
                       captureClientEvent("capability_card_clicked", {
                         capability_id: card.id,
@@ -100,7 +100,7 @@ export function CapabilityProofGridV3() {
                   </Link>
                 </div>
               </div>
-            </GlassPanel>
+            </SectionSurface>
           </motion.article>
         ))}
       </div>

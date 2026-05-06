@@ -72,7 +72,7 @@ export function DiagnosticBandV3() {
         <Button
           href={data.cta.href}
           size="lg"
-          className="group gap-2 border-0 bg-white text-[#F05A28] shadow-[0_20px_50px_rgba(0,0,0,0.25)] hover:bg-white/95 hover:text-[#F05A28]"
+          className="group gap-2 border-0 bg-white text-brand shadow-[0_20px_50px_rgba(0,0,0,0.25)] hover:bg-white/95 hover:text-brand"
         >
           {data.cta.label}
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

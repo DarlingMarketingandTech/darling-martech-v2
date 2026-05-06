@@ -29,6 +29,9 @@
     },
     "firecrawl": {
       "enabled": true
+    },
+    "hex": {
+      "enabled": true
     }
   }
 }

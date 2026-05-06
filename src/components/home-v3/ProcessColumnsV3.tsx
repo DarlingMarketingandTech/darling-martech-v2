@@ -12,7 +12,7 @@ export function ProcessColumnsV3() {
   return (
     <BleedSection
       tone="metal"
-      className="relative overflow-hidden border-y border-[#F5F4F0]/8 py-20 md:py-28"
+      className="relative overflow-hidden border-y border-foreground/8 py-20 md:py-28"
     >
       {/* Background grid texture */}
       <div
@@ -32,13 +32,13 @@ export function ProcessColumnsV3() {
       />
 
       <div className="relative mb-12 max-w-3xl">
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#0FD9C8]/80">
+        <p className="font-mono text-xs uppercase tracking-[0.22em] text-signal/80">
           {processSection.eyebrow}
         </p>
-        <h2 className="mt-3 font-syne text-3xl leading-[1.05] tracking-[-0.02em] text-[#F5F4F0] md:text-5xl">
+        <h2 className="mt-3 font-syne text-3xl leading-[1.05] tracking-[-0.02em] text-foreground md:text-5xl">
           {processSection.headline}
         </h2>
-        <p className="mt-4 text-base leading-relaxed text-[#F5F4F0]/72 md:text-lg">
+        <p className="mt-4 text-base leading-relaxed text-body-muted md:text-lg">
           {processSection.body}
         </p>
       </div>
@@ -56,7 +56,7 @@ export function ProcessColumnsV3() {
         {!prefersReducedMotion ? (
           <motion.div
             aria-hidden
-            className="absolute top-[40px] hidden h-2.5 w-2.5 rounded-full bg-[#F05A28] shadow-[0_0_28px_rgba(240,90,40,0.85)] md:block"
+            className="absolute top-[40px] hidden h-2.5 w-2.5 rounded-full bg-brand shadow-[0_0_28px_rgba(240,90,40,0.85)] md:block"
             initial={{ left: "-2%" }}
             animate={{ left: ["-2%", "100%"] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
@@ -68,26 +68,26 @@ export function ProcessColumnsV3() {
             <RevealItem key={column.number} className="relative">
               {/* Numbered node */}
               <div className="relative z-10 flex items-center gap-4">
-                <div className="relative inline-flex h-[88px] w-[88px] shrink-0 items-center justify-center rounded-2xl border border-[#F05A28]/30 bg-[#0F1012]/85 font-mono text-3xl font-medium text-[#F05A28] shadow-[inset_0_1px_0_rgba(245,244,240,0.06),0_20px_40px_rgba(0,0,0,0.4)] backdrop-blur">
+                <div className="relative inline-flex h-[88px] w-[88px] shrink-0 items-center justify-center rounded-2xl border border-brand/30 bg-surface-strong/85 font-mono text-3xl font-medium text-brand shadow-[inset_0_1px_0_rgba(245,244,240,0.06),0_20px_40px_rgba(0,0,0,0.4)] backdrop-blur">
                   {column.number}
                   <span className="absolute -inset-px rounded-2xl bg-[radial-gradient(60%_60%_at_50%_50%,rgba(240,90,40,0.25)_0%,rgba(240,90,40,0)_70%)] opacity-70" />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[#F5F4F0]/52">
+                  <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-foreground/52">
                     Step 0{index + 1}
                   </span>
-                  <h3 className="font-syne text-2xl leading-tight text-[#F5F4F0] md:text-[1.7rem]">
+                  <h3 className="font-syne text-2xl leading-tight text-foreground md:text-[1.7rem]">
                     {column.title}
                   </h3>
                 </div>
               </div>
-              <p className="mt-5 max-w-md text-sm leading-relaxed text-[#F5F4F0]/68 md:text-[0.95rem]">
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-body-muted md:text-[0.95rem]">
                 {column.body}
               </p>
 
               {/* Decorative micro-bracket */}
-              <div className="mt-6 flex items-center gap-3 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[#F5F4F0]/36">
-                <span className="h-px w-10 bg-[#F5F4F0]/14" />
+              <div className="mt-6 flex items-center gap-3 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-foreground/36">
+                <span className="h-px w-10 bg-foreground/14" />
                 <span>{`system_step_${index + 1}`}</span>
               </div>
             </RevealItem>

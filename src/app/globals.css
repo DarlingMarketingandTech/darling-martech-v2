@@ -6,8 +6,11 @@
 
 :root {
   --color-bg: #0c0c0e;
-  --color-surface: #13131a;
-  --color-surface-strong: #18181f;
+  /* Canonical surface fill — referenced by @theme --color-surface for Tailwind `bg-surface` */
+  --surface-base: #13131a;
+  --color-surface: var(--surface-base);
+  --surface-strong-base: #18181f;
+  --color-surface-strong: var(--surface-strong-base);
   --color-border: #2a2a2e;
   --color-orange: #f05a28;
   --color-offwhite: #f5f4f0;
@@ -15,6 +18,10 @@
   /* Metric / proof number accent — aligned with tools “live” teal */
   --color-green: #0fd9c8;
   --color-muted: #a1a1aa;
+  /* Secondary body — single standard opacity for marketing surfaces */
+  --body-muted-base: rgba(245, 244, 240, 0.72);
+  --color-body-muted: var(--body-muted-base);
+  /* Brand orange for Darling UI — use Tailwind `text-brand` / `border-brand`; do not reuse `--color-accent` (shadcn). */
 
   --font-inter: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
   --font-syne: "Syne Variable", Syne, ui-sans-serif, system-ui, sans-serif;
@@ -56,6 +63,12 @@
 @theme inline {
   --color-background: var(--color-bg);
   --color-foreground: var(--color-offwhite);
+  /* Darling semantic palette (Tailwind: bg-surface, text-signal, text-brand, text-body-muted) */
+  --color-surface: var(--surface-base);
+  --color-surface-strong: var(--surface-strong-base);
+  --color-signal: var(--color-teal);
+  --color-brand: var(--color-orange);
+  --color-body-muted: var(--body-muted-base);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-mono);
   --font-heading: var(--font-syne);

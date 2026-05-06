@@ -38,7 +38,7 @@ export function OwnerStatementV3() {
           className="relative mx-auto w-full max-w-[460px] lg:mx-0"
         >
           <div className="absolute -inset-6 -z-10 rounded-[28px] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(240,90,40,0.18)_0%,rgba(240,90,40,0)_70%)] blur-2xl" />
-          <div className="relative overflow-hidden rounded-2xl border border-[#F5F4F0]/12 bg-[#0F1012]/70 shadow-[0_40px_120px_rgba(0,0,0,0.55)] backdrop-blur">
+          <div className="relative overflow-hidden rounded-2xl border border-foreground/12 bg-surface-strong/70 shadow-[0_40px_120px_rgba(0,0,0,0.55)] backdrop-blur">
             <div className="aspect-4/5 w-full">
               <CloudinaryImage
                 publicId="studio/jacob-portrait"
@@ -51,20 +51,20 @@ export function OwnerStatementV3() {
               />
             </div>
             {/* Caption strip */}
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-[#F5F4F0]/10 bg-[#0C0C0E]/80 px-5 py-4 backdrop-blur">
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-foreground/10 bg-background/80 px-5 py-4 backdrop-blur">
               <div>
-                <p className="font-syne text-base font-medium text-[#F5F4F0]">Jacob Darling</p>
-                <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#F5F4F0]/56">
+                <p className="font-syne text-base font-medium text-foreground">Jacob Darling</p>
+                <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-foreground/56">
                   Founder · Operating Owner
                 </p>
               </div>
-              <span className="inline-flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[#0FD9C8]/90">
+              <span className="inline-flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-signal/90">
                 <MapPin className="size-3" />
                 Indianapolis
               </span>
             </div>
             {/* Top scan line accent */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent_0%,rgba(15,217,200,0.6)_50%,transparent_100%)]" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/60 to-transparent" />
           </div>
 
           {/* Floating signature card */}
@@ -73,27 +73,27 @@ export function OwnerStatementV3() {
             whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.2, 0.85, 0.25, 1] }}
-            className="absolute -right-4 -top-4 hidden rotate-[2.5deg] rounded-xl border border-[#F05A28]/30 bg-[#0F1012]/85 px-3.5 py-2.5 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[#F05A28] shadow-[0_20px_50px_rgba(240,90,40,0.18)] backdrop-blur md:block"
+            className="absolute -right-4 -top-4 hidden rotate-[2.5deg] rounded-xl border border-brand/30 bg-surface-strong/85 px-3.5 py-2.5 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-brand shadow-[0_20px_50px_rgba(240,90,40,0.18)] backdrop-blur md:block"
           >
-            <span className="block text-[#F5F4F0]/56">est.</span>
-            <span className="block text-base font-medium tracking-tight text-[#F5F4F0]">15+ yrs</span>
+            <span className="block text-foreground/56">est.</span>
+            <span className="block text-base font-medium tracking-tight text-foreground">15+ yrs</span>
           </motion.div>
         </motion.div>
 
         {/* Statement */}
         <div className="max-w-xl">
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#0FD9C8]/80">Owner Statement</p>
-          <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-[#F5F4F0] md:text-[3rem]">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-signal/80">Owner Statement</p>
+          <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-foreground md:text-[3rem]">
             One accountable operator,{" "}
-            <span className="bg-[linear-gradient(180deg,#FF7A4A_0%,#F05A28_100%)] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-b from-[#FF7A4A] to-brand bg-clip-text text-transparent">
               not a handoff chain.
             </span>
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-[#F5F4F0]/74 md:text-lg">
+          <p className="mt-5 text-base leading-relaxed text-body-muted md:text-lg">
             I stay responsible from planning through implementation. No strategy deck
             handoff, no fragmented execution, and no confusion about who owns outcomes.
           </p>
-          <p className="mt-4 text-base leading-relaxed text-[#F5F4F0]/72">
+          <p className="mt-4 text-base leading-relaxed text-body-muted">
             That continuity keeps momentum intact: one operating owner, one clear
             scoreboard, and one plan that stays connected to real performance.
           </p>
@@ -106,12 +106,12 @@ export function OwnerStatementV3() {
                 whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-15%" }}
                 transition={{ duration: 0.5, delay: 0.2 + idx * 0.1, ease: [0.2, 0.85, 0.25, 1] }}
-                className="flex items-baseline gap-4 border-l border-[#F5F4F0]/12 pl-4"
+                className="flex items-baseline gap-4 border-l border-foreground/12 pl-4"
               >
-                <span className="shrink-0 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[#F05A28]">
+                <span className="shrink-0 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-brand">
                   {String(idx + 1).padStart(2, "0")} · {beat.label}
                 </span>
-                <span className="text-[0.95rem] leading-relaxed text-[#F5F4F0]/82">{beat.value}</span>
+                <span className="text-[0.95rem] leading-relaxed text-foreground/82">{beat.value}</span>
               </motion.li>
             ))}
           </ul>
@@ -121,7 +121,7 @@ export function OwnerStatementV3() {
               {homepageData.closingCta.readyLink.label}
               <ArrowUpRight className="size-4" />
             </Button>
-            <Button href="/about" variant="ghost" size="lg" className="text-[#F5F4F0]">
+            <Button href="/about" variant="ghost" size="lg" className="text-foreground">
               How I work
             </Button>
           </div>

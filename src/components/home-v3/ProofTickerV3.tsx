@@ -20,8 +20,8 @@ export function ProofTickerV3() {
         className="pointer-events-none absolute inset-y-0 right-0 hidden w-32 bg-[linear-gradient(270deg,var(--surface-strong-base)_0%,transparent_100%)] md:block"
       />
       {/* Top + bottom hairlines */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/40 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brand/35 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-signal/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-brand/35 to-transparent" />
 
       <SlowMarquee className="hidden md:block px-6 md:px-10">
         {metrics.map((metric) => (

@@ -104,7 +104,7 @@ export function ProblemGridV3() {
                 </div>
 
                 {/* Bottom accent line */}
-                <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px origin-left scale-x-0 bg-gradient-to-r from-brand to-transparent transition-transform duration-500 group-hover:scale-x-100" />
+                <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px origin-left scale-x-0 bg-linear-to-r from-brand to-transparent transition-transform duration-500 group-hover:scale-x-100" />
               </SectionSurface>
             </Link>
           </RevealItem>

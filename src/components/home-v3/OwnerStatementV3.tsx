@@ -64,7 +64,7 @@ export function OwnerStatementV3() {
               </span>
             </div>
             {/* Top scan line accent */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/60 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-signal/60 to-transparent" />
           </div>
 
           {/* Floating signature card */}
@@ -85,7 +85,7 @@ export function OwnerStatementV3() {
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-signal/80">Owner Statement</p>
           <h2 className="mt-3 font-syne text-3xl leading-[1.04] tracking-[-0.02em] text-foreground md:text-[3rem]">
             One accountable operator,{" "}
-            <span className="bg-gradient-to-b from-[#FF7A4A] to-brand bg-clip-text text-transparent">
+            <span className="bg-linear-to-b from-[#FF7A4A] to-brand bg-clip-text text-transparent">
               not a handoff chain.
             </span>
           </h2>

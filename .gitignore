@@ -51,3 +51,9 @@ public/sitemap-0.xml
 
 # local research/scrape artifacts
 .firecrawl/
+
+# local agent / IDE plugin caches (do not commit)
+.claude/
+.codex-home/
+.codex-tmp/
+.playwright-mcp/

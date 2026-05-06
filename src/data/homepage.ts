@@ -314,7 +314,7 @@ export const homepageV4Data: HomepageV4Data = {
     eyebrow: "What Gets Built",
     title: "The work is shaped around the bottleneck, not a menu of disconnected deliverables.",
     intro:
-      "Each card shows a practical system layer and one proof example. The homepage should explain what changes without forcing visitors through three separate proof sections.",
+      "Each layer targets a specific breakdown — the place where leads stall, follow-up fails, or reporting goes dark. Fix the right layer and the whole system moves.",
     cards: [
       {
         title: "Website structure + conversion",
@@ -400,7 +400,7 @@ export const homepageV4Data: HomepageV4Data = {
     eyebrow: "Selected Outcomes",
     title: "A few examples of what changed after the operating layer was rebuilt.",
     intro:
-      "This section should stay compact. One featured case explains the operator model, and the supporting highlights prove the work changes real commercial behavior.",
+      "Every engagement starts with a specific operational problem. These are real results from clients who needed the system to work reliably, not another campaign.",
     featuredSlug: "graston-growth-engine",
     featuredLabel: "Automation + systems",
     featuredTitle: "From fragmented follow-up to a system the team could actually run.",
@@ -426,7 +426,7 @@ export const homepageV4Data: HomepageV4Data = {
     ],
   },
   tools: {
-    eyebrow: "Low-Trust Entry",
+    eyebrow: "Start Without a Call",
     title: "Tools buyers can use before they are ready to talk.",
     intro:
       "These are practical diagnostics and planning tools. The audit stays first because it is the clearest starting point when the real bottleneck is still fuzzy.",

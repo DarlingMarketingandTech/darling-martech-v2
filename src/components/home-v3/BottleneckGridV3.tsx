@@ -1,8 +1,6 @@
 import { homepageV4Data } from "@/data/homepage";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { SectionSurface } from "@/components/layout-v3/SectionSurface";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function BottleneckGridV3() {
   const { bottlenecks } = homepageV4Data;
@@ -43,15 +41,11 @@ export function BottleneckGridV3() {
         ))}
       </div>
 
-      <div className="mt-10 flex flex-col items-start gap-4">
-        {bottlenecks.ctaSupporting ? (
-          <p className="max-w-xl text-sm leading-relaxed text-body-muted md:text-base">{bottlenecks.ctaSupporting}</p>
-        ) : null}
-        <Button href={bottlenecks.cta.href} size="lg" className="gap-2">
-          {bottlenecks.cta.label}
-          <ArrowRight className="size-4" />
-        </Button>
-      </div>
+      {bottlenecks.ctaSupporting ? (
+        <p className="mt-8 max-w-xl text-sm leading-relaxed text-body-muted md:text-base">
+          {bottlenecks.ctaSupporting}
+        </p>
+      ) : null}
     </BleedSection>
   );
 }

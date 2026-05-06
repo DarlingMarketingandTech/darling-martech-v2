@@ -80,3 +80,7 @@ skills-lock.json
 .idea/
 # Local Cursor/editor debug logs
 .cursor/*.log
+# Claude/Codex skills vendored locally
+.claude/skills/
+.agents/skills/
+skills-lock.json

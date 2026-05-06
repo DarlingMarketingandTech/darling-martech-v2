@@ -1,3 +1,7 @@
 # Exclude agent skills from Vercel upload/build context (esp. `vercel deploy` from working tree)
 .agents/skills/
 skills-lock.json
+# Exclude Claude/Codex skills from Vercel upload/build context
+.claude/skills/
+.agents/skills/
+skills-lock.json

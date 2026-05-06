@@ -1,4 +1,4 @@
-import type { PageMeta } from "@/types";
+import type { HomepageAdjacentCapabilitiesSection, PageMeta } from "@/types";
 
 export const proofMeta: PageMeta = {
   title: "Proof",
@@ -84,6 +84,45 @@ export const proofPageData = {
       caseStudySlugs: ["primarycare-indy", "urgentcare-indy", "russell-painting", "317-bbq"],
     },
   ],
+  /** Homepage grid shows three bottleneck-aligned cards; these builds stay discoverable here and on /services */
+  homepageAdjacentCapabilitiesSection: {
+    eyebrow: "Also available",
+    title: "Reporting, internal tools, and brand systems",
+    intro:
+      "The homepage focuses on the three common breakpoints. If your constraint is measurement, bespoke surfaces, or perception — jump straight to filtered proof and the matching service lane.",
+    items: [
+      {
+        id: "reporting-attribution",
+        title: "Reporting + attribution",
+        body: "Dashboards, source tracking, and operating visibility that make channel and pipeline decisions easier to defend.",
+        proofHubHref: "/proof?projectType=reporting-attribution-system",
+        featuredProofHref: "/proof/graston-technique",
+        featuredProofLabel: "Graston Technique — reporting layer",
+        serviceHref: "/services/attribution-analytics",
+        serviceLabel: "Attribution & Analytics",
+      },
+      {
+        id: "internal-tools-calculators",
+        title: "Internal tools + calculators",
+        body: "Custom operating surfaces, pricing tools, diagnostics, and workflows when off-the-shelf software does not fit the job.",
+        proofHubHref: "/proof?projectType=custom-infrastructure-product",
+        featuredProofHref: "/proof/the-compass",
+        featuredProofLabel: "The Compass — diagnostic product",
+        serviceHref: "/services/custom-infrastructure",
+        serviceLabel: "Custom Infrastructure & Integrations",
+      },
+      {
+        id: "brand-message-system",
+        title: "Brand + message system",
+        body: "A clearer way to explain the offer, carry trust, and stay consistent across the site, sales material, and campaigns.",
+        proofHubHref: "/proof?projectType=brand-identity-system",
+        featuredProofHref: "/proof/black-letter",
+        featuredProofLabel: "Black Letter — identity system",
+        serviceHref: "/services/brand-identity",
+        serviceLabel: "Brand Positioning & Identity System",
+      },
+    ],
+  } satisfies HomepageAdjacentCapabilitiesSection,
   antiClaims: [
     {
       claim: "Average client sees 300% ROI.",

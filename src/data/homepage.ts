@@ -259,19 +259,11 @@ export const homepageV4Data: HomepageV4Data = {
     eyebrow: "OWNER-OPERATED · SYSTEMS-FIRST · INDIANAPOLIS",
     title: "One operator to fix the parts of growth that do not work together.",
     body: [
-      "Most teams do not need more disconnected marketing activity. They need a clearer operating layer between website conversion, CRM, automation, reporting, and the next decision.",
-      "I diagnose where the system breaks, rebuild the right piece, and connect it back to revenue, follow-up, and visibility so the business gets easier to run.",
+      "Most teams do not need more disconnected marketing activity. They need a clearer operating layer across website conversion, CRM, automation, reporting, and visibility so the right bottleneck gets diagnosed, rebuilt, and tied to better decisions.",
     ],
     primaryCta: { label: "Run the Growth System Audit", href: "/tools/growth-system-audit" },
     secondaryCta: { label: "See Selected Proof", href: "/proof" },
-    processItems: ["Diagnose the bottleneck", "Build the missing layer", "Improve what the system does next"],
-    trustItems: [
-      "Website conversion",
-      "CRM + automation",
-      "Reporting",
-      "Internal tools",
-      "AI search readiness",
-    ],
+    trustItems: ["Website conversion", "CRM + automation", "Reporting"],
     visual: {
       publicId: "curated/homepage/core-infrastructure-engine",
       alt: "Homepage system visual showing a connected operator layer across website, CRM, automation, and reporting.",
@@ -280,7 +272,6 @@ export const homepageV4Data: HomepageV4Data = {
       points: [
         "Website, proof, and next-step logic aligned",
         "Lead capture and follow-up routed on purpose",
-        "Reporting tied back to actual operating decisions",
       ],
     },
   },
@@ -289,6 +280,8 @@ export const homepageV4Data: HomepageV4Data = {
     title: "Most growth bottlenecks start in one of three places.",
     intro:
       "This is usually not a traffic problem first. It is a clarity problem, a system problem, or a visibility problem that keeps demand from turning into useful action.",
+    ctaSupporting: "Not sure which one is yours? The audit diagnoses it in 8 questions.",
+    cta: { label: "Run the Growth System Audit", href: "/tools/growth-system-audit" },
     cards: [
       {
         title: "The website looks fine, but it does not move people.",
@@ -317,6 +310,7 @@ export const homepageV4Data: HomepageV4Data = {
       "Each layer targets a specific breakdown — the place where leads stall, follow-up fails, or reporting goes dark. Fix the right layer and the whole system moves.",
     cards: [
       {
+        id: "website-conversion",
         title: "Website structure + conversion",
         body: "Sharper positioning, cleaner page hierarchy, stronger proof placement, and a clearer path to the next step.",
         href: "/proof?projectType=conversion-path-repair",
@@ -330,6 +324,7 @@ export const homepageV4Data: HomepageV4Data = {
         },
       },
       {
+        id: "crm-automation",
         title: "CRM + automation",
         body: "Lead capture, routing, reminders, lifecycle workflows, and follow-up that do not depend on memory.",
         href: "/proof?projectType=crm-automation-system",
@@ -343,45 +338,7 @@ export const homepageV4Data: HomepageV4Data = {
         },
       },
       {
-        title: "Reporting + attribution",
-        body: "Dashboards, source tracking, and operating visibility that make channel and pipeline decisions easier to defend.",
-        href: "/proof?projectType=reporting-attribution-system",
-        proof: {
-          label: "Graston Technique",
-          metric: "+212% qualified leads",
-          detail: "Reporting and attribution were reorganized around the operating system, not isolated campaign snapshots.",
-          href: "/proof/graston-technique",
-          publicId: "graston_data_visualization_dashboard",
-          alt: "Dashboard screenshot showing reporting and attribution proof for Graston Technique.",
-        },
-      },
-      {
-        title: "Internal tools + calculators",
-        body: "Custom operating surfaces, pricing tools, diagnostics, and workflows when off-the-shelf software does not fit the job.",
-        href: "/proof?projectType=custom-infrastructure-product",
-        proof: {
-          label: "The Compass",
-          metric: "68% completion rate",
-          detail: "An interactive diagnostic created higher-intent leads by giving buyers a useful next step before a call.",
-          href: "/proof/the-compass",
-          publicId: "CMO_Simulator",
-          alt: "Internal diagnostic and planning tool interface used as proof for custom product and workflow systems.",
-        },
-      },
-      {
-        title: "Brand + message system",
-        body: "A clearer way to explain the offer, carry trust, and stay consistent across the site, sales material, and campaigns.",
-        href: "/proof?projectType=brand-identity-system",
-        proof: {
-          label: "Black Letter",
-          metric: "Identity rebuilt with consistent standards",
-          detail: "A stronger brand system made the business easier to recognize and easier to trust across touchpoints.",
-          href: "/proof/black-letter",
-          publicId: "Gemini_Generated_Image_aadwklaadwklaadw",
-          alt: "Brand identity composite showing a more consistent authority-driven visual system.",
-        },
-      },
-      {
+        id: "visibility-local",
         title: "Visibility + local demand capture",
         body: "Structured search presence, review velocity, and authority signals that help the right buyers find the business sooner.",
         href: "/proof?projectType=local-growth-system",

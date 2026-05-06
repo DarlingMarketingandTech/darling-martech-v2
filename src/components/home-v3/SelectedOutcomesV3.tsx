@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { homepageV4Data } from "@/data/homepage";
+import { captureClientEvent } from "@/lib/posthog";
 import { caseStudies } from "@/data/work/work-index";
 import { getProofDetailHeroPublicId } from "@/data/proof-visuals";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
@@ -83,6 +86,13 @@ export function SelectedOutcomesV3() {
               <Link
                 href={featuredOutcomes.featuredCta.href}
                 className="mt-6 inline-flex items-center gap-2 text-sm text-[#F5F4F0]"
+                onClick={() =>
+                  captureClientEvent("proof_card_clicked", {
+                    slug: featuredOutcomes.featuredSlug,
+                    surface: "featured",
+                    href: featuredOutcomes.featuredCta.href,
+                  })
+                }
               >
                 {featuredOutcomes.featuredCta.label}
                 <ArrowUpRight className="size-4" />
@@ -99,7 +109,18 @@ export function SelectedOutcomesV3() {
             }
 
             return (
-              <Link key={highlight.slug} href={`/proof/${highlight.slug}`} className="group block">
+              <Link
+                key={highlight.slug}
+                href={`/proof/${highlight.slug}`}
+                className="group block"
+                onClick={() =>
+                  captureClientEvent("proof_card_clicked", {
+                    slug: highlight.slug,
+                    surface: "highlight",
+                    href: `/proof/${highlight.slug}`,
+                  })
+                }
+              >
                 <GlassPanel className="h-full border-[#F5F4F0]/10 bg-[linear-gradient(180deg,rgba(245,244,240,0.025),rgba(245,244,240,0.015))] p-5 transition-transform duration-200 group-hover:-translate-y-1">
                   <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-[#0FD9C8]">
                     {highlight.label}

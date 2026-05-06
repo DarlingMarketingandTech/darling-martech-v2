@@ -108,6 +108,8 @@ pnpm build
 pnpm verify
 ```
 
+Prefer ESLint through those scripts (`pnpm lint`, or `pnpm exec eslint .` if invoking ESLint directly) so the version matches devDependencies. A globally installed `eslint` CLI (for example via `npm install -g eslint`) can diverge from the repo pin.
+
 If visible UI changed, also validate the affected route behavior in-browser.
 
 Do not claim work is complete if verification fails. If a failure is unrelated to your changes, say so explicitly.

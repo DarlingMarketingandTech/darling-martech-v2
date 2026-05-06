@@ -1,4 +1,5 @@
 import type { ProjectPathId, Service, ServiceCluster } from "@/types";
+import { proofPageData } from "@/data/proof";
 import { SERVICE_VISUAL_BY_SLUG } from "@/data/service-visuals";
 
 const servicesUnmerged: Omit<Service, "visualPublicId" | "visualAlt">[] = [
@@ -455,3 +456,7 @@ export function getProjectPathIdsForService(slug: ServiceCluster): ProjectPathId
 export function getServicesIndexLaneHash(clusterId: ServiceDisplayClusterId): string {
   return clusterId === "foundation" ? "lane-foundation" : `lane-${clusterId}`;
 }
+
+/** Rotated-off homepage capabilities — canonical copy lives on `proofPageData.homepageAdjacentCapabilitiesSection`. */
+export const servicesIndexAdjacentCapabilitiesSection =
+  proofPageData.homepageAdjacentCapabilitiesSection;

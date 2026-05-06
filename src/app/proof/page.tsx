@@ -118,6 +118,55 @@ export default async function ProofPage({ searchParams }: PageProps) {
             </div>
           </section>
 
+          <section
+            className="mt-11 rounded-3xl border border-[#F5F4F0]/10 bg-[#0C0C0E]/40 px-5 py-8 md:mt-14 md:px-9 md:py-10"
+            aria-labelledby="adjacent-cap-heading"
+          >
+            <p className="meta-label text-[#F05A28]/90">
+              {proofPageData.homepageAdjacentCapabilitiesSection.eyebrow}
+            </p>
+            <h2
+              id="adjacent-cap-heading"
+              className="font-display mt-3 max-w-2xl text-balance text-xl font-semibold tracking-[-0.02em] text-[#F5F4F0] md:text-2xl"
+            >
+              {proofPageData.homepageAdjacentCapabilitiesSection.title}
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#F5F4F0]/58 md:text-base">
+              {proofPageData.homepageAdjacentCapabilitiesSection.intro}
+            </p>
+            <ul className="mt-8 grid gap-4 md:grid-cols-3 md:gap-5">
+              {proofPageData.homepageAdjacentCapabilitiesSection.items.map((item) => (
+                <li
+                  key={item.id}
+                  className="flex flex-col rounded-2xl border border-[#F5F4F0]/10 bg-[#13131A]/28 px-5 py-5"
+                >
+                  <h3 className="font-display text-lg font-semibold text-[#F5F4F0]">{item.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[#F5F4F0]/60">{item.body}</p>
+                  <div className="mt-5 flex flex-col gap-2 border-t border-[#F5F4F0]/8 pt-4 text-sm">
+                    <Link
+                      href={item.proofHubHref}
+                      className="text-[#0FD9C8] underline decoration-[#0FD9C8]/30 underline-offset-4 transition-colors hover:decoration-[#0FD9C8]/60"
+                    >
+                      Browse proof by project type →
+                    </Link>
+                    <Link
+                      href={item.featuredProofHref}
+                      className="text-[#F5F4F0]/70 underline decoration-[#F5F4F0]/15 underline-offset-4 transition-colors hover:text-[#F05A28]"
+                    >
+                      {item.featuredProofLabel} →
+                    </Link>
+                    <Link
+                      href={item.serviceHref}
+                      className="text-[#F5F4F0]/52 underline decoration-[#F5F4F0]/15 underline-offset-4 transition-colors hover:text-[#F05A28]"
+                    >
+                      {item.serviceLabel} →
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+
           <section aria-label="Representative proof metrics" className="mt-12 md:mt-14">
             <p className="meta-label text-[#F5F4F0]/42">{proofPageData.metricsIntro}</p>
             <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-8 border-y border-[#F5F4F0]/10 py-8 md:grid-cols-4 md:gap-x-6">

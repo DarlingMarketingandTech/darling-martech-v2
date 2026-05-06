@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { homepageV4Data } from "@/data/homepage";
+import { captureClientEvent } from "@/lib/posthog";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { GlassPanel } from "@/components/layout-v3/GlassPanel";
 import { Button } from "@/components/ui/button";
@@ -25,11 +28,25 @@ export function ClosingCtaV3() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Button href={closingCta.primaryCta.href} size="lg" className="gap-2">
+            <Button
+              href={closingCta.primaryCta.href}
+              size="lg"
+              className="gap-2"
+              onClick={() =>
+                captureClientEvent("closing_cta_clicked", { cta: "primary", href: closingCta.primaryCta.href })
+              }
+            >
               {closingCta.primaryCta.label}
               <ArrowRight className="size-4" />
             </Button>
-            <Button href={closingCta.secondaryCta.href} variant="secondary" size="lg">
+            <Button
+              href={closingCta.secondaryCta.href}
+              variant="secondary"
+              size="lg"
+              onClick={() =>
+                captureClientEvent("closing_cta_clicked", { cta: "secondary", href: closingCta.secondaryCta.href })
+              }
+            >
               {closingCta.secondaryCta.label}
             </Button>
           </div>
@@ -39,6 +56,9 @@ export function ClosingCtaV3() {
           <Link
             href={closingCta.tertiaryCta.href}
             className="inline-flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-[#F05A28]"
+            onClick={() =>
+              captureClientEvent("closing_cta_clicked", { cta: "tertiary", href: closingCta.tertiaryCta.href })
+            }
           >
             {closingCta.tertiaryCta.label}
             <ArrowRight className="size-3.5" />

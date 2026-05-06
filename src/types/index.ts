@@ -641,7 +641,6 @@ export interface HomepageHero {
   body: string[];
   primaryCta: HomepageLink;
   secondaryCta: HomepageLink;
-  processItems: string[];
   trustItems: string[];
   visual: HomepageHeroVisual;
 }
@@ -657,6 +656,8 @@ export interface HomepageBottlenecks {
   title: string;
   intro: string;
   cards: HomepageBottleneckCard[];
+  cta: HomepageLink;
+  ctaSupporting?: string;
 }
 
 export interface HomepageCapabilityProof {
@@ -669,10 +670,31 @@ export interface HomepageCapabilityProof {
 }
 
 export interface HomepageCapabilityCard {
+  /** Stable id for analytics and React keys */
+  id: string;
   title: string;
   body: string;
   href: string;
   proof: HomepageCapabilityProof;
+}
+
+/** Capabilities rotated off the homepage grid — surfaced on /proof and /services for higher-intent buyers */
+export interface HomepageAdjacentCapability {
+  id: string;
+  title: string;
+  body: string;
+  proofHubHref: string;
+  featuredProofHref: string;
+  featuredProofLabel: string;
+  serviceHref: string;
+  serviceLabel: string;
+}
+
+export interface HomepageAdjacentCapabilitiesSection {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  items: HomepageAdjacentCapability[];
 }
 
 export interface HomepageCapabilities {

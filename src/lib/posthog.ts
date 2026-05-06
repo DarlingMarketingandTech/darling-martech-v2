@@ -1,5 +1,8 @@
 import { appEnv, assertEnvPresent } from "@/lib/env";
 
+/** Browser PostHog capture — re-exported for call sites that import from `@/lib/posthog`. */
+export { captureClientEvent } from "./analytics";
+
 type CaptureEventInput = {
   distinctId: string;
   event: string;

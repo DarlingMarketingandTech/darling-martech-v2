@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { homepageV4Data } from "@/data/homepage";
+import { captureClientEvent } from "@/lib/posthog";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { GlassPanel } from "@/components/layout-v3/GlassPanel";
 import { Button } from "@/components/ui/button";
@@ -44,24 +45,23 @@ export function HeroV3() {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button href={hero.primaryCta.href} size="lg" className="gap-2">
+            <Button
+              href={hero.primaryCta.href}
+              size="lg"
+              className="gap-2"
+              onClick={() => captureClientEvent("hero_cta_clicked", { cta: "primary", href: hero.primaryCta.href })}
+            >
               {hero.primaryCta.label}
               <ArrowRight className="size-4" />
             </Button>
-            <Button href={hero.secondaryCta.href} variant="secondary" size="lg">
+            <Button
+              href={hero.secondaryCta.href}
+              variant="secondary"
+              size="lg"
+              onClick={() => captureClientEvent("hero_cta_clicked", { cta: "secondary", href: hero.secondaryCta.href })}
+            >
               {hero.secondaryCta.label}
             </Button>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-2">
-            {hero.processItems.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-[#F5F4F0]/12 bg-[#F5F4F0]/[0.03] px-3 py-1.5 text-xs text-[#F5F4F0]/68"
-              >
-                {item}
-              </span>
-            ))}
           </div>
 
           <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-[#F5F4F0]/46">
@@ -77,7 +77,7 @@ export function HeroV3() {
           transition={{ duration: 0.5, delay: 0.08 }}
         >
           <GlassPanel className="overflow-hidden border-[#F5F4F0]/12 bg-[linear-gradient(180deg,rgba(245,244,240,0.03),rgba(15,217,200,0.015))]">
-            <div className="relative aspect-[4/5] min-h-[360px]">
+            <div className="relative aspect-4/5 min-h-[360px]">
               <CloudinaryImage
                 publicId={hero.visual.publicId}
                 alt={hero.visual.alt}

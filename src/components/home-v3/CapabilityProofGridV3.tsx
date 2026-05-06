@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { homepageV4Data } from "@/data/homepage";
+import { captureClientEvent } from "@/lib/posthog";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { GlassPanel } from "@/components/layout-v3/GlassPanel";
 import { CloudinaryProofImage } from "@/components/ui/CloudinaryProofImage";
@@ -26,10 +27,10 @@ export function CapabilityProofGridV3() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-4 md:grid-cols-3">
         {capabilities.cards.map((card) => (
           <motion.article
-            key={card.title}
+            key={card.id}
             whileHover={prefersReducedMotion ? undefined : { y: -4 }}
             transition={{ duration: 0.18 }}
           >
@@ -67,6 +68,14 @@ export function CapabilityProofGridV3() {
                   <Link
                     href={card.proof.href}
                     className="mt-4 inline-flex items-center gap-1.5 text-sm text-[#F5F4F0]"
+                    onClick={() =>
+                      captureClientEvent("capability_card_clicked", {
+                        capability_id: card.id,
+                        title: card.title,
+                        link_target: "related_proof",
+                        href: card.proof.href,
+                      })
+                    }
                   >
                     View related proof
                     <ArrowUpRight className="size-4" />
@@ -74,7 +83,18 @@ export function CapabilityProofGridV3() {
                 </div>
 
                 <div className="mt-auto pt-5">
-                  <Link href={card.href} className="inline-flex items-center gap-2 text-sm text-[#F5F4F0]/88">
+                  <Link
+                    href={card.href}
+                    className="inline-flex items-center gap-2 text-sm text-[#F5F4F0]/88"
+                    onClick={() =>
+                      captureClientEvent("capability_card_clicked", {
+                        capability_id: card.id,
+                        title: card.title,
+                        link_target: "proof_hub_filter",
+                        href: card.href,
+                      })
+                    }
+                  >
                     Explore this build type
                     <ArrowUpRight className="size-4" />
                   </Link>

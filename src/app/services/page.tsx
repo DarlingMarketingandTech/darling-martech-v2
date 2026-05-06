@@ -10,6 +10,7 @@ import {
   SERVICE_DISPLAY_CLUSTERS,
   SERVICE_DISPLAY_CLUSTER_ORDER,
   getServicesByCluster,
+  servicesIndexAdjacentCapabilitiesSection,
 } from "@/data/services";
 import { getProofAnglesForDisplayCluster } from "@/data/proof-angles";
 import { buildMetadata } from "@/lib/metadata";
@@ -94,6 +95,49 @@ export default function ServicesIndexPage() {
 
           <SectionWrapper className="pt-0 md:pt-4">
             <ServicesBuyerPathSplit />
+          </SectionWrapper>
+
+          <SectionWrapper className="pt-2 md:pt-6">
+            <div className="rounded-3xl border border-[#F5F4F0]/10 bg-[#13131A]/22 px-6 py-8 md:px-10 md:py-10">
+              <Eyebrow>{servicesIndexAdjacentCapabilitiesSection.eyebrow}</Eyebrow>
+              <h2 className="font-display mt-3 text-balance text-2xl font-semibold text-[#F5F4F0] md:text-3xl">
+                {servicesIndexAdjacentCapabilitiesSection.title}
+              </h2>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#F5F4F0]/62 md:text-base">
+                {servicesIndexAdjacentCapabilitiesSection.intro}
+              </p>
+              <ul className="mt-8 grid gap-4 md:grid-cols-3 md:gap-5">
+                {servicesIndexAdjacentCapabilitiesSection.items.map((item) => (
+                  <li
+                    key={item.id}
+                    className="flex flex-col rounded-2xl border border-[#F5F4F0]/10 bg-[#0C0C0E]/35 px-5 py-5"
+                  >
+                    <h3 className="font-display text-lg font-semibold text-[#F5F4F0]">{item.title}</h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-[#F5F4F0]/58">{item.body}</p>
+                    <div className="mt-5 flex flex-col gap-2 border-t border-[#F5F4F0]/8 pt-4 text-sm">
+                      <Link
+                        href={item.serviceHref}
+                        className="font-medium text-[#F05A28] transition-colors hover:text-[#ff6d40]"
+                      >
+                        Open service → {item.serviceLabel}
+                      </Link>
+                      <Link
+                        href={item.proofHubHref}
+                        className="text-[#F5F4F0]/62 underline decoration-[#F5F4F0]/18 underline-offset-4 transition-colors hover:text-[#0FD9C8]"
+                      >
+                        Matching proof (filtered) →
+                      </Link>
+                      <Link
+                        href={item.featuredProofHref}
+                        className="text-[#F5F4F0]/52 underline decoration-[#F5F4F0]/15 underline-offset-4 transition-colors hover:text-[#F05A28]"
+                      >
+                        {item.featuredProofLabel} →
+                      </Link>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </SectionWrapper>
 
           {strategicLead ? (

@@ -32,7 +32,7 @@ export function MobileNav({ isOpen, onClose, nav, cta }: MobileNavProps) {
     <AnimatePresence>
       {isOpen ? (
         <motion.div
-          className="fixed inset-0 z-[100] md:hidden"
+          className="fixed inset-0 z-100 md:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

@@ -1,17 +1,18 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { homepageV4Data } from "@/data/homepage";
 import { captureClientEvent } from "@/lib/posthog";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { GlassPanel } from "@/components/layout-v3/GlassPanel";
 import { Button } from "@/components/ui/button";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
+import { useNetworkAware } from "@/hooks/useNetworkAware";
 
 export function HeroV3() {
   const { hero } = homepageV4Data;
-  const prefersReducedMotion = useReducedMotion();
+  const { shouldReduceMotion } = useNetworkAware();
 
   return (
     <BleedSection className="relative overflow-hidden pt-16 sm:pt-18 md:pt-24" innerClassName="pb-12 sm:pb-14 md:pb-20 lg:pb-24">
@@ -26,8 +27,8 @@ export function HeroV3() {
 
       <div className="relative grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:items-center">
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
-          animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
           className="max-w-3xl"
         >
@@ -73,8 +74,8 @@ export function HeroV3() {
         </motion.div>
 
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 22 }}
-          animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 22 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.08 }}
         >
           <GlassPanel className="overflow-hidden border-foreground/12 bg-[linear-gradient(180deg,rgba(245,244,240,0.03),rgba(15,217,200,0.015))]">

@@ -2,16 +2,17 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { homepageV4Data } from "@/data/homepage";
 import { captureClientEvent } from "@/lib/posthog";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { SectionSurface } from "@/components/layout-v3/SectionSurface";
 import { CloudinaryProofImage } from "@/components/ui/CloudinaryProofImage";
+import { useNetworkAware } from "@/hooks/useNetworkAware";
 
 export function CapabilityProofGridV3() {
   const { capabilities } = homepageV4Data;
-  const prefersReducedMotion = useReducedMotion();
+  const { shouldReduceMotion } = useNetworkAware();
 
   return (
     <BleedSection className="py-16 md:py-20 lg:py-24">
@@ -31,7 +32,7 @@ export function CapabilityProofGridV3() {
         {capabilities.cards.map((card) => (
           <motion.article
             key={card.id}
-            whileHover={prefersReducedMotion ? undefined : { y: -4 }}
+            whileHover={shouldReduceMotion ? undefined : { y: -4 }}
             transition={{ duration: 0.18 }}
           >
             <SectionSurface className="group h-full overflow-hidden">

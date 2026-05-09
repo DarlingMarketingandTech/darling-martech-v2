@@ -257,13 +257,13 @@ export const homepageData = {
 export const homepageV4Data: HomepageV4Data = {
   hero: {
     eyebrow: "OWNER-OPERATED · SYSTEMS-FIRST · INDIANAPOLIS",
-    title: "One operator to fix the parts of growth that do not work together.",
+    title: "Your marketing stack is either working for you. Or it isn't.",
     body: [
-      "Most teams do not need more disconnected marketing activity. They need a clearer operating layer across website conversion, CRM, automation, reporting, and visibility so the right bottleneck gets diagnosed, rebuilt, and tied to better decisions.",
+      "Most teams have tools, traffic, and effort — but the website doesn't convert, follow-up depends on memory, and reporting can't explain what's happening. The fix is usually structural: diagnose the exact bottleneck, rebuild the operating layer, and tie it to decisions that actually move revenue.",
     ],
     primaryCta: { label: "Run the Growth System Audit", href: "/tools/growth-system-audit" },
     secondaryCta: { label: "See Selected Proof", href: "/proof" },
-    trustItems: ["Website conversion", "CRM + automation", "Reporting"],
+    trustItems: ["+212% qualified leads", "95% less manual overhead", "15+ years · Healthcare · Legal · B2B"],
     visual: {
       publicId: "curated/homepage/core-infrastructure-engine",
       alt: "Homepage system visual showing a connected operator layer across website, CRM, automation, and reporting.",
@@ -275,6 +275,13 @@ export const homepageV4Data: HomepageV4Data = {
       ],
     },
   },
+  proofBar: [
+    { value: "+212%", label: "qualified leads — CRM + lifecycle automation rebuild" },
+    { value: "+45%", label: "patient pipeline — multi-year intake + CRM alignment" },
+    { value: "95%", label: "manual overhead removed — stack consolidation + workflows" },
+    { value: "4.9★", label: "local trust conversion — reputation + request flow system" },
+    { value: "15+", label: "years · Healthcare · Legal · Finance · SaaS · B2B" },
+  ],
   bottlenecks: {
     eyebrow: "Where It Breaks",
     title: "Most growth bottlenecks start in one of three places.",
@@ -347,11 +354,16 @@ export const homepageV4Data: HomepageV4Data = {
           metric: "Top 3 local pack ranking",
           detail: "Brand, search structure, and local trust signals turned a great product into something customers could actually find.",
           href: "/proof/317-bbq",
-          publicId: "russell-paintinglocal-visability",
+          publicId: "curated/proof/317-bbq-local-visibility",
           alt: "Local visibility proof visual showing search presence and trust signals.",
         },
       },
     ],
+  },
+  diagnosticBand: {
+    headline: "Not sure where to start? There's an 8-question diagnostic for that.",
+    body: "Answer 8 questions. Get a specific diagnosis — not a generic checklist. No email required to see your results.",
+    cta: { label: "Run the Growth System Audit", href: "/tools/growth-system-audit" },
   },
   featuredOutcomes: {
     eyebrow: "Selected Outcomes",

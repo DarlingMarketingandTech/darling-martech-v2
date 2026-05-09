@@ -747,9 +747,19 @@ export interface HomepageClosingCta {
   tertiaryCta: HomepageLink;
 }
 
+export interface HomepageDiagnosticBand {
+  headline: string;
+  body: string;
+  cta: HomepageLink;
+}
+
 export interface HomepageV4Data {
   hero: HomepageHero;
+  /** Proof metrics bar rendered directly below the hero. */
+  proofBar: ProofMetric[];
   bottlenecks: HomepageBottlenecks;
+  /** Mid-page orange diagnostic band surfacing the Growth System Audit. */
+  diagnosticBand: HomepageDiagnosticBand;
   capabilities: HomepageCapabilities;
   featuredOutcomes: HomepageOutcomeFeature;
   tools: HomepageToolsSection;

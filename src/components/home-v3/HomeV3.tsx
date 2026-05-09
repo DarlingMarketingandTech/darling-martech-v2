@@ -2,10 +2,8 @@
 
 import { Suspense, lazy } from "react";
 import { HeroV3 } from "@/components/home-v3/HeroV3";
-import { ProofTickerV3 } from "@/components/home-v3/ProofTickerV3";
 import { BottleneckGridV3 } from "@/components/home-v3/BottleneckGridV3";
 import { CapabilityProofGridV3 } from "@/components/home-v3/CapabilityProofGridV3";
-import { DiagnosticBandV3 } from "@/components/home-v3/DiagnosticBandV3";
 import {
   ToolsPreviewSkeleton,
   SelectedOutcomesSkeleton,
@@ -36,13 +34,8 @@ export function HomeV3() {
     <>
       {/* Above-fold: eager load for fast LCP */}
       <HeroV3 />
-      {/* Proof bar: immediate credibility below the hero */}
-      <ProofTickerV3 />
       <BottleneckGridV3 />
       <CapabilityProofGridV3 />
-
-      {/* Mid-page diagnostic band: low-trust audit CTA before proof/tools */}
-      <DiagnosticBandV3 />
 
       {/* Below-fold: lazy load with skeleton fallbacks */}
       <Suspense fallback={<SelectedOutcomesSkeleton />}>

@@ -71,6 +71,11 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={cn("h-full", "antialiased", syne.variable, inter.variable, jetbrainsMono.variable, "font-sans")}>
+      <head>
+        {/* Preconnect to Cloudinary CDN for faster image loading */}
+        <link rel="preconnect" href={`https://res.cloudinary.com`} />
+        <link rel="dns-prefetch" href={`https://res.cloudinary.com`} />
+      </head>
       <body className="min-h-full flex flex-col text-[#F5F4F0]">
         <AppProviders>{children}</AppProviders>
         {appEnv.plausibleDomain ? (

@@ -668,3 +668,53 @@ select {
     margin-right: 0.65rem;
   }
 }
+
+/* ============================================
+   Skeleton Loading Animations
+   ============================================ */
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 244, 240, 0.04) 0%,
+    rgba(245, 244, 240, 0.08) 20%,
+    rgba(245, 244, 240, 0.12) 40%,
+    rgba(245, 244, 240, 0.08) 60%,
+    rgba(245, 244, 240, 0.04) 80%,
+    rgba(245, 244, 240, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+.skeleton-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation: none;
+    background: rgba(245, 244, 240, 0.06);
+  }
+  .skeleton-pulse {
+    animation: none;
+  }
+}

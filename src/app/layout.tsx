@@ -9,8 +9,6 @@ import { buildMetadata } from "@/lib/metadata";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const CLOUDINARY_CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? "djhqowk67";
-
 const syne = Syne({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],

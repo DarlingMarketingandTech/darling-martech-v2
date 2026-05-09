@@ -70,7 +70,7 @@ export function useNetworkAware(): NetworkInfo {
 }
 
 // Type declarations for Network Information API
-interface NetworkInformation extends EventTarget {
+interface NetworkInformation {
   readonly effectiveType?: "slow-2g" | "2g" | "3g" | "4g";
   readonly saveData?: boolean;
   readonly downlink?: number;

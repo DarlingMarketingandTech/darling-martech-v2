@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useRef, useState } from "react";
 import { homepageV4Data } from "@/data/homepage";
 import { captureClientEvent } from "@/lib/posthog";
@@ -109,8 +109,8 @@ export function HeroV3() {
     <BleedSection 
       className="relative overflow-hidden pt-16 sm:pt-18 md:pt-24" 
       innerClassName="pb-12 sm:pb-14 md:pb-20 lg:pb-24"
-      ref={containerRef}
     >
+      <div ref={containerRef} className="relative">
       {/* Animated background gradient */}
       <motion.div
         aria-hidden
@@ -257,7 +257,6 @@ export function HeroV3() {
           initial={showAnimations ? "hidden" : undefined}
           animate={showAnimations ? "visible" : undefined}
           whileHover={showAnimations ? { 
-            y: showAnimations ? useTransform(scrollYProgress, [0, 1], [-60, -75]) : 0,
             scale: 1.02,
             transition: { duration: 0.3 }
           } : undefined}
@@ -308,6 +307,7 @@ export function HeroV3() {
           </GlassPanel>
         </motion.div>
       </motion.div>
+      </div>
     </BleedSection>
   );
 }

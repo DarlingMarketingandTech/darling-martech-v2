@@ -1,312 +1,214 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { useRef, useState } from "react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { homepageV4Data } from "@/data/homepage";
 import { captureClientEvent } from "@/lib/posthog";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
-import { GlassPanel } from "@/components/layout-v3/GlassPanel";
 import { Button } from "@/components/ui/button";
-import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 import { useNetworkAware } from "@/hooks/useNetworkAware";
+import { LivingEngineDiagram } from "@/components/home-v3/LivingEngineDiagram";
+import { EASE_OUT_EXPO } from "@/lib/motion-easings";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-      duration: 0.5,
-    },
-  },
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE_OUT_EXPO } },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.23, 1, 0.32, 1],
-    },
-  },
-};
+/** Splits a string into words/spaces and renders each character with a stagger. */
+function StaggeredHeadline({ text, reduce }: { text: string; reduce: boolean }) {
+  if (reduce) {
+    return <>{text}</>;
+  }
 
-const eyebrowVariants = {
-  hidden: { opacity: 0, x: -12 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.23, 1, 0.32, 1],
-    },
-  },
-};
+  // Preserve spaces while splitting so word-break stays natural.
+  const words = text.split(/(\s+)/);
 
-const glassVariants = {
-  hidden: { opacity: 0, scale: 0.92, rotateY: 10 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    rotateY: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.23, 1, 0.32, 1],
-      delay: 0.15,
-    },
-  },
-};
+  let charIndex = 0;
+  return (
+    <span aria-label={text}>
+      {words.map((word, wIdx) => {
+        if (/^\s+$/.test(word)) {
+          return (
+            <span key={`s-${wIdx}`} aria-hidden>
+              {" "}
+            </span>
+          );
+        }
+        return (
+          <span
+            key={`w-${wIdx}`}
+            className="inline-block whitespace-nowrap"
+            aria-hidden
+          >
+            {Array.from(word).map((ch) => {
+              const i = charIndex++;
+              return (
+                <motion.span
+                  key={`c-${i}`}
+                  initial={{ opacity: 0, y: "0.6em", filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{
+                    duration: 0.55,
+                    delay: i * 0.018,
+                    ease: EASE_OUT_EXPO,
+                  }}
+                  className="inline-block"
+                >
+                  {ch}
+                </motion.span>
+              );
+            })}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
 
 export function HeroV3() {
   const { hero } = homepageV4Data;
   const { shouldReduceMotion } = useNetworkAware();
   const prefersReducedMotion = useReducedMotion();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isHoveredPrimary, setIsHoveredPrimary] = useState(false);
-  const [isHoveredSecondary, setIsHoveredSecondary] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end center"],
-  });
-
-  // Parallax effect for background gradient
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.3]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-
-  // Parallax effect for left content
-  const leftY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const leftOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  // Parallax effect for right panel
-  const rightY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const rightOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  // Hover states for buttons with magnetic effect
-  const primaryHoverVariants = {
-    hover: {
-      scale: 1.05,
-      boxShadow: "0 20px 40px rgba(240, 90, 40, 0.25)",
-      transition: { duration: 0.3, ease: "easeOut" },
-    },
-  };
-
-  const secondaryHoverVariants = {
-    hover: {
-      scale: 1.05,
-      boxShadow: "0 20px 40px rgba(15, 217, 200, 0.15)",
-      transition: { duration: 0.3, ease: "easeOut" },
-    },
-  };
-
-  const showAnimations = !shouldReduceMotion && !prefersReducedMotion;
+  const reduce = shouldReduceMotion || prefersReducedMotion === true;
 
   return (
-    <BleedSection 
-      className="relative overflow-hidden pt-16 sm:pt-18 md:pt-24" 
+    <BleedSection
+      className="relative overflow-hidden pt-14 sm:pt-18 md:pt-24"
       innerClassName="pb-12 sm:pb-14 md:pb-20 lg:pb-24"
     >
-      <div ref={containerRef} className="relative">
-      {/* Animated background gradient */}
-      <motion.div
+      {/* Atmospheric backdrop */}
+      <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-60"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(45% 30% at 100% 0%, rgba(15,217,200,0.08) 0%, rgba(15,217,200,0)_70%), radial-gradient(40% 35% at 0% 100%, rgba(240,90,40,0.08) 0%, rgba(240,90,40,0)_72%)",
-          opacity: showAnimations ? bgOpacity : 0.6,
-          y: showAnimations ? bgY : 0,
+            "radial-gradient(50% 35% at 100% 0%, rgba(15,217,200,0.10) 0%, rgba(15,217,200,0) 70%), radial-gradient(45% 35% at 0% 100%, rgba(240,90,40,0.10) 0%, rgba(240,90,40,0) 72%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(245,244,240,0.18) 30%, rgba(245,244,240,0.18) 70%, transparent)",
         }}
       />
 
-      {/* Enhanced animated overlay */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(240,90,40,0.04)_0%,transparent_50%),radial-gradient(circle_at_80%_70%,rgba(15,217,200,0.04)_0%,transparent_60%)]"
-        initial={{ opacity: 0 }}
-        animate={showAnimations ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
-      />
-
-      <motion.div 
-        className="relative grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:items-center"
-        variants={showAnimations ? containerVariants : undefined}
-        initial={showAnimations ? "hidden" : undefined}
-        animate={showAnimations ? "visible" : undefined}
-      >
-        {/* Left Content Column */}
-        <motion.div
-          style={showAnimations ? { y: leftY, opacity: leftOpacity } : undefined}
-          className="max-w-3xl"
-        >
-          {/* Eyebrow */}
-          <motion.p 
-            className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-signal"
-            variants={showAnimations ? eyebrowVariants : undefined}
-            initial={showAnimations ? "hidden" : undefined}
-            animate={showAnimations ? "visible" : undefined}
+      <div className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
+        {/* Left content */}
+        <div className="max-w-3xl">
+          {/* Status row */}
+          <motion.div
+            className="flex flex-wrap items-center gap-x-3 gap-y-2"
+            initial={reduce ? false : "hidden"}
+            animate={reduce ? false : "visible"}
+            variants={fadeUp}
           >
-            {hero.eyebrow}
-          </motion.p>
+            <span className="inline-flex items-center gap-2 rounded-full border border-signal/30 bg-signal/8 px-3 py-1 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-signal">
+              <span className="relative inline-flex size-1.5 rounded-full bg-signal">
+                <span className="absolute inset-0 animate-ping rounded-full bg-signal/70" />
+              </span>
+              {hero.eyebrow}
+            </span>
+          </motion.div>
 
-          {/* Main Title */}
-          <motion.h1 
-            className="mt-4 max-w-[14ch] font-syne text-[clamp(2.2rem,10vw,6.2rem)] leading-[0.94] tracking-[-0.025em] text-foreground"
-            variants={showAnimations ? itemVariants : undefined}
-            initial={showAnimations ? "hidden" : undefined}
-            animate={showAnimations ? "visible" : undefined}
-          >
-            {hero.title}
-          </motion.h1>
+          {/* Headline with staggered character reveal */}
+          <h1 className="mt-5 max-w-[14ch] font-syne text-[clamp(2.4rem,9vw,5.6rem)] leading-[0.95] tracking-[-0.025em] text-foreground">
+            <StaggeredHeadline text={hero.title} reduce={reduce} />
+          </h1>
 
-          {/* Body Paragraphs */}
-          <motion.div 
-            className="mt-5 max-w-2xl space-y-3 text-[0.98rem] leading-6 text-body-muted sm:space-y-4 md:mt-6 md:text-lg md:leading-7"
-            variants={showAnimations ? containerVariants : undefined}
-            initial={showAnimations ? "hidden" : undefined}
-            animate={showAnimations ? "visible" : undefined}
+          <motion.div
+            className="mt-5 max-w-2xl space-y-3 text-[0.98rem] leading-7 text-body-muted md:mt-6 md:text-lg md:leading-8"
+            initial={reduce ? false : "hidden"}
+            animate={reduce ? false : "visible"}
+            variants={fadeUp}
+            transition={{ delay: 0.4 }}
           >
-            {hero.body.map((paragraph, idx) => (
-              <motion.p 
-                key={paragraph}
-                variants={showAnimations ? itemVariants : undefined}
-                initial={showAnimations ? "hidden" : undefined}
-                animate={showAnimations ? "visible" : undefined}
-                custom={idx}
-              >
+            {hero.body.map((paragraph) => (
+              <p key={paragraph} className="text-pretty">
                 {paragraph}
-              </motion.p>
+              </p>
             ))}
           </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div 
-            className="mt-7 grid w-full grid-cols-1 gap-2.5 sm:mt-8 sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:gap-3"
-            variants={showAnimations ? itemVariants : undefined}
-            initial={showAnimations ? "hidden" : undefined}
-            animate={showAnimations ? "visible" : undefined}
+          {/* CTAs with magnetic pull */}
+          <motion.div
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+            initial={reduce ? false : "hidden"}
+            animate={reduce ? false : "visible"}
+            variants={fadeUp}
+            transition={{ delay: 0.55 }}
           >
-            <motion.div
-              onHoverStart={() => setIsHoveredPrimary(true)}
-              onHoverEnd={() => setIsHoveredPrimary(false)}
-              variants={showAnimations ? primaryHoverVariants : undefined}
-              whileHover={showAnimations ? "hover" : undefined}
-            >
+            <MagneticButton glowColor="rgba(240, 90, 40, 0.35)">
               <Button
                 href={hero.primaryCta.href}
                 size="lg"
                 className="w-full justify-center gap-2 sm:w-auto"
-                onClick={() => captureClientEvent("hero_cta_clicked", { cta: "primary", href: hero.primaryCta.href })}
+                onClick={() =>
+                  captureClientEvent("hero_cta_clicked", {
+                    cta: "primary",
+                    href: hero.primaryCta.href,
+                  })
+                }
               >
                 {hero.primaryCta.label}
-                <motion.div
-                  animate={isHoveredPrimary && showAnimations ? { x: 4 } : { x: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ArrowRight className="size-4" />
-                </motion.div>
+                <ArrowRight className="size-4" />
               </Button>
-            </motion.div>
+            </MagneticButton>
 
-            <motion.div
-              onHoverStart={() => setIsHoveredSecondary(true)}
-              onHoverEnd={() => setIsHoveredSecondary(false)}
-              variants={showAnimations ? secondaryHoverVariants : undefined}
-              whileHover={showAnimations ? "hover" : undefined}
-            >
+            <MagneticButton glowColor="rgba(15, 217, 200, 0.22)">
               <Button
                 href={hero.secondaryCta.href}
                 variant="secondary"
                 size="lg"
-                className="w-full justify-center sm:w-auto"
-                onClick={() => captureClientEvent("hero_cta_clicked", { cta: "secondary", href: hero.secondaryCta.href })}
+                className="w-full justify-center gap-2 sm:w-auto"
+                onClick={() =>
+                  captureClientEvent("hero_cta_clicked", {
+                    cta: "secondary",
+                    href: hero.secondaryCta.href,
+                  })
+                }
               >
                 {hero.secondaryCta.label}
+                <ArrowUpRight className="size-4" />
               </Button>
-            </motion.div>
+            </MagneticButton>
           </motion.div>
 
-          {/* Trust Items */}
-          <motion.div 
-            className="mt-5 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-foreground/50 sm:mt-6 sm:gap-x-5 sm:text-[0.68rem] sm:tracking-[0.16em]"
-            variants={showAnimations ? containerVariants : undefined}
-            initial={showAnimations ? "hidden" : undefined}
-            animate={showAnimations ? "visible" : undefined}
+          {/* Trust strip */}
+          <motion.div
+            className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-foreground/45 sm:text-[0.66rem]"
+            initial={reduce ? false : "hidden"}
+            animate={reduce ? false : "visible"}
+            variants={fadeUp}
+            transition={{ delay: 0.7 }}
           >
-            {hero.trustItems.map((item) => (
-              <motion.span 
-                key={item}
-                variants={showAnimations ? itemVariants : undefined}
-                initial={showAnimations ? "hidden" : undefined}
-                animate={showAnimations ? "visible" : undefined}
-              >
-                {item}
-              </motion.span>
+            {hero.trustItems.map((item, idx) => (
+              <div key={item} className="flex items-center gap-3">
+                <span>{item}</span>
+                {idx < hero.trustItems.length - 1 ? (
+                  <span aria-hidden className="size-1 rounded-full bg-foreground/25" />
+                ) : null}
+              </div>
             ))}
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Right Glass Panel */}
+        {/* Right: Living Engine Diagram */}
         <motion.div
-          style={showAnimations ? { y: rightY, opacity: rightOpacity } : undefined}
-          variants={showAnimations ? glassVariants : undefined}
-          initial={showAnimations ? "hidden" : undefined}
-          animate={showAnimations ? "visible" : undefined}
-          whileHover={showAnimations ? { 
-            scale: 1.02,
-            transition: { duration: 0.3 }
-          } : undefined}
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          animate={reduce ? false : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.25 }}
+          className="relative"
         >
-          <GlassPanel className="overflow-hidden border-foreground/12 bg-[linear-gradient(180deg,rgba(245,244,240,0.03),rgba(15,217,200,0.015))] shadow-xl hover:shadow-2xl transition-shadow duration-300">
-            <div className="relative aspect-5/6 min-h-[300px] sm:aspect-4/5 sm:min-h-[360px]">
-              <CloudinaryImage
-                publicId={hero.visual.publicId}
-                alt={hero.visual.alt}
-                width={1200}
-                height={1500}
-                priority
-                sizes="(min-width: 1024px) 34vw, 100vw"
-                className="absolute inset-0 size-full object-cover object-center opacity-45 mix-blend-screen"
-                postTransforms="e_sharpen"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,12,14,0.28)_0%,rgba(12,12,14,0.78)_58%,rgba(12,12,14,0.96)_100%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(58%_52%_at_72%_18%,rgba(15,217,200,0.14)_0%,rgba(15,217,200,0)_72%)] sm:bg-[radial-gradient(55%_45%_at_75%_20%,rgba(15,217,200,0.14)_0%,rgba(15,217,200,0)_70%)]" />
-
-              <motion.div 
-                className="absolute inset-x-0 bottom-0 p-5 sm:p-6 md:p-7"
-                initial={showAnimations ? { opacity: 0, y: 12 } : undefined}
-                animate={showAnimations ? { opacity: 1, y: 0 } : undefined}
-                transition={showAnimations ? { duration: 0.6, delay: 0.25 } : undefined}
-              >
-                <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-signal">
-                  {hero.visual.eyebrow}
-                </p>
-                <h2 className="mt-3 max-w-[16ch] font-syne text-2xl leading-tight text-foreground md:text-[2rem]">
-                  {hero.visual.title}
-                </h2>
-                <ul className="mt-5 space-y-3 text-sm leading-relaxed text-body-muted">
-                  {hero.visual.points.map((point, idx) => (
-                    <motion.li 
-                      key={point} 
-                      className="flex gap-3"
-                      initial={showAnimations ? { opacity: 0, x: -8 } : undefined}
-                      animate={showAnimations ? { opacity: 1, x: 0 } : undefined}
-                      transition={showAnimations ? { duration: 0.4, delay: 0.3 + idx * 0.08 } : undefined}
-                    >
-                      <span className="mt-2 size-1.5 shrink-0 rounded-full bg-signal" />
-                      <span>{point}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            </div>
-          </GlassPanel>
+          <LivingEngineDiagram />
+          {/* Caption */}
+          <p className="mt-3 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-foreground/40">
+            Fig. 01 — Operator layer reconciling website, CRM, and reporting
+          </p>
         </motion.div>
-      </motion.div>
       </div>
     </BleedSection>
   );

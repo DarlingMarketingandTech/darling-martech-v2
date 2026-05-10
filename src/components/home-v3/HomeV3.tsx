@@ -11,9 +11,9 @@ import {
 } from "@/components/home-v3/skeletons";
 
 // Lazy load below-fold sections for better initial page load
-const SelectedOutcomesV3 = lazy(() =>
-  import("@/components/home-v3/SelectedOutcomesV3").then((mod) => ({
-    default: mod.SelectedOutcomesV3,
+const OperatorDashboardV3 = lazy(() =>
+  import("@/components/home-v3/OperatorDashboardV3").then((mod) => ({
+    default: mod.OperatorDashboardV3,
   }))
 );
 
@@ -39,7 +39,7 @@ export function HomeV3() {
 
       {/* Below-fold: lazy load with skeleton fallbacks */}
       <Suspense fallback={<SelectedOutcomesSkeleton />}>
-        <SelectedOutcomesV3 />
+        <OperatorDashboardV3 />
       </Suspense>
 
       <Suspense fallback={<ToolsPreviewSkeleton />}>

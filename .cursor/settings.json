@@ -32,6 +32,9 @@
     },
     "hex": {
       "enabled": true
+    },
+    "figma": {
+      "enabled": true
     }
   }
 }

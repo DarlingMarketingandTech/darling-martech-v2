@@ -1,5 +1,6 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { appEnv, assertEnvPresent } from "@/lib/env";
+import type { SiteEventName } from "@/types";
 
 type ToolCompletionRecord = {
   distinct_id: string;
@@ -26,6 +27,27 @@ type ToolLeadRecord = {
   utm_campaign?: string | null;
   referrer?: string | null;
   page_path?: string | null;
+};
+
+type SiteEventRecord = {
+  distinct_id: string;
+  event_name: SiteEventName;
+  idempotency_key?: string | null;
+  route_path?: string | null;
+  tool_slug?: string | null;
+  proof_slug?: string | null;
+  result_id?: string | null;
+  properties?: Record<string, unknown> | null;
+  created_at?: string | null;
+};
+
+type VisitorProfileUpsert = {
+  distinct_id: string;
+  email_normalized?: string | null;
+  last_seen?: string | null;
+  last_route_path?: string | null;
+  last_tool_slug?: string | null;
+  last_tool_result_id?: string | null;
 };
 
 /** Server-side client: prefers service role for writes, falls back to anon. */
@@ -119,6 +141,59 @@ export async function insertToolLead(record: ToolLeadRecord): Promise<{ id: stri
   }
 
   return { id: data.id as string };
+}
+
+export async function insertSiteEvent(record: SiteEventRecord): Promise<{ id?: string; deduped: boolean }> {
+  const supabase = createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("site_events")
+    .insert({
+      distinct_id: record.distinct_id,
+      event_name: record.event_name,
+      idempotency_key: record.idempotency_key ?? null,
+      route_path: record.route_path ?? null,
+      tool_slug: record.tool_slug ?? null,
+      proof_slug: record.proof_slug ?? null,
+      result_id: record.result_id ?? null,
+      properties: record.properties ?? null,
+      created_at: record.created_at ?? null,
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    // Unique violation means we already captured this event; treat as success.
+    if (error.code === "23505") {
+      return { deduped: true };
+    }
+    throw new Error(`Supabase event insert failed: ${error.message}`);
+  }
+
+  if (!data?.id) {
+    throw new Error("Supabase event insert did not return a row id.");
+  }
+
+  return { id: data.id as string, deduped: false };
+}
+
+export async function upsertVisitorProfile(input: VisitorProfileUpsert): Promise<void> {
+  const supabase = createSupabaseServerClient();
+  const { error } = await supabase.from("visitor_profiles").upsert(
+    {
+      distinct_id: input.distinct_id,
+      email_normalized: input.email_normalized ?? null,
+      last_seen: input.last_seen ?? null,
+      last_route_path: input.last_route_path ?? null,
+      last_tool_slug: input.last_tool_slug ?? null,
+      last_tool_result_id: input.last_tool_result_id ?? null,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "distinct_id" }
+  );
+
+  if (error) {
+    throw new Error(`Supabase visitor upsert failed: ${error.message}`);
+  }
 }
 
 export type SaveReportForEmailInput = {

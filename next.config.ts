@@ -1,5 +1,12 @@
 import type { NextConfig } from "next";
 
+/**
+ * Permanent redirects for SEO and legacy URLs.
+ * - /work → /proof: old case-study path before proof hub rename.
+ * - /lab → /tools: old diagnostics hub path before tools rename.
+ * - /proof/pike-medical: removed parent-style proof URL; canonical slug is clinical-compass.
+ * - /tools/growth-bottleneck-quiz: quiz slug renamed to growth-system-audit.
+ */
 const nextConfig: NextConfig = {
   async redirects() {
     return [

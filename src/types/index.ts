@@ -13,6 +13,13 @@ export type TrustLadderStage =
   | "commit"
   | "return";
 
+export type SiteEventName =
+  | "tool_completed"
+  | "tool_lead_submitted"
+  | "contact_form_submitted"
+  | "cta_clicked"
+  | "proof_viewed";
+
 export type OutcomeTag =
   | "Pipeline Growth"
   | "Systems Built"

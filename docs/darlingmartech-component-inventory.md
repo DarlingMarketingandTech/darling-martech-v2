@@ -8,7 +8,7 @@
 \# \- All components use Tailwind CSS classes  
 \# \- Shadcn/UI is the base for interactive primitives (Dialog, Select, etc.)  
 \# \- Framer Motion handles all animation via AnimateOnScroll wrapper or direct  
-\# \- All data is typed via interfaces defined in darlingmartech-data-model-spec.md  
+\# \- All data is typed via `src/types/*` and approved content lives in `src/data/*` (see `AGENTS.md`)  
 \# \- Props marked with ? are optional
 
 \---

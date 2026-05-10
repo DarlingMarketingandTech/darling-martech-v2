@@ -121,7 +121,7 @@ Pipeline visibility went from zero to real-time within 60 days.
 Systems built: CRM build · Pipeline automation · Intake workflow · Segment nurturing
 
 CTA: Read the full case study →  
-\[Links to /proof/pike-medical\]
+\[Links to /proof/clinical-compass\] (legacy `/proof/pike-medical` redirects here)
 
 ────────────────────────────  
 CARD 3: Russell Painting  

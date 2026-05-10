@@ -16,7 +16,7 @@
 
 **Subhead (18px, off-white):** This page exists for one reason: to help you name the specific thing holding your growth back — before you decide what to do about it.
 
-**CTA (below subhead):** Not sure which one is yours? Take the 3-minute diagnostic → *(links to /tools/growth-bottleneck-quiz)*
+**CTA (below subhead):** Not sure which one is yours? Take the 3-minute diagnostic → *(links to /tools/growth-system-audit; legacy `/tools/growth-bottleneck-quiz` redirects)*
 
 ---
 

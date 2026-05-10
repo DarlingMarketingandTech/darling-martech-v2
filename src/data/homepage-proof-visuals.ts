@@ -222,7 +222,7 @@ export const HOMEPAGE_PROOF_VISUALS: HomepageProofVisual[] = [
     alt: "CMO Simulator overview screen showing a custom strategy simulation tool",
     projectType: "custom-infrastructure-product",
     secondaryProjectType: "custom-tools-product-systems",
-    proofSlug: "cmo-sim",
+    proofSlug: "cmo-simulator",
     visualRole: "primary-card-visual",
     recommendedSection: "custom-tools-product-systems",
     width: 1481,

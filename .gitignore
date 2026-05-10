@@ -66,6 +66,7 @@ agent-system/last-run-report.json
 
 # local agent / IDE plugin caches
 .claude/
+.claude/skills/
 .codex-home/
 .codex-tmp/
 .playwright-mcp/
@@ -80,7 +81,3 @@ skills-lock.json
 .idea/
 # Local Cursor/editor debug logs
 .cursor/*.log
-# Claude/Codex skills vendored locally
-.claude/skills/
-.agents/skills/
-skills-lock.json

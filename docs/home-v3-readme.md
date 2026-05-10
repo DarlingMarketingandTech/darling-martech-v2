@@ -1,44 +1,21 @@
-# Home V3 Swap Notes
+# Home V3 notes
 
-## What was built
+## Current behavior
 
-- New route: `src/app/home-v3/page.tsx`
-- New page composer: `src/components/home-v3/HomeV3.tsx`
-- New sections:
-  - `HeroV3`
-  - `ToolsPreviewV3`
-  - `ClosingCtaV3`
-- New primitives:
-  - Motion: `src/components/motion/*`
-  - Layout: `src/components/layout-v3/BleedSection.tsx`, `src/components/layout-v3/GlassPanel.tsx`
+- **Production homepage** is `src/app/page.tsx`, which renders `<HomeV3 />` from `src/components/home-v3/HomeV3.tsx`.
+- **`/home-v3`** (`src/app/home-v3/page.tsx`) **redirects to `/`** so bookmarks and old links do not 404.
 
-## Deprecated modules
+## What lives under `home-v3`
 
-The following draft sections were removed from the active tree and should not be re-imported into `HomeV3`:
+- Page composer: `src/components/home-v3/HomeV3.tsx`
+- Sections: `HeroV3`, `ToolsPreviewV3`, `ClosingCtaV3`, and other composed bands
+- Motion: `src/components/motion/*`
+- Layout helpers: `src/components/layout-v3/BleedSection.tsx`, `GlassPanel.tsx`
 
-- `ProofTickerV3`
-- `ProblemGridV3`
-- `DiagnosticBandV3`
-- `ProcessColumnsV3`
-- `ProofStripV3`
-- `OwnerStatementV3`
-- `FeaturedTransformationV3`
-- `WhatThisCanIncludeV3`
-- `ProjectTypeProofV3`
+## Deprecated modules (do not re-import into `HomeV3`)
 
-## Verification run
+- `ProofTickerV3`, `ProblemGridV3`, `DiagnosticBandV3`, `ProcessColumnsV3`, `ProofStripV3`, `OwnerStatementV3`, `FeaturedTransformationV3`, `WhatThisCanIncludeV3`, `ProjectTypeProofV3`
 
-- `pnpm lint` completed without cleanup-related lint regressions at the time of this build note.
-- `pnpm typecheck` passed.
-- `pnpm build` passed.
-- Browser QA (`/home-v3`) checked at:
-  - desktop `1440x900`
-  - tablet `834x1112`
-  - mobile `390x844`
-  - no blocking layout issues after hero visibility fix.
-- Lighthouse JSON saved at:
-  - `/.firecrawl/refs/lighthouse-home-v3-prod.json`
+## Verification
 
-## Swap procedure
-
-When approved, update `src/app/page.tsx` to render `<HomeV3 />` instead of the current homepage composition.
+After homepage changes, run `pnpm verify` and spot-check `/` in the browser per `docs/verification-runbook.md`.

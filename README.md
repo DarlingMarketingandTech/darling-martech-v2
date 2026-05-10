@@ -73,4 +73,4 @@ Use `.env.example` as the source of truth for required local variables.
 
 ## Current Focus
 
-The current implementation priority is the data-model and copy-ingestion foundation that supports all page builds with fewer prompts and less rework.
+Ship changes through the typed content contract (`src/types`, `src/data`) and strategy in `docs/revamp/*`, per `AGENTS.md` — not through one-off JSX copy.

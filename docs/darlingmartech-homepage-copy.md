@@ -36,7 +36,7 @@
 
 **Subhead (body, 20px, off-white, max 400px wide):** When strategy, systems, and execution live in different hands, nothing compounds. I close that gap — and I stay to run it.
 
-**Primary CTA:** Find your bottleneck → *(links to /tools/growth-bottleneck-quiz)*
+**Primary CTA:** Find your bottleneck → *(links to /tools/growth-system-audit; legacy `/tools/growth-bottleneck-quiz` redirects)*
 
 **Secondary CTA:** See the proof *(links to /proof)*
 
@@ -66,7 +66,7 @@
 
 **Section headline (H2, Syne):** Most growth problems start in one of four places.
 
-**Section body (16px, muted):** Not sure which one is yours? \[Run the 3-minute diagnostic →\] *(links to /tools/growth-bottleneck-quiz)*
+**Section body (16px, muted):** Not sure which one is yours? \[Run the 3-minute diagnostic →\] *(links to /tools/growth-system-audit; legacy `/tools/growth-bottleneck-quiz` redirects)*
 
 ---
 

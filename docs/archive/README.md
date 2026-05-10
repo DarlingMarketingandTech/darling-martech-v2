@@ -8,3 +8,5 @@ Canonical guidance lives in:
 - `AGENTS.md`
 - `docs/revamp/*`
 - current implementation docs in `docs/*`
+
+Stale or superseded material pending review lives in **`cleanup-candidates/`** (see [cleanup-candidates/README.md](cleanup-candidates/README.md)).

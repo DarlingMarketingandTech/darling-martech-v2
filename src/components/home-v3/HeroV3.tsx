@@ -2,14 +2,24 @@
 
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { homepageV4Data } from "@/data/homepage";
 import { captureClientEvent } from "@/lib/posthog";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { useNetworkAware } from "@/hooks/useNetworkAware";
-import { LivingEngineDiagram } from "@/components/home-v3/LivingEngineDiagram";
+import { OperatingLayerCards } from "@/components/home-v3/OperatingLayerCards";
 import { EASE_OUT_EXPO } from "@/lib/motion-easings";
+
+// Defer the R3F scene to client-only to avoid SSR + WebGL hydration cost.
+const OperatingLayerScene = dynamic(
+  () =>
+    import("@/components/home-v3/OperatingLayerScene").then(
+      (m) => m.OperatingLayerScene,
+    ),
+  { ssr: false },
+);
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -96,7 +106,7 @@ export function HeroV3() {
         }}
       />
 
-      <div className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
+      <div className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,1fr)] xl:gap-14">
         {/* Left content */}
         <div className="max-w-3xl">
           {/* Status row */}
@@ -196,16 +206,45 @@ export function HeroV3() {
           </motion.div>
         </div>
 
-        {/* Right: Living Engine Diagram */}
+        {/* Right: 3D Operating Layer scene with floating glass cards */}
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 24 }}
           animate={reduce ? false : { opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.25 }}
           className="relative"
         >
-          <LivingEngineDiagram />
+          <div className="relative mx-auto aspect-square w-full max-w-[640px]">
+            {/* Atmospheric photographic backdrop */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[28px]"
+            >
+              <img
+                src="/images/hero-operator-backdrop.jpg"
+                alt=""
+                className="size-full object-cover opacity-80"
+              />
+              {/* Soften edges into the page background */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(75% 75% at 50% 50%, transparent 40%, rgba(12,12,14,0.85) 100%)",
+                }}
+              />
+            </div>
+
+            {/* The R3F canvas (chip + rings + particles) */}
+            <div className="absolute inset-0 z-0">
+              <OperatingLayerScene />
+            </div>
+
+            {/* DOM overlay: connecting SVG lines + glass cards */}
+            <OperatingLayerCards />
+          </div>
+
           {/* Caption */}
-          <p className="mt-3 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-foreground/40">
+          <p className="mt-3 text-center font-mono text-[0.6rem] uppercase tracking-[0.22em] text-foreground/40 sm:text-left">
             Fig. 01 — Operator layer reconciling website, CRM, and reporting
           </p>
         </motion.div>

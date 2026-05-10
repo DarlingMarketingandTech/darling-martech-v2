@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { homepageV4Data } from "@/data/homepage";
 import { captureClientEvent } from "@/lib/posthog";
 import { caseStudies } from "@/data/work/work-index";
@@ -9,11 +10,36 @@ import { getProofDetailHeroPublicId } from "@/data/proof-visuals";
 import { BleedSection } from "@/components/layout-v3/BleedSection";
 import { SectionSurface } from "@/components/layout-v3/SectionSurface";
 import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
+import { useNetworkAware } from "@/hooks/useNetworkAware";
 
 const studyBySlug = new Map(caseStudies.map((study) => [study.slug, study] as const));
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.23, 1, 0.32, 1],
+    },
+  },
+};
+
 export function SelectedOutcomesV3() {
   const { featuredOutcomes } = homepageV4Data;
+  const { shouldReduceMotion } = useNetworkAware();
   const featuredStudy = studyBySlug.get(featuredOutcomes.featuredSlug);
 
   if (!featuredStudy) {
@@ -36,81 +62,89 @@ export function SelectedOutcomesV3() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-5 xl:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)]">
-        <SectionSurface className="overflow-hidden">
-          <div className="grid gap-0 lg:grid-cols-[minmax(260px,0.9fr)_minmax(0,1.1fr)]">
-            <div className="relative min-h-[260px] overflow-hidden border-b border-border-subtle lg:border-b-0 lg:border-r">
-              <CloudinaryImage
-                publicId={featuredVisual}
-                alt={featuredStudy.proofDetailHeroAlt ?? featuredStudy.title}
-                width={1400}
-                height={1200}
-                sizes="(min-width: 1280px) 34vw, 100vw"
-                className="absolute inset-0 size-full object-cover"
-                postTransforms="e_sharpen"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,12,14,0.18)_0%,rgba(12,12,14,0.75)_100%)]" />
-            </div>
-
-            <div className="p-6 md:p-7">
-              <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-signal">
-                {featuredOutcomes.featuredLabel}
-              </p>
-              <h3 className="mt-3 max-w-[18ch] font-syne text-3xl leading-tight text-foreground">
-                {featuredOutcomes.featuredTitle}
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-body-muted md:text-[0.95rem]">
-                {featuredOutcomes.featuredBody}
-              </p>
-
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border-subtle bg-surface-muted p-4">
-                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-foreground/50">
-                    Primary result
-                  </p>
-                  <p className="mt-2 font-syne text-3xl leading-none text-foreground">
-                    {featuredStudy.primaryMetric.value}
-                  </p>
-                  <p className="mt-2 text-sm text-body-muted">{featuredStudy.primaryMetric.label}</p>
-                </div>
-                <div className="rounded-2xl border border-border-subtle bg-surface-muted p-4">
-                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-foreground/50">
-                    Commercial shift
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-body-muted">
-                    {featuredStudy.resultSummary}
-                  </p>
-                </div>
+      {/* Modern Bento Grid Layout */}
+      <motion.div 
+        className="mt-10 grid gap-5 md:grid-cols-4 md:grid-rows-2"
+        variants={shouldReduceMotion ? undefined : containerVariants}
+        initial={shouldReduceMotion ? undefined : "hidden"}
+        animate={shouldReduceMotion ? undefined : "visible"}
+      >
+        {/* Featured Study - Large Left Card (2x2) */}
+        <motion.div 
+          className="md:col-span-2 md:row-span-2"
+          variants={shouldReduceMotion ? undefined : itemVariants}
+        >
+          <SectionSurface className="group h-full overflow-hidden">
+            <div className="grid gap-0 h-full grid-rows-[minmax(200px,1fr)_auto]">
+              <div className="relative overflow-hidden border-b border-border-subtle">
+                <CloudinaryImage
+                  publicId={featuredVisual}
+                  alt={featuredStudy.proofDetailHeroAlt ?? featuredStudy.title}
+                  width={1400}
+                  height={1200}
+                  sizes="(min-width: 1280px) 34vw, 100vw"
+                  className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  postTransforms="e_sharpen"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,12,14,0.18)_0%,rgba(12,12,14,0.75)_100%)]" />
               </div>
 
-              <Link
-                href={featuredOutcomes.featuredCta.href}
-                className="mt-6 inline-flex items-center gap-2 text-sm text-foreground"
-                onClick={() =>
-                  captureClientEvent("proof_card_clicked", {
-                    slug: featuredOutcomes.featuredSlug,
-                    surface: "featured",
-                    href: featuredOutcomes.featuredCta.href,
-                  })
-                }
-              >
-                {featuredOutcomes.featuredCta.label}
-                <ArrowUpRight className="size-4" />
-              </Link>
+              <div className="p-5 md:p-6">
+                <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-signal">
+                  {featuredOutcomes.featuredLabel}
+                </p>
+                <h3 className="mt-2 max-w-[16ch] font-syne text-2xl md:text-[1.85rem] leading-tight text-foreground">
+                  {featuredOutcomes.featuredTitle}
+                </h3>
+                <p className="mt-3 text-xs md:text-sm leading-relaxed text-body-muted">
+                  {featuredOutcomes.featuredBody}
+                </p>
+
+                <div className="mt-4 space-y-3">
+                  <div className="rounded-xl border border-border-subtle bg-surface-muted p-3">
+                    <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-foreground/50">
+                      Primary result
+                    </p>
+                    <p className="mt-1.5 font-syne text-2xl leading-none text-foreground">
+                      {featuredStudy.primaryMetric.value}
+                    </p>
+                    <p className="mt-1 text-xs text-body-muted">{featuredStudy.primaryMetric.label}</p>
+                  </div>
+                </div>
+
+                <Link
+                  href={featuredOutcomes.featuredCta.href}
+                  className="mt-4 inline-flex items-center gap-2 text-xs md:text-sm text-foreground"
+                  onClick={() =>
+                    captureClientEvent("proof_card_clicked", {
+                      slug: featuredOutcomes.featuredSlug,
+                      surface: "featured",
+                      href: featuredOutcomes.featuredCta.href,
+                    })
+                  }
+                >
+                  {featuredOutcomes.featuredCta.label}
+                  <ArrowUpRight className="size-3.5" />
+                </Link>
+              </div>
             </div>
-          </div>
-        </SectionSurface>
+          </SectionSurface>
+        </motion.div>
 
-        <div className="grid gap-5">
-          {featuredOutcomes.highlights.map((highlight) => {
-            const study = studyBySlug.get(highlight.slug);
-            if (!study) {
-              return null;
-            }
+        {/* Highlight Cards - Right Column (2x1 each) */}
+        {featuredOutcomes.highlights.map((highlight, index) => {
+          const study = studyBySlug.get(highlight.slug);
+          if (!study) {
+            return null;
+          }
 
-            return (
+          return (
+            <motion.div
+              key={highlight.slug}
+              className="md:col-span-2"
+              variants={shouldReduceMotion ? undefined : itemVariants}
+            >
               <Link
-                key={highlight.slug}
                 href={`/proof/${highlight.slug}`}
                 className="group block"
                 onClick={() =>
@@ -121,25 +155,36 @@ export function SelectedOutcomesV3() {
                   })
                 }
               >
-                <SectionSurface className="h-full p-5 transition-transform duration-200 group-hover:-translate-y-1">
-                  <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-signal">
+                <SectionSurface className="h-full p-5 md:p-6 flex flex-col transition-all duration-200 group-hover:shadow-lg">
+                  {/* Metric Highlight */}
+                  <div className="flex items-baseline gap-2 mb-3">
+                    <p className="font-syne text-3xl md:text-4xl leading-none text-signal font-bold">
+                      {study.primaryMetric.value}
+                    </p>
+                    <p className="text-xs md:text-sm text-body-muted">{study.primaryMetric.label}</p>
+                  </div>
+
+                  {/* Category Label */}
+                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-foreground/50 mb-2">
                     {highlight.label}
                   </p>
-                  <p className="mt-3 font-syne text-3xl leading-none text-foreground">
-                    {study.primaryMetric.value}
+
+                  {/* Description */}
+                  <p className="text-sm leading-relaxed text-body-muted flex-grow">
+                    {highlight.detail}
                   </p>
-                  <p className="mt-1 text-sm text-foreground/60">{study.primaryMetric.label}</p>
-                  <p className="mt-4 text-sm leading-relaxed text-body-muted">{highlight.detail}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm text-foreground">
+
+                  {/* CTA */}
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs md:text-sm text-foreground group-hover:gap-2 transition-all">
                     View proof
                     <ArrowUpRight className="size-4" />
                   </span>
                 </SectionSurface>
               </Link>
-            );
-          })}
-        </div>
-      </div>
+            </motion.div>
+          );
+        })}
+      </motion.div>
     </BleedSection>
   );
 }

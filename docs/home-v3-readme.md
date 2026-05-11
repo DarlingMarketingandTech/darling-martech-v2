@@ -8,8 +8,8 @@
 ## What lives under `home-v3`
 
 - Page composer: `src/components/home-v3/HomeV3.tsx`
-- Sections: `HeroV3`, `ToolsPreviewV3`, `ClosingCtaV3`, and other composed bands
-- Motion: `src/components/motion/*`
+- Sections: `HeroV3`, `BottleneckGridV3`, `CapabilityProofGridV3`, lazy-loaded `SelectedOutcomesV3`, `ToolsPreviewV3`, `ClosingCtaV3`
+- Motion: Framer Motion inside sections client components (`HeroV3`, etc.) — no separate `src/components/motion/*` barrel
 - Layout helpers: `src/components/layout-v3/BleedSection.tsx`, `GlassPanel.tsx`
 
 ## Deprecated modules (do not re-import into `HomeV3`)

@@ -72,7 +72,7 @@
 |---|---|---|---|---|  
 | \`ToolCard\` | \`ToolCard.tsx\` | Card for each interactive tool on the /tools hub. Tool title in Syne SemiBold, tagline in Inter, estimated time badge in JetBrains Mono (small, muted), primary CTA button. Subtle dark surface card with orange left border accent. | \`tool: Tool\` | /tools hub, Homepage tools preview |  
 | \`ToolGrid\` | \`ToolGrid.tsx\` | Grid container for ToolCards. 2-column desktop, 1-column mobile. | \`tools: Tool\[\]\` | /tools hub |  
-| \`ToolsPreviewBand\` | \`ToolsPreviewBand.tsx\` | Homepage section showing 2-3 featured tools. Dark band background, eyebrow \+ H2 intro, tool cards in horizontal layout, "See all tools" text link. | \`tools: Tool\[\]\` \`cta: NavItem\` | Homepage |  
+| \`ToolsPreviewV3\` | \`ToolsPreviewV3.tsx\` | Homepage tools preview (lazy-loaded in HomeV3). Featured tools from homepage data / labs. | Composes typed tools + CTAs | Homepage |  
 | \`QuizEngine\` | \`QuizEngine.tsx\` | Multi-step question flow engine. Manages step state, answer accumulation, progress bar updates, result routing logic. Renders QuizProgress \+ QuizQuestion per step. On completion: routes to ResultCard or EmailGate (if emailGated). | \`tool: Tool\` \`onComplete: (result: ToolResult, answers: Record\<string, any\>) \=\> void\` | /tools/\[slug\] |  
 | \`QuizProgress\` | \`QuizProgress.tsx\` | Progress indicator at top of quiz. Step number ("Question 3 of 7") in Inter small \+ orange progress bar fill. Positioned sticky below header. | \`current: number\` \`total: number\` | /tools/\[slug\] (inside QuizEngine) |  
 | \`QuizQuestion\` | \`QuizQuestion.tsx\` | Single question display. Handles 4 input types: 'single' (radio cards), 'multi' (checkbox cards), 'scale' (horizontal slider with labeled endpoints), 'text' (textarea). Each renders in same clean layout: question text in Syne, options in Inter, Next button below. | \`question: ToolQuestion\` \`onAnswer: (value: any) \=\> void\` \`currentAnswer?: any\` | /tools/\[slug\] (inside QuizEngine) |  
@@ -154,7 +154,7 @@ SiteHeader
 HomepageHero  
 ProofBar  
 ProblemHubGrid (4 problem cards, "Problems we fix")  
-ToolsPreviewBand (2-3 featured tools)  
+ToolsPreviewV3 (homepage tools preview)  
 ProofStrip  
 BandSection → \[Founder positioning "Just You" statement\]  
 ProofCard (1 featured case study)  

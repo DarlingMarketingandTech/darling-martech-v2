@@ -5,7 +5,14 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+let scrollTriggerRegistered = false;
+
+function ensureScrollTriggerRegistered() {
+  if (!scrollTriggerRegistered) {
+    gsap.registerPlugin(ScrollTrigger);
+    scrollTriggerRegistered = true;
+  }
+}
 
 /**
  * Opt-in smooth scrolling + ScrollTrigger sync.
@@ -16,14 +23,17 @@ export function useSmoothScroll() {
   const tickerRef = useRef<((time: number) => void) | null>(null);
 
   useEffect(() => {
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    ensureScrollTriggerRegistered();
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       autoRaf: false,
     });
 
@@ -32,6 +42,7 @@ export function useSmoothScroll() {
     const onTick = (time: number) => {
       lenis.raf(time * 1000);
     };
+
     tickerRef.current = onTick;
     gsap.ticker.add(onTick);
     gsap.ticker.lagSmoothing(0);
@@ -41,6 +52,8 @@ export function useSmoothScroll() {
         gsap.ticker.remove(tickerRef.current);
         tickerRef.current = null;
       }
+
+      lenis.off("scroll", ScrollTrigger.update);
       lenis.destroy();
     };
   }, []);

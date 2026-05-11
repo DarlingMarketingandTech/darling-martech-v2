@@ -14,7 +14,7 @@
 | 6 | How it works (3 columns) | `BandSection` + `homepageData.processSection.columns` | Match; minor punctuation vs copy doc (em dash in intro — optional polish) |
 | 7 | Proof strip | `ProofGrid` + `homepageData.proofStrip` | Match |
 | 8 | “Just you” / owner | `homepageData.ownerOperator` | Match; optional portrait in copy doc not required in data |
-| 9 | Tools preview | `ToolsPreviewBand` + first four `tools` from `labs.ts` | Match (order follows `labs.ts`, not copy doc card order) |
+| 9 | Tools preview | `ToolsPreviewV3` + featured tools from `homepage.ts` / `labs.ts` | Match (order follows data + lazy section load) |
 | 10 | Closing CTA | `homepageData.closingCta` | Match; primary CTA uses **Cal.com** (`siteConfig.calComLink`); secondary → `/tools` |
 | 11 | Footer | `SiteFooter` + `navigation.footer` | Match |
 

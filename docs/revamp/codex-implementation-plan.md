@@ -4,6 +4,8 @@
 
 Guide implementation agents through the revamp in the right order without skipping the data contract layer.
 
+See also: `docs/revamp/runtime-slimming-plan.md` (runtime orphan cleanup, `_archive_legacy/runtime-slimming-2026-05/` archive path and README, browser smoke list, and platform QA appendix).
+
 ## Phase order
 
 1. Define or update content structure in `src/types`

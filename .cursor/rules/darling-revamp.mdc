@@ -7,6 +7,8 @@ alwaysApply: true
 
 Defer to `AGENTS.md` as the primary source of truth.
 
+Runtime orphan cleanup and archived experimental code are described in `docs/revamp/runtime-slimming-plan.md` (`_archive_legacy/` is excluded from the TypeScript graph).
+
 Enforce these repo rules:
 
 - Organize proof by project type, buyer scenario, complexity, scope shape, and decision usefulness.
